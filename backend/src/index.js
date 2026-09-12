@@ -46,7 +46,7 @@ initializeInsuranceServices();
 
 app.use(
   cors({
-    origin: [
+    origin: process.env.CORS_ORIGIN || [
       "http://localhost:5173",
       "http://localhost:4000",
     ],

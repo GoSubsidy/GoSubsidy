@@ -1,0 +1,397 @@
+/* ================================================================
+   GoSubsidy — Simple, Light & Moderate Theme for DPR Generator
+   ================================================================ */
+
+.gosubsidy-dpr-wizard {
+  background: #f8fafc;
+  min-height: 100vh;
+  font-family: 'Inter', system-ui, -apple-system, sans-serif;
+  color: #1e293b;
+  padding-bottom: 60px;
+}
+
+/* Light, Clean Hero Section */
+.gs-hero {
+  background: #ffffff !important;
+  color: #0f172a !important;
+  padding: 24px 0 28px !important;
+  border-bottom: 1px solid #e2e8f0;
+  box-shadow: 0 4px 20px rgba(15, 23, 42, 0.03);
+}
+
+.gs-shell {
+  width: min(1180px, calc(100% - 32px));
+  margin: 0 auto;
+}
+
+.gs-topline {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 16px !important;
+}
+
+.gs-brand {
+  font-size: 20px;
+  font-weight: 900;
+  letter-spacing: -0.02em;
+  color: #0f172a;
+}
+.gs-brand span { color: #1677ff; }
+
+.gs-title h1 {
+  font-size: 24px !important;
+  font-weight: 900;
+  color: #0f172a !important;
+  margin: 0 0 4px 0 !important;
+  letter-spacing: -0.03em;
+}
+
+.gs-title p {
+  color: #64748b !important;
+  font-size: 13px !important;
+  margin: 0;
+}
+
+/* Modern Clean Stepper Grid (Light Theme) */
+.gs-stepper {
+  display: grid !important;
+  grid-template-columns: repeat(6, minmax(0, 1fr)) !important;
+  gap: 8px !important;
+  margin-top: 20px !important;
+}
+
+.gs-step {
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  gap: 8px !important;
+  background: #f1f5f9;
+  border: 1px solid #cbd5e1;
+  border-radius: 10px !important;
+  padding: 8px 10px !important;
+  color: #475569;
+  font-size: 12px !important;
+  font-weight: 700;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  white-space: nowrap;
+}
+
+.gs-step.active {
+  background: #1677ff !important;
+  border-color: #1677ff !important;
+  color: #fff !important;
+  box-shadow: 0 4px 14px rgba(22, 119, 255, 0.3);
+}
+
+.gs-step.done {
+  background: #e6f4ed !important;
+  border-color: #b7ebd0 !important;
+  color: #0b5132 !important;
+}
+
+.gs-step-dot {
+  width: 22px !important;
+  height: 22px !important;
+  border-radius: 50%;
+  display: grid;
+  place-items: center;
+  background: #e2e8f0;
+  color: #475569;
+  font-size: 10px !important;
+  flex-shrink: 0;
+}
+
+.gs-step.active .gs-step-dot { background: rgba(255, 255, 255, 0.3); color: #fff; }
+.gs-step.done .gs-step-dot { background: #b7ebd0; color: #0b5132; }
+
+/* Top Action Buttons (Light Theme contrast) */
+.gs-top-btn {
+  border: 1px solid #cbd5e1;
+  border-radius: 10px;
+  padding: 9px 16px;
+  font-size: 12.5px;
+  font-weight: 800;
+  background: #f8fafc;
+  color: #334155;
+  cursor: pointer;
+  transition: all 0.15s ease;
+}
+
+.gs-top-btn:hover {
+  background: #f1f5f9;
+  border-color: #94a3b8;
+}
+
+.gs-top-btn.primary {
+  background: #1677ff !important;
+  border-color: #1677ff !important;
+  color: #ffffff !important;
+  box-shadow: 0 4px 14px rgba(22, 119, 255, 0.3);
+}
+
+/* Main Shell & Wizard Card Container */
+.gs-main {
+  margin-top: 24px;
+}
+
+.gs-wizard-card {
+  background: #ffffff;
+  border: 1px solid #d9e2ec;
+  border-radius: 20px;
+  padding: 36px 40px;
+  box-shadow: 0 12px 40px rgba(14, 43, 76, 0.07);
+}
+
+.gs-card-heading {
+  margin-bottom: 28px;
+  padding-bottom: 16px;
+  border-bottom: 1px solid #e2e8f0;
+}
+
+.gs-card-heading h2 {
+  font-size: 22px;
+  font-weight: 900;
+  color: #0b2238;
+  margin: 0 0 6px 0;
+}
+
+.gs-card-heading p {
+  color: #627d98;
+  font-size: 13.5px;
+  margin: 0;
+}
+
+/* Form Fields & Modern Inputs */
+.gs-field-label {
+  display: block;
+  font-size: 12px;
+  font-weight: 800;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  color: #334e68;
+  margin-bottom: 7px;
+}
+
+.gs-field, .form-control, .form-select {
+  width: 100%;
+  height: 48px;
+  padding: 10px 16px;
+  font-size: 14px;
+  font-weight: 600;
+  color: #0b2238;
+  background: #f8fafc;
+  border: 1.5px solid #cbd5e1;
+  border-radius: 12px;
+  transition: all 0.2s ease;
+}
+
+.gs-field:focus, .form-control:focus, .form-select:focus {
+  background: #ffffff;
+  border-color: #1677ff;
+  box-shadow: 0 0 0 4px rgba(22, 119, 255, 0.12);
+  outline: none;
+}
+
+/* Assets Table Layout (Fixed Assets step) */
+.gs-assets-table {
+  display: grid;
+  gap: 12px;
+}
+
+.gs-asset-row {
+  display: grid;
+  grid-template-columns: 1fr 280px;
+  align-items: center;
+  gap: 20px;
+  padding: 12px 16px;
+  background: #f8fafc;
+  border: 1px solid #e2e8f0;
+  border-radius: 12px;
+}
+
+.gs-asset-row strong {
+  font-size: 13.5px;
+  color: #102a43;
+}
+
+/* Reconciliation Box */
+.gs-reconcile-box {
+  padding: 18px 20px;
+  border-radius: 14px;
+  background: #f0f4f8;
+  border: 1px solid #d9e2ec;
+  font-size: 13.5px;
+}
+
+.gs-reconcile-box.ok {
+  background: #eaf8f3;
+  border-color: #a3e4d7;
+  color: #076846;
+}
+
+.gs-reconcile-box.warning {
+  background: #fff8eb;
+  border-color: #fce1b6;
+  color: #8c6118;
+}
+
+/* Sub-tabs inside Financials */
+.gs-subtabs {
+  display: flex;
+  gap: 8px;
+  flex-wrap: wrap;
+  padding-bottom: 12px;
+  border-bottom: 1px solid #e2e8f0;
+}
+
+.gs-subtabs button {
+  background: #f1f5f9;
+  border: 1px solid #cbd5e1;
+  border-radius: 10px;
+  padding: 8px 16px;
+  font-size: 12.5px;
+  font-weight: 700;
+  color: #486581;
+  cursor: pointer;
+  transition: all 0.15s ease;
+}
+
+.gs-subtabs button.active {
+  background: #1677ff;
+  border-color: #1677ff;
+  color: #fff;
+  box-shadow: 0 4px 12px rgba(22, 119, 255, 0.25);
+}
+
+/* Footer Navigation Bar */
+.gs-footerbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: 24px;
+  padding: 20px 0;
+}
+
+.gs-footer-left {
+  display: flex;
+  gap: 12px;
+}
+
+.gs-nav-btn {
+  background: #ffffff;
+  border: 1.5px solid #cbd5e1;
+  border-radius: 12px;
+  padding: 12px 24px;
+  font-size: 14px;
+  font-weight: 800;
+  color: #334e68;
+  cursor: pointer;
+  transition: all 0.15s ease;
+}
+
+.gs-nav-btn:hover {
+  background: #f8fafc;
+  border-color: #9fb3c8;
+}
+
+.gs-nav-btn.next {
+  background: #1677ff;
+  border-color: #1677ff;
+  color: #ffffff;
+  box-shadow: 0 6px 20px rgba(22, 119, 255, 0.3);
+}
+
+.gs-nav-btn.next:hover {
+  background: #0958d9;
+}
+
+.gs-save-btn {
+  background: #f1f5f9;
+  border: 1.5px solid #cbd5e1;
+  border-radius: 12px;
+  padding: 12px 20px;
+  font-size: 13.5px;
+  font-weight: 800;
+  color: #486581;
+  cursor: pointer;
+}
+
+/* Draft Banner */
+.gs-draft {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background: linear-gradient(90deg, #fffaf0, #fef3c7);
+  border: 1px solid #fde68a;
+  border-radius: 14px;
+  padding: 14px 20px;
+  margin-bottom: 24px;
+  font-size: 13px;
+  color: #92400e;
+}
+
+.gs-draft-actions {
+  display: flex;
+  gap: 10px;
+}
+
+.gs-draft-actions button {
+  border: 0;
+  border-radius: 8px;
+  padding: 6px 14px;
+  font-size: 12px;
+  font-weight: 800;
+  cursor: pointer;
+  background: #d97706;
+  color: #fff;
+}
+
+.gs-draft-actions button.fresh {
+  background: #e2e8f0;
+  color: #334155;
+}
+
+@media(max-width: 950px) {
+  .gs-stepper {
+    grid-template-columns: repeat(3, minmax(0, 1fr)) !important;
+  }
+}
+
+@media(max-width: 768px) {
+  .gs-wizard-card { padding: 20px; }
+  .gs-asset-row { grid-template-columns: 1fr; gap: 8px; }
+  .gs-stepper { grid-template-columns: repeat(2, minmax(0, 1fr)) !important; }
+}
+/* Table edit input container wrapper */
+.table td .input-group,
+.dpr-table-input-wrap,
+table input[type="text"],
+table input[type="number"] {
+  width: 100% !important;
+  min-width: 95px; /* Ensures enough room for 6-7 digits plus formatting */
+  max-width: 130px;
+}
+
+/* Ensure the actual input box expands and text is fully visible */
+table td input.form-control,
+table td input {
+  padding-left: 22px !important; /* Space for the ₹ symbol */
+  padding-right: 6px !important;
+  font-size: 13px !important;
+  text-align: right;
+  box-sizing: border-box;
+}
+
+/* Position the Rupee symbol neatly inside or beside the input */
+.input-group-text, 
+.dpr-rupee-symbol {
+  position: absolute;
+  left: 6px;
+  z-index: 5;
+  background: transparent;
+  border: none;
+  font-size: 12px;
+  color: #64748b;
+}

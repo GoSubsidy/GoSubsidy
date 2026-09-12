@@ -1,0 +1,360 @@
+/* ============================================================
+   GoSubsidy Admin Portal Analytics
+   Compatibility stylesheet for Analytics.jsx
+   ============================================================ */
+
+.analytics-header {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 24px;
+  margin-bottom: 24px;
+}
+
+.analytics-actions {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  flex-wrap: wrap;
+}
+
+.analytics-period {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  min-height: 42px;
+  padding: 8px 12px;
+  border: 1px solid #e5e7eb;
+  border-radius: 12px;
+  background: #fff;
+}
+
+.analytics-period select {
+  border: 0;
+  outline: 0;
+  background: transparent;
+  font-weight: 600;
+}
+
+.analytics-live-status {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  margin-top: 8px;
+  color: #64748b;
+  font-size: 13px;
+  font-weight: 600;
+}
+
+.analytics-live-dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: #22c55e;
+  box-shadow: 0 0 0 4px rgba(34,197,94,.12);
+}
+
+.analytics-card,
+.analytics-metric-card {
+  background: #fff;
+  border: 1px solid #e8edf3;
+  border-radius: 18px;
+  box-shadow: 0 8px 24px rgba(15,23,42,.05);
+}
+
+.analytics-metric-card {
+  height: 100%;
+  padding: 18px;
+}
+
+.analytics-metric-top {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+}
+
+.analytics-metric-icon,
+.audience-icon {
+  width: 44px;
+  height: 44px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 13px;
+  font-size: 18px;
+}
+
+.analytics-metric-label {
+  margin-top: 14px;
+  color: #64748b;
+  font-size: 13px;
+  font-weight: 700;
+}
+
+.analytics-metric-value {
+  margin-top: 4px;
+  color: #0f172a;
+  font-size: 30px;
+  line-height: 1.1;
+  font-weight: 800;
+}
+
+.analytics-metric-caption {
+  margin-top: 5px;
+  color: #94a3b8;
+  font-size: 12px;
+}
+
+.analytics-card {
+  padding: 20px;
+}
+
+.analytics-card-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  margin-bottom: 18px;
+}
+
+.analytics-table-wrap {
+  width: 100%;
+  overflow-x: auto;
+}
+
+.analytics-table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.analytics-table th,
+.analytics-table td {
+  padding: 12px 10px;
+  border-bottom: 1px solid #eef2f7;
+  text-align: left;
+  vertical-align: middle;
+}
+
+.analytics-table th {
+  color: #64748b;
+  font-size: 12px;
+  text-transform: uppercase;
+  letter-spacing: .04em;
+}
+
+.keyword-cell {
+  font-weight: 700;
+  color: #0f172a;
+}
+
+.keyword-rank,
+.page-rank,
+.trending-rank {
+  color: #64748b;
+  font-weight: 700;
+}
+
+.traffic-chart {
+  width: 100%;
+}
+
+.traffic-bars {
+  display: flex;
+  align-items: flex-end;
+  gap: 8px;
+  min-height: 190px;
+}
+
+.traffic-columns {
+  flex: 1;
+  display: flex;
+  align-items: flex-end;
+  justify-content: center;
+  gap: 4px;
+  height: 170px;
+}
+
+.traffic-bar {
+  width: 10px;
+  min-height: 2px;
+  border-radius: 5px 5px 0 0;
+}
+
+.traffic-bar.visits {
+  background: #2563eb;
+}
+
+.traffic-bar.searches {
+  background: #8b5cf6;
+}
+
+.traffic-day {
+  color: #94a3b8;
+  font-size: 10px;
+  text-align: center;
+}
+
+.traffic-legend {
+  display: flex;
+  gap: 18px;
+  margin-top: 14px;
+  color: #64748b;
+  font-size: 12px;
+}
+
+.legend-dot {
+  display: inline-block;
+  width: 8px;
+  height: 8px;
+  margin-right: 6px;
+  border-radius: 50%;
+}
+
+.legend-dot.visits { background: #2563eb; }
+.legend-dot.searches { background: #8b5cf6; }
+
+.page-list {
+  display: grid;
+  gap: 12px;
+}
+
+.page-list-item,
+.trending-item {
+  padding: 12px 0;
+  border-bottom: 1px solid #eef2f7;
+}
+
+.page-list-top,
+.trending-main {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+}
+
+.page-value {
+  color: #0f172a;
+  font-weight: 800;
+}
+
+.page-progress,
+.zero-result-progress {
+  height: 7px;
+  margin-top: 8px;
+  overflow: hidden;
+  border-radius: 999px;
+  background: #eef2f7;
+}
+
+.page-progress::after {
+  content: "";
+  display: block;
+  width: var(--progress, 50%);
+  height: 100%;
+  border-radius: inherit;
+  background: #2563eb;
+}
+
+.trending-list {
+  display: grid;
+  gap: 4px;
+}
+
+.trending-fire {
+  margin-right: 8px;
+  color: #f97316;
+}
+
+.zero-result-highlight {
+  padding: 14px;
+  border-radius: 14px;
+  background: #fff7ed;
+}
+
+.zero-result-progress::after {
+  content: "";
+  display: block;
+  width: var(--progress, 0%);
+  height: 100%;
+  border-radius: inherit;
+  background: #ef4444;
+}
+
+.audience-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 14px;
+}
+
+.audience-card {
+  padding: 16px;
+  border-radius: 15px;
+  border: 1px solid #eef2f7;
+  background: #fff;
+}
+
+.audience-percentage {
+  margin-top: 5px;
+  font-size: 22px;
+  font-weight: 800;
+}
+
+.analytics-loading,
+.analytics-empty,
+.analytics-error {
+  padding: 40px 20px;
+  text-align: center;
+}
+
+.analytics-error {
+  color: #b91c1c;
+}
+
+.analytics-empty-icon {
+  margin-bottom: 10px;
+  color: #94a3b8;
+  font-size: 28px;
+}
+
+.analytics-footer {
+  color: #94a3b8;
+  font-size: 12px;
+  text-align: center;
+  padding: 12px 0 24px;
+}
+
+.analytics-eyebrow {
+  color: #64748b;
+  font-size: 12px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: .06em;
+}
+
+.analytics-trend-icon {
+  font-size: 13px;
+}
+
+.blue { background: #eff6ff; color: #2563eb; }
+.purple { background: #f5f3ff; color: #7c3aed; }
+.green { background: #f0fdf4; color: #16a34a; }
+.orange { background: #fff7ed; color: #ea580c; }
+.cyan { background: #ecfeff; color: #0891b2; }
+.gray { background: #f8fafc; color: #64748b; }
+.red { background: #fef2f2; color: #dc2626; }
+.pink { background: #fdf2f8; color: #db2777; }
+
+@media (max-width: 768px) {
+  .analytics-header {
+    flex-direction: column;
+  }
+
+  .analytics-actions {
+    width: 100%;
+  }
+
+  .audience-grid {
+    grid-template-columns: 1fr;
+  }
+}

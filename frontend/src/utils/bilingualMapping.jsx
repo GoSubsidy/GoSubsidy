@@ -1,0 +1,96 @@
+// Map states to their regional language metadata
+export const STATE_LANGUAGE_MAP = {
+  Telangana: { code: "te", name: "Telugu", native: "తెలుగు" },
+  "Andhra Pradesh": { code: "te", name: "Telugu", native: "తెలుగు" },
+  Karnataka: { code: "kn", name: "Kannada", native: "ಕನ್ನಡ" },
+  "Tamil Nadu": { code: "ta", name: "Tamil", native: "தமிழ்" },
+  Maharashtra: { code: "mr", name: "Marathi", native: "मराठी" },
+  Gujarat: { code: "gu", name: "Gujarati", native: "ગુજરાતી" },
+  Punjab: { code: "pa", name: "Punjabi", native: "ਪੰਜਾਬੀ" },
+  Kerala: { code: "ml", name: "Malayalam", native: "മലയാളം" },
+  "West Bengal": { code: "bn", name: "Bengali", native: "বাংলা" },
+};
+
+// Common bilingual field label translations
+export const FIELD_TRANSLATIONS = {
+  projectName: {
+    te: "వ్యాపార / ప్రాజెక్ట్ పేరు",
+    hi: "व्यापार / परियोजना का नाम",
+    ta: "வணக்கம் / திட்டம் பெயர்",
+    kn: "ವ್ಯವಹಾರ / ಯೋಜನೆ ಹೆಸರು",
+    mr: "व्यवसाय / प्रकल्प नाव",
+    gu: "व्यवસાય / પ્રોજેક્ટ નામ",
+  },
+  promoterName: {
+    te: "ప్రమోటర్ పేరు",
+    hi: "प्रमोटर का नाम",
+    ta: "விளம்பரதாரர் பெயர்",
+    kn: "ಪ್ರಮೋಟರ್ ಹೆಸರು",
+    mr: "प्रमोटरचे नाव",
+    gu: "પ્રમોટરનું નામ",
+  },
+  mobile: {
+    te: "మొబైల్ నంబర్",
+    hi: "मोबाइल नंबर",
+    ta: "மொபைல் எண்",
+    kn: "ಮೊಬೈಲ್ ಸಂಖ್ಯೆ",
+    mr: "मोबाईल नंबर",
+    gu: "મોબાઈલ નંબર",
+  },
+  email: {
+    te: "ఈమెయిల్ చిరునామా",
+    hi: "ईमेल पता",
+    ta: "மின்னஞ்சல் முகவரி",
+    kn: "ಇಮೇಲ್ ವಿಳಾಸ",
+    mr: "ईमेल पत्ता",
+    gu: "ઈમેઇલ સરનામું",
+  },
+  businessType: {
+    te: "వ్యాపార రకం / రంగం",
+    hi: "व्यवसाय का प्रकार",
+    ta: "வ்த்திய வகை",
+    kn: "ವ್ಯವಹಾರದ ಪ್ರಕಾರ",
+    mr: "व्यवसायाचा प्रकार",
+    gu: "વ્યવસાયનો પ્રકાર",
+  },
+  constitution: {
+    te: "ఎంటిటీ రకం (Constitution)",
+    hi: "एंटिटी का प्रकार",
+    ta: "நிறுவனத்தின் வகை",
+    kn: "ಸಂಸ್ಥೆಯ ಪ್ರಕಾರ",
+    mr: "संस्थेचा प्रकार",
+    gu: "સંસ્થાનો પ્રકાર",
+  },
+  state: {
+    te: "రాష్ట్రం",
+    hi: "राज्य",
+    ta: "மாநிலம்",
+    kn: "ರಾಜ್ಯ",
+    mr: "राज्य",
+    gu: "રાજ્ય",
+  },
+  district: {
+    te: "జిల్లా",
+    hi: "जिला",
+    ta: "மாவட்டம்",
+    kn: "ಜಿಲ್ಲೆ",
+    mr: "जिल्हा",
+    gu: "જિલ્લો",
+  },
+  location: {
+    te: "ప్రాజెక్ట్ ప్రదేశం",
+    hi: "परियोजना स्थान",
+    ta: "திட்டத்தின் இடம்",
+    kn: "ಯೋಜನೆಯ ಸ್ಥಳ",
+    mr: "प्रकल्प ठिकाण",
+    gu: "પ્રોજેક્ટ સ્થાન",
+  },
+  projectCost: {
+    te: "మొత్తం ప్రాజెక్ట్ ఖర్చు",
+    hi: "कुल परियोजना लागत",
+    ta: "மொத்த திட்டச் செலவு",
+    kn: "ಒಟ್ಟು ಯೋಜನಾ ವೆಚ್ಚ",
+    mr: "एकूण प्रकल्प खर्च",
+    gu: "કુલ પ્રોજેક્ટ ખર્ચ",
+  }
+};

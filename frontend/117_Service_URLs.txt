@@ -1,0 +1,117 @@
+001. /services/proprietorship — Startups — Proprietorship
+002. /services/partnership — Startups — Partnership
+003. /services/one-person-company — Startups — One Person Company
+004. /services/limited-liability-partnership — Startups — Limited Liability Partnership
+005. /services/private-limited-company — Startups — Private Limited Company
+006. /services/section-8-company — Startups — Section 8 Company
+007. /services/trust-registration — Startups — Trust Registration
+008. /services/public-limited-company — Startups — Public Limited Company
+009. /services/producer-company — Startups — Producer Company
+010. /services/indian-subsidiary — Startups — Indian Subsidiary
+011. /services/startup-india — Registration — Startup India
+012. /services/trade-license — Registration — Trade License
+013. /services/fssai-registration — Registration — FSSAI Registration
+014. /services/fssai-license — Registration — FSSAI License
+015. /services/halal-license-and-certification — Registration — Halal License & Certification
+016. /services/icegate-registration — Registration — ICEGATE Registration
+017. /services/import-export-code — Registration — Import Export Code
+018. /services/legal-entity-identifier-code — Registration — Legal Entity Identifier Code
+019. /services/iso-registration — Registration — ISO Registration
+020. /services/pf-registration — Registration — PF Registration
+021. /services/esi-registration — Registration — ESI Registration
+022. /services/professional-tax-registration — Registration — Professional Tax Registration
+023. /services/rcmc-registration — Registration — RCMC Registration
+024. /services/tn-rera-registration-for-agents — Registration — TN RERA Registration for Agents
+025. /services/12a-and-80g-registration — Registration — 12A and 80G Registration
+026. /services/12a-registration — Registration — 12A Registration
+027. /services/80g-registration — Registration — 80G Registration
+028. /services/barcode-registration — Registration — Barcode Registration
+029. /services/bis-registration — Registration — BIS Registration
+030. /services/certificate-of-incumbency — Registration — Certificate of Incumbency
+031. /services/darpan-registration — Registration — Darpan Registration
+032. /services/digital-signature — Registration — Digital Signature
+033. /services/shop-act-registration — Registration — Shop Act Registration
+034. /services/udyam-registration — Registration — Udyam Registration
+035. /services/fire-license — Registration — Fire License
+036. /services/legal-name-change — Registration — Legal Name Change
+037. /services/water-testing — Registration — Water Testing
+038. /services/food-testing — Registration — Food Testing
+039. /services/trademark-registration — Trademark — Trademark Registration
+040. /services/trademark-objection — Trademark — Trademark Objection
+041. /services/trademark-certificate — Trademark — Trademark Certificate
+042. /services/trademark-opposition — Trademark — Trademark Opposition
+043. /services/trademark-hearing — Trademark — Trademark Hearing
+044. /services/trademark-rectification — Trademark — Trademark Rectification
+045. /services/tm-infringement-notice — Trademark — TM Infringement Notice
+046. /services/trademark-renewal — Trademark — Trademark Renewal
+047. /services/trademark-transfer — Trademark — Trademark Transfer
+048. /services/expedited-tm-registration — Trademark — Expedited TM Registration
+049. /services/logo-designing — Trademark — Logo Designing
+050. /services/design-registration — Trademark — Design Registration
+051. /services/design-objection — Trademark — Design Objection
+052. /services/copyright-registration — Trademark — Copyright Registration
+053. /services/copyright-objection — Trademark — Copyright Objection
+054. /services/patent-registration — Trademark — Patent Registration
+055. /services/trademark-protection — Trademark — Trademark Protection
+056. /services/gst-registration — GST — GST Registration
+057. /services/gst-return-filing-by-accountant — GST — GST Return Filing by Accountant
+058. /services/gst-lut-form — GST — GST LUT Form
+059. /services/gst-notice — GST — GST Notice
+060. /services/gst-annual-return-filing-gstr-9 — GST — GST Annual Return Filing (GSTR-9)
+061. /services/gst-registration-for-foreigners — GST — GST Registration for Foreigners
+062. /services/gst-amendment — GST — GST Amendment
+063. /services/gst-revocation — GST — GST Revocation
+064. /services/gstr-10 — GST — GSTR-10
+065. /services/virtual-office-gstin — GST — Virtual Office + GSTIN
+066. /services/income-tax-e-filing — Income Tax — Income Tax E-Filing
+067. /services/business-itr-filing — Income Tax — Business ITR Filing
+068. /services/partnership-firm-llp-itr — Income Tax — Partnership Firm / LLP ITR
+069. /services/company-itr-filing — Income Tax — Company ITR Filing
+070. /services/trust-ngo-tax-filing — Income Tax — Trust / NGO Tax Filing
+071. /services/15ca-15cb-filing — Income Tax — 15CA - 15CB Filing
+072. /services/tan-registration — Income Tax — TAN Registration
+073. /services/tds-return-filing — Income Tax — TDS Return Filing
+074. /services/income-tax-notice — Income Tax — Income Tax Notice
+075. /services/revised-itr-return-itr-u — Income Tax — Revised ITR Return (ITR-U)
+076. /services/company-compliance — MCA — Company Compliance
+077. /services/llp-compliance — MCA — LLP Compliance
+078. /services/opc-compliance — MCA — OPC Compliance
+079. /services/name-change-company — MCA — Name Change - Company
+080. /services/registered-office-change — MCA — Registered Office Change
+081. /services/din-ekyc-filing — MCA — DIN eKYC Filing
+082. /services/din-reactivation — MCA — DIN Reactivation
+083. /services/director-change — MCA — Director Change
+084. /services/remove-director — MCA — Remove Director
+085. /services/adt-1-filing — MCA — ADT-1 Filing
+086. /services/dpt-3-filing — MCA — DPT-3 Filing
+087. /services/llp-form-11-filing — MCA — LLP Form 11 Filing
+088. /services/dormant-status-filing — MCA — Dormant Status Filing
+089. /services/moa-amendment — MCA — MOA Amendment
+090. /services/aoa-amendment — MCA — AOA Amendment
+091. /services/authorized-capital-increase — MCA — Authorized Capital Increase
+092. /services/share-transfer — MCA — Share Transfer
+093. /services/demat-of-shares — MCA — Demat of Shares
+094. /services/winding-up-llp — MCA — Winding Up - LLP
+095. /services/winding-up-company — MCA — Winding Up - Company
+096. /services/commencement-inc-20a — MCA — Commencement (INC-20A)
+097. /services/ccfs-scheme — MCA — CCFS Scheme
+098. /services/fdi-filing — Compliance — FDI Filing
+099. /services/odi-filing — Compliance — ODI Filing
+100. /services/fla-return-filing — Compliance — FLA Return Filing
+101. /services/fssai-renewal — Compliance — FSSAI Renewal
+102. /services/fssai-return-filing — Compliance — FSSAI Return Filing
+103. /services/business-plan — Compliance — Business Plan
+104. /services/hr-and-payroll — Compliance — HR & Payroll
+105. /services/pf-return-filing — Compliance — PF Return Filing
+106. /services/esi-return-filing — Compliance — ESI Return Filing
+107. /services/professional-tax-return-filing — Compliance — Professional Tax Return Filing
+108. /services/partnership-compliance — Compliance — Partnership Compliance
+109. /services/proprietorship-compliance — Compliance — Proprietorship Compliance
+110. /services/bookkeeping — Compliance — Bookkeeping
+111. /services/ca-consultation — Consultation — CA Consultation
+112. /services/legal-consultation — Consultation — Legal Consultation
+113. /services/uae-company-registration — Global — UAE Company Registration
+114. /services/usa-company-registration — Global — USA Company Registration
+115. /services/singapore-business-setup — Global — Singapore Business Setup
+116. /services/uk-company-registration — Global — UK Company Registration
+117. /services/usa-trademark-registration — Global — USA Trademark Registration

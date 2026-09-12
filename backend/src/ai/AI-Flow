@@ -1,0 +1,17 @@
+backend/
+├── src/
+│   ├── ai/
+│   │   ├── systemPrompt.js
+│   │   ├── contextBuilder.js
+│   │   ├── recommendationRules.js
+│   │   ├── aiController.js
+│   │   └── ai.routes.js
+│   │
+│   ├── middleware/
+│   │   └── rateLimiter.js
+│   │
+│   ├── app.js
+│   └── server.js
+│
+├── .env
+└── package.json

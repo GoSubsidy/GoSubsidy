@@ -1,0 +1,58 @@
+﻿import express from "express";
+import cors from "cors";
+import dotenv from "dotenv";
+import { generateAdvice } from "./openaiClient.js"; // ✅ MUST MATCH EXPORT
+
+dotenv.config();
+
+const app = express();
+
+app.use(cors());
+app.use(express.json());
+
+/* ---------- HEALTH ---------- */
+app.get("/", (req, res) => {
+  res.json({ status: "ok", service: "Subsidy Backend" });
+});
+
+/* ---------- AI ENDPOINT ---------- */
+app.post("/ai/scheme-advice", async (req, res) => {
+  try {
+    const { schemeName } = req.body;
+
+    if (!schemeName) {
+      return res.status(400).json({
+        success: false,
+        advice: [],
+        fallback: true
+      });
+    }
+
+    const result = await generateAdvice({ schemeName });
+
+    res.json({
+      success: true,
+      advice: result.advice, // ✅ always array
+      fallback: result.fallback,
+      updatedAt: new Date().toISOString()
+    });
+
+  } catch (err) {
+    console.error("❌ API error:", err.message);
+    res.status(500).json({
+      success: false,
+      advice: [
+        "AI service temporarily unavailable",
+        "Apply through official portal"
+      ],
+      fallback: true
+    });
+  }
+});
+
+/* ---------- START ---------- */
+const PORT = 4000;
+
+app.listen(PORT, "0.0.0.0", () => {
+  console.log(`🚀 Backend running on http://0.0.0.0:${PORT}`);
+});

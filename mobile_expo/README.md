@@ -1,0 +1,1 @@
+Run mobile: npm install && npx expo start

@@ -1,0 +1,822 @@
+/* =====================================================
+   GLOBAL DASHBOARD LAYOUT
+====================================================== */
+.gs-dashboard {
+  min-height: 100vh;
+  background-color: #f8fafc;
+  color: #1e293b;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+  display: flex;
+  flex-direction: column;
+  overflow-x: hidden;
+}
+
+/* =====================================================
+   INSURANCEDEKHO-STYLE CONTAINER & GROUP CARDS
+====================================================== */
+.idk-showcase-container {
+  max-width: 1200px;
+  width: 100%;
+  margin: 32px auto;
+  padding: 0 16px;
+  display: flex;
+  flex-direction: column;
+  gap: 28px;
+  box-sizing: border-box;
+}
+
+.idk-group-card {
+  background: #ffffff;
+  border-radius: 24px;
+  border: 1px solid #eef2f6;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.04);
+  padding: 32px 36px 40px;
+  transition: transform 0.25s ease, box-shadow 0.25s ease;
+  box-sizing: border-box;
+}
+
+.idk-group-card:hover {
+  box-shadow: 0 14px 36px rgba(0, 0, 0, 0.06);
+}
+
+.idk-card-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  margin-bottom: 28px;
+  border-bottom: 1px solid #f1f5f9;
+  padding-bottom: 18px;
+}
+
+.idk-kicker {
+  font-size: 0.75rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: #0284c7;
+  display: block;
+  margin-bottom: 4px;
+}
+
+.idk-title {
+  font-size: 1.45rem;
+  font-weight: 700;
+  color: #1e293b;
+  margin: 0 0 4px;
+}
+
+.idk-subtitle {
+  font-size: 0.9rem;
+  color: #64748b;
+  margin: 0;
+}
+
+.idk-view-all-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 0.9rem;
+  font-weight: 600;
+  color: #0284c7;
+  text-decoration: none;
+  transition: color 0.15s ease, transform 0.15s ease;
+}
+
+.idk-view-all-link:hover {
+  color: #0369a1;
+  transform: translateX(3px);
+}
+
+/* 5 Column Minimal Grid */
+.idk-grid {
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  gap: 24px 16px;
+}
+
+.idk-tile-link {
+  text-decoration: none;
+  color: inherit;
+  display: block;
+}
+
+.idk-tile {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  padding: 20px 10px 14px;
+  border-radius: 18px;
+  background: #ffffff;
+  transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+  cursor: pointer;
+  height: 100%;
+  box-sizing: border-box;
+}
+
+.idk-tile:hover {
+  background-color: #f8fafc;
+  transform: translateY(-5px);
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.04);
+}
+
+/* =====================================================
+   TOP FLOATING BADGES
+====================================================== */
+.idk-badge {
+  position: absolute;
+  top: -8px;
+  background: #10b981;
+  color: #ffffff;
+  font-size: 0.68rem;
+  font-weight: 700;
+  padding: 2px 8px;
+  border-radius: 6px;
+  box-shadow: 0 2px 6px rgba(16, 185, 129, 0.3);
+  white-space: nowrap;
+  letter-spacing: 0.02em;
+  z-index: 2;
+  transition: transform 0.2s ease;
+}
+
+.idk-tile:hover .idk-badge {
+  transform: scale(1.05);
+}
+
+.idk-tile-link:nth-child(2) .idk-badge {
+  background: #ef4444;
+  box-shadow: 0 2px 6px rgba(239, 68, 68, 0.3);
+}
+
+/* =====================================================
+   ICON CONTAINER & HOVER ANIMATIONS
+====================================================== */
+.idk-icon-wrapper {
+  width: 60px;
+  height: 60px;
+  border-radius: 16px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.95rem;
+  margin-bottom: 12px;
+  transition: all 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+/* Base Icon Floating Hover Effect */
+.idk-tile:hover .idk-icon-wrapper {
+  transform: scale(1.14) translateY(-3px);
+}
+
+/* Special Custom Hover Animations */
+.idk-tone-startup-orange:hover .idk-icon-wrapper i {
+  display: inline-block;
+  animation: rocketLaunch 0.6s ease-in-out infinite alternate;
+}
+
+.idk-tone-global-cyan:hover .idk-icon-wrapper i {
+  display: inline-block;
+  animation: globeSpin 2s linear infinite;
+}
+
+.idk-tone-cibil-blue:hover .idk-icon-wrapper i {
+  display: inline-block;
+  animation: gaugePulse 0.8s ease-in-out infinite alternate;
+}
+
+.idk-tone-loan-gold:hover .idk-icon-wrapper i,
+.idk-tone-scheme-emerald:hover .idk-icon-wrapper i {
+  display: inline-block;
+  animation: coinBounce 0.6s ease-in-out infinite alternate;
+}
+
+@keyframes rocketLaunch {
+  0% { transform: translateY(0) rotate(0deg); }
+  100% { transform: translateY(-4px) rotate(12deg); }
+}
+
+@keyframes globeSpin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
+@keyframes gaugePulse {
+  0% { transform: scale(1); }
+  100% { transform: scale(1.15); }
+}
+
+@keyframes coinBounce {
+  0% { transform: translateY(0); }
+  100% { transform: translateY(-4px); }
+}
+
+/* =====================================================
+   VIBRANT COLOR PALETTES & SOFT ICON BACKGROUNDS
+====================================================== */
+/* 1. Schemes */
+.idk-tone-scheme-emerald .idk-icon-wrapper {
+  background: #ecfdf5;
+  color: #059669;
+}
+.idk-tone-scheme-emerald:hover .idk-icon-wrapper {
+  background: #d1fae5;
+  box-shadow: 0 6px 16px rgba(5, 150, 105, 0.2);
+}
+
+/* 2. Startups */
+.idk-tone-startup-orange .idk-icon-wrapper {
+  background: #fff7ed;
+  color: #ea580c;
+}
+.idk-tone-startup-orange:hover .idk-icon-wrapper {
+  background: #ffedd5;
+  box-shadow: 0 6px 16px rgba(234, 88, 12, 0.2);
+}
+
+/* 3. Registration */
+.idk-tone-reg-blue .idk-icon-wrapper {
+  background: #eff6ff;
+  color: #2563eb;
+}
+.idk-tone-reg-blue:hover .idk-icon-wrapper {
+  background: #dbeafe;
+  box-shadow: 0 6px 16px rgba(37, 99, 235, 0.2);
+}
+
+/* 4. Trademark */
+.idk-tone-tm-purple .idk-icon-wrapper {
+  background: #faf5ff;
+  color: #9333ea;
+}
+.idk-tone-tm-purple:hover .idk-icon-wrapper {
+  background: #f3e8ff;
+  box-shadow: 0 6px 16px rgba(147, 51, 234, 0.2);
+}
+
+/* 5. GST */
+.idk-tone-gst-teal .idk-icon-wrapper {
+  background: #f0fdfa;
+  color: #0d9488;
+}
+.idk-tone-gst-teal:hover .idk-icon-wrapper {
+  background: #ccfbf1;
+  box-shadow: 0 6px 16px rgba(13, 148, 136, 0.2);
+}
+
+/* 6. Income Tax */
+.idk-tone-tax-green .idk-icon-wrapper {
+  background: #f0fdf4;
+  color: #16a34a;
+}
+.idk-tone-tax-green:hover .idk-icon-wrapper {
+  background: #dcfce7;
+  box-shadow: 0 6px 16px rgba(22, 163, 74, 0.2);
+}
+
+/* 7. MCA */
+.idk-tone-mca-indigo .idk-icon-wrapper {
+  background: #eef2ff;
+  color: #4f46e5;
+}
+.idk-tone-mca-indigo:hover .idk-icon-wrapper {
+  background: #e0e7ff;
+  box-shadow: 0 6px 16px rgba(79, 70, 229, 0.2);
+}
+
+/* 8. Compliance */
+.idk-tone-comp-rose .idk-icon-wrapper {
+  background: #fff1f2;
+  color: #e11d48;
+}
+.idk-tone-comp-rose:hover .idk-icon-wrapper {
+  background: #ffe4e6;
+  box-shadow: 0 6px 16px rgba(225, 29, 72, 0.2);
+}
+
+/* 9. Consultation */
+.idk-tone-consult-amber .idk-icon-wrapper {
+  background: #fffbeb;
+  color: #d97706;
+}
+.idk-tone-consult-amber:hover .idk-icon-wrapper {
+  background: #fef3c7;
+  box-shadow: 0 6px 16px rgba(217, 119, 6, 0.2);
+}
+
+/* 10. Global */
+.idk-tone-global-cyan .idk-icon-wrapper {
+  background: #ecfeff;
+  color: #0891b2;
+}
+.idk-tone-global-cyan:hover .idk-icon-wrapper {
+  background: #cffafe;
+  box-shadow: 0 6px 16px rgba(8, 145, 178, 0.2);
+}
+
+/* 11. Loans */
+.idk-tone-loan-gold .idk-icon-wrapper {
+  background: #fefce8;
+  color: #ca8a04;
+}
+.idk-tone-loan-gold:hover .idk-icon-wrapper {
+  background: #fef9c3;
+  box-shadow: 0 6px 16px rgba(202, 138, 4, 0.2);
+}
+
+/* 12. Insurance */
+.idk-tone-insure-sky .idk-icon-wrapper {
+  background: #f0f9ff;
+  color: #0284c7;
+}
+.idk-tone-insure-sky:hover .idk-icon-wrapper {
+  background: #e0f2fe;
+  box-shadow: 0 6px 16px rgba(2, 132, 199, 0.2);
+}
+
+/* 13. EMI Calculator */
+.idk-tone-emi-violet .idk-icon-wrapper {
+  background: #f5f3ff;
+  color: #7c3aed;
+}
+.idk-tone-emi-violet:hover .idk-icon-wrapper {
+  background: #ede9fe;
+  box-shadow: 0 6px 16px rgba(124, 58, 237, 0.2);
+}
+
+/* 14. DPR Project */
+.idk-tone-dpr-crimson .idk-icon-wrapper {
+  background: #fff1f2;
+  color: #be123c;
+}
+.idk-tone-dpr-crimson:hover .idk-icon-wrapper {
+  background: #ffe4e6;
+  box-shadow: 0 6px 16px rgba(190, 18, 60, 0.2);
+}
+
+/* 15. CIBIL */
+.idk-tone-cibil-blue .idk-icon-wrapper {
+  background: #eff6ff;
+  color: #1d4ed8;
+}
+.idk-tone-cibil-blue:hover .idk-icon-wrapper {
+  background: #dbeafe;
+  box-shadow: 0 6px 16px rgba(29, 78, 216, 0.2);
+}
+
+/* 16. View More */
+.idk-tone-more-slate .idk-icon-wrapper {
+  background: #f1f5f9;
+  color: #475569;
+}
+.idk-tone-more-slate:hover .idk-icon-wrapper {
+  background: #e2e8f0;
+  box-shadow: 0 6px 16px rgba(71, 85, 105, 0.2);
+}
+
+/* =====================================================
+   TYPOGRAPHY
+====================================================== */
+.idk-tile-title {
+  font-size: 1rem;
+  font-weight: 700;
+  color: #1e293b;
+  line-height: 1.25;
+  transition: color 0.15s ease;
+}
+
+.idk-tile:hover .idk-tile-title {
+  color: #0f172a;
+}
+
+.idk-tile-sub {
+  font-size: 0.8rem;
+  color: #64748b;
+  margin-top: 4px;
+  line-height: 1.2;
+}
+
+/* =====================================================
+   POPULAR SERVICES SCROLLER SECTION
+====================================================== */
+.gs-popular-section {
+  max-width: 1200px;
+  width: 100%;
+  margin: 16px auto 36px;
+  padding: 0 16px;
+  box-sizing: border-box;
+}
+
+.gs-section-heading-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 18px;
+}
+
+.gs-popular-title {
+  font-size: 1.25rem;
+  font-weight: 700;
+  color: #1e293b;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.gs-popular-title i {
+  color: #eab308;
+}
+
+.gs-view-all {
+  font-size: 0.9rem;
+  font-weight: 600;
+  color: #0284c7;
+  text-decoration: none;
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+}
+
+.gs-view-all:hover {
+  text-decoration: underline;
+}
+
+.gs-popular-slider-wrap {
+  position: relative;
+  display: flex;
+  align-items: center;
+}
+
+.gs-popular-track {
+  display: flex;
+  gap: 14px;
+  overflow-x: hidden;
+  scroll-behavior: smooth;
+  padding: 8px 4px 16px;
+  width: 100%;
+}
+
+.gs-popular-card {
+  flex: 0 0 calc(25% - 11px);
+  min-width: 220px;
+  background: #ffffff;
+  border-radius: 16px;
+  padding: 16px;
+  border: 1px solid #e2e8f0;
+  text-decoration: none;
+  color: #1e293b;
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.03);
+  transition: all 0.2s ease;
+  box-sizing: border-box;
+}
+
+.gs-popular-card:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.06);
+  border-color: #cbd5e1;
+}
+
+.gs-popular-icon {
+  width: 44px;
+  height: 44px;
+  border-radius: 12px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.35rem;
+  background: #f0f9ff;
+  color: #0284c7;
+  flex-shrink: 0;
+}
+
+.gs-popular-body {
+  display: flex;
+  flex-direction: column;
+}
+
+.gs-popular-body strong {
+  font-size: 0.92rem;
+  font-weight: 600;
+  color: #1e293b;
+}
+
+.gs-popular-body span {
+  font-size: 0.78rem;
+  color: #0284c7;
+  font-weight: 500;
+  margin-top: 2px;
+  display: flex;
+  align-items: center;
+  gap: 4px;
+}
+
+.gs-popular-arrow {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-60%);
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  background: #ffffff;
+  border: 1px solid #e2e8f0;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  z-index: 5;
+  color: #475569;
+  transition: all 0.15s ease;
+}
+
+.gs-popular-arrow:hover:not(:disabled) {
+  background: #0284c7;
+  color: #ffffff;
+  border-color: #0284c7;
+}
+
+.gs-popular-arrow:disabled {
+  opacity: 0.3;
+  cursor: not-allowed;
+}
+
+.gs-popular-prev {
+  left: -18px;
+}
+
+.gs-popular-next {
+  right: -18px;
+}
+
+/* =====================================================
+   TRUST STATS BAR
+====================================================== */
+.gs-stats-bar {
+  max-width: 1200px;
+  width: 100%;
+  margin: 0 auto 48px;
+  padding: 24px 32px;
+  background: #ffffff;
+  border-radius: 20px;
+  border: 1px solid #eef2f6;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.03);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  box-sizing: border-box;
+}
+
+.gs-stat {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+}
+
+.gs-stat-icon {
+  width: 48px;
+  height: 48px;
+  border-radius: 12px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.4rem;
+}
+
+.gs-stat-icon i {
+  color: #0284c7;
+}
+
+.gs-stat div {
+  display: flex;
+  flex-direction: column;
+}
+
+.gs-stat strong {
+  font-size: 1.05rem;
+  font-weight: 700;
+  color: #1e293b;
+}
+
+.gs-stat span {
+  font-size: 0.82rem;
+  color: #64748b;
+}
+
+.gs-stat-divider {
+  width: 1px;
+  height: 40px;
+  background-color: #e2e8f0;
+}
+
+/* =====================================================
+   RESPONSIVE MEDIA QUERIES
+====================================================== */
+@media (max-width: 1024px) {
+  .idk-grid {
+    grid-template-columns: repeat(4, 1fr);
+  }
+
+  .gs-popular-card {
+    flex: 0 0 calc(33.333% - 10px);
+  }
+
+  .gs-stats-bar {
+    padding: 20px 24px;
+  }
+}
+
+@media (max-width: 768px) {
+  .idk-group-card {
+    padding: 24px 18px 28px;
+  }
+
+  .idk-card-header {
+    flex-direction: column;
+    gap: 12px;
+  }
+
+  .idk-grid {
+    grid-template-columns: repeat(3, 1fr);
+    gap: 18px 10px;
+  }
+
+  .gs-popular-card {
+    flex: 0 0 calc(50% - 7px);
+  }
+
+  .gs-stats-bar {
+    flex-direction: column;
+    gap: 20px;
+    align-items: flex-start;
+  }
+
+  .gs-stat-divider {
+    display: none;
+  }
+
+  .gs-popular-prev {
+    left: -10px;
+  }
+
+  .gs-popular-next {
+    right: -10px;
+  }
+}
+
+@media (max-width: 480px) {
+  .idk-grid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 16px 8px;
+  }
+
+  .gs-popular-card {
+    flex: 0 0 85%;
+  }
+
+  .idk-title {
+    font-size: 1.25rem;
+  }
+}
+/* =====================================================
+   VIEW MORE TRIGGER BUTTON & MODAL
+====================================================== */
+.idk-tile-btn {
+  background: transparent;
+  border: none;
+  padding: 0;
+  text-align: inherit;
+  cursor: pointer;
+  width: 100%;
+  display: block;
+}
+
+/* Modal Overlay Backdrop */
+.idk-modal-backdrop {
+  position: fixed;
+  inset: 0;
+  background-color: rgba(15, 23, 42, 0.6);
+  backdrop-filter: blur(4px);
+  z-index: 9999;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 20px;
+  animation: modalFadeIn 0.2s ease-out;
+}
+
+/* Modal Card Window */
+.idk-modal-card {
+  background: #ffffff;
+  border-radius: 24px;
+  max-width: 680px;
+  width: 100%;
+  box-shadow: 0 24px 48px rgba(0, 0, 0, 0.2);
+  border: 1px solid #e2e8f0;
+  overflow: hidden;
+  animation: modalSlideUp 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.idk-modal-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 24px 28px 18px;
+  border-bottom: 1px solid #f1f5f9;
+}
+
+.idk-modal-header h3 {
+  font-size: 1.25rem;
+  font-weight: 800;
+  color: #1e293b;
+  margin: 0 0 4px;
+}
+
+.idk-modal-header p {
+  font-size: 0.85rem;
+  color: #64748b;
+  margin: 0;
+}
+
+.idk-modal-close {
+  background: #f1f5f9;
+  border: none;
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #475569;
+  font-size: 1rem;
+  cursor: pointer;
+  transition: all 0.15s ease;
+}
+
+.idk-modal-close:hover {
+  background: #e2e8f0;
+  color: #0f172a;
+  transform: scale(1.05);
+}
+
+/* Modal Internal Grid */
+.idk-modal-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 16px;
+  padding: 24px 28px;
+  max-height: 380px;
+  overflow-y: auto;
+}
+
+.idk-modal-footer {
+  padding: 16px 28px 24px;
+  border-top: 1px solid #f1f5f9;
+  display: flex;
+  justify-content: center;
+}
+
+.idk-modal-full-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  background: #0284c7;
+  color: #ffffff;
+  padding: 10px 22px;
+  border-radius: 12px;
+  font-size: 0.92rem;
+  font-weight: 700;
+  text-decoration: none;
+  transition: all 0.2s ease;
+}
+
+.idk-modal-full-btn:hover {
+  background: #0369a1;
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(2, 132, 199, 0.25);
+}
+
+@keyframes modalFadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+@keyframes modalSlideUp {
+  from {
+    opacity: 0;
+    transform: translateY(20px) scale(0.97);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+@media (max-width: 600px) {
+  .idk-modal-grid {
+    grid-template-columns: repeat(2, 1fr);
+    padding: 16px;
+  }
+}

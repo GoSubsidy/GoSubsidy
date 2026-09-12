@@ -1,0 +1,586 @@
+/* ================================================================
+   GoSubsidy — Loan Eligibility & Prepayment Calculator Theme
+   ================================================================ */
+
+:root {
+  --gs-navy: #061a31;
+  --gs-navy-2: #0a2b4d;
+  --gs-blue: #1677ff;
+  --gs-blue-hover: #0958d9;
+  --gs-blue-light: #f0f6ff;
+  --gs-green: #059669;
+  --gs-green-light: #ecfdf5;
+  --gs-ink: #111827;
+  --gs-muted: #6b7280;
+  --gs-line: #e5e7eb;
+  --gs-line-2: #f3f4f6;
+  --gs-surface: #ffffff;
+  --gs-bg: #e4edf5;
+}
+
+* { box-sizing: border-box; }
+html { scroll-behavior: smooth; }
+body { margin: 0; background: var(--gs-bg); color: var(--gs-ink); font-family: Inter, ui-sans-serif, system-ui, sans-serif; }
+button { font: inherit; }
+
+/* Main Page Container */
+.gs-loan-page {
+  min-height: 100vh;
+  padding: 30px 20px 80px;
+  background: radial-gradient(circle at 50% 0%, rgba(22, 119, 255, 0.08), transparent 40%),
+              linear-gradient(180deg, #e8edf3 0%, #d8e3ef 100%);
+}
+
+.gs-loan-shell {
+  max-width: 1100px;
+  margin: 0 auto;
+}
+
+/* Breadcrumbs */
+.gs-loan-breadcrumb {
+  font-size: 11px;
+  font-weight: 800;
+  color: var(--gs-muted);
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  margin-bottom: 16px;
+}
+.gs-loan-breadcrumb span {
+  margin: 0 6px;
+  color: var(--gs-blue);
+}
+
+/* Header Section */
+.gs-loan-header {
+  background: var(--gs-surface);
+  border: 1px solid var(--gs-line);
+  border-radius: 16px;
+  padding: 24px 30px;
+  margin-bottom: 24px;
+  box-shadow: 0 10px 30px rgba(11, 37, 69, 0.04);
+}
+
+.gs-loan-header h1 {
+  margin: 0 0 10px 0;
+  color: var(--gs-navy);
+  font-size: 24px;
+  font-weight: 950;
+  letter-spacing: -0.02em;
+}
+
+.gs-header-description {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 10px;
+}
+
+.gs-header-description p {
+  margin: 0;
+  color: var(--gs-muted);
+  font-size: 13.5px;
+  line-height: 1.5;
+}
+
+.gs-read-more {
+  background: none;
+  border: none;
+  color: var(--gs-blue);
+  font-size: 13px;
+  font-weight: 800;
+  cursor: pointer;
+  padding: 0;
+}
+.gs-read-more:hover {
+  text-decoration: underline;
+}
+
+.gs-read-more-panel {
+  margin-top: 16px;
+  padding-top: 16px;
+  border-top: 1px solid var(--gs-line-2);
+  color: #334155;
+  font-size: 13px;
+  line-height: 1.6;
+}
+.gs-read-more-panel p + p {
+  margin-top: 10px;
+}
+
+/* Main Calculator Card (Grid Layout: Form vs Results) */
+.gs-loan-card {
+  display: grid;
+  grid-template-columns: 1fr 360px;
+  gap: 24px;
+  background: var(--gs-surface);
+  border: 1px solid var(--gs-line);
+  border-radius: 20px;
+  padding: 30px;
+  box-shadow: 0 20px 45px rgba(11, 37, 69, 0.08);
+  margin-bottom: 30px;
+}
+
+@media (max-width: 900px) {
+  .gs-loan-card {
+    grid-template-columns: 1fr;
+    padding: 20px;
+  }
+}
+
+/* Input Panel */
+.gs-loan-panel-heading {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 24px;
+  padding-bottom: 12px;
+  border-bottom: 1px solid var(--gs-line-2);
+}
+
+.gs-loan-panel-heading h2 {
+  margin: 0;
+  font-size: 16px;
+  font-weight: 900;
+  color: var(--gs-navy);
+}
+
+.gs-loan-panel-heading span {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  background: var(--gs-green-light);
+  color: var(--gs-green);
+  border: 1px solid #a7f3d0;
+  padding: 3px 10px;
+  border-radius: 20px;
+  font-size: 10.5px;
+  font-weight: 900;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+/* Form Fields Grid Structure */
+.gs-fields {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 16px 20px;
+}
+
+@media (max-width: 600px) {
+  .gs-fields {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* Individual Field Box */
+.gs-field {
+  background: #f8fafc;
+  border: 1px solid #e2e8f0;
+  border-radius: 12px;
+  padding: 12px 14px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  min-height: 90px;
+  transition: border-color 0.15s ease, box-shadow 0.15s ease;
+}
+
+.gs-field:focus-within {
+  border-color: var(--gs-blue);
+  background: #ffffff;
+  box-shadow: 0 0 0 3px rgba(22, 119, 255, 0.1);
+}
+
+.gs-field-top {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 8px;
+  margin-bottom: 6px;
+}
+
+.gs-field-top label {
+  font-size: 11px;
+  font-weight: 800;
+  color: var(--gs-muted);
+  text-transform: uppercase;
+  letter-spacing: 0.03em;
+}
+
+/* Custom Number Input Wrapper */
+.gs-number {
+  display: flex;
+  align-items: center;
+  gap: 3px;
+  background: #ffffff;
+  border: 1px solid #cbd5e1;
+  border-radius: 7px;
+  padding: 3px 8px;
+  width: 120px;
+}
+
+.gs-number span, .gs-number small {
+  font-size: 12px;
+  font-weight: 800;
+  color: #64748b;
+}
+
+.gs-number input {
+  width: 100%;
+  border: none;
+  background: transparent;
+  font-size: 14px;
+  font-weight: 900;
+  color: var(--gs-ink);
+  text-align: right;
+  outline: none;
+}
+
+.gs-number input::-webkit-outer-spin-button,
+.gs-number input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+/* Custom Range Slider */
+.gs-slider {
+  width: 100%;
+  height: 5px;
+  background: linear-gradient(to right, var(--gs-blue) var(--progress, 0%), #cbd5e1 var(--progress, 0%));
+  border-radius: 5px;
+  outline: none;
+  -webkit-appearance: none;
+  margin-top: 6px;
+  cursor: pointer;
+}
+
+.gs-slider::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  width: 15px;
+  height: 15px;
+  border-radius: 50%;
+  background: var(--gs-blue);
+  cursor: pointer;
+  box-shadow: 0 2px 5px rgba(22, 119, 255, 0.4);
+  transition: transform 0.1s ease;
+}
+
+.gs-slider::-webkit-slider-thumb:hover {
+  transform: scale(1.15);
+}
+
+/* Slider Limits Footer */
+.gs-limits {
+  display: flex;
+  justify-content: space-between;
+  font-size: 10px;
+  font-weight: 800;
+  color: #94a3b8;
+  margin-top: 4px;
+}
+
+/* Goal Toggles for Prepayment */
+.gs-goal {
+  grid-column: 1 / -1;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  background: #f8fafc;
+  border: 1px solid #e2e8f0;
+  border-radius: 12px;
+  padding: 12px 14px;
+  margin-top: 4px;
+}
+
+.gs-goal strong {
+  font-size: 12px;
+  font-weight: 800;
+  color: #475569;
+  flex: 1;
+}
+
+.gs-goal button {
+  padding: 8px 16px;
+  background: #ffffff;
+  border: 1px solid #cbd5e1;
+  border-radius: 8px;
+  font-size: 12px;
+  font-weight: 800;
+  color: #475569;
+  cursor: pointer;
+  transition: all 0.15s ease;
+}
+
+.gs-goal button.active {
+  background: var(--gs-blue);
+  border-color: var(--gs-blue);
+  color: #ffffff;
+  box-shadow: 0 4px 12px rgba(22, 119, 255, 0.25);
+}
+
+/* Disclaimer Notice Inside Input Panel */
+.gs-loan-note {
+  grid-column: 1 / -1;
+  margin-top: 20px;
+  display: flex;
+  align-items: flex-start;
+  gap: 8px;
+  font-size: 11px;
+  color: var(--gs-muted);
+  line-height: 1.4;
+  background: #f8fafc;
+  padding: 10px 12px;
+  border-radius: 8px;
+  border: 1px solid #f1f5f9;
+}
+.gs-loan-note i {
+  color: var(--gs-blue);
+  font-size: 13px;
+  margin-top: 1px;
+}
+
+/* Results Sidebar Panel */
+.gs-result {
+  background: #f8fafc;
+  border: 1px solid #e2e8f0;
+  border-radius: 16px;
+  padding: 24px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.gs-result h3 {
+  margin: 0 0 16px 0;
+  font-size: 15px;
+  font-weight: 900;
+  color: var(--gs-navy);
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  text-align: center;
+}
+
+/* Circular Donut Gauge Representation */
+.gs-donut {
+  position: relative;
+  width: 170px;
+  height: 170px;
+  margin: 0 auto 20px auto;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+  background: radial-gradient(circle, #ffffff 58%, #eef6ff 100%);
+  border: 8px solid var(--gs-blue);
+  box-shadow: 0 10px 25px rgba(22, 119, 255, 0.15);
+  text-align: center;
+  padding: 10px;
+}
+
+.gs-donut.green {
+  border-color: var(--gs-green);
+  box-shadow: 0 10px 25px rgba(5, 150, 105, 0.15);
+  background: radial-gradient(circle, #ffffff 58%, #ecfdf5 100%);
+}
+
+.gs-donut div span {
+  display: block;
+  font-size: 10px;
+  font-weight: 800;
+  color: var(--gs-muted);
+  text-transform: uppercase;
+  margin-bottom: 3px;
+}
+
+.gs-donut div strong {
+  font-size: 17px;
+  font-weight: 950;
+  color: var(--gs-navy);
+}
+
+.gs-result-line {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 8px 0;
+  border-bottom: 1px dashed #cbd5e1;
+  font-size: 12px;
+}
+
+.gs-result-line span {
+  color: var(--gs-muted);
+  font-weight: 700;
+}
+
+.gs-result-line strong {
+  color: var(--gs-ink);
+  font-weight: 900;
+}
+
+/* Apply CTA Button */
+.gs-apply {
+  width: 100%;
+  margin-top: 18px;
+  padding: 13px;
+  border: none;
+  border-radius: 10px;
+  background: linear-gradient(135deg, var(--gs-blue) 0%, var(--gs-blue-hover) 100%);
+  color: #ffffff;
+  font-size: 13.5px;
+  font-weight: 900;
+  cursor: pointer;
+  box-shadow: 0 6px 18px rgba(22, 119, 255, 0.3);
+  transition: transform 0.15s ease, box-shadow 0.15s ease;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+}
+
+.gs-apply:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 8px 22px rgba(22, 119, 255, 0.4);
+}
+
+/* Bottom Article / Information Section */
+.gs-loan-content {
+  display: grid;
+  grid-template-columns: 1.4fr 0.8fr;
+  gap: 24px;
+}
+
+@media (max-width: 900px) {
+  .gs-loan-content {
+    grid-template-columns: 1fr;
+  }
+}
+
+.gs-loan-article {
+  background: var(--gs-surface);
+  border: 1px solid var(--gs-line);
+  border-radius: 20px;
+  padding: 30px;
+  box-shadow: 0 10px 30px rgba(11, 37, 69, 0.04);
+}
+
+.gs-eyebrow {
+  color: var(--gs-blue);
+  font-size: 9.5px;
+  font-weight: 950;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  display: block;
+  margin-bottom: 6px;
+}
+
+.gs-loan-article h2 {
+  margin: 0 0 12px 0;
+  color: var(--gs-navy);
+  font-size: 19px;
+  font-weight: 900;
+}
+
+.gs-loan-article p {
+  color: var(--gs-muted);
+  font-size: 13px;
+  line-height: 1.6;
+  margin: 0 0 20px 0;
+}
+
+.gs-info-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 14px;
+}
+
+@media (max-width: 768px) {
+  .gs-info-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+.gs-info {
+  background: #f8fafc;
+  border: 1px solid #e2e8f0;
+  border-radius: 12px;
+  padding: 16px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.gs-info div {
+  width: 32px;
+  height: 32px;
+  border-radius: 8px;
+  background: var(--gs-blue-light);
+  color: var(--gs-blue);
+  display: grid;
+  place-items: center;
+  font-size: 15px;
+}
+
+.gs-info section strong {
+  display: block;
+  font-size: 12.5px;
+  color: var(--gs-navy);
+  margin-bottom: 4px;
+}
+
+.gs-info section p {
+  margin: 0;
+  font-size: 11.5px;
+  color: var(--gs-muted);
+  line-height: 1.4;
+}
+
+/* Trust Sidebar */
+.gs-trust {
+  background: linear-gradient(145deg, #061a31 0%, #0d3559 100%);
+  border-radius: 20px;
+  padding: 30px;
+  color: #ffffff;
+  box-shadow: 0 15px 35px rgba(6, 26, 49, 0.2);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.gs-trust-icon {
+  width: 44px;
+  height: 44px;
+  border-radius: 12px;
+  background: rgba(255, 255, 255, 0.1);
+  display: grid;
+  place-items: center;
+  font-size: 20px;
+  color: #60a5fa;
+  margin-bottom: 16px;
+}
+
+.gs-trust h3 {
+  margin: 0 0 6px 0;
+  font-size: 17px;
+  font-weight: 900;
+}
+
+.gs-trust p {
+  margin: 0 0 20px 0;
+  color: #93c5fd;
+  font-size: 12.5px;
+  line-height: 1.5;
+}
+
+.gs-trust div {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 12px;
+  font-weight: 700;
+  color: #e2e8f0;
+  margin-bottom: 8px;
+}
+
+.gs-trust div i {
+  color: #34d399;
+}

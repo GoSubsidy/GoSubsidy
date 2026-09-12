@@ -1,0 +1,759 @@
+/* ================================================================
+   GoSubsidy — World-Class Bank-Ready DPR Preview
+   Presentation layer only. No financial/calculation logic here.
+   Designed for A4 report pages, screen preview and clean PDF print.
+   ================================================================ */
+
+:root{
+  --gs-navy:#061a31;
+  --gs-navy-2:#0a2b4d;
+  --gs-blue:#1677ff;
+  --gs-blue-2:#49a7ff;
+  --gs-gold:#d8ad4d;
+  --gs-gold-soft:#fbf4df;
+  --gs-ink:#102943;
+  --gs-ink-2:#28435e;
+  --gs-muted:#71859a;
+  --gs-line:#dbe6ef;
+  --gs-line-2:#e9f0f5;
+  --gs-surface:#ffffff;
+  --gs-surface-2:#f7fafc;
+  --gs-bg:#dfe9f1;
+  --gs-green:#07825f;
+  --gs-green-soft:#eaf8f3;
+  --gs-red:#b94b55;
+  --gs-red-soft:#fff0f1;
+  --gs-shadow:0 18px 55px rgba(5,31,57,.12);
+  --gs-shadow-soft:0 8px 28px rgba(10,45,77,.07);
+}
+
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{margin:0;background:var(--gs-bg);color:var(--gs-ink);font-family:Inter,ui-sans-serif,system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif}
+button{font:inherit}
+
+/* ---------- preview shell ---------- */
+.dpr30-preview{
+  min-height:100vh;
+  padding:20px 18px 60px;
+  background:
+    radial-gradient(circle at 10% 0%,rgba(73,167,255,.13),transparent 25%),
+    radial-gradient(circle at 92% 12%,rgba(216,173,77,.10),transparent 23%),
+    linear-gradient(180deg,#e7eff5 0%,#dce7ef 100%);
+}
+
+.dpr30-action-bar{
+  position:sticky;
+  top:14px;
+  z-index:100;
+  width:min(1120px,calc(100vw - 36px));
+  min-height:58px;
+  margin:0 auto 18px;
+  padding:9px 11px 9px 16px;
+  display:flex;
+  align-items:center;
+  gap:14px;
+  border:1px solid rgba(255,255,255,.65);
+  border-radius:16px;
+  background:rgba(6,26,49,.94);
+  box-shadow:0 14px 35px rgba(3,20,37,.22);
+  backdrop-filter:blur(18px);
+}
+
+.dpr30-action-bar button{
+  border:1px solid rgba(255,255,255,.17);
+  border-radius:10px;
+  padding:10px 15px;
+  color:#fff;
+  background:rgba(255,255,255,.08);
+  cursor:pointer;
+  font-size:12px;
+  font-weight:800;
+  transition:.18s ease;
+}
+.dpr30-action-bar button:hover{background:var(--gs-blue);border-color:var(--gs-blue);transform:translateY(-1px)}
+.dpr30-action-title{
+  flex:1;
+  color:#cfe2f5;
+  font-size:11px;
+  font-weight:800;
+  letter-spacing:.08em;
+  text-transform:uppercase;
+}
+
+/* ---------- document ---------- */
+.dpr30-document{
+  width:210mm;
+  margin:0 auto;
+}
+.dpr30-page{
+  position:relative;
+  width:210mm;
+  min-height:297mm;
+  margin:0 auto 22px;
+  padding:17mm 16mm 15mm;
+  overflow:hidden;
+  background:#fff;
+  border:1px solid #d5e0e8;
+  border-radius:5px;
+  box-shadow:var(--gs-shadow);
+  page-break-after:always;
+}
+.dpr30-page:last-child{page-break-after:auto}
+
+/* subtle report rail */
+.dpr30-page::before{
+  content:"";
+  position:absolute;
+  left:0;
+  top:0;
+  bottom:0;
+  width:4px;
+  background:linear-gradient(180deg,var(--gs-blue),var(--gs-gold));
+}
+
+.dpr30-page-header{
+  position:relative;
+  display:grid;
+  grid-template-columns:1fr auto auto;
+  align-items:end;
+  gap:18px;
+  padding:0 0 9px;
+  margin-bottom:20px;
+  border-bottom:1px solid var(--gs-line);
+}
+.dpr30-brand-small{
+  color:var(--gs-blue);
+  font-size:10px;
+  line-height:1;
+  font-weight:950;
+  letter-spacing:.16em;
+  text-transform:uppercase;
+}
+.dpr30-page-title{
+  margin-top:5px;
+  color:var(--gs-navy);
+  font-size:10px;
+  font-weight:750;
+  letter-spacing:.045em;
+  text-transform:uppercase;
+}
+.dpr30-page-title-right{
+  color:#637a8f;
+  font-size:9px;
+  font-weight:800;
+  letter-spacing:.07em;
+  text-transform:uppercase;
+  text-align:right;
+}
+.dpr30-page-number{
+  min-width:72px;
+  color:#73879a;
+  font-size:9px;
+  font-weight:800;
+  text-align:right;
+}
+.dpr30-page-content{font-size:13px;line-height:1.65}
+.dpr30-page-footer{
+  position:absolute;
+  left:16mm;
+  right:16mm;
+  bottom:7mm;
+  display:flex;
+  justify-content:space-between;
+  gap:15px;
+  padding-top:7px;
+  border-top:1px solid #edf2f6;
+  color:#8798a8;
+  font-size:8px;
+  line-height:1.3;
+}
+
+/* ---------- section hierarchy ---------- */
+.dpr30-section-heading{
+  display:flex;
+  align-items:center;
+  gap:12px;
+  margin:0 0 18px;
+}
+.dpr30-section-heading>span{
+  display:grid;
+  place-items:center;
+  width:35px;
+  height:35px;
+  flex:none;
+  border-radius:10px;
+  color:#fff;
+  background:linear-gradient(135deg,var(--gs-blue),var(--gs-navy-2));
+  font-size:10px;
+  font-weight:950;
+  box-shadow:0 8px 18px rgba(22,119,255,.18);
+}
+.dpr30-section-heading h2{
+  margin:0;
+  color:var(--gs-navy);
+  font-size:25px;
+  line-height:1.15;
+  letter-spacing:-.035em;
+  font-weight:900;
+}
+.dpr30-subtitle{
+  margin:0 0 11px;
+  color:var(--gs-navy-2);
+  font-size:15px;
+  line-height:1.25;
+  font-weight:900;
+}
+
+/* ---------- cover ---------- */
+.dpr30-cover{
+  display:flex;
+  flex-direction:column;
+  justify-content:center;
+  padding:23mm 19mm 18mm;
+  background:
+    radial-gradient(circle at 85% 16%,rgba(73,167,255,.18),transparent 25%),
+    radial-gradient(circle at 14% 86%,rgba(216,173,77,.12),transparent 23%),
+    linear-gradient(135deg,#f9fcff,#edf5fb 58%,#f9fbfd);
+}
+.dpr30-cover::after{
+  content:"BANK-READY • FINANCIAL APPRAISAL REPORT";
+  position:absolute;
+  right:-35px;
+  top:125px;
+  transform:rotate(90deg);
+  color:rgba(6,26,49,.09);
+  font-size:9px;
+  font-weight:950;
+  letter-spacing:.18em;
+}
+.dpr30-cover-brand{
+  color:var(--gs-blue);
+  font-size:25px;
+  font-weight:950;
+  letter-spacing:-.04em;
+}
+.dpr30-cover-sub{
+  margin-top:4px;
+  color:#7a8fa4;
+  font-size:8px;
+  font-weight:850;
+  letter-spacing:.23em;
+}
+.dpr30-cover-label{
+  width:max-content;
+  margin-top:54px;
+  padding:7px 11px;
+  border-radius:7px;
+  color:#72591d;
+  background:var(--gs-gold-soft);
+  border:1px solid #eedaa3;
+  font-size:9px;
+  font-weight:950;
+  letter-spacing:.12em;
+}
+.dpr30-cover h1{
+  max-width:150mm;
+  margin:15px 0 7px;
+  color:var(--gs-navy);
+  font-size:40px;
+  line-height:1.05;
+  letter-spacing:-.055em;
+  font-weight:950;
+}
+.dpr30-cover h2{
+  margin:0;
+  color:var(--gs-blue);
+  font-size:17px;
+  font-weight:800;
+}
+.dpr30-cover-grid{
+  display:grid;
+  grid-template-columns:repeat(3,1fr);
+  gap:10px;
+  margin-top:48px;
+}
+.dpr30-cover-note{
+  margin-top:auto;
+  padding-top:18px;
+  color:#7b8e9f;
+  font-size:10px;
+  font-weight:700;
+}
+
+/* ---------- cards / summary ---------- */
+.dpr30-summary-grid,
+.dpr30-financial-grid,
+.dpr30-summary-strip{
+  display:grid;
+  grid-template-columns:repeat(4,minmax(0,1fr));
+  gap:11px;
+  margin-bottom:16px;
+}
+.dpr30-summary-card{
+  min-width:0;
+  padding:14px 15px;
+  border:1px solid var(--gs-line);
+  border-radius:13px;
+  background:linear-gradient(145deg,#fff,#f8fbfd);
+  box-shadow:var(--gs-shadow-soft);
+}
+.dpr30-summary-card span{
+  display:block;
+  color:#71869a;
+  font-size:8.5px;
+  line-height:1.35;
+  font-weight:850;
+  letter-spacing:.07em;
+  text-transform:uppercase;
+}
+.dpr30-summary-card strong{
+  display:block;
+  margin-top:7px;
+  color:var(--gs-navy);
+  font-size:17px;
+  line-height:1.2;
+  font-weight:950;
+  letter-spacing:-.025em;
+}
+.dpr30-highlight{
+  margin:13px 0;
+  padding:14px 16px;
+  border:1px solid #cfe1f1;
+  border-left:4px solid var(--gs-blue);
+  border-radius:12px;
+  color:#38526b;
+  background:linear-gradient(90deg,#f2f8fe,#fbfdff);
+  font-size:12px;
+  line-height:1.65;
+}
+.dpr30-highlight strong{color:var(--gs-navy)}
+
+/* ---------- information tables ---------- */
+.dpr30-info-table{
+  width:100%;
+  border-collapse:separate;
+  border-spacing:0;
+  overflow:hidden;
+  border:1px solid var(--gs-line);
+  border-radius:13px;
+  background:#fff;
+  font-size:12px;
+}
+.dpr30-info-table tr:nth-child(even){background:#f8fbfd}
+.dpr30-info-table th,
+.dpr30-info-table td{
+  padding:10px 13px;
+  border-bottom:1px solid var(--gs-line-2);
+  vertical-align:top;
+}
+.dpr30-info-table tr:last-child th,
+.dpr30-info-table tr:last-child td{border-bottom:0}
+.dpr30-info-table th{
+  width:34%;
+  color:#627a8f;
+  font-size:9px;
+  font-weight:900;
+  letter-spacing:.05em;
+  text-transform:uppercase;
+  text-align:left;
+}
+.dpr30-info-table td{color:#18344e;font-size:12px;font-weight:700}
+
+/* ---------- calculators ---------- */
+.dpr30-calculator-suite{
+  margin-top:17px;
+  padding:16px;
+  border:1px solid #cfdfea;
+  border-radius:17px;
+  background:
+    radial-gradient(circle at 100% 0%,rgba(22,119,255,.08),transparent 30%),
+    linear-gradient(145deg,#fafdff,#f2f7fb);
+  box-shadow:0 12px 32px rgba(9,49,82,.06);
+}
+.dpr30-suite-heading{
+  display:flex;
+  justify-content:space-between;
+  align-items:end;
+  gap:15px;
+  margin-bottom:12px;
+  padding-bottom:12px;
+  border-bottom:1px solid #dce7ef;
+}
+.dpr30-suite-heading>div>span{
+  color:var(--gs-blue);
+  font-size:8px;
+  font-weight:950;
+  letter-spacing:.15em;
+}
+.dpr30-suite-heading h3{
+  margin:4px 0 0;
+  color:var(--gs-navy);
+  font-size:18px;
+  line-height:1.15;
+  letter-spacing:-.03em;
+  font-weight:950;
+}
+.dpr30-suite-heading small{color:#7b8d9d;font-size:9px;font-weight:800}
+.dpr30-calculator-grid{
+  display:grid;
+  grid-template-columns:repeat(2,minmax(0,1fr));
+  gap:9px;
+}
+.dpr30-calculator-card{
+  display:grid;
+  grid-template-columns:35px minmax(0,1fr);
+  gap:11px;
+  align-items:center;
+  min-width:0;
+  padding:11px;
+  border:1px solid #d9e5ee;
+  border-radius:12px;
+  background:#fff;
+  box-shadow:0 4px 15px rgba(7,39,67,.04);
+  transition:.18s ease;
+}
+.dpr30-calculator-card:hover{transform:translateY(-2px);border-color:#9dc8ef;box-shadow:0 9px 24px rgba(22,119,255,.08)}
+.dpr30-calculator-index{
+  display:grid;
+  place-items:center;
+  width:35px;
+  height:35px;
+  border-radius:10px;
+  color:#176bd3;
+  background:#eaf4ff;
+  border:1px solid #d1e6fb;
+  font-size:9px;
+  font-weight:950;
+}
+.dpr30-calculator-copy span{
+  display:block;
+  color:#657c90;
+  font-size:8px;
+  line-height:1.2;
+  font-weight:900;
+  letter-spacing:.06em;
+  text-transform:uppercase;
+}
+.dpr30-calculator-copy strong{
+  display:block;
+  margin-top:3px;
+  color:var(--gs-navy);
+  font-size:15px;
+  line-height:1.15;
+  font-weight:950;
+}
+.dpr30-calculator-copy small{
+  display:block;
+  margin-top:3px;
+  color:#8293a2;
+  font-size:8px;
+  line-height:1.25;
+}
+
+/* ---------- financial statements ---------- */
+.dpr30-financial-block{margin:0 0 17px}
+.dpr30-table-wrap{
+  width:100%;
+  overflow-x:auto;
+  border:1px solid var(--gs-line);
+  border-radius:12px;
+  background:#fff;
+}
+.dpr30-financial-table,
+.dpr30-markdown table{
+  width:100%;
+  min-width:650px;
+  border-collapse:separate;
+  border-spacing:0;
+  font-size:11px;
+}
+.dpr30-financial-table th,
+.dpr30-financial-table td,
+.dpr30-markdown table th,
+.dpr30-markdown table td{
+  padding:8px 9px;
+  border-right:1px solid #edf2f6;
+  border-bottom:1px solid #edf2f6;
+  text-align:right;
+  vertical-align:middle;
+}
+.dpr30-financial-table tr:last-child th,
+.dpr30-financial-table tr:last-child td,
+.dpr30-markdown table tr:last-child th,
+.dpr30-markdown table tr:last-child td{border-bottom:0}
+.dpr30-financial-table th:first-child,
+.dpr30-financial-table td:first-child,
+.dpr30-markdown table th:first-child,
+.dpr30-markdown table td:first-child{text-align:left}
+.dpr30-financial-table thead th,
+.dpr30-markdown table thead th{
+  position:sticky;
+  top:0;
+  z-index:1;
+  color:#526b81;
+  background:#f0f5f9;
+  font-size:8px;
+  line-height:1.25;
+  font-weight:950;
+  letter-spacing:.045em;
+  text-transform:uppercase;
+}
+.dpr30-financial-table tbody th{
+  color:#304a62;
+  background:#fbfdfe;
+  font-weight:800;
+}
+.dpr30-financial-table tbody td{color:#173650;font-weight:700}
+.dpr30-financial-table tr:nth-child(even) td{background:#fcfdff}
+.dpr30-financial-table .dpr30-total th,
+.dpr30-financial-table .dpr30-total td{
+  color:var(--gs-navy);
+  background:#edf5fc;
+  font-weight:950;
+}
+.dpr30-two-col-table{min-width:0!important}
+.dpr30-two-col-table th,.dpr30-two-col-table td{font-size:11px}
+
+/* ---------- narrative / AI sections ---------- */
+.dpr30-markdown{
+  color:#29445c;
+  font-size:13px;
+  line-height:1.8;
+}
+.dpr30-markdown p{margin:0 0 13px}
+.dpr30-markdown h3{
+  margin:19px 0 9px;
+  color:var(--gs-navy);
+  font-size:18px;
+  line-height:1.3;
+  font-weight:950;
+  letter-spacing:-.025em;
+}
+.dpr30-markdown h4{
+  margin:15px 0 7px;
+  color:var(--gs-navy-2);
+  font-size:14px;
+  font-weight:900;
+}
+.dpr30-markdown ul,.dpr30-markdown ol{margin:8px 0 15px;padding-left:22px}
+.dpr30-markdown li{margin:4px 0}
+.dpr30-markdown strong{color:#102f4b;font-weight:900}
+.dpr30-markdown table{margin:13px 0}
+.dpr30-blockquote{
+  margin:14px 0;
+  padding:13px 16px;
+  border-left:4px solid var(--gs-gold);
+  border-radius:0 10px 10px 0;
+  color:#5d5136;
+  background:#fffaf0;
+}
+
+/* ---------- two column content ---------- */
+.dpr30-two-column,
+.dpr30-market-grid{
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:13px;
+}
+.dpr30-two-column>* ,
+.dpr30-market-grid>*{
+  min-width:0;
+  padding:15px;
+  border:1px solid var(--gs-line);
+  border-radius:13px;
+  background:linear-gradient(145deg,#fff,#f8fbfd);
+  box-shadow:var(--gs-shadow-soft);
+}
+.dpr30-profile-box,
+.dpr30-control-box{
+  padding:17px;
+  border:1px solid var(--gs-line);
+  border-radius:14px;
+  background:#fbfdff;
+  box-shadow:var(--gs-shadow-soft);
+}
+.dpr30-profile-box strong{color:var(--gs-navy);font-size:15px}
+.dpr30-note{
+  margin-top:11px;
+  color:#71869a;
+  font-size:10px;
+  line-height:1.55;
+}
+.dpr30-warning{
+  margin-top:11px;
+  padding:13px 15px;
+  border:1px solid #eadba9;
+  border-left:4px solid var(--gs-gold);
+  border-radius:11px;
+  color:#665629;
+  background:#fffaf0;
+  font-size:11px;
+  line-height:1.6;
+}
+.dpr30-warning strong{color:#594710}
+.dpr30-checklist{
+  display:grid;
+  gap:8px;
+}
+.dpr30-checklist>*{
+  padding:10px 12px;
+  border:1px solid var(--gs-line);
+  border-radius:10px;
+  background:#fff;
+}
+
+/* ---------- credit / DSCR ---------- */
+.dpr30-dscr{
+  margin-top:15px;
+  padding:20px;
+  border:1px solid #c7e7dc;
+  border-radius:16px;
+  color:#42635a;
+  background:linear-gradient(145deg,#f2fbf7,#e8f7f1);
+  font-size:12px;
+  font-weight:800;
+}
+.dpr30-dscr strong{
+  display:inline-block;
+  margin-left:5px;
+  color:var(--gs-green);
+  font-size:30px;
+  line-height:1;
+  font-weight:950;
+}
+.dpr30-formula{
+  margin-top:12px;
+  padding:13px 15px;
+  border:1px dashed #b9cbd9;
+  border-radius:11px;
+  color:#5c7287;
+  background:#f7fafc;
+  font-size:11px;
+  line-height:1.6;
+}
+.dpr30-empty-finance{
+  min-height:90px;
+  display:grid;
+  place-items:center;
+  padding:18px;
+  border:1px dashed #c9d7e2;
+  border-radius:12px;
+  color:#8496a6;
+  background:#fafcfd;
+  font-size:11px;
+  text-align:center;
+}
+
+/* ---------- final disclaimer ---------- */
+.dpr30-important-disclaimer{
+  margin-top:17px;
+  padding:17px;
+  border:1px solid #e1caca;
+  border-radius:13px;
+  color:#694b4f;
+  background:#fff7f7;
+  font-size:10.5px;
+  line-height:1.65;
+}
+.dpr30-important-disclaimer b{color:#843d46}
+
+/* ---------- empty state ---------- */
+.dpr-preview-empty{
+  min-height:100vh;
+  display:grid;
+  place-items:center;
+  padding:24px;
+  background:#e8f0f5;
+}
+.dpr-empty-card{
+  width:min(520px,100%);
+  padding:32px;
+  border:1px solid var(--gs-line);
+  border-radius:20px;
+  background:#fff;
+  box-shadow:var(--gs-shadow);
+  text-align:center;
+}
+.dpr-empty-card h2{margin:0;color:var(--gs-navy);font-size:25px}
+.dpr-empty-card p{color:var(--gs-muted);font-size:13px}
+.dpr-empty-card button{
+  border:0;border-radius:10px;padding:11px 17px;color:#fff;background:var(--gs-blue);font-weight:850;cursor:pointer
+}
+
+/* ---------- page-specific visual composition ---------- */
+.dpr30-bank-report .dpr30-page:nth-child(2) .dpr30-page-content{display:block}
+.dpr30-bank-report .dpr30-page:nth-child(2) .dpr30-summary-grid{margin-bottom:12px}
+.dpr30-bank-report .dpr30-page:nth-child(14) .dpr30-financial-table tbody tr:last-child th,
+.dpr30-bank-report .dpr30-page:nth-child(14) .dpr30-financial-table tbody tr:last-child td{background:#eaf8f3;color:var(--gs-green)}
+.dpr30-bank-report .dpr30-page:nth-child(28) .dpr30-financial-block{
+  margin-top:8px;
+  padding:13px;
+  border:1px solid var(--gs-line);
+  border-radius:15px;
+  background:#fbfdff;
+}
+.dpr30-bank-report .dpr30-page:nth-child(28) .dpr30-financial-table{font-size:12px}
+.dpr30-bank-report .dpr30-page:nth-child(28) .dpr30-financial-table th,
+.dpr30-bank-report .dpr30-page:nth-child(28) .dpr30-financial-table td{padding:10px}
+.dpr30-bank-report .dpr30-page:nth-child(28) .dpr30-dscr{margin-top:20px}
+.dpr30-bank-report .dpr30-page:nth-child(29) .dpr30-warning{margin-bottom:13px}
+
+/* ---------- responsive ---------- */
+@media(max-width:900px){
+  .dpr30-preview{padding:10px 8px 40px}
+  .dpr30-action-bar{position:sticky;top:8px;width:calc(100vw - 16px);border-radius:13px}
+  .dpr30-action-title{display:none}
+  .dpr30-document,.dpr30-page{width:100%;}
+  .dpr30-page{min-height:auto;margin-bottom:14px;padding:30px 22px 55px;border-radius:4px;overflow:visible}
+  .dpr30-page-footer{position:relative;left:auto;right:auto;bottom:auto;margin-top:30px}
+  .dpr30-page-header{grid-template-columns:1fr auto;}
+  .dpr30-page-title-right{display:none}
+  .dpr30-summary-grid,.dpr30-financial-grid,.dpr30-summary-strip{grid-template-columns:repeat(2,1fr)}
+  .dpr30-cover-grid{grid-template-columns:repeat(2,1fr)}
+}
+@media(max-width:620px){
+  .dpr30-page{padding:24px 16px 45px}
+  .dpr30-page-content{font-size:12.5px}
+  .dpr30-section-heading h2{font-size:22px}
+  .dpr30-summary-grid,.dpr30-financial-grid,.dpr30-summary-strip,.dpr30-cover-grid,.dpr30-two-column,.dpr30-market-grid{grid-template-columns:1fr}
+  .dpr30-calculator-grid{grid-template-columns:1fr}
+  .dpr30-cover h1{font-size:31px}
+  .dpr30-cover-label{margin-top:35px}
+  .dpr30-calculator-card{grid-template-columns:33px 1fr}
+  .dpr30-calculator-index{width:33px;height:33px}
+}
+
+/* ---------- print / PDF ---------- */
+@page{size:A4;margin:0}
+@media print{
+  html,body{background:#fff!important}
+  body{-webkit-print-color-adjust:exact;print-color-adjust:exact}
+  .dpr30-preview{padding:0!important;background:#fff!important}
+  .dpr30-action-bar{display:none!important}
+  .dpr30-document{width:210mm!important;margin:0!important}
+  .dpr30-page{
+    width:210mm!important;
+    min-height:297mm!important;
+    height:297mm!important;
+    margin:0!important;
+    padding:17mm 16mm 15mm!important;
+    border:0!important;
+    border-radius:0!important;
+    box-shadow:none!important;
+    overflow:hidden!important;
+    page-break-after:always!important;
+    break-after:page!important;
+  }
+  .dpr30-page:last-child{page-break-after:auto!important;break-after:auto!important}
+  .dpr30-page-content{font-size:12px!important;line-height:1.58!important}
+  .dpr30-markdown{font-size:12px!important;line-height:1.65!important}
+  .dpr30-markdown h3{font-size:17px!important}
+  .dpr30-section-heading h2{font-size:23px!important}
+  .dpr30-summary-card strong{font-size:16px!important}
+  .dpr30-calculator-suite{padding:13px!important}
+  .dpr30-calculator-grid{gap:7px!important}
+  .dpr30-calculator-card{padding:8px!important}
+  .dpr30-calculator-copy strong{font-size:13px!important}
+  .dpr30-page-footer{position:absolute!important;left:16mm!important;right:16mm!important;bottom:7mm!important}
+}

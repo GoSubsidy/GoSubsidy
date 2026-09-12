@@ -1,0 +1,515 @@
+/* =========================================================
+   GoSubsidy - Eligibility / Prepayment calculator pages
+   Visual architecture based on supplied reference screenshots.
+========================================================= */
+
+.gs-refcalc-page {
+  min-height: calc(100vh - 105px);
+  padding: 34px 20px 70px;
+  background: linear-gradient(180deg, #f5faff 0%, #eef6fc 46%, #ffffff 100%);
+  color: #102a43;
+}
+
+.gs-refcalc-shell {
+  width: min(1080px, 100%);
+  margin: 0 auto;
+}
+
+.gs-refcalc-intro {
+  margin-bottom: 24px;
+}
+
+.gs-refcalc-breadcrumb {
+  margin-bottom: 10px;
+  color: #3b82f6;
+  font-size: 10px;
+}
+
+.gs-refcalc-breadcrumb span {
+  margin: 0 5px;
+  color: #9fb3c8;
+}
+
+.gs-refcalc-intro h1 {
+  margin: 0;
+  color: #102a43;
+  font-size: clamp(28px, 4vw, 36px);
+  line-height: 1.12;
+  font-weight: 800;
+}
+
+.gs-refcalc-intro p {
+  max-width: 980px;
+  margin: 10px 0 0;
+  color: #334e68;
+  font-size: 14px;
+  line-height: 1.6;
+}
+
+.gs-refcalc-intro p button {
+  padding: 0;
+  border: 0;
+  background: transparent;
+  color: #0b72ff;
+  font-weight: 700;
+  cursor: pointer;
+}
+
+.gs-refcalc-card {
+  display: grid;
+  grid-template-columns: 1.42fr .88fr;
+  overflow: hidden;
+  border: 1px solid #dce6ef;
+  border-radius: 20px;
+  background: #fff;
+  box-shadow: 0 16px 42px rgba(16, 42, 67, .10);
+}
+
+.gs-refcalc-input-side {
+  padding: 32px 34px 25px;
+}
+
+.gs-refcalc-result-side {
+  padding: 30px 28px 25px;
+  background: linear-gradient(180deg, #f2f8ff 0%, #f8fbff 100%);
+  border-left: 1px solid #dce6ef;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.gs-refcalc-card-title {
+  display: flex;
+  justify-content: space-between;
+  gap: 15px;
+  align-items: center;
+  margin-bottom: 25px;
+}
+
+.gs-refcalc-card-title h2 {
+  margin: 0;
+  color: #102a43;
+  font-size: 18px;
+  font-weight: 800;
+}
+
+.gs-refcalc-live {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  padding: 6px 9px;
+  border-radius: 999px;
+  background: #e8f7ef;
+  color: #07824f;
+  font-size: 10px;
+  font-weight: 800;
+  white-space: nowrap;
+}
+
+.gs-refcalc-fields-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 20px 22px;
+}
+
+.gs-range-field {
+  min-width: 0;
+}
+
+.gs-range-top {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 9px;
+}
+
+.gs-range-top label {
+  color: #334e68;
+  font-size: 12px;
+  font-weight: 700;
+}
+
+.gs-range-value {
+  display: flex;
+  align-items: center;
+  gap: 3px;
+  min-width: 122px;
+  padding: 4px 8px;
+  border: 1px solid #d7e1ea;
+  border-radius: 8px;
+  background: #f8fafc;
+  color: #102a43;
+}
+
+.gs-range-value input {
+  width: 88px;
+  min-width: 0;
+  border: 0;
+  outline: 0;
+  background: transparent;
+  color: #102a43;
+  font-size: 13px;
+  font-weight: 800;
+  text-align: right;
+}
+
+.gs-range-value input::-webkit-outer-spin-button,
+.gs-range-value input::-webkit-inner-spin-button {
+  margin: 0;
+}
+
+.gs-range-value small {
+  color: #627d98;
+  font-size: 10px;
+  font-weight: 700;
+}
+
+.gs-range-slider {
+  appearance: none;
+  width: 100%;
+  height: 5px;
+  border-radius: 10px;
+  outline: 0;
+  background: linear-gradient(
+    90deg,
+    #1473ff 0%,
+    #1473ff var(--range-progress),
+    #dce6ef var(--range-progress),
+    #dce6ef 100%
+  );
+  cursor: pointer;
+}
+
+.gs-range-slider::-webkit-slider-thumb {
+  appearance: none;
+  width: 16px;
+  height: 16px;
+  border: 3px solid #fff;
+  border-radius: 50%;
+  background: #1473ff;
+  box-shadow: 0 1px 5px rgba(20, 115, 255, .45);
+}
+
+.gs-range-slider::-moz-range-thumb {
+  width: 12px;
+  height: 12px;
+  border: 3px solid #fff;
+  border-radius: 50%;
+  background: #1473ff;
+  box-shadow: 0 1px 5px rgba(20, 115, 255, .45);
+}
+
+.gs-range-limits {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 6px;
+  color: #829ab1;
+  font-size: 9px;
+}
+
+.gs-refcalc-disclaimer {
+  display: flex;
+  align-items: flex-start;
+  gap: 8px;
+  margin-top: 23px;
+  padding-top: 15px;
+  border-top: 1px solid #edf2f7;
+  color: #7b8794;
+  font-size: 10px;
+  font-style: italic;
+  line-height: 1.5;
+}
+
+.gs-refcalc-disclaimer i {
+  color: #1473ff;
+  font-style: normal;
+  margin-top: 1px;
+}
+
+.gs-result-title {
+  margin-bottom: 12px;
+  color: #102a43;
+  font-size: 16px;
+  font-weight: 800;
+}
+
+.gs-result-donut {
+  --eligible: 70%;
+  position: relative;
+  width: 158px;
+  height: 158px;
+  display: grid;
+  place-items: center;
+  margin: 4px 0 17px;
+  border-radius: 50%;
+  background: conic-gradient(#1473ff var(--eligible), #dcecff var(--eligible));
+}
+
+.gs-result-donut::before {
+  content: "";
+  position: absolute;
+  inset: 17px;
+  border-radius: 50%;
+  background: #f7fbff;
+}
+
+.gs-result-donut-savings {
+  background: conic-gradient(#07824f var(--eligible), #dff3e9 var(--eligible));
+}
+
+.gs-result-donut-inner {
+  position: relative;
+  z-index: 1;
+  width: 112px;
+  text-align: center;
+}
+
+.gs-result-donut-inner span {
+  display: block;
+  margin-bottom: 5px;
+  color: #627d98;
+  font-size: 10px;
+}
+
+.gs-result-donut-inner strong {
+  display: block;
+  color: #102a43;
+  font-size: 21px;
+  line-height: 1.1;
+  font-weight: 900;
+}
+
+.gs-result-lines {
+  width: 100%;
+  margin-bottom: 20px;
+}
+
+.gs-result-line {
+  display: flex;
+  justify-content: space-between;
+  gap: 12px;
+  padding: 10px 0;
+  border-bottom: 1px dashed #dce6ef;
+}
+
+.gs-result-line span {
+  color: #627d98;
+  font-size: 10px;
+}
+
+.gs-result-line strong {
+  color: #102a43;
+  font-size: 11px;
+}
+
+.gs-refcalc-apply {
+  width: 100%;
+  min-height: 44px;
+  margin-top: auto;
+  border: 0;
+  border-radius: 8px;
+  background: #1473ff;
+  color: #fff;
+  font-size: 12px;
+  font-weight: 800;
+  cursor: pointer;
+}
+
+.gs-refcalc-apply:hover {
+  background: #0c62dd;
+}
+
+.gs-prepay-mode {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 8px;
+  margin-top: 23px;
+}
+
+.gs-prepay-mode span {
+  width: 100%;
+  color: #334e68;
+  font-size: 11px;
+  font-weight: 700;
+}
+
+.gs-prepay-mode button {
+  padding: 8px 13px;
+  border: 1px solid #d5e0ea;
+  border-radius: 8px;
+  background: #fff;
+  color: #486581;
+  font-size: 11px;
+  font-weight: 700;
+  cursor: pointer;
+}
+
+.gs-prepay-mode button.active {
+  border-color: #1473ff;
+  background: #edf5ff;
+  color: #1473ff;
+}
+
+.gs-refcalc-below {
+  display: grid;
+  grid-template-columns: 1fr 300px;
+  gap: 24px;
+  margin-top: 30px;
+}
+
+.gs-refcalc-below-main,
+.gs-refcalc-trust {
+  padding: 28px;
+  border: 1px solid #e2e8f0;
+  border-radius: 16px;
+  background: #fff;
+}
+
+.gs-refcalc-eyebrow {
+  margin-bottom: 8px;
+  color: #07824f;
+  font-size: 10px;
+  font-weight: 900;
+  letter-spacing: .08em;
+}
+
+.gs-refcalc-below h2 {
+  margin: 0 0 10px;
+  color: #102a43;
+  font-size: 23px;
+}
+
+.gs-refcalc-below-main > p {
+  margin: 0;
+  color: #627d98;
+  font-size: 13px;
+  line-height: 1.7;
+}
+
+.gs-refcalc-guide-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 12px;
+  margin-top: 20px;
+}
+
+.gs-guide-card {
+  display: flex;
+  gap: 10px;
+  padding: 14px;
+  border: 1px solid #e5ebf1;
+  border-radius: 11px;
+  background: #f8fafc;
+}
+
+.gs-guide-icon {
+  width: 31px;
+  height: 31px;
+  display: grid;
+  place-items: center;
+  flex: 0 0 31px;
+  border-radius: 8px;
+  background: #eaf3ff;
+  color: #1473ff;
+}
+
+.gs-guide-card strong {
+  display: block;
+  color: #102a43;
+  font-size: 11px;
+}
+
+.gs-guide-card p {
+  margin: 4px 0 0;
+  color: #829ab1;
+  font-size: 9px;
+  line-height: 1.45;
+}
+
+.gs-refcalc-trust {
+  background: linear-gradient(145deg, #f4fbff, #f6fbf8);
+}
+
+.gs-refcalc-trust-icon {
+  width: 42px;
+  height: 42px;
+  display: grid;
+  place-items: center;
+  margin-bottom: 13px;
+  border-radius: 11px;
+  background: #eaf8f0;
+  color: #07824f;
+  font-size: 19px;
+}
+
+.gs-refcalc-trust h3 {
+  margin: 0 0 8px;
+  color: #102a43;
+  font-size: 16px;
+}
+
+.gs-refcalc-trust p {
+  margin: 0 0 15px;
+  color: #627d98;
+  font-size: 11px;
+  line-height: 1.55;
+}
+
+.gs-refcalc-trust-row {
+  display: flex;
+  align-items: center;
+  gap: 7px;
+  padding: 8px 0;
+  border-top: 1px solid #e5edf3;
+  color: #486581;
+  font-size: 10px;
+}
+
+.gs-refcalc-trust-row i {
+  color: #07824f;
+}
+
+@media (max-width: 850px) {
+  .gs-refcalc-card {
+    grid-template-columns: 1fr;
+  }
+
+  .gs-refcalc-result-side {
+    border-top: 1px solid #dce6ef;
+    border-left: 0;
+  }
+
+  .gs-refcalc-below {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (max-width: 650px) {
+  .gs-refcalc-page {
+    padding: 25px 14px 55px;
+  }
+
+  .gs-refcalc-input-side,
+  .gs-refcalc-result-side {
+    padding: 22px 18px;
+  }
+
+  .gs-refcalc-fields-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .gs-refcalc-card-title {
+    align-items: flex-start;
+  }
+
+  .gs-refcalc-guide-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .gs-refcalc-below-main,
+  .gs-refcalc-trust {
+    padding: 20px;
+  }
+}

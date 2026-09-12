@@ -1,0 +1,8 @@
+Add near your existing page imports:
+import ServicePage from "./pages/ServicePage";
+
+Inside your existing <Routes>:
+<Route path="/services/:slug" element={<ServicePage />} />
+
+Do NOT replace your existing App.jsx; this preserves your current navbar,
+expert popup, authentication and dashboard routes.

@@ -1,0 +1,10 @@
+{
+  "expo": {
+    "name": "SubsidyApp",
+    "slug": "subsidy-app",
+    "version": "1.0.0",
+    "android": {
+      "usesCleartextTraffic": true
+    }
+  }
+}

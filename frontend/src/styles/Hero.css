@@ -1,0 +1,1722 @@
+/* =========================================================
+   GoSubsidy HERO V2
+   File: src/styles/Hero.css
+
+   IMPORTANT:
+   - This file is ONLY for Hero.
+   - Do not add another Hero override elsewhere.
+   - Works with the existing gs-* Hero.jsx classes.
+   ========================================================= */
+
+
+/* =========================================================
+   HERO ROOT
+   ========================================================= */
+
+.gs-hero {
+  position: relative;
+  isolation: isolate;
+  overflow: hidden;
+
+  width: 100%;
+  min-height: 650px;
+
+  padding: 42px 0 28px;
+
+  color: #ffffff;
+
+  background:
+    radial-gradient(
+      circle at 8% 72%,
+      rgba(0, 192, 168, 0.22),
+      transparent 32%
+    ),
+    radial-gradient(
+      circle at 92% 12%,
+      rgba(93, 60, 220, 0.38),
+      transparent 34%
+    ),
+    linear-gradient(
+      115deg,
+      #073b58 0%,
+      #042c4b 38%,
+      #071d42 70%,
+      #29236e 100%
+    );
+}
+
+
+/* =========================================================
+   HERO BACKGROUND GRID
+   ========================================================= */
+
+.gs-hero::before {
+  content: "";
+
+  position: absolute;
+  inset: 0;
+
+  z-index: -3;
+
+  background-image:
+    linear-gradient(
+      rgba(255, 255, 255, 0.035) 1px,
+      transparent 1px
+    ),
+    linear-gradient(
+      90deg,
+      rgba(255, 255, 255, 0.035) 1px,
+      transparent 1px
+    );
+
+  background-size: 46px 46px;
+
+  opacity: 0.45;
+
+  pointer-events: none;
+}
+
+
+/* =========================================================
+   HERO LIGHT OVERLAY
+   ========================================================= */
+
+.gs-hero::after {
+  content: "";
+
+  position: absolute;
+  inset: 0;
+
+  z-index: -2;
+
+  background:
+    linear-gradient(
+      90deg,
+      rgba(0, 189, 170, 0.10),
+      transparent 45%,
+      rgba(94, 62, 221, 0.12)
+    );
+
+  pointer-events: none;
+}
+
+
+/* =========================================================
+   GRID / DECORATIVE ELEMENTS
+   ========================================================= */
+
+.gs-hero-grid {
+  position: absolute;
+  inset: 0;
+
+  z-index: -1;
+
+  pointer-events: none;
+
+  opacity: 0.18;
+
+  background-image:
+    linear-gradient(
+      rgba(255, 255, 255, 0.05) 1px,
+      transparent 1px
+    ),
+    linear-gradient(
+      90deg,
+      rgba(255, 255, 255, 0.05) 1px,
+      transparent 1px
+    );
+
+  background-size: 54px 54px;
+
+  mask-image: linear-gradient(
+    to bottom,
+    #000,
+    transparent 92%
+  );
+}
+
+
+/* =========================================================
+   DECORATIVE GLOWS
+   ========================================================= */
+
+.gs-hero-glow {
+  position: absolute;
+
+  border-radius: 50%;
+
+  pointer-events: none;
+
+  filter: blur(12px);
+
+  z-index: -1;
+}
+
+.gs-glow-1 {
+  width: 430px;
+  height: 430px;
+
+  top: -230px;
+  right: -80px;
+
+  background: rgba(92, 67, 255, 0.22);
+}
+
+.gs-glow-2 {
+  width: 390px;
+  height: 390px;
+
+  left: -170px;
+  bottom: -190px;
+
+  background: rgba(0, 201, 178, 0.18);
+}
+
+
+/* =========================================================
+   HERO CONTAINER
+   ========================================================= */
+
+.gs-hero .container {
+  position: relative;
+  z-index: 2;
+}
+
+
+/* =========================================================
+   HERO ROW
+   ========================================================= */
+
+.gs-hero .row {
+  align-items: center;
+}
+
+
+/* =========================================================
+   LEFT SIDE
+   ========================================================= */
+
+.gs-hero .col-lg-7 {
+  position: relative;
+  z-index: 2;
+}
+
+
+/* =========================================================
+   EYEBROW / BADGE
+   ========================================================= */
+
+.gs-hero-eyebrow {
+  display: inline-flex;
+
+  align-items: center;
+  gap: 9px;
+
+  margin: 0 0 23px;
+
+  padding: 8px 14px;
+
+  border: 1px solid rgba(255, 255, 255, 0.18);
+
+  border-radius: 999px;
+
+  color: rgba(255, 255, 255, 0.92);
+
+  background: rgba(255, 255, 255, 0.08);
+
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.10),
+    0 8px 28px rgba(0, 0, 0, 0.10);
+
+  backdrop-filter: blur(14px);
+
+  font-size: 12px;
+  font-weight: 800;
+
+  white-space: nowrap;
+}
+
+
+/* Green live dot */
+
+.gs-live-dot {
+  width: 8px;
+  height: 8px;
+
+  flex: 0 0 8px;
+
+  border-radius: 50%;
+
+  background: #00d6a3;
+
+  box-shadow:
+    0 0 0 5px rgba(0, 214, 163, 0.12),
+    0 0 16px rgba(0, 214, 163, 0.45);
+}
+
+
+/* India badge */
+
+.gs-india-badge {
+  display: inline-flex;
+
+  align-items: center;
+  justify-content: center;
+
+  width: 23px;
+  height: 23px;
+
+  margin-left: 2px;
+
+  border-radius: 50%;
+
+  color: #194b67;
+
+  background: #ffffff;
+
+  font-size: 9px;
+  font-weight: 900;
+
+  box-shadow:
+    0 3px 10px rgba(0, 0, 0, 0.12);
+}
+
+
+/* =========================================================
+   OPTIONAL KICKER
+   ========================================================= */
+
+.gs-hero-kicker {
+  display: inline-flex;
+
+  align-items: center;
+  gap: 7px;
+
+  margin: 0 0 10px;
+
+  color: #00d8ff;
+
+  font-size: 11px;
+  font-weight: 900;
+
+  letter-spacing: 0.08em;
+
+  text-transform: uppercase;
+}
+
+.gs-hero-kicker i {
+  font-size: 14px;
+}
+
+
+/* =========================================================
+   MAIN HERO TITLE
+   ========================================================= */
+
+.gs-hero-title {
+  width: 100%;
+
+  /*
+     IMPORTANT:
+     Reduced from the previous 820px.
+     This forces the premium line composition at 100%:
+     
+     Turn Your Business
+     Idea
+     Into a
+     Fundable
+     Opportunity.
+  */
+  max-width: 650px;
+
+  margin: 0;
+
+  color: #ffffff;
+
+  font-size: clamp(48px, 5vw, 70px);
+
+  line-height: 0.94;
+
+  font-weight: 900;
+
+  letter-spacing: -0.055em;
+}
+
+
+/*
+   Existing JSX has:
+
+   <span>
+      Fundable Opportunity.
+   </span>
+
+   Restricting the span makes the final words wrap naturally.
+*/
+
+.gs-hero-title span {
+  display: inline;
+
+  color: #00d9ee;
+
+  background: linear-gradient(
+    100deg,
+    #00dce8 0%,
+    #00c9e8 48%,
+    #29d4bd 100%
+  );
+
+  -webkit-background-clip: text;
+  background-clip: text;
+
+  -webkit-text-fill-color: transparent;
+}
+
+
+/* =========================================================
+   DESCRIPTION
+   ========================================================= */
+
+.gs-hero-description {
+  max-width: 680px;
+
+  margin: 24px 0 24px;
+
+  color: rgba(232, 244, 252, 0.84);
+
+  font-size: 16px;
+
+  line-height: 1.65;
+
+  font-weight: 450;
+}
+
+
+/* =========================================================
+   SEARCH
+   ========================================================= */
+
+.gs-search-wrapper {
+  display: flex;
+
+  align-items: center;
+
+  width: min(100%, 630px);
+
+  min-height: 64px;
+
+  padding: 6px;
+
+  border: 1px solid rgba(255, 255, 255, 0.18);
+
+  border-radius: 17px;
+
+  background: rgba(255, 255, 255, 0.95);
+
+  box-shadow:
+    0 18px 45px rgba(0, 0, 0, 0.18),
+    inset 0 1px 0 rgba(255, 255, 255, 0.9);
+
+  backdrop-filter: blur(15px);
+
+  transition:
+    border-color 0.2s ease,
+    box-shadow 0.2s ease;
+}
+
+.gs-search-wrapper:focus-within {
+  border-color: rgba(0, 211, 255, 0.65);
+
+  box-shadow:
+    0 20px 55px rgba(0, 0, 0, 0.20),
+    0 0 0 4px rgba(0, 211, 255, 0.10);
+}
+
+
+/* Search icon */
+
+.gs-search-icon {
+  display: grid;
+
+  place-items: center;
+
+  width: 46px;
+  height: 46px;
+
+  flex: 0 0 46px;
+
+  border-radius: 13px;
+
+  color: #00cde8;
+
+  background: #eafaff;
+
+  font-size: 18px;
+}
+
+
+/* Search input */
+
+.gs-search-wrapper input {
+  min-width: 0;
+
+  flex: 1;
+
+  height: 50px;
+
+  padding: 0 13px;
+
+  border: 0;
+
+  outline: 0;
+
+  color: #123b55;
+
+  background: transparent;
+
+  font-size: 14px;
+
+  font-weight: 600;
+}
+
+.gs-search-wrapper input::placeholder {
+  color: #8aa1b3;
+
+  font-weight: 500;
+}
+
+
+/* Search button */
+
+.gs-search-wrapper button {
+  display: inline-flex;
+
+  align-items: center;
+  justify-content: center;
+
+  gap: 8px;
+
+  min-width: 118px;
+
+  height: 50px;
+
+  padding: 0 18px;
+
+  border: 0;
+
+  border-radius: 13px;
+
+  color: #ffffff;
+
+  background:
+    linear-gradient(
+      135deg,
+      #5b38ef 0%,
+      #7433e9 100%
+    );
+
+  box-shadow:
+    0 10px 22px rgba(96, 56, 232, 0.28);
+
+  font-size: 13px;
+
+  font-weight: 850;
+
+  cursor: pointer;
+
+  transition:
+    transform 0.2s ease,
+    box-shadow 0.2s ease;
+}
+
+.gs-search-wrapper button:hover {
+  transform: translateY(-2px);
+
+  box-shadow:
+    0 14px 28px rgba(96, 56, 232, 0.36);
+}
+
+
+/* =========================================================
+   POPULAR SEARCHES
+   ========================================================= */
+
+.gs-search-hints {
+  display: flex;
+
+  align-items: center;
+
+  flex-wrap: wrap;
+
+  gap: 7px;
+
+  margin: 10px 0 0 2px;
+}
+
+.gs-search-hints > span {
+  color: rgba(255, 255, 255, 0.58);
+
+  font-size: 10px;
+
+  font-weight: 700;
+}
+
+.gs-search-hints button {
+  display: inline-flex;
+
+  align-items: center;
+
+  gap: 4px;
+
+  padding: 5px 9px;
+
+  border: 1px solid rgba(255, 255, 255, 0.16);
+
+  border-radius: 999px;
+
+  color: rgba(255, 255, 255, 0.82);
+
+  background: rgba(255, 255, 255, 0.07);
+
+  font-size: 10px;
+
+  font-weight: 750;
+
+  cursor: pointer;
+
+  transition:
+    background 0.18s ease,
+    border-color 0.18s ease,
+    transform 0.18s ease;
+}
+
+.gs-search-hints button:hover {
+  transform: translateY(-1px);
+
+  border-color: rgba(0, 218, 235, 0.45);
+
+  background: rgba(0, 218, 235, 0.10);
+}
+
+
+/* =========================================================
+   HERO ACTION BUTTONS
+   ========================================================= */
+
+.gs-hero-actions {
+  display: flex;
+
+  align-items: center;
+
+  flex-wrap: wrap;
+
+  gap: 10px;
+
+  margin-top: 18px;
+}
+
+.gs-primary-btn,
+.gs-secondary-btn {
+  display: inline-flex;
+
+  align-items: center;
+  justify-content: center;
+
+  gap: 8px;
+
+  min-height: 46px;
+
+  padding: 0 17px;
+
+  border-radius: 12px;
+
+  text-decoration: none;
+
+  font-size: 12px;
+
+  font-weight: 850;
+
+  transition:
+    transform 0.2s ease,
+    box-shadow 0.2s ease;
+}
+
+
+/* Primary */
+
+.gs-primary-btn {
+  color: #ffffff;
+
+  background:
+    linear-gradient(
+      135deg,
+      #00bfae,
+      #087cf5
+    );
+
+  box-shadow:
+    0 12px 26px rgba(0, 128, 221, 0.25);
+}
+
+.gs-primary-btn:hover {
+  color: #ffffff;
+
+  transform: translateY(-2px);
+
+  box-shadow:
+    0 16px 32px rgba(0, 128, 221, 0.32);
+}
+
+
+/* Secondary */
+
+.gs-secondary-btn {
+  color: rgba(255, 255, 255, 0.88);
+
+  border: 1px solid rgba(255, 255, 255, 0.20);
+
+  background: rgba(255, 255, 255, 0.07);
+}
+
+.gs-secondary-btn:hover {
+  color: #ffffff;
+
+  transform: translateY(-2px);
+
+  background: rgba(255, 255, 255, 0.12);
+
+  border-color: rgba(255, 255, 255, 0.32);
+}
+
+
+/* =========================================================
+   TRUST POINTS
+   ========================================================= */
+
+.gs-hero-trust {
+  display: flex;
+
+  align-items: center;
+
+  flex-wrap: wrap;
+
+  gap: 13px;
+
+  margin-top: 15px;
+}
+
+.gs-hero-trust span {
+  display: inline-flex;
+
+  align-items: center;
+
+  gap: 5px;
+
+  color: rgba(224, 241, 250, 0.66);
+
+  font-size: 9px;
+
+  font-weight: 700;
+}
+
+.gs-hero-trust i {
+  color: #00d3a0;
+
+  font-size: 11px;
+}
+
+
+/* =========================================================
+   RIGHT COLUMN
+   ========================================================= */
+
+.gs-hero .col-lg-5 {
+  position: relative;
+
+  z-index: 3;
+}
+
+
+/* =========================================================
+   INTELLIGENCE CARD
+   ========================================================= */
+
+.gs-eligibility-card {
+  position: relative;
+
+  overflow: hidden;
+
+  width: 100%;
+
+  max-width: 500px;
+
+  margin-left: auto;
+
+  padding: 24px;
+
+  border: 1px solid rgba(255, 255, 255, 0.30);
+
+  border-radius: 23px;
+
+  color: #ffffff;
+
+  background:
+    linear-gradient(
+      145deg,
+      rgba(38, 107, 151, 0.72),
+      rgba(22, 53, 91, 0.86)
+    );
+
+  box-shadow:
+    0 26px 65px rgba(0, 0, 0, 0.25),
+    inset 0 1px 0 rgba(255, 255, 255, 0.12);
+
+  backdrop-filter: blur(22px);
+}
+
+
+/* Card decorative circles */
+
+.gs-eligibility-card::before {
+  content: "";
+
+  position: absolute;
+
+  width: 220px;
+  height: 220px;
+
+  top: -125px;
+  right: -80px;
+
+  border-radius: 50%;
+
+  background: rgba(63, 191, 255, 0.12);
+
+  pointer-events: none;
+}
+
+.gs-eligibility-card::after {
+  content: "";
+
+  position: absolute;
+
+  width: 180px;
+  height: 180px;
+
+  left: -90px;
+  bottom: -120px;
+
+  border-radius: 50%;
+
+  background: rgba(0, 211, 173, 0.10);
+
+  pointer-events: none;
+}
+
+
+/* =========================================================
+   CARD HEADER
+   ========================================================= */
+
+.gs-card-header {
+  position: relative;
+
+  z-index: 2;
+
+  display: flex;
+
+  align-items: center;
+
+  gap: 13px;
+}
+
+.gs-card-icon {
+  display: grid;
+
+  place-items: center;
+
+  width: 50px;
+  height: 50px;
+
+  flex: 0 0 50px;
+
+  border-radius: 15px;
+
+  color: #ffffff;
+
+  background:
+    linear-gradient(
+      135deg,
+      #007cf7,
+      #603de9
+    );
+
+  box-shadow:
+    0 10px 25px rgba(0, 99, 235, 0.28);
+
+  font-size: 20px;
+}
+
+.gs-card-header > div:last-child > span {
+  display: block;
+
+  color: #00d8ef;
+
+  font-size: 9px;
+
+  font-weight: 900;
+
+  letter-spacing: 0.13em;
+}
+
+.gs-card-header h3 {
+  margin: 3px 0 0;
+
+  color: #ffffff;
+
+  font-size: 22px;
+
+  line-height: 1.15;
+
+  font-weight: 900;
+
+  letter-spacing: -0.025em;
+}
+
+
+/* =========================================================
+   CARD DESCRIPTION
+   ========================================================= */
+
+.gs-card-description {
+  position: relative;
+
+  z-index: 2;
+
+  margin: 14px 0 17px;
+
+  color: rgba(231, 243, 250, 0.76);
+
+  font-size: 12px;
+
+  line-height: 1.55;
+}
+
+
+/* =========================================================
+   THREE STEP FLOW
+   ========================================================= */
+
+.gs-hero-flow {
+  position: relative;
+
+  z-index: 2;
+
+  display: flex;
+
+  align-items: center;
+
+  gap: 6px;
+
+  margin-bottom: 15px;
+
+  padding: 7px 9px;
+
+  border: 1px solid rgba(255, 255, 255, 0.10);
+
+  border-radius: 11px;
+
+  background: rgba(255, 255, 255, 0.06);
+}
+
+.gs-hero-flow span {
+  display: inline-flex;
+
+  align-items: center;
+
+  gap: 5px;
+
+  color: rgba(224, 239, 248, 0.52);
+
+  font-size: 9px;
+
+  font-weight: 800;
+
+  white-space: nowrap;
+}
+
+.gs-hero-flow span.active {
+  color: #ffffff;
+}
+
+.gs-hero-flow b {
+  display: grid;
+
+  place-items: center;
+
+  width: 20px;
+  height: 20px;
+
+  border-radius: 50%;
+
+  color: rgba(255, 255, 255, 0.60);
+
+  background: rgba(255, 255, 255, 0.09);
+
+  font-size: 8px;
+}
+
+.gs-hero-flow span.active b {
+  color: #ffffff;
+
+  background: #087cf7;
+}
+
+.gs-hero-flow > i {
+  color: rgba(255, 255, 255, 0.28);
+
+  font-size: 9px;
+}
+
+
+/* =========================================================
+   FORM GROUP
+   ========================================================= */
+
+.gs-form-group {
+  position: relative;
+
+  z-index: 2;
+
+  margin-bottom: 12px;
+}
+
+.gs-form-group label {
+  display: block;
+
+  margin: 0 0 6px;
+
+  color: rgba(255, 255, 255, 0.82);
+
+  font-size: 10px;
+
+  font-weight: 800;
+}
+
+.gs-label-row {
+  display: flex;
+
+  align-items: center;
+
+  justify-content: space-between;
+
+  gap: 10px;
+}
+
+.gs-label-row small {
+  color: #54e0c1;
+
+  font-size: 9px;
+
+  font-weight: 800;
+}
+
+
+/* =========================================================
+   FORM INPUT WRAPPER
+   ========================================================= */
+
+.gs-input-wrapper {
+  position: relative;
+
+  display: flex;
+
+  align-items: center;
+
+  min-height: 46px;
+
+  border: 1px solid rgba(255, 255, 255, 0.16);
+
+  border-radius: 11px;
+
+  background: rgba(255, 255, 255, 0.075);
+
+  transition:
+    border-color 0.18s ease,
+    background 0.18s ease,
+    box-shadow 0.18s ease;
+}
+
+.gs-input-wrapper:focus-within {
+  border-color: rgba(0, 214, 239, 0.55);
+
+  background: rgba(255, 255, 255, 0.10);
+
+  box-shadow:
+    0 0 0 3px rgba(0, 214, 239, 0.08);
+}
+
+
+/* Icons */
+
+.gs-input-wrapper > i {
+  width: 40px;
+
+  flex: 0 0 40px;
+
+  text-align: center;
+
+  color: #7fd9ec;
+
+  font-size: 13px;
+}
+
+
+/* Select and input */
+
+.gs-input-wrapper select,
+.gs-input-wrapper input {
+  width: 100%;
+
+  min-width: 0;
+
+  height: 44px;
+
+  padding: 0 12px 0 0;
+
+  border: 0;
+
+  outline: 0;
+
+  color: #ffffff;
+
+  background: transparent;
+
+  font-size: 12px;
+
+  font-weight: 650;
+}
+
+.gs-input-wrapper select {
+  cursor: pointer;
+}
+
+
+/*
+   Browser native select dropdown options need
+   a readable light background.
+*/
+
+.gs-input-wrapper select option {
+  color: #173d57;
+
+  background: #ffffff;
+}
+
+
+/* Placeholder */
+
+.gs-input-wrapper input::placeholder {
+  color: rgba(224, 240, 248, 0.48);
+
+  font-weight: 500;
+}
+
+
+/* Number input */
+
+.gs-input-wrapper input[type="number"] {
+  appearance: textfield;
+}
+
+.gs-input-wrapper input[type="number"]::-webkit-inner-spin-button,
+.gs-input-wrapper input[type="number"]::-webkit-outer-spin-button {
+  margin: 0;
+
+  appearance: none;
+}
+
+
+/* =========================================================
+   RUPEE INPUT
+   ========================================================= */
+
+.gs-rupee {
+  display: grid;
+
+  place-items: center;
+
+  width: 40px;
+  height: 44px;
+
+  flex: 0 0 40px;
+
+  color: #7ee3ed;
+
+  background: rgba(0, 202, 232, 0.08);
+
+  border-radius: 10px 0 0 10px;
+
+  font-size: 14px;
+
+  font-weight: 900;
+}
+
+
+/* =========================================================
+   ELIGIBILITY BUTTON
+   ========================================================= */
+
+.gs-eligibility-button {
+  position: relative;
+
+  z-index: 2;
+
+  display: flex;
+
+  align-items: center;
+
+  justify-content: space-between;
+
+  width: 100%;
+
+  min-height: 50px;
+
+  margin-top: 3px;
+
+  padding: 0 14px 0 16px;
+
+  border: 0;
+
+  border-radius: 12px;
+
+  color: #ffffff;
+
+  background:
+    linear-gradient(
+      135deg,
+      #00bfa8 0%,
+      #00b8d4 42%,
+      #087cf5 100%
+    );
+
+  box-shadow:
+    0 13px 28px rgba(0, 172, 199, 0.24);
+
+  font-size: 12px;
+
+  font-weight: 850;
+
+  cursor: pointer;
+
+  transition:
+    transform 0.2s ease,
+    box-shadow 0.2s ease,
+    opacity 0.2s ease;
+}
+
+.gs-eligibility-button:hover:not(:disabled) {
+  transform: translateY(-2px);
+
+  box-shadow:
+    0 17px 34px rgba(0, 172, 199, 0.32);
+}
+
+.gs-eligibility-button:disabled {
+  cursor: wait;
+
+  opacity: 0.75;
+}
+
+.gs-eligibility-button > i {
+  display: grid;
+
+  place-items: center;
+
+  width: 27px;
+  height: 27px;
+
+  border-radius: 8px;
+
+  background: rgba(255, 255, 255, 0.15);
+}
+
+
+/* =========================================================
+   CARD NOTE
+   ========================================================= */
+
+.gs-card-note {
+  position: relative;
+
+  z-index: 2;
+
+  display: flex;
+
+  align-items: flex-start;
+
+  gap: 7px;
+
+  margin-top: 10px;
+
+  color: rgba(218, 238, 247, 0.50);
+
+  font-size: 8px;
+
+  line-height: 1.45;
+}
+
+.gs-card-note i {
+  flex: 0 0 auto;
+
+  margin-top: 1px;
+
+  color: #00d3a1;
+
+  font-size: 10px;
+}
+
+
+/* =========================================================
+   BOTTOM VALUE BAR
+   ========================================================= */
+
+.gs-hero-stats {
+  position: relative;
+
+  z-index: 2;
+
+  display: grid;
+
+  grid-template-columns:
+    1fr auto
+    1fr auto
+    1fr auto
+    1fr;
+
+  align-items: center;
+
+  width: 100%;
+
+  margin-top: 25px;
+
+  padding: 13px 16px;
+
+  border: 1px solid rgba(255, 255, 255, 0.14);
+
+  border-radius: 14px;
+
+  background: rgba(255, 255, 255, 0.06);
+
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.05);
+
+  backdrop-filter: blur(12px);
+}
+
+.gs-stat {
+  display: flex;
+
+  flex-direction: column;
+
+  gap: 3px;
+
+  padding: 0 15px;
+}
+
+.gs-stat:first-child {
+  padding-left: 4px;
+}
+
+.gs-stat strong {
+  display: flex;
+
+  align-items: center;
+
+  gap: 5px;
+
+  color: #ffffff;
+
+  font-size: 10px;
+
+  font-weight: 850;
+}
+
+.gs-stat strong i {
+  color: #00d5e7;
+
+  font-size: 11px;
+}
+
+.gs-stat span {
+  color: rgba(215, 235, 245, 0.48);
+
+  font-size: 8px;
+
+  font-weight: 600;
+}
+
+.gs-stat-divider {
+  width: 1px;
+
+  height: 27px;
+
+  background: rgba(255, 255, 255, 0.14);
+}
+
+
+/* =========================================================
+   LOADING ANIMATION
+   ========================================================= */
+
+.gs-spin {
+  animation: gsSpin 0.9s linear infinite;
+}
+
+@keyframes gsSpin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+
+/* =========================================================
+   LIVE DOT ANIMATION
+   ========================================================= */
+
+@keyframes gsPulse {
+  0%,
+  100% {
+    box-shadow:
+      0 0 0 4px rgba(0, 214, 163, 0.10),
+      0 0 12px rgba(0, 214, 163, 0.20);
+  }
+
+  50% {
+    box-shadow:
+      0 0 0 8px rgba(0, 214, 163, 0.03),
+      0 0 18px rgba(0, 214, 163, 0.35);
+  }
+}
+
+.gs-live-dot {
+  animation: gsPulse 2s ease-in-out infinite;
+}
+
+
+/* =========================================================
+   100% DESKTOP REFINEMENT
+   ========================================================= */
+
+@media (min-width: 1200px) {
+
+  .gs-hero {
+    min-height: 650px;
+
+    padding-top: 40px;
+    padding-bottom: 24px;
+  }
+
+  /*
+     Keeps the title from becoming excessively wide.
+  */
+
+  .gs-hero-title {
+    max-width: 620px;
+
+    font-size: 67px;
+
+    line-height: 0.94;
+  }
+
+  .gs-hero-description {
+    max-width: 650px;
+
+    margin-top: 21px;
+    margin-bottom: 21px;
+  }
+
+  .gs-search-wrapper {
+    max-width: 630px;
+  }
+
+  .gs-eligibility-card {
+    max-width: 500px;
+
+    padding: 23px;
+  }
+
+}
+
+
+/* =========================================================
+   LAPTOP
+   ========================================================= */
+
+@media (max-width: 1199.98px) {
+
+  .gs-hero {
+    min-height: 640px;
+
+    padding-top: 36px;
+  }
+
+  .gs-hero-title {
+    max-width: 590px;
+
+    font-size: clamp(46px, 5vw, 62px);
+  }
+
+  .gs-hero-description {
+    max-width: 600px;
+
+    font-size: 15px;
+  }
+
+  .gs-eligibility-card {
+    max-width: 470px;
+
+    padding: 21px;
+  }
+
+}
+
+
+/* =========================================================
+   TABLET
+   ========================================================= */
+
+@media (max-width: 991.98px) {
+
+  .gs-hero {
+    min-height: auto;
+
+    padding: 45px 0 32px;
+  }
+
+  .gs-hero .row {
+    row-gap: 28px;
+  }
+
+  .gs-hero-title {
+    max-width: 700px;
+
+    font-size: clamp(44px, 8vw, 62px);
+  }
+
+  .gs-hero-description {
+    max-width: 680px;
+  }
+
+  .gs-eligibility-card {
+    max-width: 620px;
+
+    margin: 0 auto;
+  }
+
+  .gs-hero-stats {
+    grid-template-columns: 1fr 1fr;
+
+    gap: 15px 0;
+  }
+
+  .gs-stat-divider {
+    display: none;
+  }
+
+  .gs-stat:nth-of-type(odd) {
+    border-right: 1px solid rgba(255, 255, 255, 0.14);
+  }
+}
+
+
+/* =========================================================
+   MOBILE
+   ========================================================= */
+
+@media (max-width: 767.98px) {
+
+  .gs-hero {
+    padding: 34px 0 25px;
+  }
+
+  .gs-hero-eyebrow {
+    margin-bottom: 18px;
+
+    padding: 7px 11px;
+
+    font-size: 10px;
+  }
+
+  .gs-hero-title {
+    max-width: 100%;
+
+    font-size: clamp(38px, 11vw, 52px);
+
+    line-height: 0.98;
+
+    letter-spacing: -0.045em;
+  }
+
+  .gs-hero-description {
+    margin: 18px 0 19px;
+
+    font-size: 14px;
+
+    line-height: 1.6;
+  }
+
+  .gs-search-wrapper {
+    min-height: 58px;
+
+    border-radius: 15px;
+  }
+
+  .gs-search-icon {
+    width: 40px;
+    height: 42px;
+
+    flex-basis: 40px;
+  }
+
+  .gs-search-wrapper input {
+    height: 44px;
+
+    padding: 0 7px;
+
+    font-size: 12px;
+  }
+
+  .gs-search-wrapper button {
+    min-width: 88px;
+
+    height: 44px;
+
+    padding: 0 12px;
+
+    border-radius: 11px;
+
+    font-size: 11px;
+  }
+
+  .gs-search-hints {
+    margin-left: 0;
+  }
+
+  .gs-hero-actions {
+    width: 100%;
+  }
+
+  .gs-primary-btn,
+  .gs-secondary-btn {
+    flex: 1 1 100%;
+
+    min-height: 46px;
+  }
+
+  .gs-hero-trust {
+    gap: 8px 12px;
+  }
+
+  .gs-eligibility-card {
+    max-width: 100%;
+
+    padding: 19px;
+
+    border-radius: 20px;
+  }
+
+  .gs-card-header h3 {
+    font-size: 19px;
+  }
+
+  .gs-hero-flow {
+    overflow-x: auto;
+  }
+
+  .gs-hero-stats {
+    grid-template-columns: 1fr;
+
+    gap: 12px;
+
+    padding: 15px;
+  }
+
+  .gs-stat,
+  .gs-stat:first-child {
+    padding: 0;
+
+    border-right: 0 !important;
+  }
+}
+
+
+/* =========================================================
+   SMALL MOBILE
+   ========================================================= */
+
+@media (max-width: 420px) {
+
+  .gs-hero {
+    padding-top: 27px;
+  }
+
+  .gs-hero-eyebrow {
+    max-width: 100%;
+
+    padding: 6px 9px;
+
+    font-size: 9px;
+  }
+
+  .gs-hero-title {
+    font-size: 37px;
+
+    line-height: 0.99;
+  }
+
+  .gs-hero-description {
+    font-size: 13px;
+  }
+
+  .gs-search-wrapper button {
+    min-width: 74px;
+
+    padding: 0 10px;
+  }
+
+  .gs-search-wrapper button i {
+    display: none;
+  }
+
+  .gs-card-icon {
+    width: 44px;
+    height: 44px;
+
+    flex-basis: 44px;
+  }
+
+  .gs-eligibility-card {
+    padding: 17px;
+  }
+}
+
+
+/* =========================================================
+   REDUCED MOTION
+   ========================================================= */
+
+@media (prefers-reduced-motion: reduce) {
+
+  .gs-live-dot,
+  .gs-spin {
+    animation: none;
+  }
+
+  .gs-primary-btn,
+  .gs-secondary-btn,
+  .gs-search-wrapper button,
+  .gs-eligibility-button,
+  .gs-search-hints button {
+    transition: none;
+  }
+}

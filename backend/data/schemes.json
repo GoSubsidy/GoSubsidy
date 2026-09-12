@@ -1,0 +1,612 @@
+[
+  {
+    "id": "pmegp",
+    "title": "PMEGP - Prime Minister Employment Generation Programme",
+    "type": "central",
+    "state": null,
+    "category": "MSME",
+    "department": "Ministry of MSME / KVIC",
+    "description": "Credit-linked subsidy for setting up micro enterprises (manufacturing, services & business). Subsidy reduces promoter investment and loan requirement.",
+    "eligibility": ["Age 18+", "Individual / Partnership / SHG / Co-op / Company", "Project report required"],
+    "documents": ["Aadhaar", "Project Report", "Address proof", "Bank account"],
+    "max_project_cost": 2500000,
+    "subsidies": [
+      { "id": "pmegp_general", "name": "General category subsidy", "type": "percent", "percentage": 15, "max_limit": 150000 },
+      { "id": "pmegp_special", "name": "Special category subsidy (SC/ST/Women)", "type": "percent", "percentage": 35, "max_limit": 350000 }
+    ],
+    "contact": "kvic.nic.in",
+    "source_url": "https://kvic.gov.in",
+    "last_updated": "2025-12-10"
+  },
+
+  {
+    "id": "pmmy_mudra",
+    "title": "Pradhan Mantri MUDRA Yojana (PMMY) - Loan support for micro businesses",
+    "type": "central",
+    "state": null,
+    "category": "Micro-enterprise / MSME",
+    "department": "Ministry of Finance (MUDRA)",
+    "description": "Loans to non-corporate, non-farm small/micro enterprises. Banks/finance companies provide credit; some lenders offer interest subvention or scheme-linked concessions.",
+    "eligibility": ["Micro entrepreneur", "Business proof / KYC", "No significant criminal record"],
+    "documents": ["Aadhaar", "Business Proof", "Bank account", "KYC"],
+    "max_project_cost": 1000000,
+    "subsidies": [
+      { "id": "mudra_interest_subv", "name": "Interest subvention / concession (bank specific)", "type": "percent", "percentage": 2, "max_limit": null }
+    ],
+    "contact": "mudra.gov.in",
+    "source_url": "https://mudra.gov.in",
+    "last_updated": "2025-12-10"
+  },
+
+  {
+    "id": "dairy_deds",
+    "title": "Dairy Entrepreneurship Development Scheme (DEDS)",
+    "type": "central",
+    "state": null,
+    "category": "Dairy / Livestock",
+    "department": "Department of Animal Husbandry & Dairying",
+    "description": "Capital subsidy and assistance for establishment of small dairy units, milk processing or chilling units to increase rural milk production and entrepreneurship.",
+    "eligibility": ["Individual entrepreneurs / FPO / SHG / Co-op", "Technical project plan required"],
+    "documents": ["Aadhaar", "Project Report", "Land/lease proof", "ID Proof"],
+    "max_project_cost": 2000000,
+    "subsidies": [
+      { "id": "deds_capital", "name": "Capital subsidy for dairy units", "type": "percent", "percentage": 25, "max_limit": 250000 }
+    ],
+    "contact": "dahd.nic.in",
+    "source_url": "https://dahd.nic.in",
+    "last_updated": "2025-12-10"
+  },
+
+  {
+    "id": "nlm_livestock",
+    "title": "National Livestock Mission (NLM) - Livestock & Poultry support",
+    "type": "central",
+    "state": null,
+    "category": "Livestock / Poultry",
+    "department": "Department of Animal Husbandry & Dairying",
+    "description": "Support for livestock rearing, rural backyard poultry, fodder development, veterinary services and capital support for small units; includes subsidies for units and infrastructure.",
+    "eligibility": ["Farmer / entrepreneur engaged in livestock/poultry", "Project plan for commercial units"],
+    "documents": ["Aadhaar", "Land proof or lease", "Project plan"],
+    "max_project_cost": 500000,
+    "subsidies": [
+      { "id": "nlm_poultry", "name": "Backyard poultry subsidy", "type": "percent", "percentage": 30, "max_limit": 60000 },
+      { "id": "nlm_livestock_unit", "name": "Small livestock unit subsidy", "type": "percent", "percentage": 25, "max_limit": 100000 }
+    ],
+    "contact": "nlm.nic.in",
+    "source_url": "https://nlm.gov.in",
+    "last_updated": "2025-12-10"
+  },
+
+  {
+    "id": "pmmsy_fisheries",
+    "title": "PMMSY - Pradhan Mantri Matsya Sampada Yojana",
+    "type": "central",
+    "state": null,
+    "category": "Fisheries / Aquaculture",
+    "department": "Department of Fisheries",
+    "description": "Capital subsidy and infrastructure assistance for fishers and aquaculture units including hatcheries, cold chain, boat modernization, and processing units.",
+    "eligibility": ["Fisher / farmer / entrepreneur in fisheries sector"],
+    "documents": ["Aadhaar", "Fisher ID (if any)", "Project Report", "Bank account"],
+    "max_project_cost": 3000000,
+    "subsidies": [
+      { "id": "pmmsy_capital", "name": "Capital subsidy for aquaculture & processing", "type": "percent", "percentage": 40, "max_limit": 1000000 }
+    ],
+    "contact": "dof.gov.in",
+    "source_url": "https://dof.gov.in",
+    "last_updated": "2025-12-10"
+  },
+
+  {
+    "id": "coldchain_mofpi",
+    "title": "Cold Chain / Cold Storage Capital Subsidy",
+    "type": "central",
+    "state": null,
+    "category": "Agro-processing / Cold Chain",
+    "department": "Ministry of Food Processing Industries",
+    "description": "Capital subsidy for setting up cold storage, cold chains, pack-houses and refrigerated transport to reduce wastage and connect farmers to markets.",
+    "eligibility": ["Entrepreneurs / FPOs / Cooperatives / Companies"],
+    "documents": ["Aadhaar", "Project Report", "Land/lease proof", "Bank details"],
+    "max_project_cost": 8000000,
+    "subsidies": [
+      { "id": "coldchain_capital", "name": "Cold chain capital subsidy", "type": "percent", "percentage": 35, "max_limit": 2000000 }
+    ],
+    "contact": "mofpi.nic.in",
+    "source_url": "https://mofpi.nic.in",
+    "last_updated": "2025-12-10"
+  },
+
+  {
+    "id": "solar_irrigation_mnre",
+    "title": "Solar Irrigation Pump Subsidy (Central support)",
+    "type": "central",
+    "state": null,
+    "category": "Renewable Energy / Agriculture",
+    "department": "Ministry of New & Renewable Energy",
+    "description": "Subsidy for solar pumps and solarization of irrigation systems. Subsidy reduces upfront project cost and therefore reduces loan requirement.",
+    "eligibility": ["Farmer / agricultural household", "Land ownership/lease proof often required"],
+    "documents": ["Aadhaar", "Land record", "Bank KYC", "Electricity connection proof if required"],
+    "max_project_cost": 300000,
+    "subsidies": [
+      { "id": "solar_pump_subsidy", "name": "Solar pump subsidy", "type": "percent", "percentage": 30, "max_limit": 90000 }
+    ],
+    "contact": "mnre.gov.in",
+    "source_url": "https://mnre.gov.in",
+    "last_updated": "2025-12-10"
+  },
+
+  {
+    "id": "pmfme_agro",
+    "title": "PM-FME / Agro Processing Subsidy (credit linked)",
+    "type": "central",
+    "state": null,
+    "category": "Agro-processing / MSME",
+    "department": "Ministry of Food Processing Industries",
+    "description": "Grant and credit-linked subsidy for micro food processing enterprises; supports capital investment, technology upgradation and reduces debt burden.",
+    "eligibility": ["Micro food processing units", "FPOs / entrepreneurs"],
+    "documents": ["Aadhaar", "Project Report", "GST/Udyam if available"],
+    "max_project_cost": 1500000,
+    "subsidies": [
+      { "id": "pmfme_capital", "name": "Capital grant/subsidy", "type": "percent", "percentage": 35, "max_limit": 350000 }
+    ],
+    "contact": "mofpi.nic.in",
+    "source_url": "https://mofpi.nic.in",
+    "last_updated": "2025-12-10"
+  },
+
+  {
+    "id": "sericulture_support",
+    "title": "Sericulture / Silk Development Subsidy",
+    "type": "central",
+    "state": null,
+    "category": "Sericulture / Agro",
+    "department": "Central Silk Board / Ministry of Textiles",
+    "description": "Subsidy for rearing, reeling, spinning units and post-harvest infrastructure in sericulture sector such as reeling units and mechanized equipment.",
+    "eligibility": ["Sericulture farmers / entrepreneurs", "Project plan required"],
+    "documents": ["Aadhaar", "Land proof", "Project Report"],
+    "max_project_cost": 1200000,
+    "subsidies": [
+      { "id": "sericulture_capital", "name": "Sericulture capital subsidy", "type": "percent", "percentage": 30, "max_limit": 300000 }
+    ],
+    "contact": "silkboard.gov.in",
+    "source_url": "https://csb.gov.in",
+    "last_updated": "2025-12-10"
+  },
+
+  {
+    "id": "beekeeping_support",
+    "title": "Beekeeping Capital Subsidy",
+    "type": "central",
+    "state": null,
+    "category": "Allied Agriculture",
+    "department": "Ministry of Agriculture & Farmers Welfare",
+    "description": "Support and capital subsidy for beekeeping units, training and equipment to improve pollination services and farmer incomes.",
+    "eligibility": ["Farmer / entrepreneur interested in beekeeping"],
+    "documents": ["Aadhaar", "Project Plan", "Bank account"],
+    "max_project_cost": 200000,
+    "subsidies": [
+      { "id": "beekeeping_capital", "name": "Beekeeping unit subsidy", "type": "percent", "percentage": 50, "max_limit": 50000 }
+    ],
+    "contact": "agricoop.nic.in",
+    "source_url": "https://agricoop.nic.in",
+    "last_updated": "2025-12-10"
+  },
+
+  {
+    "id": "poultry_unit_subsidy",
+    "title": "Poultry Unit Capital Subsidy",
+    "type": "central",
+    "state": null,
+    "category": "Poultry / Livestock",
+    "department": "Department of Animal Husbandry & Dairying",
+    "description": "Subsidy to set up commercial poultry units and backyard/personal poultry projects; reduces promoter capital and the loan required for birds, sheds and equipment.",
+    "eligibility": ["Entrepreneur / Farmer", "Technical plan for commercial units"],
+    "documents": ["Aadhaar", "Project report", "Land/lease proof if any"],
+    "max_project_cost": 600000,
+    "subsidies": [
+      { "id": "poultry_backyard", "name": "Backyard poultry subsidy", "type": "percent", "percentage": 30, "max_limit": 60000 },
+      { "id": "poultry_commercial", "name": "Commercial unit subsidy", "type": "percent", "percentage": 25, "max_limit": 150000 }
+    ],
+    "contact": "dahd.nic.in",
+    "source_url": "https://dahd.nic.in",
+    "last_updated": "2025-12-10"
+  },
+
+  {
+    "id": "fabrication_unit_subsidy",
+    "title": "Tool & Small Fabrication Unit Capital Subsidy",
+    "type": "central",
+    "state": null,
+    "category": "Manufacturing / MSME",
+    "department": "Ministry of MSME",
+    "description": "Capital subsidy for setting up small tool & machine fabrication micro units and micro manufacturing under cluster or scheme support.",
+    "eligibility": ["Entrepreneur / SHG / MSME unit", "Udyam registration beneficial"],
+    "documents": ["Aadhaar", "Project Report", "Udyam or business proof"],
+    "max_project_cost": 1500000,
+    "subsidies": [
+      { "id": "fab_unit_capital", "name": "Fabrication unit capital subsidy", "type": "percent", "percentage": 25, "max_limit": 300000 }
+    ],
+    "contact": "msme.gov.in",
+    "source_url": "https://msme.gov.in",
+    "last_updated": "2025-12-10"
+  },
+
+  {
+    "id": "vet_clinic_subsidy",
+    "title": "Veterinary Clinic / Mobile Veterinary Unit Subsidy",
+    "type": "central",
+    "state": null,
+    "category": "Livestock Services",
+    "department": "Department of Animal Husbandry",
+    "description": "Support for setting up rural veterinary clinics and mobile veterinary units; capital grants or subsidies reduce initial investment for service providers.",
+    "eligibility": ["Veterinarian / registered service provider", "Professional qualification"],
+    "documents": ["Degree/certification", "Aadhaar", "Project Report"],
+    "max_project_cost": 800000,
+    "subsidies": [
+      { "id": "vet_clinic_capital", "name": "Veterinary clinic subsidy", "type": "percent", "percentage": 30, "max_limit": 200000 }
+    ],
+    "contact": "dahd.nic.in",
+    "source_url": "https://dahd.nic.in",
+    "last_updated": "2025-12-10"
+  },
+
+  {
+    "id": "drip_microirrigation",
+    "title": "Micro Irrigation / Drip System Subsidy",
+    "type": "central",
+    "state": null,
+    "category": "Irrigation / Agriculture",
+    "department": "Ministry of Agriculture & Farmers Welfare",
+    "description": "Subsidy for drip and micro-irrigation systems to conserve water; covers tubing, pumps and installation and reduces the farmer's project cost for loan calculations.",
+    "eligibility": ["Land-owning farmer", "Irrigated land"],
+    "documents": ["Aadhaar", "Land record", "Project Estimate"],
+    "max_project_cost": 500000,
+    "subsidies": [
+      { "id": "drip_subsidy", "name": "Drip irrigation subsidy", "type": "percent", "percentage": 60, "max_limit": 150000 }
+    ],
+    "contact": "agricoop.nic.in",
+    "source_url": "https://agricoop.nic.in",
+    "last_updated": "2025-12-10"
+  },
+
+  {
+    "id": "agri_machinery_subsidy",
+    "title": "Agri Machinery / Equipment Capital Subsidy",
+    "type": "central",
+    "state": null,
+    "category": "Mechanization / Agriculture",
+    "department": "Ministry of Agriculture & Farmers Welfare",
+    "description": "Subsidy for purchase of approved agricultural machinery and equipment to promote mechanization and increase productivity; subsidy reduces equipment loan principal.",
+    "eligibility": ["Farmer group / FPO / individual", "Project quote required"],
+    "documents": ["Aadhaar", "Project Quote", "Bank details"],
+    "max_project_cost": 1000000,
+    "subsidies": [
+      { "id": "machinery_subsidy", "name": "Machinery capital subsidy", "type": "percent", "percentage": 40, "max_limit": 300000 }
+    ],
+    "contact": "agricoop.nic.in",
+    "source_url": "https://agricoop.nic.in",
+    "last_updated": "2025-12-10"
+  },
+
+  {
+    "id": "cold_storage_fpo",
+    "title": "FPO / Cooperative Cold Storage & Pack-house Subsidy (state/central mix)",
+    "type": "central",
+    "state": null,
+    "category": "Agro-processing / Cold Chain",
+    "department": "Ministry of Food Processing Industries",
+    "description": "Support for FPOs/cooperatives to set up shared cold storage and pack-houses; subsidy reduces required loan and increases viability.",
+    "eligibility": ["FPO / Cooperative / Producer group", "Business plan required"],
+    "documents": ["Aadhaar", "FPO registration / Cooperative documents", "Project Report"],
+    "max_project_cost": 5000000,
+    "subsidies": [
+      { "id": "fpo_coldchain_subsidy", "name": "FPO cold chain subsidy", "type": "percent", "percentage": 35, "max_limit": 1500000 }
+    ],
+    "contact": "mofpi.nic.in",
+    "source_url": "https://mofpi.nic.in",
+    "last_updated": "2025-12-10"
+  },
+
+  {
+    "id": "telangana_livestock_unit",
+    "title": "Telangana — Livestock Unit Subsidy (State Scheme example)",
+    "type": "state",
+    "state": "telangana",
+    "category": "Livestock",
+    "department": "Telangana Animal Husbandry Department",
+    "description": "State subsidy for setting up small livestock units (e.g., goat/sheep/buffalo units) to promote rural entrepreneurship and milk/meat production.",
+    "eligibility": ["Resident of Telangana", "Farmer / entrepreneur", "Project plan for units"],
+    "documents": ["Aadhaar", "Ration card / proof of residence", "Project Report"],
+    "max_project_cost": 600000,
+    "subsidies": [
+      { "id": "ts_livestock_subsidy", "name": "Telangana livestock subsidy", "type": "percent", "percentage": 30, "max_limit": 150000 }
+    ],
+    "contact": "telangana.gov.in",
+    "source_url": "https://telangana.gov.in",
+    "last_updated": "2025-12-10"
+  },
+
+  {
+    "id": "maharashtra_dairy_unit",
+    "title": "Maharashtra — Dairy Unit Assistance (State Scheme example)",
+    "type": "state",
+    "state": "maharashtra",
+    "category": "Dairy",
+    "department": "Maharashtra Animal Husbandry Department",
+    "description": "State-level subsidy for small and medium dairy units (example) to boost milk production and value addition in rural areas.",
+    "eligibility": ["Resident of Maharashtra", "Entrepreneur / Farmer"],
+    "documents": ["Aadhaar", "Land/lease proof", "Project plan"],
+    "max_project_cost": 2000000,
+    "subsidies": [
+      { "id": "mh_dairy_subsidy", "name": "Maharashtra dairy subsidy", "type": "percent", "percentage": 25, "max_limit": 250000 }
+    ],
+    "contact": "maha.gov.in",
+    "source_url": "https://maharashtra.gov.in",
+    "last_updated": "2025-12-10"
+  },
+
+  {
+    "id": "karnataka_poultry_support",
+    "title": "Karnataka — Poultry Unit Support (State example)",
+    "type": "state",
+    "state": "karnataka",
+    "category": "Poultry",
+    "department": "Karnataka Animal Husbandry",
+    "description": "State subsidy for small commercial poultry units and backyard poultry to increase rural incomes (example entry).",
+    "eligibility": ["Resident of Karnataka", "Farmer / entrepreneur"],
+    "documents": ["Aadhaar", "Project plan", "Address proof"],
+    "max_project_cost": 700000,
+    "subsidies": [
+      { "id": "ka_poultry_subsidy", "name": "Karnataka poultry subsidy", "type": "percent", "percentage": 30, "max_limit": 150000 }
+    ],
+    "contact": "karnataka.gov.in",
+    "source_url": "https://karnataka.gov.in",
+    "last_updated": "2025-12-10"
+  },
+
+  {
+    "id": "tamilnadu_fisheries_support",
+    "title": "Tamil Nadu — Fisheries & Aquaculture Support (State example)",
+    "type": "state",
+    "state": "tamil nadu",
+    "category": "Fisheries",
+    "department": "Tamil Nadu Fisheries Department",
+    "description": "State support/subsidy for fishery units, small processing and cold storage (example entry).",
+    "eligibility": ["Resident of Tamil Nadu", "Fisher / entrepreneur"],
+    "documents": ["Aadhaar", "Fisher ID (if any)", "Project Report"],
+    "max_project_cost": 2000000,
+    "subsidies": [
+      { "id": "tn_fisheries_subsidy", "name": "TN fisheries capital subsidy", "type": "percent", "percentage": 40, "max_limit": 600000 }
+    ],
+    "contact": "tn.gov.in",
+    "source_url": "https://tn.gov.in",
+    "last_updated": "2025-12-10"
+  },
+
+  {
+    "id": "kerala_beekeeping",
+    "title": "Kerala — Beekeeping Development Subsidy (State example)",
+    "type": "state",
+    "state": "kerala",
+    "category": "Allied Agriculture",
+    "department": "Kerala Agriculture Department",
+    "description": "State-level subsidy and training support for beekeeping units to improve farmer incomes and pollination services.",
+    "eligibility": ["Resident of Kerala", "Farmer / entrepreneur"],
+    "documents": ["Aadhaar", "Project Plan", "Address proof"],
+    "max_project_cost": 150000,
+    "subsidies": [
+      { "id": "kl_beekeeping_subsidy", "name": "Kerala beekeeping subsidy", "type": "percent", "percentage": 40, "max_limit": 60000 }
+    ],
+    "contact": "kerala.gov.in",
+    "source_url": "https://kerala.gov.in",
+    "last_updated": "2025-12-10"
+  },
+
+  {
+    "id": "gujarat_sericulture_support",
+    "title": "Gujarat — Sericulture & Agro-allied Subsidy (State example)",
+    "type": "state",
+    "state": "gujarat",
+    "category": "Sericulture / Allied",
+    "department": "Gujarat Agriculture / Silk Board",
+    "description": "State subsidy for sericulture units, processing and allied infrastructure (example entry).",
+    "eligibility": ["Resident of Gujarat", "Sericulture farmers / units"],
+    "documents": ["Aadhaar", "Land proof", "Project Report"],
+    "max_project_cost": 1000000,
+    "subsidies": [
+      { "id": "gj_sericulture_subsidy", "name": "Gujarat sericulture subsidy", "type": "percent", "percentage": 30, "max_limit": 300000 }
+    ],
+    "contact": "gujarat.gov.in",
+    "source_url": "https://gujarat.gov.in",
+    "last_updated": "2025-12-10"
+  },
+
+  {
+    "id": "rajasthan_dairy_support",
+    "title": "Rajasthan — Dairy & Livestock Unit Subsidy (State example)",
+    "type": "state",
+    "state": "rajasthan",
+    "category": "Dairy / Livestock",
+    "department": "Rajasthan Animal Husbandry Department",
+    "description": "State subsidy program to set up small dairy units, promote milk production and provide support for fodder infrastructure (example).",
+    "eligibility": ["Resident of Rajasthan", "Farmer / entrepreneur"],
+    "documents": ["Aadhaar", "Project Plan", "Land proof"],
+    "max_project_cost": 1500000,
+    "subsidies": [
+      { "id": "rj_dairy_subsidy", "name": "Rajasthan dairy subsidy", "type": "percent", "percentage": 25, "max_limit": 300000 }
+    ],
+    "contact": "rajasthan.gov.in",
+    "source_url": "https://rajasthan.gov.in",
+    "last_updated": "2025-12-10"
+  },
+
+  {
+    "id": "andhra_poultry_support",
+    "title": "Andhra Pradesh — Poultry & Livestock Subsidy (State example)",
+    "type": "state",
+    "state": "andhra pradesh",
+    "category": "Poultry / Livestock",
+    "department": "Andhra Pradesh Animal Husbandry",
+    "description": "State subsidy for poultry farm set-up and small livestock units, to improve rural incomes (example).",
+    "eligibility": ["Resident of Andhra Pradesh", "Farmer / entrepreneur"],
+    "documents": ["Aadhaar", "Project Report"],
+    "max_project_cost": 700000,
+    "subsidies": [
+      { "id": "ap_poultry_subsidy", "name": "AP poultry subsidy", "type": "percent", "percentage": 30, "max_limit": 150000 }
+    ],
+    "contact": "ap.gov.in",
+    "source_url": "https://ap.gov.in",
+    "last_updated": "2025-12-10"
+  },
+
+  {
+    "id": "westbengal_coldchain",
+    "title": "West Bengal — Cold Storage & Pack-house Subsidy (State example)",
+    "type": "state",
+    "state": "west bengal",
+    "category": "Cold Chain / Agro-processing",
+    "department": "West Bengal Food Processing",
+    "description": "State-level support for small cold stores and pack-houses to reduce post-harvest loss (example).",
+    "eligibility": ["FPO / Cooperative / Entrepreneur", "Business plan required"],
+    "documents": ["Aadhaar", "FPO registration / Cooperative docs", "Project Report"],
+    "max_project_cost": 4000000,
+    "subsidies": [
+      { "id": "wb_coldchain_subsidy", "name": "WB cold chain subsidy", "type": "percent", "percentage": 30, "max_limit": 1200000 }
+    ],
+    "contact": "westbengal.gov.in",
+    "source_url": "https://wb.gov.in",
+    "last_updated": "2025-12-10"
+  },
+
+  {
+    "id": "up_agri_machinery",
+    "title": "Uttar Pradesh — Farm Equipment / Micro-irrigation Subsidy (State example)",
+    "type": "state",
+    "state": "uttar pradesh",
+    "category": "Mechanization / Irrigation",
+    "department": "UP Agriculture Department",
+    "description": "State subsidy promoting micro-irrigation and mechanization for small and marginal farmers (example).",
+    "eligibility": ["Resident of Uttar Pradesh", "Farmer / Farmer Group"],
+    "documents": ["Aadhaar", "Land record", "Bank account"],
+    "max_project_cost": 500000,
+    "subsidies": [
+      { "id": "up_drip_subsidy", "name": "UP micro-irrigation subsidy", "type": "percent", "percentage": 60, "max_limit": 150000 }
+    ],
+    "contact": "up.gov.in",
+    "source_url": "https://up.gov.in",
+    "last_updated": "2025-12-10"
+  },
+
+  {
+    "id": "bihar_fisheries_support",
+    "title": "Bihar — Fisheries Unit Subsidy (State example)",
+    "type": "state",
+    "state": "bihar",
+    "category": "Fisheries / Aquaculture",
+    "department": "Bihar Fisheries Department",
+    "description": "State-level subsidy for small fish farms, ponds and aquaculture infrastructure (example).",
+    "eligibility": ["Resident of Bihar", "Fisher / entrepreneur"],
+    "documents": ["Aadhaar", "Project Report", "Land/pond records"],
+    "max_project_cost": 1200000,
+    "subsidies": [
+      { "id": "br_fisheries_subsidy", "name": "Bihar fisheries subsidy", "type": "percent", "percentage": 35, "max_limit": 300000 }
+    ],
+    "contact": "bihar.gov.in",
+    "source_url": "https://bihar.gov.in",
+    "last_updated": "2025-12-10"
+  },
+
+  {
+    "id": "jharkhand_beefarm_support",
+    "title": "Jharkhand — Small Livestock Unit Subsidy (State example)",
+    "type": "state",
+    "state": "jharkhand",
+    "category": "Livestock",
+    "department": "Jharkhand Animal Husbandry",
+    "description": "State-level subsidy for small livestock and poultry units to encourage entrepreneurship in rural areas (example).",
+    "eligibility": ["Resident of Jharkhand", "Farmer / entrepreneur"],
+    "documents": ["Aadhaar", "Project Plan"],
+    "max_project_cost": 450000,
+    "subsidies": [
+      { "id": "jh_livestock_subsidy", "name": "Jharkhand livestock subsidy", "type": "percent", "percentage": 30, "max_limit": 100000 }
+    ],
+    "contact": "jharkhand.gov.in",
+    "source_url": "https://jharkhand.gov.in",
+    "last_updated": "2025-12-10"
+  },
+
+  {
+    "id": "odisha_aqua_support",
+    "title": "Odisha — Aquaculture & Fisheries Subsidy (State example)",
+    "type": "state",
+    "state": "odisha",
+    "category": "Fisheries",
+    "department": "Odisha Fisheries & ARD Department",
+    "description": "State subsidy to support aquaculture units, pond development and value chain (example).",
+    "eligibility": ["Resident of Odisha", "Fisher / entrepreneur"],
+    "documents": ["Aadhaar", "Project Report"],
+    "max_project_cost": 2000000,
+    "subsidies": [
+      { "id": "od_aqua_subsidy", "name": "Odisha aquaculture subsidy", "type": "percent", "percentage": 40, "max_limit": 600000 }
+    ],
+    "contact": "odisha.gov.in",
+    "source_url": "https://odisha.gov.in",
+    "last_updated": "2025-12-10"
+  },
+
+  {
+    "id": "hp_horticulture_support",
+    "title": "Himachal Pradesh — Horticulture & Allied Subsidy (State example)",
+    "type": "state",
+    "state": "himachal pradesh",
+    "category": "Horticulture / Allied",
+    "department": "HP Agriculture Department",
+    "description": "State-level subsidy support for horticulture units, protected cultivation and allied processing (example).",
+    "eligibility": ["Resident of Himachal Pradesh", "Farmer / entrepreneur"],
+    "documents": ["Aadhaar", "Land proof", "Project report"],
+    "max_project_cost": 900000,
+    "subsidies": [
+      { "id": "hp_horti_subsidy", "name": "HP horticulture subsidy", "type": "percent", "percentage": 35, "max_limit": 200000 }
+    ],
+    "contact": "himachal.nic.in",
+    "source_url": "https://himachal.nic.in",
+    "last_updated": "2025-12-10"
+  },
+
+  {
+    "id": "assam_aqua_beefarm",
+    "title": "Assam — Fisheries & Livestock Subsidy (State example)",
+    "type": "state",
+    "state": "assam",
+    "category": "Fisheries / Livestock",
+    "department": "Assam Animal Husbandry & Fisheries",
+    "description": "State subsidy for small fish farms, duck/poultry units and rural livestock enterprises (example).",
+    "eligibility": ["Resident of Assam", "Farmer / entrepreneur"],
+    "documents": ["Aadhaar", "Project Report", "Address proof"],
+    "max_project_cost": 800000,
+    "subsidies": [
+      { "id": "asst_fish_livestock_subsidy", "name": "Assam fisheries & livestock subsidy", "type": "percent", "percentage": 35, "max_limit": 200000 }
+    ],
+    "contact": "assam.gov.in",
+    "source_url": "https://assam.gov.in",
+    "last_updated": "2025-12-10"
+  },
+
+  {
+    "id": "manipur_small_agri",
+    "title": "Manipur — Small Agro & Allied Subsidy (State example)",
+    "type": "state",
+    "state": "manipur",
+    "category": "Agro / Allied",
+    "department": "Manipur Agriculture Department",
+    "description": "Support for small agro-processing, mushroom farming and allied sectors with subsidy on capital equipment (example).",
+    "eligibility": ["Resident of Manipur", "Farmer / entrepreneur"],
+    "documents": ["Aadhaar", "Project Plan"],
+    "max_project_cost": 500000,
+    "subsidies": [
+      { "id": "mn_agro_subsidy", "name": "Manipur agro subsidy", "type": "percent", "percentage": 40, "max_limit": 150000 }
+    ],
+    "contact": "manipur.gov.in",
+    "source_url": "https://manipur.gov.in",
+    "last_updated": "2025-12-10"
+  }
+]

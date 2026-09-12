@@ -1,0 +1,2 @@
+<Stack.Screen name="KycHome" component={KycHomeScreen} />
+<Stack.Screen name="DocumentUpload" component={DocumentUploadScreen} />

@@ -1,0 +1,36 @@
+# Route integration
+
+Import:
+import Dashboard from "./pages/Dashboard/Dashboard";
+import ServiceCategory from "./pages/Services/ServiceCategory";
+
+Add routes in your existing React Router configuration:
+
+<Route path="/" element={<Dashboard />} />
+<Route path="/services/:slug" element={<ServiceCategory />} />
+
+IMPORTANT:
+If your existing Home/Dashboard route is not "/", keep your current route and place
+the Dashboard component at that route instead.
+
+The dashboard category cards already navigate to:
+ /services/schemes
+ /services/startup
+ /services/registrations
+ /services/trademark
+ /services/gst
+ /services/income-tax
+ /services/mca
+ /services/compliance
+ /services/consultation
+ /services/global
+ /services/loans
+ /services/insurance
+ /services/emi-calculator
+ /services/detailed-project-report
+ /services/cibil
+
+Bootstrap Icons:
+The JSX uses Bootstrap Icons classes (bi bi-*). Your project already appears to
+use bootstrap-icons. If not, add:
+import "bootstrap-icons/font/bootstrap-icons.css";

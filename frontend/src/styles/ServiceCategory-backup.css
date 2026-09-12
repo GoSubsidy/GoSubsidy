@@ -1,0 +1,60 @@
+.gs-service-page {
+  min-height: calc(100vh - 76px);
+  background: #020d1b;
+  color: #fff;
+  padding: 32px 0;
+}
+.gs-service-page-inner {
+  width: min(1200px, calc(100% - 32px));
+  margin: auto;
+}
+.gs-back-btn {
+  border: 1px solid rgba(96, 143, 194, .3);
+  border-radius: 8px;
+  background: #0b1c30;
+  color: #bcd0e6;
+  padding: 9px 13px;
+  cursor: pointer;
+}
+.gs-back-btn i { margin-right: 7px; }
+.gs-service-page-header {
+  margin: 35px 0 22px;
+}
+.gs-service-eyebrow {
+  color: #35a6ff;
+  font-size: 11px;
+  font-weight: 800;
+  letter-spacing: 1.5px;
+}
+.gs-service-page-header h1 {
+  margin: 7px 0;
+  font-size: 34px;
+  font-weight: 800;
+}
+.gs-service-page-header p {
+  margin: 0;
+  color: #9eafc2;
+}
+.gs-service-placeholder {
+  min-height: 330px;
+  display: grid;
+  place-items: center;
+  align-content: center;
+  text-align: center;
+  padding: 30px;
+  border: 1px solid rgba(75, 145, 207, .24);
+  border-radius: 15px;
+  background: linear-gradient(145deg, #0a2034, #061525);
+}
+.gs-service-placeholder > i {
+  color: #35a6ff;
+  font-size: 42px;
+}
+.gs-service-placeholder h2 {
+  margin: 16px 0 7px;
+}
+.gs-service-placeholder p {
+  max-width: 620px;
+  color: #9eafc2;
+  line-height: 1.6;
+}

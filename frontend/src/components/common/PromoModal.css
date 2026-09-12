@@ -1,0 +1,173 @@
+/* Backdrop Overlay */
+.gs-promo-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(15, 23, 42, 0.7);
+  backdrop-filter: blur(6px);
+  z-index: 9999;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 16px;
+  animation: gsFadeIn 0.25s ease-out;
+}
+
+/* Card Container with Rounded Corners & Shadow */
+.gs-promo-card {
+  position: relative;
+  width: 100%;
+  max-width: 440px;
+  background: #ffffff;
+  border-radius: 24px;
+  padding: 36px 28px 28px;
+  text-align: center;
+  box-shadow: 0 25px 60px rgba(0, 0, 0, 0.35);
+  border: 1px solid #e2e8f0;
+  animation: gsScaleUp 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+  overflow: visible;
+}
+
+/* Floating Circular Close Icon */
+.gs-promo-close-btn {
+  position: absolute;
+  top: -14px;
+  right: -14px;
+  width: 36px;
+  height: 36px;
+  background: #ffffff;
+  border: 2px solid #e2e8f0;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  color: #1e293b;
+  font-size: 15px;
+  box-shadow: 0 6px 16px rgba(0, 0, 0, 0.15);
+  transition: all 0.2s ease;
+}
+
+.gs-promo-close-btn:hover {
+  background: #fee2e2;
+  color: #dc2626;
+  border-color: #fca5a5;
+  transform: rotate(90deg) scale(1.1);
+}
+
+/* Brand Header */
+.gs-promo-header {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  margin-bottom: 16px;
+}
+
+.gs-promo-logo {
+  height: 32px;
+  width: auto;
+}
+
+.gs-promo-brand-text {
+  font-size: 20px;
+  font-weight: 850;
+}
+
+/* Offer Badges & Headings */
+.gs-promo-badge {
+  display: inline-block;
+  background: #eefcf6;
+  color: #008f66;
+  font-size: 11px;
+  font-weight: 800;
+  padding: 4px 14px;
+  border-radius: 50px;
+  border: 1px solid #c2f0dc;
+  margin-bottom: 12px;
+}
+
+.gs-promo-title {
+  font-size: 28px;
+  font-weight: 850;
+  color: #0f172a;
+  margin: 0 0 8px;
+  line-height: 1.2;
+}
+
+.gs-promo-title span {
+  color: #ff8a00;
+}
+
+.gs-promo-subtitle {
+  font-size: 13.5px;
+  color: #64748b;
+  line-height: 1.5;
+  margin: 0 0 20px;
+}
+
+/* Coupon Code Box */
+.gs-promo-coupon-box {
+  background: #f8fafc;
+  border: 2px dashed #00a878;
+  border-radius: 12px;
+  padding: 12px;
+  margin-bottom: 20px;
+}
+
+.gs-coupon-label {
+  display: block;
+  font-size: 10px;
+  font-weight: 800;
+  color: #64748b;
+  letter-spacing: 0.5px;
+  margin-bottom: 2px;
+}
+
+.gs-coupon-code {
+  font-size: 18px;
+  font-weight: 850;
+  color: #00a878;
+  letter-spacing: 1px;
+}
+
+/* Action CTA Button */
+.gs-promo-cta-btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  background: linear-gradient(135deg, #00a878, #008f66);
+  color: #ffffff;
+  padding: 13px;
+  border-radius: 10px;
+  font-size: 14px;
+  font-weight: 750;
+  text-decoration: none;
+  box-shadow: 0 6px 18px rgba(0, 168, 120, 0.3);
+  transition: all 0.2s ease;
+  box-sizing: border-box;
+}
+
+.gs-promo-cta-btn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 24px rgba(0, 168, 120, 0.4);
+  color: #ffffff;
+}
+
+.gs-promo-terms {
+  display: block;
+  font-size: 10.5px;
+  color: #94a3b8;
+  margin-top: 12px;
+}
+
+/* Animations */
+@keyframes gsFadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+@keyframes gsScaleUp {
+  from { transform: scale(0.85) translateY(15px); opacity: 0; }
+  to { transform: scale(1) translateY(0); opacity: 1; }
+}

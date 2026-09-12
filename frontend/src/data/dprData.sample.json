@@ -1,0 +1,25 @@
+{
+  "note": "Map your existing calculation engine into this shape; sample values are only demonstration data.",
+  "project": {
+    "name": "Project Name",
+    "category": "Manufacturing",
+    "location": "India",
+    "promoter": "Applicant Name",
+    "constitution": "Proprietorship"
+  },
+  "finance": {
+    "totalCost": 100,
+    "promoter": 25,
+    "termLoan": 75,
+    "interest": 9,
+    "tenure": 7,
+    "dscr": 1.85
+  },
+  "operating": {
+    "capacity": "10,000 units / year",
+    "cycles": "12 cycles / year",
+    "employment": "12",
+    "revenueYear1": 60,
+    "revenueYear5": 150
+  }
+}

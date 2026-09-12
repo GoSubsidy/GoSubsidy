@@ -1,0 +1,5 @@
+// App.jsx additions
+import ServiceCategory from "./pages/ServiceCategory";
+
+// Put inside <Routes>:
+<Route path="/services/:category" element={<ServiceCategory />} />

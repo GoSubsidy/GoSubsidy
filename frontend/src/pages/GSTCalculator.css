@@ -1,0 +1,299 @@
+
+/* GoSubsidy Investment Calculator shared visual language */
+.investment-calculator-page,
+.sip-page,
+.daily-sip-page {
+  min-height: calc(100vh - 70px);
+  padding: 42px 20px 70px;
+  background: #f5f8fb;
+  box-sizing: border-box;
+}
+
+.calculator-shell,
+.sip-shell,
+.daily-sip-shell {
+  width: min(1120px, 100%);
+  margin: 0 auto;
+}
+
+.calculator-heading,
+.sip-heading,
+.daily-sip-heading {
+  text-align: center;
+  margin-bottom: 26px;
+}
+
+.calculator-kicker,
+.sip-kicker,
+.daily-sip-kicker {
+  display: inline-block;
+  margin-bottom: 8px;
+  font-size: 12px;
+  font-weight: 800;
+  letter-spacing: .08em;
+  text-transform: uppercase;
+  color: #138a55;
+}
+
+.calculator-heading h1,
+.sip-heading h1,
+.daily-sip-heading h1 {
+  margin: 0;
+  font-size: clamp(30px, 4vw, 42px);
+  line-height: 1.1;
+  font-weight: 800;
+  color: #102a43;
+}
+
+.calculator-heading p,
+.sip-heading p,
+.daily-sip-heading p {
+  margin: 10px auto 0;
+  max-width: 720px;
+  color: #627d98;
+  font-size: 15px;
+}
+
+.calculator-card,
+.sip-card,
+.daily-sip-card {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+  overflow: hidden;
+  background: #fff;
+  border: 1px solid #e1e8ef;
+  border-radius: 20px;
+  box-shadow: 0 14px 38px rgba(16, 42, 67, .08);
+}
+
+.calculator-input-panel,
+.sip-input-panel,
+.daily-sip-input-panel {
+  padding: 34px;
+}
+
+.calculator-result-panel,
+.sip-result-panel,
+.daily-sip-result-panel {
+  padding: 34px;
+  background: linear-gradient(145deg, #edf9f3, #f7fbf9);
+  border-left: 1px solid #e1eee8;
+}
+
+.calculator-input-panel h2,
+.sip-input-panel h2,
+.daily-sip-input-panel h2 {
+  margin: 0 0 22px;
+  color: #102a43;
+  font-size: 21px;
+}
+
+.calculator-input-panel label,
+.sip-input-panel label,
+.daily-sip-input-panel label {
+  display: block;
+  margin: 16px 0 7px;
+  font-size: 13px;
+  font-weight: 700;
+  color: #334e68;
+}
+
+.calculator-input-panel input,
+.calculator-input-panel select,
+.sip-input-panel input,
+.daily-sip-input-panel input {
+  width: 100%;
+  min-height: 48px;
+  padding: 11px 14px;
+  box-sizing: border-box;
+  border: 1px solid #cbd5df;
+  border-radius: 10px;
+  outline: none;
+  background: #fff;
+  color: #102a43;
+  font-size: 16px;
+  transition: border-color .2s, box-shadow .2s;
+}
+
+.calculator-input-panel input:focus,
+.calculator-input-panel select:focus,
+.sip-input-panel input:focus,
+.daily-sip-input-panel input:focus {
+  border-color: #138a55;
+  box-shadow: 0 0 0 3px rgba(19, 138, 85, .12);
+}
+
+.segmented-control {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 8px;
+}
+
+.segmented-control button {
+  min-height: 44px;
+  border: 1px solid #cbd5df;
+  border-radius: 9px;
+  background: #fff;
+  color: #486581;
+  font-weight: 700;
+  cursor: pointer;
+}
+
+.segmented-control button.active {
+  border-color: #138a55;
+  background: #eaf8f0;
+  color: #0c7045;
+}
+
+.calculate-btn,
+.sip-calculate-btn,
+.daily-sip-calculate-btn {
+  width: 100%;
+  min-height: 50px;
+  margin-top: 24px;
+  border: 0;
+  border-radius: 10px;
+  background: #138a55;
+  color: #fff;
+  font-size: 15px;
+  font-weight: 800;
+  cursor: pointer;
+  transition: transform .15s, box-shadow .15s, background .15s;
+}
+
+.calculate-btn:hover,
+.sip-calculate-btn:hover,
+.daily-sip-calculate-btn:hover {
+  background: #0f7448;
+  transform: translateY(-1px);
+  box-shadow: 0 8px 18px rgba(19, 138, 85, .22);
+}
+
+.result-label,
+.sip-result-label,
+.daily-sip-result-label {
+  color: #486581;
+  font-size: 13px;
+  font-weight: 700;
+}
+
+.result-primary,
+.sip-result-primary,
+.daily-sip-result-primary {
+  margin: 8px 0 28px;
+  color: #0b7044;
+  font-size: clamp(30px, 4vw, 40px);
+  font-weight: 900;
+  line-height: 1.1;
+}
+
+.result-grid,
+.sip-result-grid,
+.daily-sip-result-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 12px;
+}
+
+.result-grid > div,
+.sip-result-grid > div,
+.daily-sip-result-grid > div {
+  padding: 15px;
+  border: 1px solid #dce9e2;
+  border-radius: 12px;
+  background: rgba(255,255,255,.8);
+}
+
+.result-grid span,
+.sip-result-grid span,
+.daily-sip-result-grid span {
+  display: block;
+  color: #627d98;
+  font-size: 12px;
+  margin-bottom: 6px;
+}
+
+.result-grid strong,
+.sip-result-grid strong,
+.daily-sip-result-grid strong {
+  color: #102a43;
+  font-size: 17px;
+}
+
+.result-note,
+.sip-note,
+.daily-sip-note {
+  margin-top: 18px;
+  padding: 13px 15px;
+  border-radius: 10px;
+  background: rgba(255,255,255,.78);
+  color: #627d98;
+  font-size: 12px;
+  line-height: 1.55;
+}
+
+.calculator-info,
+.sip-info,
+.daily-sip-info {
+  margin-top: 20px;
+  padding: 26px 30px;
+  background: #fff;
+  border: 1px solid #e1e8ef;
+  border-radius: 16px;
+  box-shadow: 0 8px 24px rgba(16, 42, 67, .05);
+}
+
+.calculator-info h2,
+.sip-info h2,
+.daily-sip-info h2 {
+  margin: 0 0 10px;
+  color: #102a43;
+  font-size: 20px;
+}
+
+.calculator-info p,
+.sip-info p,
+.daily-sip-info p {
+  margin: 8px 0;
+  color: #627d98;
+  line-height: 1.65;
+  font-size: 14px;
+}
+
+@media (max-width: 760px) {
+  .investment-calculator-page,
+  .sip-page,
+  .daily-sip-page {
+    padding: 28px 14px 50px;
+  }
+
+  .calculator-card,
+  .sip-card,
+  .daily-sip-card {
+    grid-template-columns: 1fr;
+  }
+
+  .calculator-result-panel,
+  .sip-result-panel,
+  .daily-sip-result-panel {
+    border-left: 0;
+    border-top: 1px solid #e1eee8;
+  }
+
+  .calculator-input-panel,
+  .calculator-result-panel,
+  .sip-input-panel,
+  .sip-result-panel,
+  .daily-sip-input-panel,
+  .daily-sip-result-panel {
+    padding: 24px 20px;
+  }
+}
+
+@media (max-width: 430px) {
+  .result-grid,
+  .sip-result-grid,
+  .daily-sip-result-grid {
+    grid-template-columns: 1fr;
+  }
+}

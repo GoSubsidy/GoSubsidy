@@ -1,0 +1,201 @@
+/* ============================================================
+   GoSubsidy Analytics - Visitor Location UI
+   ============================================================ */
+
+.analytics-location-card {
+  overflow: hidden;
+}
+
+.analytics-location-header-icon {
+  color: #0b7cff;
+  font-size: 1.25rem;
+}
+
+.analytics-location-error {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin: 0 0 18px;
+  padding: 12px 14px;
+  border: 1px solid #ffd1d1;
+  border-radius: 12px;
+  background: #fff6f6;
+  color: #b42318;
+  font-size: 13px;
+}
+
+.location-summary-grid {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 14px;
+  margin-bottom: 22px;
+}
+
+.location-summary-card {
+  padding: 17px 18px;
+  border: 1px solid #e5ebf4;
+  border-radius: 16px;
+  background: linear-gradient(145deg, #ffffff, #f7faff);
+  box-shadow: 0 8px 25px rgba(24, 55, 95, 0.06);
+}
+
+.location-summary-card span {
+  display: block;
+  color: #718096;
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.02em;
+}
+
+.location-summary-card strong {
+  display: block;
+  margin-top: 5px;
+  color: #10244b;
+  font-size: 25px;
+  line-height: 1.1;
+}
+
+.location-mini-card {
+  height: 100%;
+  overflow: hidden;
+  border: 1px solid #e6ebf3;
+  border-radius: 17px;
+  background: #fff;
+  box-shadow: 0 9px 26px rgba(16, 39, 75, 0.06);
+}
+
+.location-mini-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  padding: 17px 18px;
+  border-bottom: 1px solid #edf1f6;
+}
+
+.location-mini-header strong,
+.location-mini-header span {
+  display: block;
+}
+
+.location-mini-header strong {
+  color: #172b4d;
+  font-size: 14px;
+}
+
+.location-mini-header span {
+  margin-top: 3px;
+  color: #8a97a9;
+  font-size: 10px;
+}
+
+.location-mini-header svg {
+  color: #0b7cff;
+}
+
+.location-table {
+  width: 100%;
+  margin: 0;
+  border-collapse: collapse;
+}
+
+.location-table th,
+.location-table td {
+  padding: 10px 12px;
+  border-bottom: 1px solid #eef2f6;
+  vertical-align: middle;
+  white-space: nowrap;
+}
+
+.location-table th {
+  color: #7a8799;
+  background: #fbfcfe;
+  font-size: 10px;
+  font-weight: 800;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+}
+
+.location-table td {
+  color: #53657c;
+  font-size: 11px;
+}
+
+.location-table tbody tr:last-child td {
+  border-bottom: 0;
+}
+
+.location-table tbody tr:hover td {
+  background: #f8fbff;
+}
+
+.location-mini-table th,
+.location-mini-table td {
+  padding: 9px 10px;
+}
+
+.location-mini-table td strong {
+  color: #10244b;
+}
+
+.location-recent-wrap {
+  margin-top: 22px;
+  overflow: hidden;
+  border: 1px solid #e6ebf3;
+  border-radius: 17px;
+  background: #fff;
+}
+
+.location-recent-header {
+  padding: 17px 18px;
+  border-bottom: 1px solid #edf1f6;
+}
+
+.location-recent-header strong,
+.location-recent-header span {
+  display: block;
+}
+
+.location-recent-header strong {
+  color: #172b4d;
+  font-size: 14px;
+}
+
+.location-recent-header span {
+  margin-top: 3px;
+  color: #8a97a9;
+  font-size: 10px;
+}
+
+.location-page-pill {
+  display: inline-block;
+  max-width: 250px;
+  overflow: hidden;
+  padding: 4px 8px;
+  border-radius: 7px;
+  background: #f1f6ff;
+  color: #1268d9;
+  text-overflow: ellipsis;
+  vertical-align: middle;
+}
+
+@media (max-width: 1199px) {
+  .location-summary-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+@media (max-width: 575px) {
+  .location-summary-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .location-summary-card strong {
+    font-size: 22px;
+  }
+
+  .location-table th,
+  .location-table td {
+    padding: 9px 10px;
+  }
+}

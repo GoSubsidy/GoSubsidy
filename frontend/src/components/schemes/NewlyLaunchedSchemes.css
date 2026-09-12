@@ -1,0 +1,348 @@
+/* ============================================================
+   PAISABAZAAR COMPACT SCHEME CAROUSEL
+   File: src/components/schemes/NewlyLaunchedSchemes.css
+   ============================================================ */
+
+.gs-new-schemes-section {
+  width: 100%;
+  padding: 30px 0 35px;
+  background: #f8fbfe;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+  overflow: hidden;
+  box-sizing: border-box;
+}
+
+.gs-new-schemes-container {
+  width: min(1340px, calc(100% - 40px));
+  margin: 0 auto;
+  position: relative;
+  box-sizing: border-box;
+}
+
+/* Header */
+.gs-pb-heading {
+  text-align: center;
+  margin-bottom: 22px;
+}
+
+.gs-pb-kicker {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 4px 12px;
+  border-radius: 999px;
+  background: #edf5ff;
+  color: #0668e8;
+  font-size: 11px;
+  font-weight: 800;
+  letter-spacing: 0.8px;
+  text-transform: uppercase;
+}
+
+.gs-pb-heading h2 {
+  margin: 8px 0 4px;
+  font-size: clamp(24px, 2.6vw, 34px);
+  font-weight: 850;
+  color: #14233b;
+  letter-spacing: -0.5px;
+}
+
+.gs-pb-heading p {
+  margin: 0 auto;
+  max-width: 680px;
+  color: #61748c;
+  font-size: 14px;
+}
+
+/* Loading State */
+.gs-pb-loading {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+  min-height: 200px;
+  color: #64748b;
+  font-size: 14px;
+  font-weight: 600;
+}
+
+.gs-pb-spinner {
+  width: 26px;
+  height: 26px;
+  border: 3px solid #dce8f6;
+  border-top-color: #0668e8;
+  border-radius: 50%;
+  animation: gsSpin 0.8s linear infinite;
+}
+
+@keyframes gsSpin {
+  to { transform: rotate(360deg); }
+}
+
+/* Carousel Container */
+.gs-pb-scheme-carousel {
+  position: relative;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  box-sizing: border-box;
+}
+
+/* Viewport (Hides other cards outside the window) */
+.gs-pb-viewport {
+  width: 100%;
+  overflow: hidden;
+  padding: 8px 4px 16px;
+  box-sizing: border-box;
+}
+
+/* Sliding Track */
+.gs-pb-scheme-track {
+  display: flex;
+  gap: 20px;
+  transition: transform 0.5s cubic-bezier(0.2, 1, 0.3, 1);
+  transform: translateX(calc(-1 * var(--gs-active-index, 0) * (100% / 3 + 20px / 3)));
+  box-sizing: border-box;
+}
+
+/* Individual Scheme Card */
+.gs-pb-scheme-card {
+  flex: 0 0 calc((100% - 40px) / 3);
+  min-width: calc((100% - 40px) / 3);
+  max-width: calc((100% - 40px) / 3);
+  background: #ffffff;
+  border: 1px solid #e2ecf8;
+  border-radius: 16px;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  box-shadow: 0 6px 18px rgba(20, 35, 59, 0.05);
+  transition: transform 0.25s ease, box-shadow 0.25s ease, border-color 0.25s ease;
+  box-sizing: border-box;
+}
+
+.gs-pb-scheme-card:hover {
+  transform: translateY(-5px);
+  border-color: #cbdff7;
+  box-shadow: 0 14px 30px rgba(20, 35, 59, 0.1);
+}
+
+/* Card Image Wrap (Fixes oversized raw image loading) */
+.gs-pb-card-image-wrap {
+  position: relative;
+  width: 100%;
+  height: 170px;
+  min-height: 170px;
+  max-height: 170px;
+  overflow: hidden;
+  background: #f1f5f9;
+  border-bottom: 1px solid #edf2f7;
+  box-sizing: border-box;
+}
+
+.gs-pb-card-image {
+  width: 100% !important;
+  height: 100% !important;
+  max-height: 170px !important;
+  object-fit: cover !important;
+  object-position: center !important;
+  display: block !important;
+  transition: transform 0.35s ease;
+}
+
+.gs-pb-scheme-card:hover .gs-pb-card-image {
+  transform: scale(1.05);
+}
+
+.gs-pb-new-badge {
+  position: absolute;
+  top: 10px;
+  left: 10px;
+  z-index: 2;
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  padding: 4px 8px;
+  border-radius: 999px;
+  background: #e11d48;
+  color: #ffffff;
+  font-size: 9.5px;
+  font-weight: 850;
+  letter-spacing: 0.5px;
+  box-shadow: 0 4px 10px rgba(225, 29, 72, 0.3);
+}
+
+/* Card Body */
+.gs-pb-card-body {
+  padding: 16px;
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+  box-sizing: border-box;
+}
+
+.gs-pb-card-category {
+  display: inline-block;
+  align-self: flex-start;
+  padding: 3px 8px;
+  border-radius: 6px;
+  background: #edf5ff;
+  color: #0668e8;
+  font-size: 10px;
+  font-weight: 800;
+  text-transform: uppercase;
+  margin-bottom: 8px;
+}
+
+.gs-pb-card-body h3 {
+  margin: 0 0 6px;
+  font-size: 15.5px;
+  font-weight: 800;
+  color: #14233b;
+  line-height: 1.3;
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 2;
+  overflow: hidden;
+  min-height: 40px;
+}
+
+.gs-pb-card-description {
+  margin: 0 0 12px;
+  color: #61748c;
+  font-size: 12px;
+  line-height: 1.5;
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 3;
+  overflow: hidden;
+  min-height: 54px;
+}
+
+/* Info Badges (Benefit & Ministry) */
+.gs-pb-card-info {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  padding: 8px 10px;
+  background: #f8fbfe;
+  border: 1px solid #e6edf5;
+  border-radius: 10px;
+  margin-bottom: 14px;
+}
+
+.gs-pb-card-info span {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 11px;
+  color: #1e293b;
+  font-weight: 650;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.gs-pb-card-info i {
+  color: #0668e8;
+  font-size: 13px;
+  flex-shrink: 0;
+}
+
+/* CTA Explore Link */
+.gs-pb-explore-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  margin-top: auto;
+  color: #0668e8;
+  font-size: 12.5px;
+  font-weight: 800;
+  text-decoration: none !important;
+}
+
+.gs-pb-explore-link:hover {
+  color: #0058c9;
+}
+
+/* Navigation Arrows */
+.gs-pb-nav {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  z-index: 10;
+  width: 38px;
+  height: 38px;
+  border-radius: 50%;
+  border: 1px solid #dce6f2;
+  background: #ffffff;
+  color: #1e293b;
+  font-size: 16px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+  transition: all 0.2s ease;
+}
+
+.gs-pb-nav:hover {
+  background: #0668e8;
+  color: #ffffff;
+  border-color: #0668e8;
+}
+
+.gs-pb-nav-left { left: -18px; }
+.gs-pb-nav-right { right: -18px; }
+
+/* Indicator Dots */
+.gs-pb-dots {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 7px;
+  margin-top: 14px;
+}
+
+.gs-pb-dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  border: none;
+  background: #cbd6e3;
+  cursor: pointer;
+  padding: 0;
+  transition: all 0.25s ease;
+}
+
+.gs-pb-dot.is-active {
+  width: 22px;
+  border-radius: 999px;
+  background: #0668e8;
+}
+
+/* Responsive Media Queries */
+@media (max-width: 1100px) {
+  .gs-pb-scheme-track {
+    transform: translateX(calc(-1 * var(--gs-active-index, 0) * (100% / 2 + 20px / 2)));
+  }
+  .gs-pb-scheme-card {
+    flex: 0 0 calc((100% - 20px) / 2);
+    min-width: calc((100% - 20px) / 2);
+    max-width: calc((100% - 20px) / 2);
+  }
+}
+
+@media (max-width: 680px) {
+  .gs-pb-scheme-track {
+    transform: translateX(calc(-1 * var(--gs-active-index, 0) * 100%));
+    gap: 14px;
+  }
+  .gs-pb-scheme-card {
+    flex: 0 0 100%;
+    min-width: 100%;
+    max-width: 100%;
+  }
+  .gs-pb-nav-left { left: 2px; }
+  .gs-pb-nav-right { right: 2px; }
+}

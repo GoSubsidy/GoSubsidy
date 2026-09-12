@@ -1,0 +1,220 @@
+
+/* =========================================================
+   GoSubsidy - Amortization Schedule
+========================================================= */
+
+.premium-amortization-card {
+  margin-top: 24px;
+  padding: 28px;
+  border: 1px solid #e2e8f0;
+  border-radius: 18px;
+  background: #ffffff;
+  box-shadow: 0 12px 30px rgba(15, 23, 42, .07);
+}
+
+.premium-amortization-header {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 24px;
+  margin-bottom: 20px;
+}
+
+.premium-amortization-eyebrow {
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+  color: #07824f;
+  font-size: 11px;
+  font-weight: 800;
+  letter-spacing: .08em;
+}
+
+.premium-amortization-header h2 {
+  margin: 7px 0 5px;
+  color: #102a43;
+  font-size: 24px;
+  font-weight: 800;
+}
+
+.premium-amortization-header p {
+  margin: 0;
+  color: #627d98;
+  font-size: 13px;
+}
+
+.premium-amortization-tabs {
+  display: inline-flex;
+  padding: 4px;
+  gap: 3px;
+  border: 1px solid #d9e2ec;
+  border-radius: 10px;
+  background: #f5f7fa;
+  flex-shrink: 0;
+}
+
+.premium-amortization-tabs button {
+  min-width: 90px;
+  padding: 9px 13px;
+  border: 0;
+  border-radius: 7px;
+  background: transparent;
+  color: #486581;
+  font-size: 12px;
+  font-weight: 800;
+  cursor: pointer;
+}
+
+.premium-amortization-tabs button.active {
+  background: #07824f;
+  color: #ffffff;
+  box-shadow: 0 4px 10px rgba(7, 130, 79, .18);
+}
+
+.premium-amortization-summary {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 12px;
+  margin-bottom: 18px;
+}
+
+.premium-amortization-summary > div {
+  padding: 15px 16px;
+  border: 1px solid #e2e8f0;
+  border-radius: 11px;
+  background: #f8fafc;
+}
+
+.premium-amortization-summary span {
+  display: block;
+  margin-bottom: 6px;
+  color: #627d98;
+  font-size: 11px;
+}
+
+.premium-amortization-summary strong {
+  color: #102a43;
+  font-size: 16px;
+}
+
+.premium-amortization-table-wrap {
+  width: 100%;
+  overflow-x: auto;
+  border: 1px solid #e2e8f0;
+  border-radius: 12px;
+}
+
+.premium-amortization-table {
+  width: 100%;
+  min-width: 820px;
+  border-collapse: collapse;
+  background: #ffffff;
+}
+
+.premium-amortization-table th,
+.premium-amortization-table td {
+  padding: 12px 13px;
+  border-bottom: 1px solid #edf2f7;
+  text-align: right;
+  white-space: nowrap;
+  font-size: 12px;
+}
+
+.premium-amortization-table thead th {
+  background: #f7fafc;
+  color: #486581;
+  font-size: 11px;
+  font-weight: 800;
+  text-transform: uppercase;
+  letter-spacing: .03em;
+}
+
+.premium-amortization-table th:first-child,
+.premium-amortization-table td:first-child,
+.premium-amortization-table th:nth-child(2),
+.premium-amortization-table td:nth-child(2) {
+  text-align: left;
+}
+
+.premium-amortization-table tbody tr:hover {
+  background: #f8fbfd;
+}
+
+.premium-amortization-table tbody th {
+  color: #102a43;
+  font-weight: 800;
+}
+
+.premium-table-strong {
+  color: #102a43;
+  font-weight: 800;
+}
+
+.premium-table-positive {
+  color: #07824f;
+  font-weight: 700;
+}
+
+.premium-phase-badge {
+  display: inline-flex;
+  padding: 5px 8px;
+  border-radius: 999px;
+  font-size: 10px;
+  font-weight: 800;
+}
+
+.premium-phase-badge.repayment {
+  background: #eaf8f0;
+  color: #087443;
+}
+
+.premium-phase-badge.moratorium {
+  background: #fff6df;
+  color: #9a6700;
+}
+
+.premium-amortization-note {
+  display: flex;
+  align-items: flex-start;
+  gap: 8px;
+  margin-top: 13px;
+  padding: 11px 13px;
+  border-radius: 9px;
+  background: #f7fafc;
+  color: #627d98;
+  font-size: 11px;
+  line-height: 1.5;
+}
+
+.premium-amortization-note i {
+  color: #07824f;
+  margin-top: 1px;
+}
+
+@media (max-width: 850px) {
+  .premium-amortization-header {
+    flex-direction: column;
+  }
+
+  .premium-amortization-tabs {
+    width: 100%;
+  }
+
+  .premium-amortization-tabs button {
+    flex: 1;
+  }
+
+  .premium-amortization-summary {
+    grid-template-columns: 1fr 1fr;
+  }
+}
+
+@media (max-width: 520px) {
+  .premium-amortization-card {
+    padding: 18px 14px;
+  }
+
+  .premium-amortization-summary {
+    grid-template-columns: 1fr;
+  }
+}

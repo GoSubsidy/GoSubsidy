@@ -1,0 +1,1275 @@
+/* ==========================================================
+   GoSubsidy Home.css
+   Professional Indian Government Finance Marketplace
+   Matched with src/pages/Home.jsx
+   ========================================================== */
+
+/* ==========================================================
+   ROOT VARIABLES & BASE DASHBOARD
+   ========================================================== */
+
+:root {
+  --gs-navy: #062b61;
+  --gs-navy-dark: #041f48;
+  --gs-blue: #0b63ce;
+  --gs-blue-dark: #084da3;
+  --gs-blue-light: #eaf3ff;
+  --gs-orange: #ff8a00;
+  --gs-orange-dark: #e56f00;
+  --gs-green: #138808;
+  --gs-red: #c62828;
+  --gs-text: #152238;
+  --gs-muted: #64748b;
+  --gs-border: #e5eaf1;
+  --gs-white: #ffffff;
+  --gs-light: #f6f9fd;
+  --gs-radius: 18px;
+  --gs-shadow: 0 8px 30px rgba(15, 35, 70, 0.08);
+  --gs-shadow-lg: 0 18px 55px rgba(15, 35, 70, 0.14);
+}
+
+.gosubsidy-home-dashboard,
+.gs-home {
+  width: 100%;
+  min-height: 100vh;
+  margin: 0;
+  padding: 0;
+  background: var(--gs-light);
+  color: var(--gs-text);
+  font-family: Inter, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Arial, sans-serif;
+  overflow-x: hidden;
+}
+
+.gs-home *,
+.gs-home *::before,
+.gs-home *::after {
+  box-sizing: border-box;
+}
+
+.gs-home h1,
+.gs-home h2,
+.gs-home h3,
+.gs-home h4,
+.gs-home p {
+  margin-top: 0;
+}
+
+.gs-home a {
+  text-decoration: none;
+}
+
+.gs-home button,
+.gs-home input {
+  font-family: inherit;
+}
+
+.gs-home img {
+  display: block;
+  max-width: 100%;
+}
+
+.gs-section-container {
+  width: min(1320px, calc(100% - 48px));
+  margin: 0 auto;
+}
+
+/* ==========================================================
+   PART 1: HERO & PRESENTATION SLIDER
+   ========================================================= */
+
+.gs-home-hero {
+  position: relative;
+  width: 100%;
+  min-height: 520px;
+  padding: 36px 0 72px;
+  background:
+    radial-gradient(circle at 50% 0%, rgba(35, 113, 220, 0.9), transparent 45%),
+    linear-gradient(135deg, #06306b 0%, #0758b7 55%, #0874d7 100%);
+  overflow: hidden;
+}
+
+.gs-hero-bg-glow {
+  position: absolute;
+  width: 600px;
+  height: 600px;
+  right: -250px;
+  top: -300px;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.08);
+  pointer-events: none;
+}
+
+.gs-hero-container {
+  position: relative;
+  width: min(1380px, calc(100% - 50px));
+  margin: 0 auto;
+  z-index: 5;
+}
+
+.gs-hero-heading {
+  position: relative;
+  text-align: center;
+  color: #ffffff;
+  margin-bottom: 26px;
+  z-index: 5;
+}
+
+.gs-hero-heading h1 {
+  margin: 0 auto 8px;
+  max-width: 1050px;
+  font-size: clamp(2.2rem, 3.8vw, 3.5rem);
+  font-weight: 800;
+  line-height: 1.15;
+  letter-spacing: -0.03em;
+  color: #ffffff;
+  text-shadow: 0 3px 14px rgba(0, 0, 0, 0.18);
+}
+
+.gs-hero-heading p {
+  margin: 0;
+  font-size: clamp(1rem, 1.6vw, 1.3rem);
+  font-weight: 500;
+  color: rgba(255, 255, 255, 0.94);
+}
+
+/* Audience Carousel Panels */
+
+.gs-audience-slider {
+  position: relative;
+  width: 100%;
+  height: 320px;
+  display: flex;
+  align-items: center;
+  z-index: 10;
+}
+
+.gs-audience-panels {
+  width: 100%;
+  height: 100%;
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 10px;
+  overflow: hidden;
+  border-radius: 12px;
+}
+
+.gs-audience-panel {
+  position: relative;
+  height: 320px;
+  min-width: 0;
+  padding: 0;
+  border: 0;
+  overflow: hidden;
+  cursor: pointer;
+  background: #174e88;
+  transform: skewX(-4deg);
+  transition: transform 0.35s ease, filter 0.35s ease;
+}
+
+.gs-audience-panel img {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transform: skewX(4deg) scale(1.1);
+  transition: transform 0.45s ease, filter 0.35s ease;
+}
+
+.gs-panel-overlay {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    to bottom,
+    rgba(3, 22, 48, 0.05) 15%,
+    rgba(3, 22, 48, 0.25) 45%,
+    rgba(3, 15, 35, 0.88) 100%
+  );
+  z-index: 2;
+  pointer-events: none;
+}
+
+.gs-audience-panel:hover img {
+  transform: skewX(4deg) scale(1.15);
+}
+
+.gs-audience-panel:hover {
+  filter: brightness(1.06);
+}
+
+.gs-audience-panel.is-active {
+  box-shadow: inset 0 0 0 3px rgba(255, 255, 255, 0.7);
+}
+
+.gs-panel-content {
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  z-index: 4;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-end;
+  padding: 24px 15px 22px;
+  color: #ffffff;
+  text-align: center;
+  transform: skewX(4deg);
+}
+
+.gs-panel-icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 56px;
+  height: 56px;
+  margin-bottom: 8px;
+  border-radius: 14px;
+  background: linear-gradient(135deg, #0877ff, #304cff);
+  color: #ffffff;
+  font-size: 24px;
+  box-shadow: 0 8px 22px rgba(0, 0, 0, 0.24);
+}
+
+.gs-panel-content h3 {
+  margin: 0;
+  font-size: 1.25rem;
+  font-weight: 800;
+  letter-spacing: 0.02em;
+  color: #ffffff;
+  text-shadow: 0 2px 6px rgba(0, 0, 0, 0.4);
+}
+
+/* Slider Controls */
+
+.gs-slider-arrow {
+  position: absolute;
+  top: 50%;
+  z-index: 20;
+  width: 48px;
+  height: 48px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: none;
+  border-radius: 50%;
+  background: #ffffff;
+  color: var(--gs-navy);
+  font-size: 20px;
+  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.2);
+  cursor: pointer;
+  transform: translateY(-50%);
+  transition: transform 0.2s ease, background 0.2s ease, color 0.2s ease;
+}
+
+.gs-slider-arrow:hover {
+  background: var(--gs-orange);
+  color: #ffffff;
+  transform: translateY(-50%) scale(1.08);
+}
+
+.gs-slider-left {
+  left: -24px;
+}
+
+.gs-slider-right {
+  right: -24px;
+}
+
+.gs-hero-main-cta {
+  position: absolute;
+  left: 50%;
+  bottom: -32px;
+  z-index: 25;
+  transform: translateX(-50%);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  min-width: 290px;
+  min-height: 54px;
+  padding: 14px 28px;
+  border: none;
+  border-radius: 11px;
+  background: linear-gradient(135deg, #ff9800, #f57c00);
+  color: #ffffff;
+  font-size: 1rem;
+  font-weight: 800;
+  box-shadow: 0 12px 30px rgba(0, 0, 0, 0.22);
+  cursor: pointer;
+  transition: transform 0.25s ease, box-shadow 0.25s ease;
+}
+
+.gs-hero-main-cta:hover {
+  transform: translateX(-50%) translateY(-3px);
+  box-shadow: 0 16px 36px rgba(0, 0, 0, 0.28);
+}
+
+/* ==========================================================
+   PART 2: AUDIENCE CARDS SECTION
+   ========================================================= */
+
+.gs-audience-section {
+  position: relative;
+  background: #ffffff;
+  padding: 68px 0 46px;
+  z-index: 3;
+}
+
+.gs-audience-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 20px;
+}
+
+.gs-audience-card {
+  min-height: 170px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 24px 18px;
+  text-align: center;
+  background: #ffffff;
+  border: 1px solid #dce5ef;
+  border-radius: 16px;
+  color: var(--gs-text);
+  box-shadow: 0 7px 24px rgba(15, 35, 70, 0.07);
+  transition: transform 0.25s ease, box-shadow 0.25s ease, border-color 0.25s ease;
+}
+
+.gs-audience-card:hover {
+  transform: translateY(-6px);
+  border-color: rgba(11, 99, 206, 0.3);
+  box-shadow: var(--gs-shadow-lg);
+  color: var(--gs-text);
+}
+
+.gs-audience-icon {
+  width: 58px;
+  height: 58px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 11px;
+  border-radius: 50%;
+  background: #e9f3ff;
+  color: #0871d8;
+  font-size: 25px;
+}
+
+.gs-audience-card h3 {
+  margin: 0 0 6px;
+  font-size: 1.1rem;
+  font-weight: 800;
+  color: var(--gs-navy);
+}
+
+.gs-audience-card p {
+  max-width: 220px;
+  margin: 0;
+  color: var(--gs-muted);
+  font-size: 0.85rem;
+  line-height: 1.5;
+}
+
+/* ==========================================================
+   PART 3: GOSUBSIDY SERVICES SECTION (6 CARDS GRID)
+   ========================================================= */
+
+.gs-home-services-section {
+  position: relative;
+  width: 100%;
+  padding: 68px 0 88px;
+  background: var(--gs-white);
+  border-top: 1px solid var(--gs-border);
+}
+
+.gs-home-services-heading {
+  max-width: 760px;
+  margin: 0 auto 44px;
+  text-align: center;
+}
+
+.gs-home-section-kicker,
+.gs-section-kicker {
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+  padding: 6px 14px;
+  border-radius: 999px;
+  background: var(--gs-blue-light);
+  color: var(--gs-blue);
+  font-size: 11px;
+  font-weight: 800;
+  letter-spacing: 0.9px;
+  text-transform: uppercase;
+  margin-bottom: 10px;
+}
+
+.gs-home-services-heading h2 {
+  margin: 0 0 10px;
+  color: var(--gs-navy);
+  font-size: clamp(28px, 3.2vw, 40px);
+  line-height: 1.2;
+  font-weight: 850;
+  letter-spacing: -0.5px;
+}
+
+.gs-home-services-heading p {
+  margin: 0 auto;
+  color: var(--gs-muted);
+  font-size: 15.5px;
+  line-height: 1.65;
+  max-width: 680px;
+}
+
+.gs-home-service-card {
+  display: flex;
+  height: 100%;
+  min-height: 410px;
+  flex-direction: column;
+  overflow: hidden;
+  border: 1px solid #e2ecf8;
+  border-radius: var(--gs-radius);
+  background: var(--gs-white);
+  box-shadow: 0 10px 30px rgba(20, 35, 59, 0.05);
+  text-decoration: none !important;
+  color: inherit;
+  transition: transform 0.28s cubic-bezier(0.16, 1, 0.3, 1),
+              box-shadow 0.28s cubic-bezier(0.16, 1, 0.3, 1),
+              border-color 0.28s ease;
+}
+
+.gs-home-service-card:hover {
+  transform: translateY(-8px);
+  border-color: #cbdff7;
+  box-shadow: 0 22px 48px rgba(20, 35, 59, 0.12);
+}
+
+.gs-home-service-image-wrap {
+  position: relative;
+  height: 210px;
+  flex: 0 0 210px;
+  width: 100%;
+  overflow: hidden;
+  background: #eef4fb;
+}
+
+.gs-home-service-image {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center;
+  transition: transform 0.55s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.gs-home-service-card:hover .gs-home-service-image {
+  transform: scale(1.07);
+}
+
+.gs-home-service-image-wrap::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(180deg, rgba(10, 30, 52, 0.02) 0%, rgba(10, 30, 52, 0.32) 100%);
+  pointer-events: none;
+}
+
+.gs-home-service-badge {
+  position: absolute;
+  z-index: 2;
+  top: 14px;
+  left: 14px;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 6px 12px;
+  border-radius: 999px;
+  background: rgba(255, 255, 255, 0.94);
+  backdrop-filter: blur(8px);
+  color: var(--gs-blue);
+  font-size: 10px;
+  font-weight: 850;
+  letter-spacing: 0.4px;
+  box-shadow: 0 6px 15px rgba(18, 45, 72, 0.12);
+}
+
+.gs-home-service-icon {
+  position: absolute;
+  z-index: 2;
+  right: 18px;
+  bottom: -22px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 46px;
+  height: 46px;
+  border: 4px solid #ffffff;
+  border-radius: 14px;
+  background: var(--gs-blue);
+  color: #ffffff;
+  font-size: 18px;
+  box-shadow: 0 8px 18px rgba(11, 99, 206, 0.25);
+  transition: transform 0.25s ease, background 0.25s ease;
+}
+
+.gs-home-service-card:hover .gs-home-service-icon {
+  transform: translateY(-2px) scale(1.05);
+  background: var(--gs-blue-dark);
+}
+
+.gs-home-service-body {
+  display: flex;
+  min-height: 190px;
+  flex: 1;
+  flex-direction: column;
+  padding: 28px 22px 20px;
+}
+
+.gs-home-service-body h3 {
+  margin: 0 0 8px;
+  color: var(--gs-navy);
+  font-size: 20px;
+  line-height: 1.3;
+  font-weight: 800;
+}
+
+.gs-home-service-body p {
+  margin: 0 0 16px;
+  color: var(--gs-muted);
+  font-size: 14px;
+  line-height: 1.65;
+}
+
+.gs-home-service-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  margin-top: auto;
+  padding-top: 14px;
+  color: var(--gs-blue);
+  font-size: 13px;
+  font-weight: 800;
+}
+
+.gs-home-service-link i {
+  font-size: 14px;
+  transition: transform 0.25s ease;
+}
+
+.gs-home-service-card:hover .gs-home-service-link i {
+  transform: translateX(5px);
+}
+
+/* ==========================================================
+   PART 4: TOP SCHEMES SECTION
+   ========================================================= */
+
+.gs-schemes-section {
+  padding: 65px 0 75px;
+  background: linear-gradient(180deg, #ffffff 0%, #f8fbff 100%);
+}
+
+.gs-section-heading {
+  text-align: center;
+  margin-bottom: 28px;
+}
+
+.gs-section-heading h2 {
+  margin: 0 0 8px;
+  color: var(--gs-navy);
+  font-size: clamp(1.8rem, 3vw, 2.4rem);
+  font-weight: 800;
+  letter-spacing: -0.03em;
+}
+
+.gs-section-heading p {
+  max-width: 650px;
+  margin: 0 auto;
+  color: var(--gs-muted);
+  font-size: 0.95rem;
+  line-height: 1.65;
+}
+
+.gs-scheme-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 20px;
+}
+
+.gs-scheme-card {
+  position: relative;
+  display: flex;
+  align-items: flex-start;
+  gap: 17px;
+  min-height: 205px;
+  padding: 24px;
+  background: #ffffff;
+  border: 1px solid #e1e8f0;
+  border-radius: 16px;
+  box-shadow: 0 6px 24px rgba(15, 35, 70, 0.055);
+  transition: transform 0.25s ease, box-shadow 0.25s ease;
+}
+
+.gs-scheme-card:hover {
+  transform: translateY(-5px);
+  border-color: rgba(11, 99, 206, 0.22);
+  box-shadow: var(--gs-shadow-lg);
+}
+
+.gs-scheme-icon {
+  flex-shrink: 0;
+  width: 56px;
+  height: 56px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 14px;
+  font-size: 23px;
+}
+
+.scheme-orange { background: #fff3df; color: #e88900; }
+.scheme-red    { background: #fff0f0; color: #d62828; }
+.scheme-green  { background: #edf9f1; color: #138808; }
+.scheme-blue   { background: #eaf3ff; color: #1769d1; }
+
+.gs-scheme-content {
+  flex: 1;
+  min-width: 0;
+}
+
+.gs-scheme-content h3 {
+  margin: 1px 0 7px;
+  color: var(--gs-navy);
+  font-size: 1.08rem;
+  font-weight: 800;
+}
+
+.gs-scheme-content p {
+  min-height: 60px;
+  margin: 0;
+  color: var(--gs-muted);
+  font-size: 0.82rem;
+  line-height: 1.5;
+}
+
+.gs-explore-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+  margin-top: 10px;
+  padding: 8px 16px;
+  border-radius: 7px;
+  background: var(--gs-blue);
+  color: #ffffff;
+  font-size: 0.82rem;
+  font-weight: 700;
+  transition: background 0.2s ease, transform 0.2s ease;
+}
+
+.gs-explore-btn:hover {
+  background: var(--gs-blue-dark);
+  color: #ffffff;
+  transform: translateX(2px);
+}
+
+/* ==========================================================
+   PART 5: HOW IT WORKS STEPPER
+   ========================================================= */
+
+.gs-how-section {
+  padding: 65px 0 75px;
+  background: #eef6fd;
+  border-top: 1px solid #e2edf7;
+  border-bottom: 1px solid #e2edf7;
+}
+
+.gs-steps {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0;
+}
+
+.gs-step-card {
+  position: relative;
+  width: 260px;
+  min-height: 145px;
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  padding: 28px 20px 20px;
+  background: #ffffff;
+  border: 1px solid #e1e8f0;
+  border-radius: 17px;
+  box-shadow: 0 6px 22px rgba(15, 35, 70, 0.06);
+}
+
+.gs-step-number {
+  position: absolute;
+  top: -18px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 38px;
+  height: 38px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+  background: var(--gs-orange);
+  color: #ffffff;
+  font-size: 0.95rem;
+  font-weight: 800;
+  box-shadow: 0 6px 16px rgba(245, 124, 0, 0.28);
+}
+
+.gs-step-icon {
+  flex-shrink: 0;
+  width: 48px;
+  height: 48px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 13px;
+  background: #eaf3ff;
+  color: var(--gs-blue);
+  font-size: 22px;
+}
+
+.gs-step-content h3 {
+  margin: 0 0 6px;
+  color: var(--gs-navy);
+  font-size: 0.96rem;
+  font-weight: 800;
+  line-height: 1.25;
+}
+
+.gs-step-content p {
+  margin: 0;
+  color: var(--gs-muted);
+  font-size: 0.79rem;
+  line-height: 1.5;
+}
+
+.gs-step-arrow {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 55px;
+  color: var(--gs-blue);
+  font-size: 22px;
+}
+
+/* ==========================================================
+   PART 6: DISCOVERY BANNER & SEARCH
+   ========================================================= */
+
+.gs-discovery-section {
+  padding: 70px 0;
+  background: #ffffff;
+}
+
+.gs-discovery-box {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 45px;
+  padding: 42px 48px;
+  border-radius: 24px;
+  background: linear-gradient(135deg, #062b61 0%, #0756aa 65%, #0870c8 100%);
+  box-shadow: var(--gs-shadow-lg);
+  overflow: hidden;
+}
+
+.gs-discovery-box::after {
+  content: "";
+  position: absolute;
+  width: 330px;
+  height: 330px;
+  right: -130px;
+  top: -190px;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.08);
+  pointer-events: none;
+}
+
+.gs-discovery-content {
+  position: relative;
+  z-index: 2;
+  max-width: 650px;
+}
+
+.gs-discovery-label {
+  display: inline-block;
+  margin-bottom: 10px;
+  color: #ffd166;
+  font-size: 0.72rem;
+  font-weight: 800;
+  letter-spacing: 1.5px;
+}
+
+.gs-discovery-content h2 {
+  margin: 0 0 10px;
+  color: #ffffff;
+  font-size: clamp(1.65rem, 3vw, 2.4rem);
+  font-weight: 800;
+  line-height: 1.2;
+  letter-spacing: -0.035em;
+}
+
+.gs-discovery-content p {
+  max-width: 600px;
+  margin: 0;
+  color: rgba(255, 255, 255, 0.8);
+  font-size: 0.94rem;
+  line-height: 1.65;
+}
+
+.gs-discovery-search {
+  position: relative;
+  z-index: 3;
+  display: flex;
+  align-items: stretch;
+  flex-shrink: 0;
+  width: 450px;
+  min-height: 54px;
+  padding: 5px;
+  border-radius: 11px;
+  background: #ffffff;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.16);
+}
+
+.gs-search-input {
+  display: flex;
+  align-items: center;
+  flex: 1;
+  min-width: 0;
+  gap: 10px;
+  padding: 0 14px;
+}
+
+.gs-search-input i {
+  color: var(--gs-blue);
+  font-size: 18px;
+}
+
+.gs-search-input input {
+  width: 100%;
+  min-width: 0;
+  border: none;
+  outline: none;
+  background: transparent;
+  color: var(--gs-text);
+  font-size: 0.88rem;
+}
+
+.gs-search-input input::placeholder {
+  color: #94a3b8;
+}
+
+.gs-discovery-search > button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 7px;
+  min-width: 105px;
+  border: none;
+  border-radius: 8px;
+  background: var(--gs-orange);
+  color: #ffffff;
+  font-size: 0.85rem;
+  font-weight: 800;
+  cursor: pointer;
+  transition: background 0.2s ease;
+}
+
+.gs-discovery-search > button:hover {
+  background: var(--gs-orange-dark);
+}
+
+/* ==========================================================
+   PART 7: FOOTER
+   ========================================================= */
+
+.gs-home-footer {
+  background: var(--gs-navy-dark);
+  color: rgba(255, 255, 255, 0.75);
+  padding: 58px 0 0;
+}
+
+.gs-footer-grid {
+  display: grid;
+  grid-template-columns: 2fr 1fr 1fr 1fr;
+  gap: 55px;
+  padding-bottom: 45px;
+}
+
+.gs-footer-logo {
+  display: flex;
+  align-items: center;
+  gap: 0;
+  margin-bottom: 8px;
+  font-size: 1.9rem;
+  font-weight: 800;
+}
+
+.gs-footer-logo span { color: var(--gs-green); }
+.gs-footer-logo strong { color: var(--gs-orange); }
+
+.gs-footer-brand > p {
+  margin: 0 0 8px;
+  color: rgba(255, 255, 255, 0.86);
+  font-size: 0.85rem;
+}
+
+.gs-footer-description {
+  max-width: 350px;
+  margin-top: 15px;
+  color: rgba(255, 255, 255, 0.58);
+  font-size: 0.8rem;
+  line-height: 1.7;
+}
+
+.gs-footer-column {
+  display: flex;
+  flex-direction: column;
+  gap: 11px;
+}
+
+.gs-footer-column h4 {
+  margin: 0 0 8px;
+  color: #ffffff;
+  font-size: 0.9rem;
+  font-weight: 800;
+}
+
+.gs-footer-column a {
+  color: rgba(255, 255, 255, 0.62);
+  font-size: 0.82rem;
+  transition: color 0.2s ease, transform 0.2s ease;
+}
+
+.gs-footer-column a:hover {
+  color: #ffffff;
+  transform: translateX(3px);
+}
+
+.gs-footer-bottom {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 20px;
+  padding: 18px 0;
+  border-top: 1px solid rgba(255, 255, 255, 0.1);
+  font-size: 0.75rem;
+}
+
+.gs-footer-social {
+  display: flex;
+  align-items: center;
+  gap: 9px;
+}
+
+.gs-footer-social a {
+  width: 34px;
+  height: 34px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.1);
+  color: #ffffff;
+  font-size: 14px;
+  transition: background 0.2s ease, transform 0.2s ease;
+}
+
+.gs-footer-social a:hover {
+  background: var(--gs-blue);
+  transform: translateY(-2px);
+  color: #ffffff;
+}
+
+/* ==========================================================
+   RESPONSIVE MEDIA QUERIES
+   ========================================================= */
+
+@media (max-width: 1199px) {
+  .gs-section-container {
+    width: min(1100px, calc(100% - 36px));
+  }
+  .gs-hero-container {
+    width: calc(100% - 48px);
+  }
+  .gs-audience-grid,
+  .gs-scheme-grid {
+    gap: 16px;
+  }
+  .gs-step-card {
+    width: 220px;
+  }
+  .gs-step-arrow {
+    width: 38px;
+  }
+  .gs-discovery-box {
+    padding: 38px;
+  }
+  .gs-discovery-search {
+    width: 390px;
+  }
+}
+
+@media (max-width: 991px) {
+  .gs-home-hero {
+    min-height: auto;
+    padding: 30px 0 60px;
+  }
+  .gs-audience-slider,
+  .gs-audience-panels,
+  .gs-audience-panel {
+    height: 280px;
+  }
+  .gs-audience-grid,
+  .gs-scheme-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+  .gs-steps {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 24px;
+  }
+  .gs-step-card {
+    width: 100%;
+  }
+  .gs-step-arrow {
+    display: none;
+  }
+  .gs-discovery-box {
+    flex-direction: column;
+    align-items: stretch;
+    gap: 25px;
+  }
+  .gs-discovery-search {
+    width: 100%;
+  }
+  .gs-footer-grid {
+    grid-template-columns: 2fr 1fr 1fr;
+    gap: 35px;
+  }
+  .gs-footer-brand {
+    grid-column: 1 / -1;
+  }
+}
+
+@media (max-width: 767px) {
+  .gs-home-hero {
+    padding: 24px 0 52px;
+  }
+  .gs-audience-slider,
+  .gs-audience-panels,
+  .gs-audience-panel {
+    height: 275px;
+  }
+  .gs-audience-panels {
+    grid-template-columns: 1fr;
+  }
+  .gs-audience-panel {
+    display: none;
+    transform: none;
+  }
+  .gs-audience-panel.is-active {
+    display: block;
+  }
+  .gs-panel-content {
+    transform: none;
+  }
+  .gs-slider-left { left: 8px; }
+  .gs-slider-right { right: 8px; }
+  .gs-hero-main-cta {
+    bottom: -28px;
+    min-width: 250px;
+    padding: 12px 20px;
+    font-size: 0.88rem;
+  }
+  .gs-audience-section {
+    padding: 58px 0 35px;
+  }
+  .gs-audience-grid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 12px;
+  }
+  .gs-scheme-grid {
+    grid-template-columns: 1fr;
+  }
+  .gs-steps {
+    grid-template-columns: 1fr;
+    gap: 20px;
+  }
+  .gs-discovery-box {
+    padding: 28px 20px;
+  }
+  .gs-footer-grid {
+    grid-template-columns: 1fr 1fr;
+    gap: 30px;
+  }
+  .gs-footer-bottom {
+    flex-direction: column;
+    text-align: center;
+  }
+}
+
+@media (max-width: 479px) {
+  .gs-hero-heading h1 {
+    font-size: 1.65rem;
+  }
+  .gs-audience-card {
+    min-height: 145px;
+    padding: 16px 8px;
+  }
+  .gs-footer-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .gs-home *,
+  .gs-home *::before,
+  .gs-home *::after {
+    scroll-behavior: auto !important;
+    transition: none !important;
+    animation: none !important;
+  }
+}
+/* =========================================================
+   FIXED SERVICE CARDS VISUALS
+   ========================================================= */
+
+.gs-home-service-card {
+  position: relative;
+  border-radius: 20px !important;
+  border: 1px solid #e2ecf8 !important;
+  background: #ffffff !important;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  box-shadow: 0 10px 25px rgba(20, 35, 59, 0.05) !important;
+  transition: transform 0.25s ease, box-shadow 0.25s ease, border-color 0.25s ease !important;
+}
+
+.gs-home-service-card:hover {
+  transform: translateY(-6px) !important;
+  border-color: #cbdff7 !important;
+  box-shadow: 0 20px 40px rgba(20, 35, 59, 0.12) !important;
+}
+
+/* Image container with 16:10 ratio */
+.gs-home-service-image-wrap {
+  position: relative !important;
+  width: 100% !important;
+  height: 220px !important;
+  flex: 0 0 220px !important;
+  overflow: hidden !important;
+  background: #eef4fb !important;
+}
+
+.gs-home-service-image {
+  width: 100% !important;
+  height: 100% !important;
+  object-fit: cover !important;
+  object-position: center !important;
+  display: block !important;
+  transition: transform 0.45s ease !important;
+}
+
+.gs-home-service-card:hover .gs-home-service-image {
+  transform: scale(1.05) !important;
+}
+
+/* Top Pill Badge */
+.gs-home-service-badge {
+  position: absolute !important;
+  top: 14px !important;
+  left: 14px !important;
+  z-index: 3 !important;
+  display: inline-flex !important;
+  align-items: center !important;
+  gap: 6px !important;
+  padding: 6px 12px !important;
+  border-radius: 20px !important;
+  background: #0284c7 !important;
+  color: #ffffff !important;
+  font-size: 11px !important;
+  font-weight: 800 !important;
+  letter-spacing: 0.5px !important;
+  box-shadow: 0 4px 12px rgba(2, 132, 199, 0.3) !important;
+}
+
+/* Floating Bottom-Right Circular Icon */
+.gs-home-service-icon {
+  position: absolute !important;
+  right: 16px !important;
+  bottom: 14px !important;
+  z-index: 3 !important;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  width: 40px !important;
+  height: 40px !important;
+  border-radius: 50% !important;
+  background: #ffffff !important;
+  color: #0284c7 !important;
+  font-size: 17px !important;
+  box-shadow: 0 6px 16px rgba(0, 0, 0, 0.15) !important;
+  border: none !important;
+  transition: transform 0.2s ease, background 0.2s ease, color 0.2s ease !important;
+}
+
+.gs-home-service-card:hover .gs-home-service-icon {
+  background: #0284c7 !important;
+  color: #ffffff !important;
+  transform: scale(1.1) !important;
+}
+
+/* Card Body Typography */
+.gs-home-service-body {
+  padding: 22px 20px !important;
+  display: flex !important;
+  flex-direction: column !important;
+  flex: 1 !important;
+  background: #ffffff !important;
+}
+
+.gs-home-service-body h3 {
+  margin: 0 0 8px !important;
+  font-size: 1.25rem !important;
+  font-weight: 800 !important;
+  color: #0f172a !important;
+  line-height: 1.3 !important;
+}
+
+.gs-home-service-body p {
+  margin: 0 0 16px !important;
+  color: #64748b !important;
+  font-size: 0.9rem !important;
+  line-height: 1.55 !important;
+}
+
+.gs-home-service-link {
+  display: inline-flex !important;
+  align-items: center !important;
+  gap: 6px !important;
+  margin-top: auto !important;
+  color: #0284c7 !important;
+  font-size: 0.9rem !important;
+  font-weight: 750 !important;
+}
+
+.gs-home-service-link i {
+  transition: transform 0.2s ease !important;
+}
+
+.gs-home-service-card:hover .gs-home-service-link i {
+  transform: translateX(4px) !important;
+}

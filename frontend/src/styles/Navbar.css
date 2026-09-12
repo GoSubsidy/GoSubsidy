@@ -1,0 +1,637 @@
+/* ============================================================
+   GOSUBSIDY PREMIUM NAVBAR
+   STEP 1
+   ============================================================ */
+
+.gs-navbar {
+  width: 100%;
+  height: 76px;
+  display: flex;
+  align-items: center;
+
+  background: rgba(255, 255, 255, 0.98);
+
+  border-bottom: 1px solid #e8edf3;
+
+  box-shadow:
+    0 4px 18px rgba(15, 23, 42, 0.06);
+
+  backdrop-filter: blur(16px);
+
+  position: sticky;
+  top: 0;
+
+  z-index: 1050;
+}
+
+
+/* ============================================================
+   NAVBAR CONTAINER
+   ============================================================ */
+
+.gs-navbar-container {
+  width: 100%;
+  max-width: 1500px;
+
+  margin: 0 auto;
+
+  padding: 0 28px;
+
+  display: flex;
+  align-items: center;
+
+  gap: 24px;
+}
+
+
+/* ============================================================
+   BRAND
+   ============================================================ */
+
+.gs-navbar-brand {
+  display: flex;
+  align-items: center;
+
+  flex-shrink: 0;
+
+  text-decoration: none !important;
+
+  gap: 9px;
+}
+
+.gs-navbar-logo {
+  width: 48px;
+  height: 48px;
+
+  object-fit: contain;
+
+  flex-shrink: 0;
+}
+
+.gs-navbar-brand-text {
+  display: flex;
+  flex-direction: column;
+
+  line-height: 1;
+}
+
+.gs-navbar-brand-name {
+  display: flex;
+  align-items: center;
+
+  font-size: 25px;
+  font-weight: 850;
+
+  letter-spacing: -1px;
+}
+
+.gs-nav-go {
+  color: #009e60 !important;
+}
+
+.gs-nav-subsidy {
+  color: #ff9933 !important;
+}
+
+.gs-navbar-brand-text small {
+  margin-top: 5px;
+
+  color: #60758b;
+
+  font-size: 8px;
+  font-weight: 800;
+
+  letter-spacing: 1.15px;
+
+  text-transform: uppercase;
+}
+
+
+/* ============================================================
+   NAVIGATION AREA
+   ============================================================ */
+
+.gs-navbar-collapse {
+  flex: 1;
+
+  align-items: center;
+
+  min-width: 0;
+}
+
+.gs-navbar-menu {
+  flex: 1;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  gap: 3px;
+
+  min-width: 0;
+}
+
+
+/* ============================================================
+   NAV LINKS
+   ============================================================ */
+
+.gs-navbar-link {
+  height: 42px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  gap: 6px;
+
+  padding: 0 12px;
+
+  border-radius: 11px;
+
+  color: #42566b !important;
+
+  font-size: 12px;
+  font-weight: 700;
+
+  white-space: nowrap;
+
+  text-decoration: none !important;
+
+  transition:
+    background 0.2s ease,
+    color 0.2s ease,
+    transform 0.2s ease;
+}
+
+.gs-navbar-link i {
+  font-size: 14px;
+
+  color: #65798c;
+
+  transition: color 0.2s ease;
+}
+
+.gs-navbar-link:hover {
+  color: #086ff0 !important;
+
+  background: #f2f7ff;
+
+  transform: translateY(-1px);
+}
+
+.gs-navbar-link:hover i {
+  color: #086ff0;
+}
+
+
+/* ============================================================
+   ACTIVE NAV
+   ============================================================ */
+
+.gs-navbar-link.active {
+  color: #ffffff !important;
+
+  background:
+    linear-gradient(
+      135deg,
+      #0878f9 0%,
+      #4146ed 100%
+    );
+
+  box-shadow:
+    0 7px 17px rgba(37, 99, 235, 0.20);
+}
+
+.gs-navbar-link.active i {
+  color: #ffffff;
+}
+
+
+/* ============================================================
+   RIGHT SIDE
+   ============================================================ */
+
+.gs-navbar-actions {
+  display: flex;
+  align-items: center;
+
+  flex-shrink: 0;
+
+  gap: 8px;
+}
+
+
+/* ============================================================
+   LOGIN
+   ============================================================ */
+
+.gs-login-btn {
+  height: 40px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  padding: 0 17px;
+
+  border-radius: 11px;
+
+  border: 1px solid #d9e3ef;
+
+  background: #ffffff;
+
+  color: #23415f !important;
+
+  font-size: 12px;
+  font-weight: 700;
+
+  text-decoration: none !important;
+
+  transition: all 0.2s ease;
+}
+
+.gs-login-btn:hover {
+  color: #086ff0 !important;
+
+  border-color: #9fc4fa;
+
+  background: #f5f9ff;
+}
+
+
+/* ============================================================
+   REGISTER / APPLY
+   ============================================================ */
+
+.gs-register-btn {
+  height: 40px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  padding: 0 18px;
+
+  border-radius: 11px;
+
+  background:
+    linear-gradient(
+      135deg,
+      #0878f9,
+      #4146ed
+    );
+
+  color: #ffffff !important;
+
+  font-size: 12px;
+  font-weight: 800;
+
+  text-decoration: none !important;
+
+  box-shadow:
+    0 7px 18px rgba(37, 99, 235, 0.20);
+
+  transition: all 0.2s ease;
+}
+
+.gs-register-btn:hover {
+  color: #ffffff !important;
+
+  transform: translateY(-1px);
+
+  box-shadow:
+    0 10px 24px rgba(37, 99, 235, 0.28);
+}
+
+
+/* ============================================================
+   NOTIFICATION
+   ============================================================ */
+
+.gs-notification-btn {
+  position: relative;
+
+  width: 40px;
+  height: 40px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  border: 1px solid #e4eaf1;
+
+  border-radius: 50%;
+
+  background: #f8fafc;
+
+  color: #53677b;
+
+  font-size: 16px;
+
+  transition: all 0.2s ease;
+}
+
+.gs-notification-btn:hover {
+  color: #086ff0;
+
+  background: #eef5ff;
+
+  border-color: #c9ddfb;
+}
+
+.gs-notification-dot {
+  position: absolute;
+
+  top: 7px;
+  right: 8px;
+
+  width: 6px;
+  height: 6px;
+
+  border-radius: 50%;
+
+  background: #ef4444;
+
+  border: 1px solid #ffffff;
+}
+
+
+/* ============================================================
+   CUSTOMER PROFILE
+   ============================================================ */
+
+.gs-user-card {
+  height: 44px;
+
+  display: flex;
+  align-items: center;
+
+  gap: 8px;
+
+  padding: 4px 10px 4px 5px;
+
+  border-radius: 12px;
+
+  background: #f6f8ff;
+
+  border: 1px solid #e1e8f4;
+
+  transition: all 0.2s ease;
+}
+
+.gs-user-card:hover,
+.gs-user-card.open {
+  background: #f3f7ff;
+
+  border-color: #cbdafa;
+
+  box-shadow:
+    0 7px 20px rgba(37, 99, 235, 0.10);
+}
+
+.gs-user-avatar {
+  width: 34px;
+  height: 34px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  flex-shrink: 0;
+
+  border-radius: 50%;
+
+  color: #ffffff;
+
+  background:
+    linear-gradient(
+      135deg,
+      #2563eb,
+      #7c3aed
+    );
+
+  font-size: 13px;
+  font-weight: 800;
+}
+
+.gs-user-details {
+  min-width: 0;
+
+  display: flex;
+  flex-direction: column;
+}
+
+.gs-user-details strong {
+  max-width: 110px;
+
+  overflow: hidden;
+
+  color: #172b43;
+
+  font-size: 11px;
+  font-weight: 800;
+
+  white-space: nowrap;
+  text-overflow: ellipsis;
+}
+
+.gs-user-details small {
+  max-width: 110px;
+
+  overflow: hidden;
+
+  color: #718096;
+
+  font-size: 8px;
+
+  white-space: nowrap;
+  text-overflow: ellipsis;
+}
+
+.gs-profile-chevron {
+  color: #64748b;
+
+  font-size: 9px;
+}
+
+
+/* ============================================================
+   MOBILE MENU BUTTON
+   ============================================================ */
+
+.gs-navbar-toggler {
+  display: none;
+
+  width: 42px;
+  height: 42px;
+
+  align-items: center;
+  justify-content: center;
+
+  border: 1px solid #dbe4ee !important;
+
+  border-radius: 10px;
+
+  background: #ffffff;
+
+  color: #183b61;
+
+  font-size: 22px;
+}
+
+.gs-navbar-toggler:focus {
+  box-shadow: none !important;
+}
+
+
+/* ============================================================
+   LARGE LAPTOP
+   ============================================================ */
+
+@media (max-width: 1350px) {
+
+  .gs-navbar-container {
+    padding: 0 20px;
+    gap: 15px;
+  }
+
+  .gs-navbar-menu {
+    gap: 1px;
+  }
+
+  .gs-navbar-link {
+    padding: 0 9px;
+    font-size: 11px;
+  }
+
+  .gs-navbar-link i {
+    font-size: 13px;
+  }
+
+  .gs-login-btn,
+  .gs-register-btn {
+    padding-left: 13px;
+    padding-right: 13px;
+  }
+}
+
+
+/* ============================================================
+   TABLET / MOBILE
+   ============================================================ */
+
+@media (max-width: 1199px) {
+
+  .gs-navbar {
+    height: 70px;
+  }
+
+  .gs-navbar-container {
+    padding: 0 18px;
+  }
+
+  .gs-navbar-toggler {
+    display: flex;
+
+    margin-left: auto;
+  }
+
+  .gs-navbar-collapse {
+    position: absolute;
+
+    top: 70px;
+    left: 12px;
+    right: 12px;
+
+    padding: 14px;
+
+    border-radius: 18px;
+
+    background: #ffffff;
+
+    border: 1px solid #e4eaf1;
+
+    box-shadow:
+      0 20px 45px rgba(15, 23, 42, 0.15);
+  }
+
+  .gs-navbar-menu {
+    width: 100%;
+
+    flex-direction: column;
+
+    align-items: stretch;
+
+    gap: 5px;
+  }
+
+  .gs-navbar-link {
+    width: 100%;
+
+    justify-content: flex-start;
+
+    padding: 0 15px;
+
+    height: 46px;
+  }
+
+  .gs-navbar-actions {
+    width: 100%;
+
+    margin-top: 12px;
+
+    padding-top: 12px;
+
+    border-top: 1px solid #edf1f5;
+
+    justify-content: stretch;
+  }
+
+  .gs-login-btn,
+  .gs-register-btn {
+    flex: 1;
+  }
+}
+
+
+/* ============================================================
+   SMALL MOBILE
+   ============================================================ */
+
+@media (max-width: 575px) {
+
+  .gs-navbar {
+    height: 64px;
+  }
+
+  .gs-navbar-container {
+    padding: 0 12px;
+  }
+
+  .gs-navbar-logo {
+    width: 42px;
+    height: 42px;
+  }
+
+  .gs-navbar-brand-name {
+    font-size: 21px;
+  }
+
+  .gs-navbar-brand-text small {
+    display: none;
+  }
+
+  .gs-navbar-collapse {
+    top: 64px;
+  }
+
+  .gs-navbar-actions {
+    flex-direction: column;
+  }
+
+  .gs-login-btn,
+  .gs-register-btn {
+    width: 100%;
+  }
+}

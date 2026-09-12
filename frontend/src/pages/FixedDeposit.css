@@ -1,0 +1,356 @@
+/* GoSubsidy Fixed Deposit Calculator
+   PolicyBazaar/Paisabazaar-inspired information architecture.
+   Original GoSubsidy visual treatment; no third-party code copied. */
+
+.gs-fd-page{
+  min-height:100vh;
+  background:#f5f8fb;
+  color:#122c49;
+  padding:28px 0 60px;
+}
+
+.gs-fd-container{
+  width:min(1080px,calc(100% - 32px));
+  margin:0 auto;
+}
+
+.gs-fd-hero{
+  padding:8px 0 24px;
+}
+
+.gs-fd-eyebrow{
+  display:flex;
+  align-items:center;
+  gap:8px;
+  color:#087f5b;
+  font-size:11px;
+  font-weight:900;
+  letter-spacing:.12em;
+  margin-bottom:8px;
+}
+
+.gs-fd-eyebrow i{font-size:16px}
+
+.gs-fd-hero h1{
+  margin:0;
+  color:#102d52;
+  font-size:34px;
+  line-height:1.12;
+  font-weight:900;
+}
+
+.gs-fd-hero p{
+  max-width:900px;
+  margin:9px 0 0;
+  color:#5d7184;
+  font-size:14px;
+  line-height:1.7;
+}
+
+.gs-fd-card{
+  display:grid;
+  grid-template-columns:minmax(0,1.55fr) minmax(300px,.75fr);
+  overflow:hidden;
+  background:#fff;
+  border:1px solid #d8e2ea;
+  border-radius:14px;
+  box-shadow:0 10px 30px rgba(18,48,75,.08);
+}
+
+.gs-fd-input-panel{
+  padding:30px 34px;
+}
+
+.gs-fd-section-title{
+  display:flex;
+  justify-content:space-between;
+  gap:18px;
+  align-items:flex-start;
+  margin-bottom:26px;
+}
+
+.gs-fd-section-title span{
+  color:#1264e8;
+  font-size:10px;
+  font-weight:900;
+  letter-spacing:.12em;
+}
+
+.gs-fd-section-title h2{
+  margin:6px 0 0;
+  color:#102d52;
+  font-size:21px;
+  line-height:1.25;
+  font-weight:850;
+}
+
+.gs-fd-icon{
+  width:42px;
+  height:42px;
+  display:grid;
+  place-items:center;
+  flex:0 0 42px;
+  border-radius:10px;
+  background:#eef6ff;
+  color:#1264e8;
+  font-size:19px;
+}
+
+.gs-fd-fields{
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:18px;
+}
+
+.gs-fd-field{
+  display:block;
+  min-width:0;
+}
+
+.gs-fd-field>span{
+  display:block;
+  margin-bottom:8px;
+  color:#35536d;
+  font-size:12px;
+  font-weight:750;
+}
+
+.gs-fd-input-wrap,
+.gs-fd-tenure-wrap{
+  display:flex;
+  align-items:center;
+  min-height:46px;
+  border:1px solid #cbd9e5;
+  border-radius:7px;
+  background:#fff;
+  overflow:hidden;
+}
+
+.gs-fd-input-wrap:focus-within,
+.gs-fd-tenure-wrap:focus-within{
+  border-color:#1677ff;
+  box-shadow:0 0 0 3px rgba(22,119,255,.09);
+}
+
+.gs-fd-input-wrap b{
+  padding:0 12px;
+  color:#526a7e;
+  font-size:14px;
+  font-weight:800;
+}
+
+.gs-fd-input-wrap input,
+.gs-fd-tenure-wrap input{
+  width:100%;
+  min-width:0;
+  border:0;
+  outline:0;
+  background:transparent;
+  color:#172f48;
+  padding:12px 10px;
+  font-size:14px;
+  font-weight:700;
+}
+
+.gs-fd-tenure-wrap select{
+  height:46px;
+  border:0;
+  border-left:1px solid #dce5ec;
+  outline:0;
+  background:#f8fafc;
+  color:#304e68;
+  padding:0 12px;
+  font-weight:700;
+}
+
+.gs-fd-calculate{
+  display:inline-flex;
+  align-items:center;
+  justify-content:center;
+  gap:10px;
+  min-width:140px;
+  margin-top:25px;
+  padding:12px 20px;
+  border:0;
+  border-radius:5px;
+  background:#073fbd;
+  color:#fff;
+  font-size:13px;
+  font-weight:850;
+  cursor:pointer;
+  box-shadow:0 5px 13px rgba(7,63,189,.18);
+}
+
+.gs-fd-calculate:hover{background:#052f90}
+
+.gs-fd-note{
+  display:flex;
+  gap:8px;
+  margin-top:20px;
+  padding-top:16px;
+  border-top:1px solid #edf1f4;
+  color:#7a8c9b;
+  font-size:11px;
+  line-height:1.55;
+}
+
+.gs-fd-note i{color:#1264e8}
+
+.gs-fd-result-panel{
+  padding:30px 28px;
+  background:#eef7ff;
+  border-left:1px solid #dce8f1;
+}
+
+.gs-fd-result-heading{
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  color:#58728b;
+  font-size:10px;
+  font-weight:900;
+  letter-spacing:.08em;
+}
+
+.gs-fd-result-heading i{
+  color:#1264e8;
+  font-size:18px;
+}
+
+.gs-fd-maturity{
+  margin-top:10px;
+  color:#e90046;
+  font-size:29px;
+  line-height:1.15;
+  font-weight:900;
+}
+
+.gs-fd-divider{
+  height:1px;
+  margin:22px 0 5px;
+  background:#d8e5ef;
+}
+
+.gs-fd-result-row{
+  display:flex;
+  justify-content:space-between;
+  gap:12px;
+  padding:13px 0;
+  border-bottom:1px solid #dfe9f1;
+}
+
+.gs-fd-result-row span{
+  color:#637b8e;
+  font-size:11px;
+}
+
+.gs-fd-result-row strong{
+  color:#173c5d;
+  font-size:12px;
+  text-align:right;
+}
+
+.gs-fd-live-hint{
+  margin-top:15px;
+  padding:10px 12px;
+  border-radius:7px;
+  background:#fff;
+  color:#637b8e;
+  font-size:10px;
+}
+
+.gs-fd-info,
+.gs-fd-faq{
+  margin-top:30px;
+  padding:25px 28px;
+  background:#fff;
+  border:1px solid #dbe5ec;
+  border-radius:12px;
+}
+
+.gs-fd-info h2,
+.gs-fd-faq h2{
+  margin:0;
+  color:#123555;
+  font-size:19px;
+  font-weight:850;
+}
+
+.gs-fd-info>p{
+  margin:8px 0 20px;
+  color:#657b8e;
+  font-size:12px;
+  line-height:1.7;
+}
+
+.gs-fd-benefits{
+  display:grid;
+  grid-template-columns:repeat(3,1fr);
+  gap:12px;
+}
+
+.gs-fd-benefits article{
+  display:flex;
+  gap:12px;
+  padding:15px;
+  border:1px solid #e1e9ef;
+  border-radius:9px;
+  background:#fbfdff;
+}
+
+.gs-fd-benefits i{
+  color:#1264e8;
+  font-size:18px;
+}
+
+.gs-fd-benefits h3{
+  margin:0 0 4px;
+  color:#173a58;
+  font-size:13px;
+}
+
+.gs-fd-benefits p{
+  margin:0;
+  color:#75899a;
+  font-size:10px;
+  line-height:1.55;
+}
+
+.gs-fd-faq details{
+  padding:15px 0;
+  border-bottom:1px solid #e6edf2;
+}
+
+.gs-fd-faq details:last-child{border-bottom:0}
+
+.gs-fd-faq summary{
+  color:#173a58;
+  font-size:13px;
+  font-weight:800;
+  cursor:pointer;
+}
+
+.gs-fd-faq details p{
+  margin:8px 0 0;
+  color:#718596;
+  font-size:11px;
+  line-height:1.65;
+}
+
+@media(max-width:820px){
+  .gs-fd-card{grid-template-columns:1fr}
+  .gs-fd-result-panel{
+    border-left:0;
+    border-top:1px solid #dce8f1;
+  }
+  .gs-fd-benefits{grid-template-columns:1fr}
+}
+
+@media(max-width:600px){
+  .gs-fd-page{padding-top:18px}
+  .gs-fd-container{width:min(100% - 20px,1080px)}
+  .gs-fd-hero h1{font-size:27px}
+  .gs-fd-input-panel,.gs-fd-result-panel{padding:22px 18px}
+  .gs-fd-fields{grid-template-columns:1fr}
+  .gs-fd-section-title h2{font-size:18px}
+}

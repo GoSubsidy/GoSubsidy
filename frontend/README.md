@@ -1,0 +1,1 @@
+Frontend: run `npm install` and `npm run dev` inside the frontend folder.

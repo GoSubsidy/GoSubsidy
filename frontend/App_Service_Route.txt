@@ -1,0 +1,5 @@
+// App.jsx integration
+import ServicePage from "./pages/ServicePage";
+
+// Inside <Routes>, add:
+<Route path="/services/:slug" element={<ServicePage />} />

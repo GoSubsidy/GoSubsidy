@@ -4,7 +4,6 @@ import { useAuth } from "../../context/AuthContext";
 import { useLanguage } from "../../context/LanguageContext";
 import { useTranslation } from "react-i18next";
 import SchemeRegistrationModal from "../schemes/SchemeRegistrationModal";
-import logo from "../../assets/images/gosubsidy-logo.png";
 import "./Navbar.css";
 
 /* =========================================================
@@ -543,7 +542,7 @@ export default function Navbar() {
             </button>
 
             <Link to="/" className="gs-navbar-brand" onClick={closeMenus}>
-              <img src={logo} alt="GoSubsidy" className="gs-navbar-logo" />
+              <img src="/images/gosubsidy-logo.png" alt="GoSubsidy" className="gs-navbar-logo" />
               <div className="gs-navbar-brand-text">
                 <span className="gs-navbar-brand-name">
                   <span className="gs-nav-go">Go</span>
@@ -936,7 +935,7 @@ export default function Navbar() {
           <div className="gs-drawer-content" onClick={(e) => e.stopPropagation()}>
             <div className="gs-drawer-header">
               <div className="gs-drawer-brand">
-                <img src={logo} alt="GoSubsidy" className="gs-drawer-logo" />
+                <img src="/images/gosubsidy-logo.png" alt="GoSubsidy" className="gs-drawer-logo" />
                 <span className="gs-drawer-title">
                   <span className="gs-nav-go">Go</span>
                   <span className="gs-nav-subsidy">Subsidy</span>

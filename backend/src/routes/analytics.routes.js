@@ -324,10 +324,10 @@ router.get("/locations", async (req, res) => {
       await supabaseAdmin
         .from("portal_visits")
         .select(
-          "city, state, country, country_code, page_path, created_at, session_id"
+          "city, state, country, country_code, page_path, visited_at, session_id"
         )
         .gte("created_at", since)
-        .order("created_at", {
+        .order("visited_at", {
           ascending: false,
         })
         .limit(20000);
@@ -385,7 +385,7 @@ router.get("/locations", async (req, res) => {
         country_code:
           row.country_code || null,
         page_path: row.page_path || "/",
-        created_at: row.created_at,
+        visited_at: row.visited_at,
       }));
 
     return res.json({

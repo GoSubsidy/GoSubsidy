@@ -394,12 +394,12 @@ export default function PaymentModal({ product, onClose, onSuccess }) {
               <label className="form-label small fw-bold text-dark mb-1">
                 Mobile Number (10 Digits) <span className="text-danger">*</span>
               </label>
-              <div className="input-group input-group-sm">
+              <div className="input-group input-group-sm gs-phone-input">
                 <span className="input-group-text bg-light fw-bold text-muted">+91</span>
                 <input
                   type="tel"
                   maxLength={10}
-                  className="form-control"
+                  className="form-control gs-phone-number"
                   placeholder="9876543210"
                   value={customerPhone}
                   onChange={(e) => setCustomerPhone(e.target.value.replace(/[^0-9]/g, "").slice(0, 10))}
@@ -618,6 +618,44 @@ export default function PaymentModal({ product, onClose, onSuccess }) {
         }
         .gs-coupon-entry-row button:disabled { background: #94a3b8; }
         .gs-promo-error-msg { color: #dc2626; font-size: 11px; text-align: left; margin: -4px 0 8px; font-weight: 600; }
+
+        /* Mobile number input fix */
+        .gs-phone-input {
+          display: flex !important;
+          width: 100% !important;
+          flex-wrap: nowrap !important;
+          align-items: stretch !important;
+        }
+
+        .gs-phone-input .input-group-text {
+          position: relative !important;
+          z-index: 2 !important;
+          flex: 0 0 auto !important;
+          width: 48px !important;
+          min-width: 48px !important;
+          justify-content: center !important;
+          padding: 6px 8px !important;
+          white-space: nowrap !important;
+        }
+
+        .gs-phone-input .gs-phone-number {
+          position: relative !important;
+          z-index: 1 !important;
+          flex: 1 1 auto !important;
+          width: 1% !important;
+          min-width: 0 !important;
+          margin-left: 0 !important;
+          padding-left: 12px !important;
+          padding-right: 12px !important;
+          box-sizing: border-box !important;
+          letter-spacing: 0.2px;
+        }
+
+        .gs-phone-input .gs-phone-number:focus {
+          position: relative !important;
+          z-index: 3 !important;
+          box-shadow: 0 0 0 0.15rem rgba(2, 132, 199, 0.15) !important;
+        }
 
         .gs-back-button { border: 0; background: transparent; color: #64748b; margin-top: 8px; cursor: pointer; font-size: 12px; }
         .gs-payment-message { margin-top: 12px; padding: 8px; background: #eff6ff; color: #1d4ed8; border-radius: 8px; font-size: 12px; }

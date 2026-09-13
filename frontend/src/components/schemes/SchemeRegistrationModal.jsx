@@ -46,13 +46,17 @@ export default function SchemeRegistrationModal({ isOpen, onClose, onSuccess }) 
         ""
       ).replace(/[^0-9]/g, "").slice(-10);
 
+      // Only prefill a complete, valid Indian mobile number.
+      // Invalid/old profile values must not appear as a partial phone number.
+      const validPhone = /^[6-9]\d{9}$/.test(rawPhone) ? rawPhone : "";
+
       setFormData({
         fullName:
           user?.user_metadata?.full_name ||
           user?.user_metadata?.name ||
           "",
         email: user?.email || "",
-        mobile: rawPhone,
+        mobile: validPhone,
         businessName:
           user?.user_metadata?.business_name ||
           user?.user_metadata?.company_name ||

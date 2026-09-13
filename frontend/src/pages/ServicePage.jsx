@@ -100,10 +100,17 @@ export default function ServicePage() {
   }, [slug, service.price]);
 
   // Customer & Transaction Details with strict mobile validation
+  const initialProfilePhone = String(
+    user?.phone || user?.user_metadata?.phone || user?.user_metadata?.mobile || ""
+  ).replace(/[^0-9]/g, "").slice(-10);
+  const validInitialProfilePhone = /^[6-9]\d{9}$/.test(initialProfilePhone)
+    ? initialProfilePhone
+    : "";
+
   const [formData, setFormData] = useState({
     name: user?.user_metadata?.full_name || user?.user_metadata?.name || "",
     email: user?.email || "",
-    phone: String(user?.phone || user?.user_metadata?.phone || "").replace(/[^0-9]/g, "").slice(-10),
+    phone: validInitialProfilePhone,
     pan: "",
   });
 
@@ -117,11 +124,22 @@ export default function ServicePage() {
 
   useEffect(() => {
     if (user) {
+      const rawProfilePhone = String(
+        user?.phone ||
+        user?.user_metadata?.phone ||
+        user?.user_metadata?.mobile ||
+        ""
+      ).replace(/[^0-9]/g, "").slice(-10);
+      const validProfilePhone = /^[6-9]\d{9}$/.test(rawProfilePhone)
+        ? rawProfilePhone
+        : "";
+
       setFormData((prev) => ({
         ...prev,
         name: user?.user_metadata?.full_name || user?.user_metadata?.name || prev.name,
         email: user?.email || prev.email,
-        phone: String(user?.phone || user?.user_metadata?.phone || prev.phone).replace(/[^0-9]/g, "").slice(-10),
+        // Do not overwrite a customer's field with an incomplete profile value.
+        phone: validProfilePhone || prev.phone,
       }));
     }
   }, [user]);

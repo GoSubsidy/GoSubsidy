@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
-const logo = "/images/gosubsidy-logo.png";
+import logo from "../../assets/images/gosubsidy-logo.png";
 import "./PromoModal.css";
 
 export default function PromoModal() {

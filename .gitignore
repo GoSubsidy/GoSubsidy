@@ -23,3 +23,5 @@ pnpm-debug.log*
 Thumbs.db
 .vscode/
 .idea/
+!frontend/src/components/insurance/coverage/
+!frontend/src/components/insurance/coverage/**

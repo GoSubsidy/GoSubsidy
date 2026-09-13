@@ -223,10 +223,12 @@
   margin-bottom: 3px;
 }
 
-.gs-input-box {
+.gs-form-group-item .gs-input-box {
   position: relative;
-  display: flex;
-  align-items: center;
+  display: flex !important;
+  align-items: center !important;
+  width: 100% !important;
+  overflow: hidden !important;
 }
 
 .gs-input-box i {
@@ -245,6 +247,17 @@
   outline: none;
   background: #f8fafc;
   box-sizing: border-box;
+}
+
+.gs-form-group-item .gs-input-box input[type="tel"] {
+  flex: 1 1 auto !important;
+  width: 100% !important;
+  border: 1px solid #cbd5e1 !important;
+  outline: none !important;
+  background: #f8fafc !important;
+  font-size: 12.5px !important;
+  padding: 9px 10px 9px 42px !important;
+  box-sizing: border-box !important;
 }
 
 .gs-input-box input:focus {
@@ -907,6 +920,13 @@
   font-size: 12.5px;
   outline: none;
   background: #ffffff;
+  box-sizing: border-box;
+  width: 100%;
+}
+
+.gs-checkout-form-grid .gs-modal-field input[type="tel"] {
+  width: 100% !important;
+  box-sizing: border-box !important;
 }
 
 .gs-modal-field input:focus {

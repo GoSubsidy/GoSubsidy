@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
-import logo from "../../assets/images/gosubsidy-logo.png";
 import "./PromoModal.css";
 
 export default function PromoModal() {
@@ -9,10 +8,12 @@ export default function PromoModal() {
   useEffect(() => {
     // Show popup after a 2-second delay if not closed in current session
     const hasSeenModal = sessionStorage.getItem("gs_promo_seen");
+
     if (!hasSeenModal) {
       const timer = setTimeout(() => {
         setIsOpen(true);
       }, 2000);
+
       return () => clearTimeout(timer);
     }
   }, []);
@@ -25,19 +26,28 @@ export default function PromoModal() {
   // Close on Escape key
   useEffect(() => {
     const handleKeyDown = (e) => {
-      if (e.key === "Escape") closeModal();
+      if (e.key === "Escape") {
+        closeModal();
+      }
     };
+
     if (isOpen) {
       window.addEventListener("keydown", handleKeyDown);
     }
-    return () => window.removeEventListener("keydown", handleKeyDown);
+
+    return () => {
+      window.removeEventListener("keydown", handleKeyDown);
+    };
   }, [isOpen]);
 
   if (!isOpen) return null;
 
   return (
     <div className="gs-promo-overlay" onClick={closeModal}>
-      <div className="gs-promo-card" onClick={(e) => e.stopPropagation()}>
+      <div
+        className="gs-promo-card"
+        onClick={(e) => e.stopPropagation()}
+      >
         {/* Floating Close Button */}
         <button
           type="button"
@@ -51,7 +61,11 @@ export default function PromoModal() {
         {/* Modal Content */}
         <div className="gs-promo-content">
           <div className="gs-promo-header">
-            <img src={logo} alt="GoSubsidy" className="gs-promo-logo" />
+            <img
+              src="/images/gosubsidy-logo.png"
+              alt="GoSubsidy"
+            />
+
             <span className="gs-promo-brand-text">
               <span className="text-success">Go</span>
               <span className="text-warning">Subsidy</span>
@@ -65,13 +79,20 @@ export default function PromoModal() {
           <h2 className="gs-promo-title">
             Unlock Flat <span>20% OFF</span>
           </h2>
+
           <p className="gs-promo-subtitle">
-            On all Government Schemes, DPR Reports &amp; Business Registrations.
+            On all Government Schemes, DPR Reports &amp; Business
+            Registrations.
           </p>
 
           <div className="gs-promo-coupon-box">
-            <span className="gs-coupon-label">USE PROMO CODE</span>
-            <strong className="gs-coupon-code">GOSUBSIDY20</strong>
+            <span className="gs-coupon-label">
+              USE PROMO CODE
+            </span>
+
+            <strong className="gs-coupon-code">
+              GOSUBSIDY20
+            </strong>
           </div>
 
           <Link
@@ -79,7 +100,8 @@ export default function PromoModal() {
             className="gs-promo-cta-btn"
             onClick={closeModal}
           >
-            Claim Offer Now <i className="bi bi-arrow-right ms-2" />
+            Claim Offer Now{" "}
+            <i className="bi bi-arrow-right ms-2" />
           </Link>
 
           <small className="gs-promo-terms">

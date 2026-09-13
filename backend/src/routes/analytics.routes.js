@@ -107,35 +107,32 @@ async function requireAdmin(req, res) {
     return null;
   }
 
-  const { data: profile, error } =
-    await supabaseAdmin
-      .from("profiles")
-      .select("is_admin, role")
-      .eq("id", user.id)
-      .maybeSingle();
+  // Use the same Admin Portal authorization table as the
+  // GoSubsidy Admin Login.
+  const {
+    data: adminRecord,
+    error: adminError,
+  } = await supabaseAdmin
+    .from("portal_analytics_admins")
+    .select("user_id")
+    .eq("user_id", user.id)
+    .maybeSingle();
 
-  if (error) {
+  if (adminError) {
     console.error(
-      "[Analytics] Admin profile check failed:",
-      error
+      "[Analytics] Admin authorization check failed:",
+      adminError
     );
+
     res.status(500).json({
       success: false,
       message: "Unable to verify admin access.",
     });
+
     return null;
   }
 
-  const role = String(
-    profile?.role || ""
-  ).toLowerCase();
-
-  const isAdmin =
-    profile?.is_admin === true ||
-    role === "admin" ||
-    role === "administrator";
-
-  if (!isAdmin) {
+  if (!adminRecord) {
     res.status(403).json({
       success: false,
       message: "Analytics access denied.",

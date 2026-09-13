@@ -326,7 +326,7 @@ router.get("/locations", async (req, res) => {
         .select(
           "city, state, country, country_code, page_path, visited_at, session_id"
         )
-        .gte("created_at", since)
+        .gte("visited_at", since)
         .order("visited_at", {
           ascending: false,
         })

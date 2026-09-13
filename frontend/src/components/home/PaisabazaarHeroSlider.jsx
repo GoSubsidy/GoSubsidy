@@ -861,111 +861,108 @@ export default function PaisabazaarHeroSlider({ onSchemeClick }) {
           }
         }
 
-        /* ---------------------------------------------------------
-           Mobile
-        --------------------------------------------------------- */
+        /* =========================================
+     MOBILE HERO — GoSubsidy
+     ========================================= */
 
-        @media (max-width: 700px) {
-          .gs-hero-main {
-            width: calc(100% - 20px);
-            min-height: 0;
-          }
+  .premium-service-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    width: 100%;
+    gap: 8px;
+  }
 
-          .gs-hero-copy {
-            padding-top: 18px;
-          }
+  .premium-service-card {
+    min-width: 0;
+    padding: 10px 6px;
+  }
 
-          .gs-hero-badge {
-            height: 36px;
-            padding: 0 12px;
-            font-size: 10px;
-          }
+  .premium-service-card strong {
+    font-size: 11px;
+    line-height: 1.2;
+  }
 
-          .gs-hero-title {
-            margin-top: 19px;
-            font-size: clamp(33px,9.5vw,46px);
-            letter-spacing: -1.5px;
-          }
+  .premium-service-card small {
+    font-size: 8px;
+    line-height: 1.2;
+  }
 
-          .gs-hero-description {
-            margin: 16px 0 20px;
-            font-size: 14px;
-          }
+  /* CTA buttons */
+  .premium-hero-actions {
+    flex-direction: column;
+    width: 100%;
+    gap: 10px;
+  }
 
-          .gs-service-grid {
-            grid-template-columns: repeat(2,minmax(0,1fr));
-            gap: 10px;
-          }
+  .premium-primary-btn,
+  .premium-secondary-btn {
+    width: 100%;
+    min-height: 44px;
+  }
 
-          .gs-service-card {
-            height: 132px;
-          }
+  /* Trust row */
+  .premium-trust-row {
+    gap: 7px;
+    flex-direction: column;
+    align-items: flex-start;
+    width: 100%;
+    font-size: 11px;
+  }
 
-          .gs-service-icon {
-            width: 42px;
-            height: 42px;
-            flex-basis: 42px;
-            font-size: 18px;
-          }
+  /* =========================================
+     PROMOTIONAL BANNER
+     ========================================= */
 
-          .gs-service-card:last-child {
-            grid-column: 1/-1;
-            width: calc(50% - 5px);
-            justify-self: center;
-          }
+  .fintech-props-row {
+    grid-template-columns: 1fr;
+  }
 
-          .gs-actions {
-            flex-direction: column;
-            align-items: stretch;
-          }
+  .fintech-card-viewport {
+    width: calc(100vw - 28px);
+    max-width: calc(100vw - 28px);
 
-          .gs-btn-primary,
-          .gs-btn-secondary {
-            width: 100%;
-          }
+    /* IMPORTANT:
+       Do not make this a 400px square */
+    height: auto;
+    aspect-ratio: 1.48 / 1;
 
-          .gs-trust {
-            flex-direction: column;
-            align-items: flex-start;
-            gap: 10px;
-          }
+    margin: 12px auto 0;
+  }
 
-          .gs-slider-column {
-            padding: 0 22px 42px;
-          }
+  .fintech-glass-card,
+  .fintech-sidebox-image-wrap {
+    width: 100%;
+    max-width: 100%;
 
-          .gs-slider {
-            height: 390px;
-          }
+    height: 100%;
+    min-height: 0;
 
-          .gs-arrow {
-            width: 42px;
-            height: 42px;
-          }
+    border-radius: 16px;
+  }
 
-          .gs-arrow-left { left: -16px; }
-          .gs-arrow-right { right: -16px; }
+  /* Keep the COMPLETE proposal poster visible */
+  .fintech-sidebox-image {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+    object-position: center;
+  }
 
-          .gs-stats {
-            width: calc(100% - 12px);
-            grid-template-columns: 1fr;
-          }
+  /* Remove unnecessary desktop effects on phone */
+  .fintech-glass-card {
+    border-width: 4px;
+    border-radius: 16px;
+    box-shadow: 0 12px 30px rgba(16, 60, 90, 0.14);
+  }
 
-          .gs-stat {
-            padding: 14px 18px;
-            border-right: 0;
-            border-bottom: 1px solid #d9e5ed;
-          }
-
-          .gs-industries {
-            grid-template-columns: 1fr;
-            gap: 9px;
-          }
-
-          .gs-industries-title {
-            text-align: center;
-          }
-        }
+  /* Hide decorative overlays that can clutter the small screen */
+  .fintech-banner-orbit,
+  .fintech-banner-grid,
+  .fintech-banner-icon-tile,
+  .fintech-image-overlay-badge,
+  .fintech-banner-typography {
+    display: none !important;
+  }
+}
       `}</style>
 
       <div className="gs-hero-main">

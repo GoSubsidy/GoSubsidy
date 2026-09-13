@@ -1,85 +1,101 @@
-/* ===========================================================
-   GoSubsidy Insurance API
-=========================================================== */
+// ============================================
+// GoSubsidy API Service
+// ============================================
 
-const API_BASE_URL = "http://localhost:4000";
+const API_BASE_URL =
+  import.meta.env.VITE_API_BASE_URL || "http://localhost:4000";
 
-/* ===========================================================
-   HEALTH
-=========================================================== */
+// ============================================
+// Generic Request Helper
+// ============================================
 
-export async function insuranceHealth() {
-  const response = await fetch(
-    `${API_BASE_URL}/api/insurance/health`
-  );
+async function request(endpoint, options = {}) {
+  const response = await fetch(`${API_BASE_URL}${endpoint}`, {
+    headers: {
+      "Content-Type": "application/json",
+      ...options.headers,
+    },
+    ...options,
+  });
+
+  const data = await response.json();
 
   if (!response.ok) {
-    throw new Error("Insurance service unavailable");
+    throw new Error(data.message || "Request failed");
   }
 
-  return response.json();
+  return data;
 }
 
-/* ===========================================================
-   PROVIDERS
-=========================================================== */
+// ============================================
+// GET ALL SCHEMES
+// ============================================
 
-export async function getProviders() {
-  const response = await fetch(
-    `${API_BASE_URL}/api/insurance/providers`
-  );
-
-  if (!response.ok) {
-    throw new Error("Failed to load providers");
-  }
-
-  return response.json();
+export async function fetchSchemes() {
+  return request("/schemes");
 }
 
-/* ===========================================================
-   GET LIVE QUOTES
-=========================================================== */
+// ============================================
+// GET SCHEME BY ID
+// ============================================
 
-export async function getInsuranceQuotes(payload) {
-  const response = await fetch(
-    `${API_BASE_URL}/api/insurance/quotes`,
-    {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify(payload),
-    }
-  );
-
-  if (!response.ok) {
-    const error = await response.text();
-    throw new Error(error || "Failed to fetch insurance quotes");
-  }
-
-  return response.json();
+export async function fetchScheme(id) {
+  return request(`/schemes/${id}`);
 }
 
-/* ===========================================================
-   CREATE INSURANCE JOURNEY
-=========================================================== */
+// Alias
+export const fetchSchemeById = fetchScheme;
 
-export async function createInsuranceQuote(payload) {
-  const response = await fetch(
-    `${API_BASE_URL}/api/insurance/journey`,
-    {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify(payload),
-    }
-  );
+// ============================================
+// CREATE SCHEME
+// ============================================
 
-  if (!response.ok) {
-    const error = await response.text();
-    throw new Error(error || "Failed to create insurance journey");
-  }
+export async function createScheme(payload) {
+  return request("/schemes", {
+    method: "POST",
+    body: JSON.stringify(payload),
+  });
+}
 
-  return response.json();
+// ============================================
+// UPDATE SCHEME
+// ============================================
+
+export async function updateScheme(id, payload) {
+  return request(`/schemes/${id}`, {
+    method: "PUT",
+    body: JSON.stringify(payload),
+  });
+}
+
+// ============================================
+// DELETE SCHEME
+// ============================================
+
+export async function deleteScheme(id) {
+  return request(`/schemes/${id}`, {
+    method: "DELETE",
+  });
+}
+
+// ============================================
+// AI ELIGIBILITY CHECK
+// ============================================
+
+export async function checkEligibility(formData) {
+  return request("/ai/eligibility", {
+    method: "POST",
+    body: JSON.stringify(formData),
+  });
+}
+
+// ============================================
+// GENERIC POST
+// ============================================
+
+export async function post(endpoint, body) {
+  return request(endpoint, {
+    method: "POST",
+    body: JSON.stringify(body),
+  });
 }

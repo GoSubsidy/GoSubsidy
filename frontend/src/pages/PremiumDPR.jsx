@@ -8,6 +8,9 @@ import Footer from "../components/layout/Footer";
 import { PREMIUM_PRODUCTS } from "../services/premiumProducts";
 import { STATE_LANGUAGE_MAP, FIELD_TRANSLATIONS } from "../utils/bilingualMapping";
 import { useLanguage } from "../context/LanguageContext";
+
+const API_BASE_URL =
+  import.meta.env.VITE_API_BASE_URL || "http://localhost:4000";
 // ======================================================
 // GoSubsidy - Detailed Project Report (Bilingual Support)
 // frontend/src/pages/PremiumDPR.jsx
@@ -1027,7 +1030,7 @@ export default function DPR() {
         });
       }, 1000);
 
-      const response = await fetch("http://localhost:4000/api/dpr/generate", {
+      const response = await fetch(`${API_BASE_URL}/api/dpr/generate`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ project: payload }),

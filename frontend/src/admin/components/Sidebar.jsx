@@ -18,8 +18,7 @@ import {
   FaAddressBook,
 } from "react-icons/fa";
 import { logout } from "../../services/authService";
-import logo from "../../assets/images/gosubsidy-logo.png";
-
+const logo = "/images/gosubsidy-logo.png";
 export default function Sidebar({
   collapsed = false,
   mobileOpen = false,

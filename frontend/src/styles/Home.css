@@ -647,14 +647,65 @@
     flex: 0 0 calc(50% - 7px);
   }
 
+  /* =====================================================
+     MOBILE FIX — TRUST STATS
+     Keep all four benefits compact in a 2 × 2 grid.
+     The old mobile rule stacked all stats vertically,
+     which created the large empty spaces seen on phones.
+  ====================================================== */
   .gs-stats-bar {
-    flex-direction: column;
-    gap: 20px;
-    align-items: flex-start;
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 0;
+    padding: 0;
+    align-items: stretch;
+    overflow: hidden;
+    border-radius: 18px;
   }
 
+  .gs-stat {
+    min-width: 0;
+    min-height: 92px;
+    padding: 14px 12px;
+    gap: 10px;
+    box-sizing: border-box;
+    align-items: center;
+  }
+
+  /* Hide the separator elements on mobile so only the four
+     actual statistics participate in the 2 × 2 grid. */
   .gs-stat-divider {
     display: none;
+  }
+
+  /* Subtle internal 2 × 2 separators */
+  .gs-stat:nth-child(4),
+  .gs-stat:nth-child(5) {
+    border-top: 1px solid #e2e8f0;
+  }
+
+  .gs-stat:nth-child(3),
+  .gs-stat:nth-child(6) {
+    border-left: 1px solid #e2e8f0;
+  }
+
+  .gs-stat-icon {
+    width: 42px;
+    height: 42px;
+    flex: 0 0 42px;
+    border-radius: 12px;
+    font-size: 1.15rem;
+  }
+
+  .gs-stat strong {
+    font-size: 0.92rem;
+    line-height: 1.2;
+  }
+
+  .gs-stat span {
+    margin-top: 3px;
+    font-size: 0.72rem;
+    line-height: 1.25;
   }
 
   .gs-popular-prev {
@@ -672,8 +723,61 @@
     gap: 16px 8px;
   }
 
+  /* Phone-sized Popular Services card */
   .gs-popular-card {
-    flex: 0 0 85%;
+    flex: 0 0 82%;
+    min-width: 0;
+    padding: 14px;
+    gap: 12px;
+    border-radius: 16px;
+  }
+
+  .gs-popular-icon {
+    width: 44px;
+    height: 44px;
+    font-size: 1.2rem;
+  }
+
+  .gs-popular-body strong {
+    font-size: 0.9rem;
+    line-height: 1.25;
+  }
+
+  .gs-popular-body span {
+    font-size: 0.76rem;
+  }
+
+  .gs-popular-title {
+    font-size: 1.1rem;
+  }
+
+  .gs-view-all {
+    font-size: 0.78rem;
+  }
+
+  .gs-stats-bar {
+    margin-bottom: 28px;
+  }
+
+  .gs-stat {
+    min-height: 88px;
+    padding: 12px 10px;
+    gap: 8px;
+  }
+
+  .gs-stat-icon {
+    width: 40px;
+    height: 40px;
+    flex-basis: 40px;
+    font-size: 1.08rem;
+  }
+
+  .gs-stat strong {
+    font-size: 0.82rem;
+  }
+
+  .gs-stat span {
+    font-size: 0.68rem;
   }
 
   .idk-title {

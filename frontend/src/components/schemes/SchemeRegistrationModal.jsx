@@ -46,17 +46,13 @@ export default function SchemeRegistrationModal({ isOpen, onClose, onSuccess }) 
         ""
       ).replace(/[^0-9]/g, "").slice(-10);
 
-      // Only prefill a complete, valid Indian mobile number.
-      // Invalid/old profile values must not appear as a partial phone number.
-      const validPhone = /^[6-9]\d{9}$/.test(rawPhone) ? rawPhone : "";
-
       setFormData({
         fullName:
           user?.user_metadata?.full_name ||
           user?.user_metadata?.name ||
           "",
         email: user?.email || "",
-        mobile: validPhone,
+        mobile: rawPhone,
         businessName:
           user?.user_metadata?.business_name ||
           user?.user_metadata?.company_name ||
@@ -219,7 +215,7 @@ export default function SchemeRegistrationModal({ isOpen, onClose, onSuccess }) 
 
   return (
     <div
-        className="d-flex align-items-center justify-content-center"
+        className="d-flex align-items-center justify-content-center scheme-registration-overlay"
       style={{
         position: "fixed",
         inset: 0,
@@ -227,13 +223,97 @@ export default function SchemeRegistrationModal({ isOpen, onClose, onSuccess }) 
         background: "rgba(15, 23, 42, 0.65)",
         backdropFilter: "blur(6px)",
         padding: "16px",
+        overflowY: "auto",
+        overflowX: "hidden",
+        WebkitOverflowScrolling: "touch",
       }}
       onClick={onClose}
     >
+      <style>{`
+        .scheme-registration-card {
+          flex: 0 0 auto;
+        }
+
+        .scheme-registration-card .row {
+          min-width: 0;
+        }
+
+        @media (max-width: 767.98px) {
+          .scheme-registration-overlay {
+            align-items: stretch !important;
+            justify-content: flex-start !important;
+            padding: 0 !important;
+            background: #ffffff !important;
+            backdrop-filter: none !important;
+          }
+
+          .scheme-registration-card {
+            width: 100vw !important;
+            max-width: 100vw !important;
+            height: 100dvh !important;
+            max-height: 100dvh !important;
+            min-height: 100dvh !important;
+            margin: 0 !important;
+            border-radius: 0 !important;
+            box-shadow: none !important;
+            overflow-y: auto !important;
+            overflow-x: hidden !important;
+          }
+
+          .scheme-registration-card .row {
+            width: 100%;
+            margin: 0;
+          }
+
+          .scheme-registration-card .col-md-5,
+          .scheme-registration-card .col-md-7 {
+            width: 100%;
+            max-width: 100%;
+            flex: 0 0 100%;
+          }
+
+          .scheme-registration-card .col-md-5 {
+            padding: 24px 20px !important;
+          }
+
+          .scheme-registration-card .col-md-7 {
+            padding: 24px 20px !important;
+          }
+
+          .scheme-registration-card .input-group,
+          .scheme-registration-card .form-control,
+          .scheme-registration-card .input-group-text {
+            min-width: 0;
+          }
+
+          .scheme-registration-card .form-control {
+            font-size: 16px;
+          }
+
+          .scheme-registration-card .btn {
+            min-height: 46px;
+          }
+
+          .scheme-registration-card .position-absolute {
+            position: absolute !important;
+          }
+        }
+
+        @media (max-width: 380px) {
+          .scheme-registration-card .col-md-5,
+          .scheme-registration-card .col-md-7 {
+            padding-left: 16px !important;
+            padding-right: 16px !important;
+          }
+        }
+      `}</style>
+
       <div
-        className="card border-0 shadow-lg overflow-hidden position-relative"
+        className="card border-0 shadow-lg overflow-hidden position-relative scheme-registration-card"
         style={{
           width: "min(780px, 98vw)",
+          maxWidth: "780px",
+          maxHeight: "calc(100dvh - 32px)",
           borderRadius: "20px",
           background: "#ffffff",
         }}

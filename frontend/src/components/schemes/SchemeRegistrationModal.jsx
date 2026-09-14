@@ -348,11 +348,25 @@ export default function SchemeRegistrationModal({ isOpen, onClose, onSuccess }) 
             <div>
               <div className="d-flex align-items-center gap-2 mb-3">
                 <div
-                  className="rounded-3 d-flex align-items-center justify-content-center bg-white text-success fw-bold"
-                  style={{ width: "32px", height: "32px", fontSize: "16px" }}
+                  className="rounded-3 d-flex align-items-center justify-content-center bg-white"
+                  style={{
+                    width: "42px",
+                    height: "42px",
+                    padding: "4px",
+                    flexShrink: 0,
+                  }}
                 >
-                  G
+                  <img
+                    src="/images/gosubsidy-logo.png"
+                    alt="GoSubsidy"
+                    style={{
+                      width: "100%",
+                      height: "100%",
+                      objectFit: "contain",
+                    }}
+                  />
                 </div>
+
                 <span
                   className="fw-bolder fs-5"
                   style={{ letterSpacing: "-0.5px", color: "#00a66a" }}

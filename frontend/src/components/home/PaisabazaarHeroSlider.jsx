@@ -861,108 +861,321 @@ export default function PaisabazaarHeroSlider({ onSchemeClick }) {
           }
         }
 
-        /* =========================================
-     MOBILE HERO — GoSubsidy
-     ========================================= */
+        /* ---------------------------------------------------------
+           Mobile / narrow tablet
+           Keep the hero in a clean vertical flow:
+           badge -> heading -> description -> 5 service tiles ->
+           buttons -> trust -> proposal slider -> stats.
+           This deliberately uses 900px so Android browsers running
+           in desktop/zoomed layouts do not retain the desktop grid.
+        --------------------------------------------------------- */
 
-  .premium-service-grid {
-    grid-template-columns: repeat(2, minmax(0, 1fr));
-    width: 100%;
-    gap: 8px;
-  }
+        @media (max-width: 900px) {
+          .gs-reference-hero {
+            overflow-x: hidden;
+          }
 
-  .premium-service-card {
-    min-width: 0;
-    padding: 10px 6px;
-  }
+          .gs-hero-main {
+            width: 100%;
+            height: auto;
+            min-height: 0;
+            display: flex;
+            flex-direction: column;
+            gap: 0;
+          }
 
-  .premium-service-card strong {
-    font-size: 11px;
-    line-height: 1.2;
-  }
+          .gs-hero-copy {
+            width: 100%;
+            padding: 24px 18px 0;
+          }
 
-  .premium-service-card small {
-    font-size: 8px;
-    line-height: 1.2;
-  }
+          .gs-hero-badge {
+            height: 38px;
+            max-width: 100%;
+            padding: 0 14px;
+            font-size: 10px;
+            letter-spacing: .15px;
+            white-space: nowrap;
+          }
 
-  /* CTA buttons */
-  .premium-hero-actions {
-    flex-direction: column;
-    width: 100%;
-    gap: 10px;
-  }
+          .gs-hero-title {
+            width: 100%;
+            max-width: none;
+            margin-top: 20px;
+            font-size: clamp(32px, 8.5vw, 43px);
+            line-height: 1.06;
+            letter-spacing: -1.7px;
+          }
 
-  .premium-primary-btn,
-  .premium-secondary-btn {
-    width: 100%;
-    min-height: 44px;
-  }
+          .gs-hero-title .gs-gradient {
+            margin-top: 3px;
+          }
 
-  /* Trust row */
-  .premium-trust-row {
-    gap: 7px;
-    flex-direction: column;
-    align-items: flex-start;
-    width: 100%;
-    font-size: 11px;
-  }
+          .gs-hero-description {
+            width: 100%;
+            max-width: none;
+            margin: 17px 0 21px;
+            font-size: 15px;
+            line-height: 1.48;
+          }
 
-  /* =========================================
-     PROMOTIONAL BANNER
-     ========================================= */
+          .gs-service-grid {
+            width: 100%;
+            max-width: none;
+            grid-template-columns: repeat(2, minmax(0, 1fr));
+            gap: 9px;
+          }
 
-  .fintech-props-row {
-    grid-template-columns: 1fr;
-  }
+          .gs-service-card {
+            width: 100%;
+            height: 112px;
+            min-height: 112px;
+            padding: 8px 5px;
+            border-radius: 14px;
+          }
 
-  .fintech-card-viewport {
-    width: calc(100vw - 28px);
-    max-width: calc(100vw - 28px);
+          .gs-service-icon {
+            width: 38px;
+            height: 38px;
+            flex-basis: 38px;
+            margin-bottom: 6px;
+            border-radius: 11px;
+            font-size: 16px;
+          }
 
-    /* IMPORTANT:
-       Do not make this a 400px square */
-    height: auto;
-    aspect-ratio: 1.48 / 1;
+          .gs-service-card strong {
+            font-size: 10.5px;
+            line-height: 1.12;
+          }
 
-    margin: 12px auto 0;
-  }
+          .gs-service-card small {
+            margin-top: 4px;
+            font-size: 8.8px;
+          }
 
-  .fintech-glass-card,
-  .fintech-sidebox-image-wrap {
-    width: 100%;
-    max-width: 100%;
+          /* Five cards: last card occupies the left half instead of
+             stretching across the whole mobile screen. */
+          .gs-service-card:last-child {
+            grid-column: auto;
+            width: 100%;
+            justify-self: stretch;
+          }
 
-    height: 100%;
-    min-height: 0;
+          .gs-actions {
+            width: 100%;
+            flex-direction: column;
+            align-items: stretch;
+            gap: 10px;
+            margin-top: 18px;
+          }
 
-    border-radius: 16px;
-  }
+          .gs-btn,
+          .gs-btn-primary,
+          .gs-btn-secondary {
+            width: 100%;
+            min-width: 0;
+            height: 52px;
+            padding: 0 20px;
+            font-size: 14px;
+          }
 
-  /* Keep the COMPLETE proposal poster visible */
-  .fintech-sidebox-image {
-    width: 100%;
-    height: 100%;
-    object-fit: contain;
-    object-position: center;
-  }
+          .gs-trust {
+            width: 100%;
+            display: grid;
+            grid-template-columns: repeat(2, minmax(0, 1fr));
+            align-items: center;
+            gap: 13px 12px;
+            margin-top: 19px;
+            padding-bottom: 4px;
+          }
 
-  /* Remove unnecessary desktop effects on phone */
-  .fintech-glass-card {
-    border-width: 4px;
-    border-radius: 16px;
-    box-shadow: 0 12px 30px rgba(16, 60, 90, 0.14);
-  }
+          .gs-trust span {
+            gap: 7px;
+            font-size: 11px;
+            white-space: normal;
+          }
 
-  /* Hide decorative overlays that can clutter the small screen */
-  .fintech-banner-orbit,
-  .fintech-banner-grid,
-  .fintech-banner-icon-tile,
-  .fintech-image-overlay-badge,
-  .fintech-banner-typography {
-    display: none !important;
-  }
-}
+          .gs-trust i {
+            flex: 0 0 auto;
+            font-size: 17px;
+          }
+
+          .gs-person {
+            display: none;
+          }
+
+          .gs-slider-column {
+            width: 100%;
+            min-height: 0;
+            padding: 28px 18px 55px;
+            display: block;
+          }
+
+          .gs-slider {
+            width: 100%;
+            max-width: 560px;
+            height: auto;
+            aspect-ratio: 1 / 1;
+            margin: 0 auto;
+          }
+
+          .gs-slide-image {
+            width: 100%;
+            height: 100%;
+            object-fit: contain;
+            object-position: center;
+            border-radius: 12px;
+          }
+
+          .gs-arrow {
+            width: 42px;
+            height: 42px;
+            top: 50%;
+            font-size: 18px;
+          }
+
+          .gs-arrow-left {
+            left: -9px;
+          }
+
+          .gs-arrow-right {
+            right: -9px;
+          }
+
+          .gs-dots {
+            bottom: -29px;
+            gap: 9px;
+          }
+
+          .gs-dot {
+            width: 10px;
+            height: 10px;
+          }
+
+          .gs-dot.active {
+            width: 28px;
+          }
+
+          .gs-stats {
+            width: calc(100% - 20px);
+            margin-top: 0;
+            grid-template-columns: 1fr 1fr;
+            border-radius: 17px 17px 0 0;
+          }
+
+          .gs-stat {
+            min-height: 125px;
+            padding: 16px 12px;
+            gap: 10px;
+            border-right: 1px solid #d9e5ed;
+            border-bottom: 1px solid #d9e5ed;
+            align-items: center;
+          }
+
+          .gs-stat:nth-child(2n) {
+            border-right: 0;
+          }
+
+          .gs-stat-icon {
+            width: 52px;
+            height: 52px;
+            flex-basis: 52px;
+            border-radius: 14px;
+            font-size: 22px;
+          }
+
+          .gs-stat strong {
+            font-size: 21px;
+          }
+
+          .gs-stat span {
+            font-size: 11px;
+            line-height: 1.25;
+          }
+
+          .gs-industries {
+            grid-column: 1 / -1;
+            width: 100%;
+            padding: 16px 8px 18px;
+            grid-template-columns: 1fr;
+            gap: 13px;
+            border-top: 0;
+          }
+
+          .gs-industries-title {
+            text-align: center;
+            font-size: 14px;
+            line-height: 1.35;
+          }
+
+          .gs-industry-list {
+            width: 100%;
+            grid-template-columns: repeat(4, minmax(0, 1fr));
+          }
+
+          .gs-industry {
+            min-height: 62px;
+            font-size: 8.5px;
+            gap: 5px;
+            padding: 0 3px;
+            text-align: center;
+          }
+
+          .gs-industry i {
+            font-size: 21px;
+          }
+        }
+
+        @media (max-width: 430px) {
+          .gs-hero-copy {
+            padding-left: 14px;
+            padding-right: 14px;
+          }
+
+          .gs-hero-badge {
+            width: 100%;
+            justify-content: center;
+          }
+
+          .gs-hero-title {
+            font-size: clamp(31px, 9.2vw, 38px);
+            letter-spacing: -1.45px;
+          }
+
+          .gs-hero-description {
+            font-size: 14px;
+          }
+
+          .gs-service-grid {
+            gap: 7px;
+          }
+
+          .gs-service-card {
+            height: 108px;
+            min-height: 108px;
+          }
+
+          .gs-slider-column {
+            padding-left: 14px;
+            padding-right: 14px;
+          }
+
+          .gs-stat {
+            min-height: 120px;
+            padding-left: 10px;
+            padding-right: 10px;
+          }
+
+          .gs-stat-icon {
+            width: 46px;
+            height: 46px;
+            flex-basis: 46px;
+          }
+
+          .gs-stat strong {
+            font-size: 19px;
+          }
+        }
       `}</style>
 
       <div className="gs-hero-main">

@@ -225,6 +225,8 @@ export default function SchemeRegistrationModal({ isOpen, onClose, onSuccess }) 
         padding: "16px",
         overflowY: "auto",
         overflowX: "hidden",
+        width: "100%",
+        maxWidth: "100%",
         WebkitOverflowScrolling: "touch",
       }}
       onClick={onClose}
@@ -248,8 +250,8 @@ export default function SchemeRegistrationModal({ isOpen, onClose, onSuccess }) 
           }
 
           .scheme-registration-card {
-            width: 100vw !important;
-            max-width: 100vw !important;
+            width: 100% !important;
+            max-width: 100% !important;
             height: 100dvh !important;
             max-height: 100dvh !important;
             min-height: 100dvh !important;
@@ -262,7 +264,13 @@ export default function SchemeRegistrationModal({ isOpen, onClose, onSuccess }) 
 
           .scheme-registration-card .row {
             width: 100%;
+            max-width: 100%;
             margin: 0;
+          }
+
+          .scheme-registration-card,
+          .scheme-registration-card * {
+            max-width: 100%;
           }
 
           .scheme-registration-card .col-md-5,

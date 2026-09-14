@@ -353,8 +353,11 @@ export default function SchemeRegistrationModal({ isOpen, onClose, onSuccess }) 
                 >
                   G
                 </div>
-                <span className="fw-bolder fs-5 text-white" style={{ letterSpacing: "-0.5px" }}>
-                  Go<span style={{ color: "#86efac" }}>Subsidy</span>
+                <span
+                  className="fw-bolder fs-5"
+                  style={{ letterSpacing: "-0.5px", color: "#00a66a" }}
+                >
+                  Go<span style={{ color: "#ff6800" }}>Subsidy</span>
                 </span>
               </div>
 

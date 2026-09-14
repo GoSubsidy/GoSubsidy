@@ -73,7 +73,7 @@ export default function PromoModal() {
           </div>
 
           <div className="gs-promo-badge">
-            <span>Special Weekend Offer</span>
+            <span>Special Offer</span>
           </div>
 
           <h2 className="gs-promo-title">

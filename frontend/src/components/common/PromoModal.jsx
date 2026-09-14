@@ -67,8 +67,8 @@ export default function PromoModal() {
             />
 
             <span className="gs-promo-brand-text">
-              <span className="text-success">Go</span>
-              <span className="text-warning">Subsidy</span>
+              <span style={{ color: "#00A66A" }}>Go</span>
+              <span style={{ color: "#FF6800" }}>Subsidy</span>
             </span>
           </div>
 

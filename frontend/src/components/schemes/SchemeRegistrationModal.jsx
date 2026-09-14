@@ -402,7 +402,7 @@ export default function SchemeRegistrationModal({ isOpen, onClose, onSuccess }) 
                 </div>
                 <div className="d-flex align-items-center gap-2">
                   <FaCheckCircle className="text-warning flex-shrink-0" size={12} />
-                  <span style={{ fontSize: "11.5px", fontWeight: 600 }}>Direct Ex-Banker Consultation</span>
+                  <span style={{ fontSize: "11.5px", fontWeight: 600 }}>Direct CA Consultation</span>
                 </div>
               </div>
             </div>

@@ -884,9 +884,11 @@ export default function PaisabazaarHeroSlider({ onSchemeClick }) {
             gap: 0;
           }
 
+          /* Mobile only: hero copy comes after the proposal slider. */
           .gs-hero-copy {
             width: 100%;
             padding: 24px 18px 0;
+            order: 2;
           }
 
           .gs-hero-badge {
@@ -1004,18 +1006,20 @@ export default function PaisabazaarHeroSlider({ onSchemeClick }) {
             display: none;
           }
 
+          /* Mobile only: move slider above heading/text/icons. */
           .gs-slider-column {
+            order: 1;
             width: 100%;
             min-height: 0;
-            padding: 28px 18px 55px;
+            padding: 12px 18px 42px;
             display: block;
           }
 
           .gs-slider {
             width: 100%;
-            max-width: 560px;
-            height: auto;
-            aspect-ratio: 1 / 1;
+            max-width: 430px;
+            height: 300px;
+            aspect-ratio: auto;
             margin: 0 auto;
           }
 
@@ -1156,8 +1160,12 @@ export default function PaisabazaarHeroSlider({ onSchemeClick }) {
           }
 
           .gs-slider-column {
-            padding-left: 14px;
-            padding-right: 14px;
+            padding: 10px 14px 38px;
+          }
+
+          .gs-slider {
+            max-width: 100%;
+            height: 270px;
           }
 
           .gs-stat {

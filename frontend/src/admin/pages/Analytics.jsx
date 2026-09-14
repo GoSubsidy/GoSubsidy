@@ -140,7 +140,11 @@ export default function Analytics() {
         setLoading(true);
         setError("");
 
-        const {
+        let data;
+        let rpcError;
+
+        // First try the current Supabase session.
+        ({
           data,
           error: rpcError,
         } = await supabase.rpc(
@@ -148,7 +152,47 @@ export default function Analytics() {
           {
             p_days: days,
           }
-        );
+        ));
+
+        // Recover automatically from stale/future JWT errors.
+        const rpcMessage = String(
+          rpcError?.message || ""
+        ).toLowerCase();
+
+        if (
+          rpcError &&
+          (
+            rpcMessage.includes("jwt issued at future") ||
+            rpcMessage.includes("issued at future") ||
+            rpcMessage.includes("jwt") ||
+            rpcMessage.includes("token")
+          )
+        ) {
+          const {
+            data: refreshed,
+            error: refreshError,
+          } = await supabase.auth.refreshSession();
+
+          if (refreshError) {
+            throw refreshError;
+          }
+
+          if (!refreshed?.session?.access_token) {
+            throw new Error(
+              "Admin session could not be refreshed. Please sign in again."
+            );
+          }
+
+          ({
+            data,
+            error: rpcError,
+          } = await supabase.rpc(
+            "get_portal_analytics",
+            {
+              p_days: days,
+            }
+          ));
+        }
 
         if (rpcError) {
           throw rpcError;
@@ -199,7 +243,7 @@ export default function Analytics() {
           );
         }
 
-        const response = await fetch(
+        let response = await fetch(
           `${API_BASE_URL}/api/analytics/locations?days=${days}`,
           {
             method: "GET",
@@ -210,7 +254,53 @@ export default function Analytics() {
           }
         );
 
-        const data = await response.json();
+        let data = await response.json();
+
+        const locationMessage = String(
+          data?.message || ""
+        ).toLowerCase();
+
+        // Recover once if the backend rejects the current JWT.
+        if (
+          !response.ok &&
+          (
+            locationMessage.includes("jwt issued at future") ||
+            locationMessage.includes("issued at future") ||
+            locationMessage.includes("jwt") ||
+            response.status === 401
+          )
+        ) {
+          const {
+            data: refreshed,
+            error: refreshError,
+          } = await supabase.auth.refreshSession();
+
+          if (refreshError) {
+            throw refreshError;
+          }
+
+          const refreshedToken =
+            refreshed?.session?.access_token || "";
+
+          if (!refreshedToken) {
+            throw new Error(
+              "Admin session could not be refreshed. Please sign in again."
+            );
+          }
+
+          response = await fetch(
+            `${API_BASE_URL}/api/analytics/locations?days=${days}`,
+            {
+              method: "GET",
+              headers: {
+                Accept: "application/json",
+                Authorization: `Bearer ${refreshedToken}`,
+              },
+            }
+          );
+
+          data = await response.json();
+        }
 
         if (!response.ok || !data?.success) {
           throw new Error(

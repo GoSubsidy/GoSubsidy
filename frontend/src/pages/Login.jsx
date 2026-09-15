@@ -27,16 +27,41 @@ export default function Login() {
 
   const searchParams = new URLSearchParams(location.search);
 
-  // Preserve a requested internal destination after login.
-  // Never allow an external/open redirect.
-  const requestedRedirect = searchParams.get("redirect") || "/customer/dashboard";
+  // ------------------------------------------------------------
+  // PAYMENT LOGIN RESUME
+  // ------------------------------------------------------------
+  // The payment flow stores its intent in sessionStorage before
+  // sending the customer to Login. This is deliberately preferred
+  // over the URL because OAuth/auth callbacks or hosting rewrites
+  // can drop query parameters.
+  let pendingPayment = null;
+  try {
+    const raw = sessionStorage.getItem("gosubsidy_pending_payment");
+    pendingPayment = raw ? JSON.parse(raw) : null;
+  } catch {
+    pendingPayment = null;
+  }
+
+  const requestedRedirect =
+    searchParams.get("redirect") ||
+    pendingPayment?.returnPath ||
+    "/customer/dashboard";
+
   const redirectPath =
-    requestedRedirect.startsWith("/") && !requestedRedirect.startsWith("//")
+    typeof requestedRedirect === "string" &&
+    requestedRedirect.startsWith("/") &&
+    !requestedRedirect.startsWith("//")
       ? requestedRedirect
       : "/customer/dashboard";
 
-  const resumePayment = searchParams.get("resumePayment") === "1";
-  const paymentProduct = searchParams.get("paymentProduct") || "DPR_PRO";
+  const resumePayment =
+    searchParams.get("resumePayment") === "1" ||
+    pendingPayment?.productCode === "DPR_PRO";
+
+  const paymentProduct =
+    searchParams.get("paymentProduct") ||
+    pendingPayment?.productCode ||
+    "DPR_PRO";
 
   const getPostLoginPath = () => {
     if (!resumePayment) return redirectPath;
@@ -89,10 +114,9 @@ export default function Login() {
       }
 
       setSuccessMessage("Login successful. Redirecting...");
-
-      setTimeout(() => {
-        navigate(postLoginPath, { replace: true });
-      }, 500);
+      // Auth state change/effect performs the single post-login redirect.
+      // This avoids a race with Supabase session hydration.
+      navigate(postLoginPath, { replace: true });
     } catch (error) {
       let message = "Unable to sign in. Please check your credentials.";
       const errStr = error?.message?.toLowerCase() || "";

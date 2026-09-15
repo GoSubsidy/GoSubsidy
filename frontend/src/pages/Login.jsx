@@ -27,8 +27,8 @@ export default function Login() {
 
   const searchParams = new URLSearchParams(location.search);
 
-  // Force target path to /dpr with resume payment flag
-  const getTargetRedirect = () => {
+  // Function to compute the exact hash-safe destination path
+  const getTargetHashPath = () => {
     let pendingPayment = null;
     try {
       const raw = sessionStorage.getItem("gosubsidy_pending_payment");
@@ -40,27 +40,33 @@ export default function Login() {
     const paymentProduct = searchParams.get("paymentProduct") || pendingPayment?.productCode || "DPR_PRO";
     const isDprFlow = paymentProduct === "DPR_PRO" || searchParams.get("resumePayment") === "1" || pendingPayment?.productCode === "DPR_PRO";
 
+    // Since your site uses HashRouter (gosubsy.com/#), we explicitly construct the hash URL
     if (isDprFlow) {
-      // If your app uses Hash routing (evident from gosubsy.com/#), format target with #
-      return window.location.hash.includes("#") 
-        ? "/dpr?resumePayment=1" 
-        : `/dpr?resumePayment=1&paymentProduct=${encodeURIComponent(paymentProduct)}`;
+      return "/dpr?resumePayment=1";
     }
 
-    return searchParams.get("redirect") || pendingPayment?.returnPath || "/customer/dashboard";
+    const redirect = searchParams.get("redirect") || pendingPayment?.returnPath;
+    if (redirect && redirect.startsWith("/")) {
+      return redirect;
+    }
+
+    return "/customer/dashboard";
   };
 
-  const targetPath = getTargetRedirect();
+  // Perform absolute redirection using window.location to force the HashRouter to respect it
+  const executeRedirect = () => {
+    const target = getTargetHashPath();
+    const cleanTarget = target.startsWith("/") ? target : `/${target}`;
+    
+    // Force window location assignment to ensure HashRouter jumps directly to /dpr with query params
+    window.location.href = `${window.location.origin}/#${cleanTarget}`;
+  };
 
   useEffect(() => {
     if (!authLoading && user && session) {
-      if (window.location.hash.includes("#")) {
-        window.location.href = `${window.location.origin}/#${targetPath}`;
-      } else {
-        navigate(targetPath, { replace: true });
-      }
+      executeRedirect();
     }
-  }, [authLoading, user, session, targetPath, navigate]);
+  }, [authLoading, user, session]);
 
   const handleLogin = async (e) => {
     e.preventDefault();
@@ -90,15 +96,12 @@ export default function Login() {
         throw result.error;
       }
 
-      setSuccessMessage("Login successful. Redirecting...");
+      setSuccessMessage("Login successful. Redirecting to DPR payment...");
       
+      // Execute hard redirect after brief success flash
       setTimeout(() => {
-        if (window.location.hash.includes("#")) {
-          window.location.href = `${window.location.origin}/#${targetPath}`;
-        } else {
-          navigate(targetPath, { replace: true });
-        }
-      }, 500);
+        executeRedirect();
+      }, 400);
     } catch (error) {
       let message = "Unable to sign in. Please check your credentials.";
       const errStr = error?.message?.toLowerCase() || "";

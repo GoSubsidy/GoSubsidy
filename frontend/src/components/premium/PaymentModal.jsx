@@ -50,7 +50,6 @@ export default function PaymentModal({ product, onClose, onSuccess, paymentPurpo
   const navigate = useNavigate();
   const location = useLocation();
 
-  // Use the backend's existing canonical annual advisory product code.
   const rawProductCode = product?.code || "DPR_PRO";
   const productCode =
     rawProductCode === "SUBSIDY_ADVISORY_PASS"
@@ -62,7 +61,6 @@ export default function PaymentModal({ product, onClose, onSuccess, paymentPurpo
   );
   const displayPrice = Number(product?.price || 999);
 
-  // Auto-detect claimed promo offer from localStorage on load
   useEffect(() => {
     try {
       const stored = localStorage.getItem("activePromo");
@@ -89,7 +87,6 @@ export default function PaymentModal({ product, onClose, onSuccess, paymentPurpo
     }
   }, [user]);
 
-  // Pricing calculations
   const discountPercent = appliedOffer?.discountPercent || (appliedOffer?.code === "GOSUBSIDY20" ? 20 : 0);
   const discountAmount = appliedOffer ? Math.round((displayPrice * discountPercent) / 100) : 0;
   const finalPayablePrice = Math.max(1, displayPrice - discountAmount);
@@ -149,14 +146,16 @@ export default function PaymentModal({ product, onClose, onSuccess, paymentPurpo
     if (loading) return;
 
     if (!user?.id || !session?.access_token) {
+      // Force returnPath to /dpr for DPR_PRO to prevent landing on home page (/)
+      const targetPath = productCode === "DPR_PRO" ? "/dpr" : (location.pathname || "/dpr");
+
       try {
-        // Save pending payment intent and project state so it can be resumed after login
         sessionStorage.setItem(
           "gosubsidy_pending_payment",
           JSON.stringify({
             productCode,
             purpose: paymentPurpose,
-            returnPath: location.pathname || "/dpr",
+            returnPath: targetPath,
             returnSearch: location.search || "",
             createdAt: Date.now(),
           })
@@ -165,10 +164,8 @@ export default function PaymentModal({ product, onClose, onSuccess, paymentPurpo
         console.warn("Unable to save pending payment intent:", storageError);
       }
 
-      const returnPath = location.pathname || "/dpr";
-      // Explicitly direct back to the return path with resumePayment=1 query parameter
       navigate(
-        `/login?redirect=${encodeURIComponent(returnPath + "?resumePayment=1")}&resumePayment=1&paymentProduct=${encodeURIComponent(productCode)}`
+        `/login?redirect=${encodeURIComponent(targetPath + "?resumePayment=1")}&resumePayment=1&paymentProduct=${encodeURIComponent(productCode)}`
       );
       return;
     }
@@ -362,7 +359,6 @@ export default function PaymentModal({ product, onClose, onSuccess, paymentPurpo
             <span className="gs-pay-badge">REVIEW SUMMARY</span>
             <h2>Order Details</h2>
 
-            {/* COUPON REDEMPTION BOX */}
             {appliedOffer ? (
               <div className="gs-applied-promo-box">
                 <div>
@@ -391,7 +387,6 @@ export default function PaymentModal({ product, onClose, onSuccess, paymentPurpo
             )}
             {promoError && <p className="gs-promo-error-msg">{promoError}</p>}
 
-            {/* ORDER SUMMARY BREAKDOWN */}
             <div className="gs-checkout-summary">
               <div><span>Service</span><strong>{product?.name}</strong></div>
               <div><span>Service Code</span><strong>{productCode}</strong></div>
@@ -408,7 +403,6 @@ export default function PaymentModal({ product, onClose, onSuccess, paymentPurpo
               </div>
             </div>
 
-            {/* Mobile Number Input */}
             <div className="mb-3 text-start">
               <label className="form-label small fw-bold text-dark mb-1">
                 Mobile Number (10 Digits) <span className="text-danger">*</span>
@@ -458,7 +452,6 @@ export default function PaymentModal({ product, onClose, onSuccess, paymentPurpo
           </>
         )}
 
-        {/* INLINE AUTHENTICATION POPUP VIEW */}
         {showAuthForm && (
           <div className="gs-inline-auth-box">
             <h4 className="fw-bold mb-1" style={{ fontSize: "17px", color: "#0f172a" }}>

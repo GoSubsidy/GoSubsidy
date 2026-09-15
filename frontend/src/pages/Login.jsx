@@ -27,9 +27,6 @@ export default function Login() {
 
   const searchParams = new URLSearchParams(location.search);
 
-  // ------------------------------------------------------------
-  // PAYMENT LOGIN RESUME
-  // ------------------------------------------------------------
   let pendingPayment = null;
   try {
     const raw = sessionStorage.getItem("gosubsidy_pending_payment");
@@ -38,27 +35,28 @@ export default function Login() {
     pendingPayment = null;
   }
 
-  const requestedRedirect =
-    searchParams.get("redirect") ||
-    pendingPayment?.returnPath ||
-    "/customer/dashboard";
-
-  const redirectPath =
-    typeof requestedRedirect === "string" &&
-    requestedRedirect.startsWith("/") &&
-    !requestedRedirect.startsWith("//")
-      ? requestedRedirect
-      : "/customer/dashboard";
-
-  const resumePayment =
-    searchParams.get("resumePayment") === "1" ||
-    pendingPayment?.productCode === "DPR_PRO" ||
-    redirectPath.includes("resumePayment=1");
-
   const paymentProduct =
     searchParams.get("paymentProduct") ||
     pendingPayment?.productCode ||
     "DPR_PRO";
+
+  const resumePayment =
+    searchParams.get("resumePayment") === "1" ||
+    pendingPayment?.productCode === "DPR_PRO" ||
+    paymentProduct === "DPR_PRO";
+
+  // Enforce absolute fallback to /dpr if product is DPR_PRO to avoid going to home page (/)
+  const baseRedirect =
+    paymentProduct === "DPR_PRO"
+      ? "/dpr"
+      : (searchParams.get("redirect") || pendingPayment?.returnPath || "/customer/dashboard");
+
+  const redirectPath =
+    typeof baseRedirect === "string" &&
+    baseRedirect.startsWith("/") &&
+    !baseRedirect.startsWith("//")
+      ? baseRedirect
+      : "/dpr";
 
   const getPostLoginPath = () => {
     if (!resumePayment) return redirectPath;

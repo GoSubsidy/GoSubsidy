@@ -218,10 +218,23 @@ export function AuthProvider({ children }) {
   // =========================================================
 
   const signInWithGoogle = async () => {
+    // Preserve an in-progress payment flow across the Google OAuth round trip.
+    // The Login page will consume this after Supabase restores the session.
+    try {
+      const currentPath = `${window.location.pathname}${window.location.search}${window.location.hash}`;
+      if (currentPath && currentPath !== "/login") {
+        sessionStorage.setItem("gosubsidy_oauth_return_path", currentPath);
+      }
+    } catch (storageError) {
+      console.warn("[AuthContext] Unable to preserve OAuth return path:", storageError);
+    }
+
     const { data, error } = await supabase.auth.signInWithOAuth({
       provider: "google",
       options: {
-        redirectTo: `${window.location.origin}/customer/dashboard`,
+        // Return to the Login route so the same protected redirect logic
+        // handles both email/password and Google authentication.
+        redirectTo: `${window.location.origin}/login`,
         queryParams: {
           access_type: "offline",
           prompt: "consent",

@@ -44,12 +44,44 @@ initializeInsuranceServices();
 // CORS
 // ======================================================
 
+// Production + local development origins.
+// CORS_ORIGIN may be a comma-separated environment variable.
+// Example:
+// CORS_ORIGIN=https://www.gosubsidy.com,https://gosubsidy.com,http://localhost:5173
+const defaultCorsOrigins = [
+  "https://www.gosubsidy.com",
+  "https://gosubsidy.com",
+  "http://localhost:5173",
+  "http://localhost:4000",
+];
+
+const configuredCorsOrigins = String(process.env.CORS_ORIGIN || "")
+  .split(",")
+  .map((origin) => origin.trim())
+  .filter(Boolean);
+
+const corsOrigins = [
+  ...new Set([
+    ...defaultCorsOrigins,
+    ...configuredCorsOrigins,
+  ]),
+];
+
 app.use(
   cors({
-    origin: process.env.CORS_ORIGIN || [
-      "http://localhost:5173",
-      "http://localhost:4000",
-    ],
+    origin(origin, callback) {
+      // Allow server-to-server requests and tools such as health checks.
+      if (!origin) {
+        return callback(null, true);
+      }
+
+      if (corsOrigins.includes(origin)) {
+        return callback(null, true);
+      }
+
+      console.warn(`[CORS] Blocked origin: ${origin}`);
+      return callback(new Error("CORS origin not allowed"));
+    },
     methods: [
       "GET",
       "POST",
@@ -62,8 +94,12 @@ app.use(
       "Content-Type",
       "Authorization",
     ],
+    optionsSuccessStatus: 204,
   })
 );
+
+// Explicitly handle browser preflight requests.
+app.options("*", cors());
 
 // ======================================================
 // BODY PARSERS

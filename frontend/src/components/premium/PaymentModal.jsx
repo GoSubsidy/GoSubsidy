@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { useAuth } from "../../context/AuthContext";
+import { useLocation, useNavigate } from "react-router-dom";
 
 const RAZORPAY_SCRIPT = "https://checkout.razorpay.com/v1/checkout.js";
 const API_BASE_URL = import.meta.env.VITE_API_BASE_URL || "http://localhost:4000";
@@ -25,7 +26,7 @@ function loadRazorpayScript() {
   });
 }
 
-export default function PaymentModal({ product, onClose, onSuccess }) {
+export default function PaymentModal({ product, onClose, onSuccess, paymentPurpose = "generate" }) {
   const [step, setStep] = useState("offer");
   const [loading, setLoading] = useState(false);
   const [message, setMessage] = useState("");
@@ -46,6 +47,8 @@ export default function PaymentModal({ product, onClose, onSuccess }) {
   const [promoError, setPromoError] = useState("");
 
   const { user, session, signIn, signUp, signInWithGoogle } = useAuth();
+  const navigate = useNavigate();
+  const location = useLocation();
 
   // Use the backend's existing canonical annual advisory product code.
   // Keep compatibility with the older frontend code SUBSIDY_ADVISORY_PASS.
@@ -147,7 +150,24 @@ export default function PaymentModal({ product, onClose, onSuccess }) {
     if (loading) return;
 
     if (!user?.id || !session?.access_token) {
-      setShowAuthForm(true);
+      try {
+        sessionStorage.setItem(
+          "gosubsidy_pending_payment",
+          JSON.stringify({
+            productCode,
+            purpose: paymentPurpose,
+            returnPath: location.pathname,
+            createdAt: Date.now(),
+          })
+        );
+      } catch (storageError) {
+        console.warn("Unable to save pending payment intent:", storageError);
+      }
+
+      const returnPath = location.pathname || "/dpr";
+      navigate(
+        `/login?redirect=${encodeURIComponent(returnPath)}&resumePayment=1&paymentProduct=${encodeURIComponent(productCode)}`
+      );
       return;
     }
 

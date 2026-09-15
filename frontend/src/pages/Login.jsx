@@ -114,9 +114,10 @@ export default function Login() {
       }
 
       setSuccessMessage("Login successful. Redirecting...");
-      // Auth state change/effect performs the single post-login redirect.
-      // This avoids a race with Supabase session hydration.
-      navigate(postLoginPath, { replace: true });
+      // The auth/session effect above performs the single post-login redirect.
+      // Do not navigate here as well: Supabase session hydration can race with
+      // an immediate navigation and cause the pending Premium DPR payment
+      // resume query to be lost.
     } catch (error) {
       let message = "Unable to sign in. Please check your credentials.";
       const errStr = error?.message?.toLowerCase() || "";

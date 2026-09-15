@@ -429,6 +429,48 @@ export default function DPR() {
   });
 
   // ------------------------------------------------------
+  // RESTORE DPR + RESUME PAYMENT AFTER LOGIN
+  // ------------------------------------------------------
+  React.useEffect(() => {
+    try {
+      const pendingRaw = sessionStorage.getItem("gosubsidy_pending_dpr_project");
+      if (pendingRaw) {
+        const pending = JSON.parse(pendingRaw);
+        if (pending?.project && typeof pending.project === "object") {
+          setProject((current) => ({ ...current, ...pending.project }));
+        }
+        sessionStorage.removeItem("gosubsidy_pending_dpr_project");
+      }
+    } catch (error) {
+      console.warn("Unable to restore pending DPR project:", error);
+    }
+
+    const params = new URLSearchParams(location.search);
+    if (params.get("resumePayment") !== "1") return;
+
+    let pendingPurpose = "generate";
+    try {
+      const pendingPayment = sessionStorage.getItem("gosubsidy_pending_payment");
+      if (pendingPayment) {
+        const parsed = JSON.parse(pendingPayment);
+        if (parsed?.productCode === "DPR_PRO") {
+          pendingPurpose = parsed?.purpose === "financial-edit" ? "financial-edit" : "generate";
+        }
+      }
+      sessionStorage.removeItem("gosubsidy_pending_payment");
+    } catch (error) {
+      console.warn("Unable to read pending payment intent:", error);
+    }
+
+    setDprPaymentPurpose(pendingPurpose);
+    setShowDPRPayment(true);
+
+    const cleanUrl = `${location.pathname}${location.hash || ""}`;
+    navigate(cleanUrl, { replace: true, state: location.state });
+  }, [location.pathname, location.search, location.hash, location.state, navigate]);
+
+
+  // ------------------------------------------------------
   // PREMIUM DPR ENTITLEMENT — PROJECT-SCOPED
   // ------------------------------------------------------
   // A previous test/demo payment must NOT unlock a new project.
@@ -607,6 +649,26 @@ export default function DPR() {
 
   const financialCellKey = (year, key) => `${year}-${key}`;
 
+  const savePendingDPRPayment = (purpose = "generate") => {
+    try {
+      sessionStorage.setItem(
+        "gosubsidy_pending_dpr_project",
+        JSON.stringify({ project, savedAt: Date.now() })
+      );
+      sessionStorage.setItem(
+        "gosubsidy_pending_payment",
+        JSON.stringify({
+          productCode: "DPR_PRO",
+          purpose,
+          returnPath: location.pathname,
+          createdAt: Date.now(),
+        })
+      );
+    } catch (error) {
+      console.warn("Unable to preserve DPR payment intent:", error);
+    }
+  };
+
   const startFinancialEditing = () => {
     // MANDATORY PREMIUM GATE:
     // Users may view the financial statements, but cannot edit any financial
@@ -618,6 +680,7 @@ export default function DPR() {
     if (!hasPaidAccess) {
       setPremiumFinancialUnlocked(false);
       setDprPaymentPurpose("financial-edit");
+      savePendingDPRPayment("financial-edit");
       setShowDPRPayment(true);
       return;
     }
@@ -992,6 +1055,7 @@ export default function DPR() {
       return;
     }
     setDprPaymentPurpose("generate");
+    savePendingDPRPayment("generate");
     setShowDPRPayment(true);
   };
 
@@ -2018,6 +2082,7 @@ export default function DPR() {
       {showDPRPayment && (
         <PaymentModal
           product={PREMIUM_PRODUCTS?.DPR_PRO || { code: "DPR_PRO", name: "Premium DPR", price: 999 }}
+          paymentPurpose={dprPaymentPurpose}
           onClose={() => {
             setShowDPRPayment(false);
             setDprPaymentPurpose("generate");

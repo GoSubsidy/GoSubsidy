@@ -27,58 +27,39 @@ export default function Login() {
 
   const searchParams = new URLSearchParams(location.search);
 
-  let pendingPayment = null;
-  try {
-    const raw = sessionStorage.getItem("gosubsidy_pending_payment");
-    pendingPayment = raw ? JSON.parse(raw) : null;
-  } catch {
-    pendingPayment = null;
-  }
-
-  const paymentProduct =
-    searchParams.get("paymentProduct") ||
-    pendingPayment?.productCode ||
-    "DPR_PRO";
-
-  const resumePayment =
-    searchParams.get("resumePayment") === "1" ||
-    pendingPayment?.productCode === "DPR_PRO" ||
-    paymentProduct === "DPR_PRO";
-
-  // Enforce absolute fallback to /dpr if product is DPR_PRO to avoid going to home page (/)
-  const baseRedirect =
-    paymentProduct === "DPR_PRO"
-      ? "/dpr"
-      : (searchParams.get("redirect") || pendingPayment?.returnPath || "/customer/dashboard");
-
-  const redirectPath =
-    typeof baseRedirect === "string" &&
-    baseRedirect.startsWith("/") &&
-    !baseRedirect.startsWith("//")
-      ? baseRedirect
-      : "/dpr";
-
-  const getPostLoginPath = () => {
-    if (!resumePayment) return redirectPath;
-
+  // Determine exact destination: If it's a DPR product or has resumePayment, force /dpr?resumePayment=1
+  const getTargetRedirect = () => {
+    let pendingPayment = null;
     try {
-      const target = new URL(redirectPath, window.location.origin);
-      target.searchParams.set("resumePayment", "1");
-      target.searchParams.set("paymentProduct", paymentProduct);
-      return `${target.pathname}${target.search}${target.hash}`;
+      const raw = sessionStorage.getItem("gosubsidy_pending_payment");
+      pendingPayment = raw ? JSON.parse(raw) : null;
     } catch {
-      return `${redirectPath}${redirectPath.includes("?") ? "&" : "?"}resumePayment=1&paymentProduct=${encodeURIComponent(paymentProduct)}`;
+      pendingPayment = null;
     }
+
+    const paymentProduct = searchParams.get("paymentProduct") || pendingPayment?.productCode || "DPR_PRO";
+    const isDprFlow = paymentProduct === "DPR_PRO" || searchParams.get("resumePayment") === "1" || pendingPayment?.productCode === "DPR_PRO";
+
+    if (isDprFlow) {
+      return `/dpr?resumePayment=1&paymentProduct=${encodeURIComponent(paymentProduct)}`;
+    }
+
+    const requestedRedirect = searchParams.get("redirect") || pendingPayment?.returnPath;
+    if (requestedRedirect && requestedRedirect.startsWith("/") && !requestedRedirect.startsWith("//")) {
+      return requestedRedirect;
+    }
+
+    return "/customer/dashboard";
   };
 
-  const postLoginPath = getPostLoginPath();
+  const targetPath = getTargetRedirect();
 
+  // If user is already logged in when visiting login page, redirect them immediately
   useEffect(() => {
-    if (authLoading) return;
-    if (user && session) {
-      navigate(postLoginPath, { replace: true });
+    if (!authLoading && user && session) {
+      navigate(targetPath, { replace: true });
     }
-  }, [authLoading, user, session, postLoginPath, navigate]);
+  }, [authLoading, user, session, targetPath, navigate]);
 
   const handleLogin = async (e) => {
     e.preventDefault();
@@ -109,6 +90,11 @@ export default function Login() {
       }
 
       setSuccessMessage("Login successful. Redirecting...");
+      
+      // Explicitly navigate to the exact target path (forces /dpr?resumePayment=1)
+      setTimeout(() => {
+        navigate(targetPath, { replace: true });
+      }, 500);
     } catch (error) {
       let message = "Unable to sign in. Please check your credentials.";
       const errStr = error?.message?.toLowerCase() || "";
@@ -124,7 +110,6 @@ export default function Login() {
       }
 
       setErrorMessage(message);
-    } finally {
       setLoading(false);
     }
   };
@@ -135,7 +120,8 @@ export default function Login() {
     setGoogleLoading(true);
 
     try {
-      await signInWithGoogle();
+      // Pass the target path as redirectTo option if your Supabase AuthContext supports it
+      await signInWithGoogle({ redirectTo: `${window.location.origin}${targetPath}` });
     } catch (error) {
       setErrorMessage(error?.message || "Google authentication could not be completed.");
       setGoogleLoading(false);

@@ -30,10 +30,6 @@ export default function Login() {
   // ------------------------------------------------------------
   // PAYMENT LOGIN RESUME
   // ------------------------------------------------------------
-  // The payment flow stores its intent in sessionStorage before
-  // sending the customer to Login. This is deliberately preferred
-  // over the URL because OAuth/auth callbacks or hosting rewrites
-  // can drop query parameters.
   let pendingPayment = null;
   try {
     const raw = sessionStorage.getItem("gosubsidy_pending_payment");
@@ -56,7 +52,8 @@ export default function Login() {
 
   const resumePayment =
     searchParams.get("resumePayment") === "1" ||
-    pendingPayment?.productCode === "DPR_PRO";
+    pendingPayment?.productCode === "DPR_PRO" ||
+    redirectPath.includes("resumePayment=1");
 
   const paymentProduct =
     searchParams.get("paymentProduct") ||
@@ -114,10 +111,6 @@ export default function Login() {
       }
 
       setSuccessMessage("Login successful. Redirecting...");
-      // The auth/session effect above performs the single post-login redirect.
-      // Do not navigate here as well: Supabase session hydration can race with
-      // an immediate navigation and cause the pending Premium DPR payment
-      // resume query to be lost.
     } catch (error) {
       let message = "Unable to sign in. Please check your credentials.";
       const errStr = error?.message?.toLowerCase() || "";

@@ -51,7 +51,6 @@ export default function PaymentModal({ product, onClose, onSuccess, paymentPurpo
   const location = useLocation();
 
   // Use the backend's existing canonical annual advisory product code.
-  // Keep compatibility with the older frontend code SUBSIDY_ADVISORY_PASS.
   const rawProductCode = product?.code || "DPR_PRO";
   const productCode =
     rawProductCode === "SUBSIDY_ADVISORY_PASS"
@@ -151,6 +150,7 @@ export default function PaymentModal({ product, onClose, onSuccess, paymentPurpo
 
     if (!user?.id || !session?.access_token) {
       try {
+        // Save pending payment intent and project state so it can be resumed after login
         sessionStorage.setItem(
           "gosubsidy_pending_payment",
           JSON.stringify({
@@ -166,8 +166,9 @@ export default function PaymentModal({ product, onClose, onSuccess, paymentPurpo
       }
 
       const returnPath = location.pathname || "/dpr";
+      // Explicitly direct back to the return path with resumePayment=1 query parameter
       navigate(
-        `/login?redirect=${encodeURIComponent(returnPath)}&resumePayment=1&paymentProduct=${encodeURIComponent(productCode)}`
+        `/login?redirect=${encodeURIComponent(returnPath + "?resumePayment=1")}&resumePayment=1&paymentProduct=${encodeURIComponent(productCode)}`
       );
       return;
     }
@@ -182,8 +183,6 @@ export default function PaymentModal({ product, onClose, onSuccess, paymentPurpo
     setMessage("");
 
     try {
-      // Load Razorpay directly. The create-order endpoint returns the live keyId,
-      // so a separate /config request is not required and cannot block checkout.
       const scriptLoaded = await loadRazorpayScript();
       if (!scriptLoaded || !window.Razorpay) {
         throw new Error(
@@ -191,7 +190,6 @@ export default function PaymentModal({ product, onClose, onSuccess, paymentPurpo
         );
       }
 
-      // Sends the discounted price and coupon code to the backend order endpoint
       const orderResponse = await fetch(`${API_BASE_URL}/api/payment/create-order`, {
         method: "POST",
         headers: {
@@ -614,7 +612,6 @@ export default function PaymentModal({ product, onClose, onSuccess, paymentPurpo
         .gs-checkout-total { border-top: 1px solid #cbd5e1; margin-top: 6px; padding-top: 10px !important; font-weight: 800; }
         .gs-checkout-total strong { color: #0284c7; font-size: 18px; }
         
-        /* Promo Input & Applied State */
         .gs-applied-promo-box {
           display: flex; justify-content: space-between; align-items: center;
           background: #ecfdf5; border: 1px solid #6ee7b7; border-radius: 10px;
@@ -640,7 +637,6 @@ export default function PaymentModal({ product, onClose, onSuccess, paymentPurpo
         .gs-coupon-entry-row button:disabled { background: #94a3b8; }
         .gs-promo-error-msg { color: #dc2626; font-size: 11px; text-align: left; margin: -4px 0 8px; font-weight: 600; }
 
-        /* Mobile number input fix */
         .gs-phone-input {
           display: flex !important;
           width: 100% !important;

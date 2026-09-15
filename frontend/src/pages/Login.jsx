@@ -27,7 +27,7 @@ export default function Login() {
 
   const searchParams = new URLSearchParams(location.search);
 
-  // Determine exact destination: If it's a DPR product or has resumePayment, force /dpr?resumePayment=1
+  // Force target path to /dpr with resume payment flag
   const getTargetRedirect = () => {
     let pendingPayment = null;
     try {
@@ -41,23 +41,24 @@ export default function Login() {
     const isDprFlow = paymentProduct === "DPR_PRO" || searchParams.get("resumePayment") === "1" || pendingPayment?.productCode === "DPR_PRO";
 
     if (isDprFlow) {
-      return `/dpr?resumePayment=1&paymentProduct=${encodeURIComponent(paymentProduct)}`;
+      // If your app uses Hash routing (evident from gosubsy.com/#), format target with #
+      return window.location.hash.includes("#") 
+        ? "/dpr?resumePayment=1" 
+        : `/dpr?resumePayment=1&paymentProduct=${encodeURIComponent(paymentProduct)}`;
     }
 
-    const requestedRedirect = searchParams.get("redirect") || pendingPayment?.returnPath;
-    if (requestedRedirect && requestedRedirect.startsWith("/") && !requestedRedirect.startsWith("//")) {
-      return requestedRedirect;
-    }
-
-    return "/customer/dashboard";
+    return searchParams.get("redirect") || pendingPayment?.returnPath || "/customer/dashboard";
   };
 
   const targetPath = getTargetRedirect();
 
-  // If user is already logged in when visiting login page, redirect them immediately
   useEffect(() => {
     if (!authLoading && user && session) {
-      navigate(targetPath, { replace: true });
+      if (window.location.hash.includes("#")) {
+        window.location.href = `${window.location.origin}/#${targetPath}`;
+      } else {
+        navigate(targetPath, { replace: true });
+      }
     }
   }, [authLoading, user, session, targetPath, navigate]);
 
@@ -91,9 +92,12 @@ export default function Login() {
 
       setSuccessMessage("Login successful. Redirecting...");
       
-      // Explicitly navigate to the exact target path (forces /dpr?resumePayment=1)
       setTimeout(() => {
-        navigate(targetPath, { replace: true });
+        if (window.location.hash.includes("#")) {
+          window.location.href = `${window.location.origin}/#${targetPath}`;
+        } else {
+          navigate(targetPath, { replace: true });
+        }
       }, 500);
     } catch (error) {
       let message = "Unable to sign in. Please check your credentials.";
@@ -120,8 +124,7 @@ export default function Login() {
     setGoogleLoading(true);
 
     try {
-      // Pass the target path as redirectTo option if your Supabase AuthContext supports it
-      await signInWithGoogle({ redirectTo: `${window.location.origin}${targetPath}` });
+      await signInWithGoogle();
     } catch (error) {
       setErrorMessage(error?.message || "Google authentication could not be completed.");
       setGoogleLoading(false);

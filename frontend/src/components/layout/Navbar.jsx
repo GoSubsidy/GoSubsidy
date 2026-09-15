@@ -487,44 +487,150 @@ export default function Navbar() {
   return (
     <header className="gs-navbar-root" ref={navbarRef} aria-label="GoSubsidy Navigation">
       <style>{`
-        /* Perfectly matched typography and sizing exactly like the official logo asset */
+        /* =====================================================
+           GoSubsidy compact app-style brand icon
+           Keeps the existing brand asset, but presents it like
+           the compact icons used by modern fintech apps.
+           ===================================================== */
         .gs-navbar-brand {
+          display: inline-flex;
+          align-items: center;
+          gap: 9px;
+          text-decoration: none;
+          flex-shrink: 0;
+          height: 58px;
+        }
+
+        .gs-navbar-logo-wrap {
+          width: 44px;
+          height: 44px;
+          min-width: 44px;
           display: flex;
           align-items: center;
-          gap: 12px;
-          text-decoration: none;
+          justify-content: center;
+          border-radius: 12px;
+          overflow: hidden;
+          background: #ffffff;
+          border: 1px solid rgba(0, 166, 106, 0.18);
+          box-shadow: 0 3px 10px rgba(0, 0, 0, 0.08),
+                      0 1px 3px rgba(0, 166, 106, 0.10);
+          transition: transform 0.2s ease, box-shadow 0.2s ease;
         }
+
+        .gs-navbar-brand:hover .gs-navbar-logo-wrap {
+          transform: translateY(-1px) scale(1.03);
+          box-shadow: 0 6px 16px rgba(0, 166, 106, 0.15),
+                      0 2px 5px rgba(255, 104, 0, 0.10);
+        }
+
         .gs-navbar-logo {
-          height: 42px;
-          width: auto;
+          width: 38px;
+          height: 38px;
           object-fit: contain;
+          display: block;
         }
+
         .gs-navbar-brand-text {
           display: flex;
           flex-direction: column;
+          justify-content: center;
           line-height: 1.05;
         }
+
         .gs-navbar-brand-name {
-          font-size: 27px;
+          font-size: 25px;
           font-weight: 900;
-          letter-spacing: -0.9px;
+          letter-spacing: -1px;
           display: flex;
           align-items: center;
         }
+
         .gs-nav-go {
           color: #00a66a;
         }
+
         .gs-nav-subsidy {
           color: #ff6800;
         }
+
         .gs-navbar-tagline {
-          font-size: 8.5px;
+          font-size: 7px;
           font-weight: 800;
           color: #1a2b4c;
-          letter-spacing: 1.25px;
-          margin-top: 3.5px;
+          letter-spacing: 1px;
+          margin-top: 4px;
           text-transform: uppercase;
           white-space: nowrap;
+        }
+
+        @media (max-width: 768px) {
+          .gs-navbar-brand {
+            gap: 7px;
+            height: 50px;
+          }
+
+          .gs-navbar-logo-wrap {
+            width: 40px;
+            height: 40px;
+            min-width: 40px;
+            border-radius: 11px;
+          }
+
+          .gs-navbar-logo {
+            width: 35px;
+            height: 35px;
+          }
+
+          .gs-navbar-brand-name {
+            font-size: 20px;
+            letter-spacing: -0.8px;
+          }
+
+          .gs-navbar-tagline {
+            font-size: 5.5px;
+            letter-spacing: 0.7px;
+            margin-top: 3px;
+          }
+        }
+
+        @media (max-width: 420px) {
+          .gs-navbar-brand-text {
+            display: none;
+          }
+
+          .gs-navbar-logo-wrap {
+            width: 42px;
+            height: 42px;
+            min-width: 42px;
+            border-radius: 12px;
+          }
+
+          .gs-navbar-logo {
+            width: 37px;
+            height: 37px;
+          }
+        }
+
+        /* Mobile drawer brand */
+        .gs-drawer-logo-wrap {
+          width: 40px;
+          height: 40px;
+          min-width: 40px;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          border-radius: 11px;
+          overflow: hidden;
+          background: #fff;
+          border: 1px solid rgba(0, 166, 106, 0.18);
+          box-shadow: 0 3px 9px rgba(0, 0, 0, 0.07);
+        }
+
+        .gs-drawer-logo-wrap .gs-drawer-logo {
+          width: 34px;
+          height: 34px;
+          object-fit: contain;
+          display: block;
         }
       `}</style>
 
@@ -541,8 +647,10 @@ export default function Navbar() {
               <i className="bi bi-list" />
             </button>
 
-            <Link to="/" className="gs-navbar-brand" onClick={closeMenus}>
-              <img src="/images/gosubsidy-logo.png" alt="GoSubsidy" className="gs-navbar-logo" />
+            <Link to="/" className="gs-navbar-brand" onClick={closeMenus} aria-label="GoSubsidy Home">
+              <span className="gs-navbar-logo-wrap">
+                <img src="/images/gosubsidy-logo.png" alt="GoSubsidy" className="gs-navbar-logo" />
+              </span>
               <div className="gs-navbar-brand-text">
                 <span className="gs-navbar-brand-name">
                   <span className="gs-nav-go">Go</span>
@@ -935,7 +1043,9 @@ export default function Navbar() {
           <div className="gs-drawer-content" onClick={(e) => e.stopPropagation()}>
             <div className="gs-drawer-header">
               <div className="gs-drawer-brand">
-                <img src="/images/gosubsidy-logo.png" alt="GoSubsidy" className="gs-drawer-logo" />
+                <span className="gs-drawer-logo-wrap">
+                  <img src="/images/gosubsidy-logo.png" alt="GoSubsidy" className="gs-drawer-logo" />
+                </span>
                 <span className="gs-drawer-title">
                   <span className="gs-nav-go">Go</span>
                   <span className="gs-nav-subsidy">Subsidy</span>

@@ -152,6 +152,10 @@ export default function PaymentModal({ product, onClose, onSuccess, paymentPurpo
     if (!user?.id || !session?.access_token) {
       try {
         sessionStorage.setItem(
+          "gosubsidy_payment_login_redirect_pending",
+          "1"
+        );
+        sessionStorage.setItem(
           "gosubsidy_pending_payment",
           JSON.stringify({
             productCode,

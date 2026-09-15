@@ -229,24 +229,21 @@ export function AuthProvider({ children }) {
       console.warn("[AuthContext] Unable to preserve OAuth return path:", storageError);
     }
 
+    let oauthRedirectTo = `${window.location.origin}/login`;
+    try {
+      const pendingRaw = sessionStorage.getItem("gosubsidy_pending_payment");
+      const pending = pendingRaw ? JSON.parse(pendingRaw) : null;
+      if (pending?.productCode === "DPR_PRO") {
+        oauthRedirectTo = `${window.location.origin}/login?redirect=%2Fdpr&resumePayment=1&paymentProduct=DPR_PRO`;
+      }
+    } catch (storageError) {
+      console.warn("[AuthContext] Unable to read pending payment for OAuth:", storageError);
+    }
+
     const { data, error } = await supabase.auth.signInWithOAuth({
       provider: "google",
       options: {
-        // Return to Login with the payment resume target preserved.
-        // This survives the full Google OAuth browser round trip.
-        redirectTo: (() => {
-          try {
-            const pendingRaw = sessionStorage.getItem("gosubsidy_pending_payment");
-            const pending = pendingRaw ? JSON.parse(pendingRaw) : null;
-            if (pending?.productCode === "DPR_PRO") {
-              const target = pending.returnPath || "/dpr";
-              return `${window.location.origin}/login?redirect=${encodeURIComponent(target)}&resumePayment=1&paymentProduct=DPR_PRO`;
-            }
-          } catch (storageError) {
-            console.warn("[AuthContext] Unable to build payment OAuth return URL:", storageError);
-          }
-          return `${window.location.origin}/login`;
-        })(),
+        redirectTo: oauthRedirectTo,
         queryParams: {
           access_type: "offline",
           prompt: "consent",

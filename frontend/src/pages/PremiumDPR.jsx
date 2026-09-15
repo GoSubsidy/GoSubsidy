@@ -446,14 +446,15 @@ export default function DPR() {
     }
 
     const params = new URLSearchParams(location.search);
-    if (params.get("resumePayment") !== "1" && !sessionStorage.getItem("gosubsidy_pending_payment")) return;
 
     let pendingPurpose = "generate";
+    let hasPendingDPRPayment = false;
     try {
       const pendingPayment = sessionStorage.getItem("gosubsidy_pending_payment");
       if (pendingPayment) {
         const parsed = JSON.parse(pendingPayment);
         if (parsed?.productCode === "DPR_PRO") {
+          hasPendingDPRPayment = true;
           pendingPurpose = parsed?.purpose === "financial-edit" ? "financial-edit" : "generate";
         }
       }
@@ -461,6 +462,11 @@ export default function DPR() {
     } catch (error) {
       console.warn("Unable to read pending payment intent:", error);
     }
+
+    const shouldResumePayment =
+      params.get("resumePayment") === "1" || hasPendingDPRPayment;
+
+    if (!shouldResumePayment) return;
 
     setDprPaymentPurpose(pendingPurpose);
     setShowDPRPayment(true);

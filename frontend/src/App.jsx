@@ -3,6 +3,7 @@ import {
   Routes,
   Route,
   useLocation,
+  useNavigate,
   Navigate,
 } from "react-router-dom";
 
@@ -95,6 +96,7 @@ import CustomerDirectory from "./admin/pages/CustomerDirectory";
 // ======================================================
 function AppContent() {
   const location = useLocation();
+  const navigate = useNavigate();
 
   // ====================================================
   // GLOBAL PORTAL PAGE-VISIT ANALYTICS
@@ -172,6 +174,28 @@ function AppContent() {
   const hideNavbar =
     isAdminRoute ||
     isDPRPreview;
+
+  // ====================================================
+  // PREMIUM DPR PAYMENT RETURN RECOVERY
+  // ====================================================
+  // If an OAuth/hosting callback unexpectedly lands on Home while a Premium
+  // DPR payment is waiting, recover the flow instead of losing the payment.
+  useEffect(() => {
+    if (location.pathname !== "/") return;
+
+    try {
+      const recoveryPending =
+        sessionStorage.getItem("gosubsidy_payment_login_redirect_pending") === "1";
+      const pendingRaw = sessionStorage.getItem("gosubsidy_pending_payment");
+      const pending = pendingRaw ? JSON.parse(pendingRaw) : null;
+
+      if (recoveryPending && pending?.productCode === "DPR_PRO") {
+        navigate("/dpr?resumePayment=1&paymentProduct=DPR_PRO", { replace: true });
+      }
+    } catch (error) {
+      console.warn("[GoSubsidy] DPR payment return recovery failed:", error);
+    }
+  }, [location.pathname, navigate]);
 
   // ====================================================
   // RENDER

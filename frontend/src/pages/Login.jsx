@@ -30,10 +30,9 @@ export default function Login() {
   // ------------------------------------------------------------
   // PAYMENT LOGIN RESUME
   // ------------------------------------------------------------
-  // The payment flow stores its intent in sessionStorage before
-  // sending the customer to Login. This is deliberately preferred
-  // over the URL because OAuth/auth callbacks or hosting rewrites
-  // can drop query parameters.
+  // Premium DPR payments always return to /dpr after authentication.
+  // This is intentionally deterministic so a missing/changed redirect
+  // parameter can never send the payment flow to Home.
   let pendingPayment = null;
   try {
     const raw = sessionStorage.getItem("gosubsidy_pending_payment");
@@ -42,47 +41,28 @@ export default function Login() {
     pendingPayment = null;
   }
 
-  const requestedRedirect =
-    searchParams.get("redirect") ||
-    pendingPayment?.returnPath ||
-    "/customer/dashboard";
+  const isPendingDPRPayment = pendingPayment?.productCode === "DPR_PRO";
+  const queryResumePayment = searchParams.get("resumePayment") === "1";
+  const queryPaymentProduct = searchParams.get("paymentProduct") || "";
+  const paymentResume =
+    isPendingDPRPayment ||
+    (queryResumePayment && queryPaymentProduct === "DPR_PRO");
 
-  const redirectPath =
+  const requestedRedirect = searchParams.get("redirect") || "/customer/dashboard";
+  const safeRequestedRedirect =
     typeof requestedRedirect === "string" &&
     requestedRedirect.startsWith("/") &&
     !requestedRedirect.startsWith("//")
       ? requestedRedirect
       : "/customer/dashboard";
 
-  const resumePayment =
-    searchParams.get("resumePayment") === "1" ||
-    pendingPayment?.productCode === "DPR_PRO";
-
-  const paymentProduct =
-    searchParams.get("paymentProduct") ||
-    pendingPayment?.productCode ||
-    "DPR_PRO";
-
-  const getPostLoginPath = () => {
-    if (!resumePayment) return redirectPath;
-
-    try {
-      const target = new URL(redirectPath, window.location.origin);
-      target.searchParams.set("resumePayment", "1");
-      target.searchParams.set("paymentProduct", paymentProduct);
-      return `${target.pathname}${target.search}${target.hash}`;
-    } catch {
-      return `${redirectPath}${redirectPath.includes("?") ? "&" : "?"}resumePayment=1&paymentProduct=${encodeURIComponent(paymentProduct)}`;
-    }
-  };
-
-  const postLoginPath = getPostLoginPath();
+  const postLoginPath = paymentResume
+    ? "/dpr?resumePayment=1&paymentProduct=DPR_PRO"
+    : safeRequestedRedirect;
 
   useEffect(() => {
-    if (authLoading) return;
-    if (user && session) {
-      navigate(postLoginPath, { replace: true });
-    }
+    if (authLoading || !user || !session) return;
+    navigate(postLoginPath, { replace: true });
   }, [authLoading, user, session, postLoginPath, navigate]);
 
   const handleLogin = async (e) => {
@@ -114,8 +94,7 @@ export default function Login() {
       }
 
       setSuccessMessage("Login successful. Redirecting...");
-      // Redirect only from the authenticated-session effect above.
-      // This prevents a race between Supabase session hydration and navigation.
+      // Navigation is handled only by the authenticated-session effect above.
     } catch (error) {
       let message = "Unable to sign in. Please check your credentials.";
       const errStr = error?.message?.toLowerCase() || "";

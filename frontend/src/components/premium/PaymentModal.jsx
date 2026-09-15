@@ -50,6 +50,8 @@ export default function PaymentModal({ product, onClose, onSuccess, paymentPurpo
   const navigate = useNavigate();
   const location = useLocation();
 
+  // Use the backend's existing canonical annual advisory product code.
+  // Keep compatibility with the older frontend code SUBSIDY_ADVISORY_PASS.
   const rawProductCode = product?.code || "DPR_PRO";
   const productCode =
     rawProductCode === "SUBSIDY_ADVISORY_PASS"
@@ -61,6 +63,7 @@ export default function PaymentModal({ product, onClose, onSuccess, paymentPurpo
   );
   const displayPrice = Number(product?.price || 999);
 
+  // Auto-detect claimed promo offer from localStorage on load
   useEffect(() => {
     try {
       const stored = localStorage.getItem("activePromo");
@@ -87,6 +90,7 @@ export default function PaymentModal({ product, onClose, onSuccess, paymentPurpo
     }
   }, [user]);
 
+  // Pricing calculations
   const discountPercent = appliedOffer?.discountPercent || (appliedOffer?.code === "GOSUBSIDY20" ? 20 : 0);
   const discountAmount = appliedOffer ? Math.round((displayPrice * discountPercent) / 100) : 0;
   const finalPayablePrice = Math.max(1, displayPrice - discountAmount);
@@ -146,16 +150,13 @@ export default function PaymentModal({ product, onClose, onSuccess, paymentPurpo
     if (loading) return;
 
     if (!user?.id || !session?.access_token) {
-      // Force returnPath to /dpr for DPR_PRO to prevent landing on home page (/)
-      const targetPath = productCode === "DPR_PRO" ? "/dpr" : (location.pathname || "/dpr");
-
       try {
         sessionStorage.setItem(
           "gosubsidy_pending_payment",
           JSON.stringify({
             productCode,
             purpose: paymentPurpose,
-            returnPath: targetPath,
+            returnPath: location.pathname || "/dpr",
             returnSearch: location.search || "",
             createdAt: Date.now(),
           })
@@ -164,8 +165,9 @@ export default function PaymentModal({ product, onClose, onSuccess, paymentPurpo
         console.warn("Unable to save pending payment intent:", storageError);
       }
 
+      const returnPath = location.pathname || "/dpr";
       navigate(
-        `/login?redirect=${encodeURIComponent(targetPath + "?resumePayment=1")}&resumePayment=1&paymentProduct=${encodeURIComponent(productCode)}`
+        `/login?redirect=${encodeURIComponent(returnPath)}&resumePayment=1&paymentProduct=${encodeURIComponent(productCode)}`
       );
       return;
     }
@@ -180,6 +182,8 @@ export default function PaymentModal({ product, onClose, onSuccess, paymentPurpo
     setMessage("");
 
     try {
+      // Load Razorpay directly. The create-order endpoint returns the live keyId,
+      // so a separate /config request is not required and cannot block checkout.
       const scriptLoaded = await loadRazorpayScript();
       if (!scriptLoaded || !window.Razorpay) {
         throw new Error(
@@ -187,6 +191,7 @@ export default function PaymentModal({ product, onClose, onSuccess, paymentPurpo
         );
       }
 
+      // Sends the discounted price and coupon code to the backend order endpoint
       const orderResponse = await fetch(`${API_BASE_URL}/api/payment/create-order`, {
         method: "POST",
         headers: {
@@ -359,6 +364,7 @@ export default function PaymentModal({ product, onClose, onSuccess, paymentPurpo
             <span className="gs-pay-badge">REVIEW SUMMARY</span>
             <h2>Order Details</h2>
 
+            {/* COUPON REDEMPTION BOX */}
             {appliedOffer ? (
               <div className="gs-applied-promo-box">
                 <div>
@@ -387,6 +393,7 @@ export default function PaymentModal({ product, onClose, onSuccess, paymentPurpo
             )}
             {promoError && <p className="gs-promo-error-msg">{promoError}</p>}
 
+            {/* ORDER SUMMARY BREAKDOWN */}
             <div className="gs-checkout-summary">
               <div><span>Service</span><strong>{product?.name}</strong></div>
               <div><span>Service Code</span><strong>{productCode}</strong></div>
@@ -403,6 +410,7 @@ export default function PaymentModal({ product, onClose, onSuccess, paymentPurpo
               </div>
             </div>
 
+            {/* Mobile Number Input */}
             <div className="mb-3 text-start">
               <label className="form-label small fw-bold text-dark mb-1">
                 Mobile Number (10 Digits) <span className="text-danger">*</span>
@@ -452,6 +460,7 @@ export default function PaymentModal({ product, onClose, onSuccess, paymentPurpo
           </>
         )}
 
+        {/* INLINE AUTHENTICATION POPUP VIEW */}
         {showAuthForm && (
           <div className="gs-inline-auth-box">
             <h4 className="fw-bold mb-1" style={{ fontSize: "17px", color: "#0f172a" }}>
@@ -605,6 +614,7 @@ export default function PaymentModal({ product, onClose, onSuccess, paymentPurpo
         .gs-checkout-total { border-top: 1px solid #cbd5e1; margin-top: 6px; padding-top: 10px !important; font-weight: 800; }
         .gs-checkout-total strong { color: #0284c7; font-size: 18px; }
         
+        /* Promo Input & Applied State */
         .gs-applied-promo-box {
           display: flex; justify-content: space-between; align-items: center;
           background: #ecfdf5; border: 1px solid #6ee7b7; border-radius: 10px;
@@ -630,6 +640,7 @@ export default function PaymentModal({ product, onClose, onSuccess, paymentPurpo
         .gs-coupon-entry-row button:disabled { background: #94a3b8; }
         .gs-promo-error-msg { color: #dc2626; font-size: 11px; text-align: left; margin: -4px 0 8px; font-weight: 600; }
 
+        /* Mobile number input fix */
         .gs-phone-input {
           display: flex !important;
           width: 100% !important;

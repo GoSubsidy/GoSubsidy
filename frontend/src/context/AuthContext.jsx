@@ -232,9 +232,21 @@ export function AuthProvider({ children }) {
     const { data, error } = await supabase.auth.signInWithOAuth({
       provider: "google",
       options: {
-        // Return to the Login route so the same protected redirect logic
-        // handles both email/password and Google authentication.
-        redirectTo: `${window.location.origin}/login`,
+        // Return to Login with the payment resume target preserved.
+        // This survives the full Google OAuth browser round trip.
+        redirectTo: (() => {
+          try {
+            const pendingRaw = sessionStorage.getItem("gosubsidy_pending_payment");
+            const pending = pendingRaw ? JSON.parse(pendingRaw) : null;
+            if (pending?.productCode === "DPR_PRO") {
+              const target = pending.returnPath || "/dpr";
+              return `${window.location.origin}/login?redirect=${encodeURIComponent(target)}&resumePayment=1&paymentProduct=DPR_PRO`;
+            }
+          } catch (storageError) {
+            console.warn("[AuthContext] Unable to build payment OAuth return URL:", storageError);
+          }
+          return `${window.location.origin}/login`;
+        })(),
         queryParams: {
           access_type: "offline",
           prompt: "consent",

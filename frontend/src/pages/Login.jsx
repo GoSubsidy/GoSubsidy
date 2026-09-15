@@ -27,46 +27,63 @@ export default function Login() {
 
   const searchParams = new URLSearchParams(location.search);
 
-  // Function to compute the exact hash-safe destination path
-  const getTargetHashPath = () => {
-    let pendingPayment = null;
+  // ------------------------------------------------------------
+  // PAYMENT LOGIN RESUME
+  // ------------------------------------------------------------
+  // The payment flow stores its intent in sessionStorage before
+  // sending the customer to Login. This is deliberately preferred
+  // over the URL because OAuth/auth callbacks or hosting rewrites
+  // can drop query parameters.
+  let pendingPayment = null;
+  try {
+    const raw = sessionStorage.getItem("gosubsidy_pending_payment");
+    pendingPayment = raw ? JSON.parse(raw) : null;
+  } catch {
+    pendingPayment = null;
+  }
+
+  const requestedRedirect =
+    searchParams.get("redirect") ||
+    pendingPayment?.returnPath ||
+    "/customer/dashboard";
+
+  const redirectPath =
+    typeof requestedRedirect === "string" &&
+    requestedRedirect.startsWith("/") &&
+    !requestedRedirect.startsWith("//")
+      ? requestedRedirect
+      : "/customer/dashboard";
+
+  const resumePayment =
+    searchParams.get("resumePayment") === "1" ||
+    pendingPayment?.productCode === "DPR_PRO";
+
+  const paymentProduct =
+    searchParams.get("paymentProduct") ||
+    pendingPayment?.productCode ||
+    "DPR_PRO";
+
+  const getPostLoginPath = () => {
+    if (!resumePayment) return redirectPath;
+
     try {
-      const raw = sessionStorage.getItem("gosubsidy_pending_payment");
-      pendingPayment = raw ? JSON.parse(raw) : null;
+      const target = new URL(redirectPath, window.location.origin);
+      target.searchParams.set("resumePayment", "1");
+      target.searchParams.set("paymentProduct", paymentProduct);
+      return `${target.pathname}${target.search}${target.hash}`;
     } catch {
-      pendingPayment = null;
+      return `${redirectPath}${redirectPath.includes("?") ? "&" : "?"}resumePayment=1&paymentProduct=${encodeURIComponent(paymentProduct)}`;
     }
-
-    const paymentProduct = searchParams.get("paymentProduct") || pendingPayment?.productCode || "DPR_PRO";
-    const isDprFlow = paymentProduct === "DPR_PRO" || searchParams.get("resumePayment") === "1" || pendingPayment?.productCode === "DPR_PRO";
-
-    // Since your site uses HashRouter (gosubsy.com/#), we explicitly construct the hash URL
-    if (isDprFlow) {
-      return "/dpr?resumePayment=1";
-    }
-
-    const redirect = searchParams.get("redirect") || pendingPayment?.returnPath;
-    if (redirect && redirect.startsWith("/")) {
-      return redirect;
-    }
-
-    return "/customer/dashboard";
   };
 
-  // Perform absolute redirection using window.location to force the HashRouter to respect it
-  const executeRedirect = () => {
-    const target = getTargetHashPath();
-    const cleanTarget = target.startsWith("/") ? target : `/${target}`;
-    
-    // Force window location assignment to ensure HashRouter jumps directly to /dpr with query params
-    window.location.href = `${window.location.origin}/#${cleanTarget}`;
-  };
+  const postLoginPath = getPostLoginPath();
 
   useEffect(() => {
-    if (!authLoading && user && session) {
-      executeRedirect();
+    if (authLoading) return;
+    if (user && session) {
+      navigate(postLoginPath, { replace: true });
     }
-  }, [authLoading, user, session]);
+  }, [authLoading, user, session, postLoginPath, navigate]);
 
   const handleLogin = async (e) => {
     e.preventDefault();
@@ -96,12 +113,9 @@ export default function Login() {
         throw result.error;
       }
 
-      setSuccessMessage("Login successful. Redirecting to DPR payment...");
-      
-      // Execute hard redirect after brief success flash
-      setTimeout(() => {
-        executeRedirect();
-      }, 400);
+      setSuccessMessage("Login successful. Redirecting...");
+      // Redirect only from the authenticated-session effect above.
+      // This prevents a race between Supabase session hydration and navigation.
     } catch (error) {
       let message = "Unable to sign in. Please check your credentials.";
       const errStr = error?.message?.toLowerCase() || "";
@@ -117,6 +131,7 @@ export default function Login() {
       }
 
       setErrorMessage(message);
+    } finally {
       setLoading(false);
     }
   };

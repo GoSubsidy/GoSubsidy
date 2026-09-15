@@ -48,7 +48,6 @@ function EditableFinancialInput({
         inputMode="numeric"
         autoComplete="off"
         autoCorrect="off"
-        autoCorrect="off"
         spellCheck={false}
         className="form-control text-end fw-bold"
         value={localValue}
@@ -209,6 +208,8 @@ function Field({
           onChange={handleChange}
         >
           {options.map((option, index) => {
+            // Options may be plain strings or catalog objects. React cannot
+            // render an object directly as an <option> child/value.
             const optionValue =
               option && typeof option === "object"
                 ? option.value ?? option.name ?? option.label ?? option.id ?? ""
@@ -285,14 +286,17 @@ export default function DPR() {
       : rawSelectedCategory || "";
 
   const resolvedBusinessType = initialCategory.includes("Food") ? "Food Processing" :
-                            initialCategory.includes("Agri") ? "Agriculture" :
-                            initialCategory.includes("Green") ? "Solar" : "Food Processing";
+                               initialCategory.includes("Agri") ? "Agriculture" :
+                               initialCategory.includes("Green") ? "Solar" : "Food Processing";
 
   const [isGeneratingDPR, setIsGeneratingDPR] = useState(false);
   const [dprProgress, setDprProgress] = useState(0);
   const [dprStatus, setDprStatus] = useState("");
   const [showDPRPayment, setShowDPRPayment] = useState(false);
 
+  // Premium DPR payment gate for editable financial statements.
+  // IMPORTANT: never unlock from a generic/stale browser flag. Access must
+  // come from a successful DPR_PRO payment recorded for this DPR workspace.
   const [dprPaymentPurpose, setDprPaymentPurpose] = useState("generate");
   const [premiumFinancialUnlocked, setPremiumFinancialUnlocked] = useState(false);
 
@@ -302,6 +306,10 @@ export default function DPR() {
   const [catalogPage, setCatalogPage] = useState(1);
   const CATALOG_PAGE_SIZE = 24;
 
+  // ------------------------------------------------------
+  // 1,023+ PROJECT CATALOG: search + pagination
+  // Only the visible page is rendered so the modal stays fast.
+  // ------------------------------------------------------
   const activeCatalog = dprCategories[activeCatalogCategory] || dprCategories[0];
   const normalizedCatalogSearch = String(catalogSearch || "").trim().toLowerCase();
 
@@ -354,12 +362,17 @@ export default function DPR() {
         ? projectProfile
         : { name: String(projectProfile || "") };
 
+    // STEP 2 INTELLIGENCE: selecting a project now loads a sensible starting
+    // DPR profile instead of changing only the project name. The applicant can
+    // edit every generated assumption afterward.
     const intelligentUpdates = buildIntelligentTemplateUpdates(
       project,
       safeProfile,
       activeCatalog || {}
     );
 
+    // A new template is a new financial starting point, so stale manual
+    // overrides must not leak into the newly selected template.
     setFinancialOverrides({});
     setFinancialDrafts({});
     setFinancialDirty({});
@@ -416,13 +429,9 @@ export default function DPR() {
   });
 
   // ------------------------------------------------------
-  // RESTORE DPR + RESUME PAYMENT AFTER LOGIN (FIXED)
+  // RESTORE DPR + RESUME PAYMENT AFTER LOGIN
   // ------------------------------------------------------
   React.useEffect(() => {
-    const params = new URLSearchParams(location.search);
-    const isResuming = params.get("resumePayment") === "1";
-
-    // Always check for pending project state if coming back from login/payment intent
     try {
       const pendingRaw = sessionStorage.getItem("gosubsidy_pending_dpr_project");
       if (pendingRaw) {
@@ -430,14 +439,14 @@ export default function DPR() {
         if (pending?.project && typeof pending.project === "object") {
           setProject((current) => ({ ...current, ...pending.project }));
         }
-        // Clean up session item so it doesn't re-apply stale data later
         sessionStorage.removeItem("gosubsidy_pending_dpr_project");
       }
     } catch (error) {
       console.warn("Unable to restore pending DPR project:", error);
     }
 
-    if (!isResuming) return;
+    const params = new URLSearchParams(location.search);
+    if (params.get("resumePayment") !== "1" && !sessionStorage.getItem("gosubsidy_pending_payment")) return;
 
     let pendingPurpose = "generate";
     try {
@@ -460,6 +469,12 @@ export default function DPR() {
     navigate(cleanUrl, { replace: true, state: location.state });
   }, [location.pathname, location.search, location.hash, location.state, navigate]);
 
+
+  // ------------------------------------------------------
+  // PREMIUM DPR ENTITLEMENT — PROJECT-SCOPED
+  // ------------------------------------------------------
+  // A previous test/demo payment must NOT unlock a new project.
+  // The payment record must contain the identity of this DPR workspace.
   const getDPRProjectKey = (source = project) =>
     JSON.stringify({
       projectName: String(source?.projectName || "").trim(),
@@ -488,6 +503,8 @@ export default function DPR() {
   React.useEffect(() => {
     setPremiumFinancialUnlocked(readPremiumFinancialEntitlement());
 
+    // If the current project changes to a project without a matching paid
+    // entitlement, immediately close financial edit mode.
     if (!readPremiumFinancialEntitlement()) {
       setFinancialEditMode(false);
       setFinancialDrafts({});
@@ -509,6 +526,7 @@ export default function DPR() {
 
   const isSyncingRef = React.useRef(false);
 
+  // Sync workingCapitalMargin dynamically when working capital facility is toggled/adjusted
   React.useEffect(() => {
     if (project.requiresWorkingCapital && Number(project.workingCapitalAmount) > 0) {
       const computedMargin = Number(project.workingCapitalAmount) * (1 - (Number(project.workingCapitalBankLoanPercent) || 75) / 100);
@@ -519,6 +537,7 @@ export default function DPR() {
     }
   }, [project.requiresWorkingCapital, project.workingCapitalAmount, project.workingCapitalBankLoanPercent]);
 
+  // 1. Bidirectional Link: If projectCost changes in Step 2, scale asset components proportionally
   React.useEffect(() => {
     if (isSyncingRef.current) return;
     const currentProjectCost = Number(project.projectCost) || 0;
@@ -570,6 +589,7 @@ export default function DPR() {
     }
   }, [project.projectCost, project.requiresWorkingCapital, project.workingCapitalAmount, project.workingCapitalBankLoanPercent]);
 
+  // 2. Bidirectional Link: If asset values are modified manually in Step 3, sum them up to update projectCost
   React.useEffect(() => {
     if (isSyncingRef.current) return;
     const computedCapitalTotal = capitalCostItems.reduce(
@@ -650,6 +670,11 @@ export default function DPR() {
   };
 
   const startFinancialEditing = () => {
+    // MANDATORY PREMIUM GATE:
+    // Users may view the financial statements, but cannot edit any financial
+    // figures until the Premium DPR charge has been successfully paid.
+    // Re-read the entitlement at click time so a stale React state or an
+    // old localStorage value can never bypass the payment gate.
     const hasPaidAccess = readPremiumFinancialEntitlement();
 
     if (!hasPaidAccess) {
@@ -799,6 +824,7 @@ export default function DPR() {
 
   const projectionYears = Math.min(15, Math.max(1, Math.floor(Number(project.loanTenure) || 1)));
 
+  // Core Financial Projections with Optional Working Capital Routing
   const calculations = useMemo(() => {
     const years = [];
     let openingLoan = estimatedTermLoan;
@@ -1462,6 +1488,7 @@ export default function DPR() {
           <Field label="Loan Tenure (Years)" name="loanTenure" type="number" min="1" max="15" />
           <Field label="Moratorium (Months)" name="moratorium" type="number" min="0" />
 
+          {/* Optional Working Capital Toggle */}
           <div className="col-12 mt-4 pt-3 border-top">
             <div className="form-check form-switch">
               <input
@@ -1732,8 +1759,13 @@ export default function DPR() {
         </div>
       </main>
 
+      {/* Shared GoSubsidy footer */}
       <Footer />
 
+      {/* =========================================================
+          GoSubsidy Project Catalog
+          Search + category tabs + pagination for 1,023+ templates.
+          ========================================================= */}
       {showCatalogModal && (
         <div
           className="modal show d-block"
@@ -1767,6 +1799,8 @@ export default function DPR() {
               </div>
 
               <div className="modal-body p-4 bg-light">
+
+                {/* Search */}
                 <div className="row g-3 mb-4">
                   <div className="col-lg-8">
                     <label className="form-label fw-bold small mb-2">
@@ -1814,6 +1848,7 @@ export default function DPR() {
                   </div>
                 </div>
 
+                {/* Intelligent template preview */}
                 <div className="alert alert-primary border-0 rounded-4 shadow-sm mb-4 py-3">
                   <div className="d-flex align-items-start gap-3">
                     <div className="rounded-circle bg-white text-primary d-flex align-items-center justify-content-center flex-shrink-0" style={{ width: "42px", height: "42px" }}>
@@ -1826,6 +1861,7 @@ export default function DPR() {
                   </div>
                 </div>
 
+                {/* Sector cards */}
                 <div className="mb-4">
                   <h6
                     className="text-uppercase text-muted fw-bold mb-3"
@@ -1880,6 +1916,7 @@ export default function DPR() {
                   </div>
                 </div>
 
+                {/* Project results */}
                 <div className="bg-white rounded-4 p-4 shadow-sm border">
                   <div className="d-flex flex-wrap align-items-center justify-content-between gap-2 mb-3 pb-3 border-bottom">
                     <div>
@@ -1967,6 +2004,7 @@ export default function DPR() {
                     </div>
                   )}
 
+                  {/* Pagination */}
                   {catalogTotalPages > 1 && (
                     <div className="d-flex flex-wrap justify-content-center align-items-center gap-2 mt-4 pt-3 border-top">
                       <button
@@ -2051,6 +2089,9 @@ export default function DPR() {
           }}
           onSuccess={() => {
             const paidAt = new Date().toISOString();
+
+            // One successful Premium DPR payment unlocks the financial
+            // editor for THIS DPR workspace only.
             const projectKey = getDPRProjectKey(project);
 
             localStorage.setItem(
@@ -2064,12 +2105,15 @@ export default function DPR() {
               })
             );
 
+            // Remove the old generic unlock flag used by an earlier build.
             localStorage.removeItem("gosubsidy_dpr_financials_unlocked");
 
             setPremiumFinancialUnlocked(true);
             setShowDPRPayment(false);
 
             if (dprPaymentPurpose === "financial-edit") {
+              // Payment was requested specifically to edit financials.
+              // Open edit mode immediately; do NOT generate the AI DPR.
               setDprPaymentPurpose("generate");
               setFinancialDrafts({});
               setFinancialDirty({});
@@ -2077,6 +2121,7 @@ export default function DPR() {
               return;
             }
 
+            // Original Premium DPR flow: after payment, generate the final DPR.
             setDprPaymentPurpose("generate");
             handleGenerateAIDPR();
           }}

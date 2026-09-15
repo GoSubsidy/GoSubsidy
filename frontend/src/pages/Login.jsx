@@ -26,14 +26,39 @@ export default function Login() {
   const [successMessage, setSuccessMessage] = useState("");
 
   const searchParams = new URLSearchParams(location.search);
-  const redirectPath = searchParams.get("redirect") || "/customer/dashboard";
+
+  // Preserve a requested internal destination after login.
+  // Never allow an external/open redirect.
+  const requestedRedirect = searchParams.get("redirect") || "/customer/dashboard";
+  const redirectPath =
+    requestedRedirect.startsWith("/") && !requestedRedirect.startsWith("//")
+      ? requestedRedirect
+      : "/customer/dashboard";
+
+  const resumePayment = searchParams.get("resumePayment") === "1";
+  const paymentProduct = searchParams.get("paymentProduct") || "DPR_PRO";
+
+  const getPostLoginPath = () => {
+    if (!resumePayment) return redirectPath;
+
+    try {
+      const target = new URL(redirectPath, window.location.origin);
+      target.searchParams.set("resumePayment", "1");
+      target.searchParams.set("paymentProduct", paymentProduct);
+      return `${target.pathname}${target.search}${target.hash}`;
+    } catch {
+      return `${redirectPath}${redirectPath.includes("?") ? "&" : "?"}resumePayment=1&paymentProduct=${encodeURIComponent(paymentProduct)}`;
+    }
+  };
+
+  const postLoginPath = getPostLoginPath();
 
   useEffect(() => {
     if (authLoading) return;
     if (user && session) {
-      navigate(redirectPath, { replace: true });
+      navigate(postLoginPath, { replace: true });
     }
-  }, [authLoading, user, session, redirectPath, navigate]);
+  }, [authLoading, user, session, postLoginPath, navigate]);
 
   const handleLogin = async (e) => {
     e.preventDefault();
@@ -66,7 +91,7 @@ export default function Login() {
       setSuccessMessage("Login successful. Redirecting...");
 
       setTimeout(() => {
-        navigate(redirectPath, { replace: true });
+        navigate(postLoginPath, { replace: true });
       }, 500);
     } catch (error) {
       let message = "Unable to sign in. Please check your credentials.";

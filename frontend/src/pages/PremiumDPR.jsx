@@ -1679,7 +1679,6 @@ export default function DPR() {
       <header className="gs-hero">
         <div className="gs-shell">
           <div className="gs-topline">
-            <div className="gs-brand"><span>Go</span>Subsidy</div>
             <div className="gs-top-actions">
               <button 
                 type="button" 

@@ -156,7 +156,8 @@ export default function PaymentModal({ product, onClose, onSuccess, paymentPurpo
           JSON.stringify({
             productCode,
             purpose: paymentPurpose,
-            returnPath: location.pathname,
+            returnPath: location.pathname || "/dpr",
+            returnSearch: location.search || "",
             createdAt: Date.now(),
           })
         );

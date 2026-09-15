@@ -306,17 +306,9 @@ async function resolveServiceOrProduct(productCode, body = {}) {
     }
   }
 
-  const amount = Number(body.amount || body.price);
-  if (amount && amount > 0) {
-    return {
-      code: normalized,
-      amount: Math.round(amount),
-      validityDays: Number(body.validityDays) || 365,
-      name: String(body.productName || body.name || normalized.replace(/_/g, " ")),
-      isCoreProduct: false,
-    };
-  }
-
+  // IMPORTANT: Never trust price/validity sent by the browser.
+  // If a service is not present in the server catalogue or the Supabase
+  // services table, reject it instead of accepting body.amount/body.price.
   return null;
 }
 
@@ -352,6 +344,55 @@ async function getAuthenticatedUser(req) {
     return null;
   }
   return user;
+}
+
+// ============================================================
+// ADMIN AUTHORIZATION
+// ============================================================
+// All admin endpoints are protected server-side. Never rely on a role
+// supplied by the browser. The profile must belong to the authenticated
+// Supabase user and explicitly have is_admin=true or role=admin.
+async function requireAdmin(req, res) {
+  if (!requireSupabaseAdmin(res)) return null;
+
+  const user = await getAuthenticatedUser(req);
+  if (!user) {
+    res.status(401).json({
+      success: false,
+      message: "Please log in with an administrator account.",
+    });
+    return null;
+  }
+
+  const { data: profile, error } = await supabaseAdmin
+    .from("profiles")
+    .select("id, role, is_admin")
+    .eq("id", user.id)
+    .maybeSingle();
+
+  if (error) {
+    console.error("[Admin Auth] Profile lookup error:", error);
+    res.status(500).json({ success: false, message: "Unable to verify administrator access." });
+    return null;
+  }
+
+  const role = String(profile?.role || "").trim().toLowerCase();
+  const isAdmin = profile?.is_admin === true || ["admin", "superadmin", "super_admin"].includes(role);
+
+  if (!isAdmin) {
+    res.status(403).json({ success: false, message: "Administrator access is required." });
+    return null;
+  }
+
+  return user;
+}
+
+function sameProductCode(a, b) {
+  const left = normalizeProductCode(a);
+  const right = normalizeProductCode(b);
+  if (!left || !right) return false;
+  if (left === right) return true;
+  return left.toLowerCase().replace(/_/g, "-") === right.toLowerCase().replace(/_/g, "-");
 }
 
 // ============================================================
@@ -570,6 +611,57 @@ router.post("/verify", async (req, res) => {
     const order = await razorpay.orders.fetch(razorpay_order_id);
     const razorpayPayment = await razorpay.payments.fetch(razorpay_payment_id);
 
+    // Never trust product, user or amount values returned by the browser.
+    // Verify the server-created Razorpay order against the logged-in user
+    // and the server-side product catalogue.
+    const orderUserId = String(order?.notes?.user_id || "").trim();
+    if (orderUserId && orderUserId !== user.id) {
+      return res.status(403).json({
+        success: false,
+        verified: false,
+        message: "This payment order does not belong to the logged-in account.",
+      });
+    }
+
+    if (String(razorpayPayment?.order_id || "") !== String(razorpay_order_id)) {
+      return res.status(400).json({
+        success: false,
+        verified: false,
+        message: "Payment does not belong to the supplied Razorpay order.",
+      });
+    }
+
+    const item = await resolveServiceOrProduct(productCode, {
+      amount: Number(order.amount) / 100,
+      productName: order?.notes?.product_name,
+    });
+
+    if (!item) {
+      return res.status(400).json({
+        success: false,
+        verified: false,
+        message: "The requested product/service is not available.",
+      });
+    }
+
+    const orderProductCode = order?.notes?.product_code;
+    if (!sameProductCode(item.code, orderProductCode) || !sameProductCode(item.code, productCode)) {
+      return res.status(400).json({
+        success: false,
+        verified: false,
+        message: "Payment product verification failed.",
+      });
+    }
+
+    const expectedAmountPaise = Math.round(item.amount * 100);
+    if (Number(order?.amount) !== expectedAmountPaise || Number(razorpayPayment?.amount) !== expectedAmountPaise) {
+      return res.status(400).json({
+        success: false,
+        verified: false,
+        message: "Payment amount verification failed.",
+      });
+    }
+
     const paymentStatus = String(razorpayPayment?.status || "").toLowerCase();
     if (!["captured", "authorized"].includes(paymentStatus)) {
       return res.status(400).json({
@@ -578,11 +670,6 @@ router.post("/verify", async (req, res) => {
         message: `Payment status is ${razorpayPayment.status}.`,
       });
     }
-
-    const item = await resolveServiceOrProduct(productCode, {
-      amount: Number(order.amount) / 100,
-      productName: order?.notes?.product_name,
-    });
 
     const realPhone =
       order?.notes?.applicant_phone ||
@@ -667,14 +754,29 @@ router.post("/verify", async (req, res) => {
 
     // E. Update Entitlement
     const now = new Date();
-    const expiryDate = new Date(now);
+
+    // Extend an existing active entitlement instead of resetting it.
+    const { data: existingEntitlement } = await supabaseAdmin
+      .from("gosubsidy_entitlements")
+      .select("expires_at")
+      .eq("user_id", user.id)
+      .eq("product_code", item.code)
+      .maybeSingle();
+
+    const currentExpiry = existingEntitlement?.expires_at
+      ? new Date(existingEntitlement.expires_at)
+      : null;
+    const baseDate = currentExpiry && currentExpiry > now ? currentExpiry : now;
+    const expiryDate = new Date(baseDate);
     expiryDate.setDate(expiryDate.getDate() + item.validityDays);
 
     const entitlementPayload = {
       user_id: user.id,
       product_code: item.code,
       status: "active",
-      starts_at: now.toISOString(),
+      starts_at: currentExpiry && currentExpiry > now
+        ? (existingEntitlement?.starts_at || now.toISOString())
+        : now.toISOString(),
       expires_at: expiryDate.toISOString(),
       payment_id: payment?.id || null,
       updated_at: now.toISOString(),
@@ -865,7 +967,7 @@ router.get("/customer/applications", async (req, res) => {
 
 router.get("/admin/all-applications", async (req, res) => {
   try {
-    if (!requireSupabaseAdmin(res)) return;
+    if (!(await requireAdmin(req, res))) return;
 
     let { data: allApps, error: appErr } = await supabaseAdmin
       .from("applications")
@@ -931,7 +1033,7 @@ router.get("/admin/all-applications", async (req, res) => {
 
 router.post("/admin/create-admin-user", async (req, res) => {
   try {
-    if (!requireSupabaseAdmin(res)) return;
+    if (!(await requireAdmin(req, res))) return;
 
     const { userId, name, email, password, role } = req.body || {};
 
@@ -988,7 +1090,7 @@ router.post("/admin/create-admin-user", async (req, res) => {
 
 router.patch("/applications/:applicationId/status", async (req, res) => {
   try {
-    if (!requireSupabaseAdmin(res)) return;
+    if (!(await requireAdmin(req, res))) return;
 
     const { applicationId } = req.params;
     const { status, stage } = req.body || {};

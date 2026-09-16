@@ -39,6 +39,7 @@ import Loans from "./pages/Loans";
 import Contact from "./pages/Contact";
 import Register from "./pages/Register";
 import Login from "./pages/Login";
+import DownloadApp from "./pages/DownloadApp";
 
 // ======================================================
 // PREMIUM DPR & CALCULATORS
@@ -410,6 +411,12 @@ function AppContent() {
           path="/insurance/demo-proposal"
           element={<DemoProviderProposal />}
         />
+
+        {/* ==================================================
+            DownloadApp
+        ================================================== */}
+
+<Route path="/download-app" element={<DownloadApp />} />
 
         {/* ==================================================
             SERVICES

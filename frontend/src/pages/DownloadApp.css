@@ -1,5 +1,6 @@
 .gs-download-page {
   min-height: calc(100vh - 130px);
+  min-height: calc(100dvh - 130px);
   background:
     radial-gradient(circle at 20% 10%, rgba(0, 166, 106, 0.10), transparent 30%),
     radial-gradient(circle at 80% 20%, rgba(255, 104, 0, 0.10), transparent 30%),
@@ -8,12 +9,15 @@
   justify-content: center;
   align-items: center;
   padding: 50px 20px;
+  box-sizing: border-box;
+  overflow: hidden;
 }
 
 .gs-download-container {
   width: 100%;
   max-width: 850px;
   text-align: center;
+  margin: 0 auto;
 }
 
 .gs-download-icon {
@@ -25,12 +29,14 @@
   border-radius: 24px;
   border: 1px solid rgba(0, 166, 106, 0.15);
   box-shadow: 0 15px 40px rgba(0, 0, 0, 0.10);
+  box-sizing: border-box;
 }
 
 .gs-download-icon img {
   width: 100%;
   height: 100%;
   object-fit: contain;
+  display: block;
 }
 
 .gs-download-badge {
@@ -55,9 +61,7 @@
   color: #00a66a;
 }
 
-.gs-download-container h1 span {
-  color: #ff6800;
-}
+.gs-download-container h1 span { color: #ff6800; }
 
 .gs-download-container h2 {
   margin: 18px 0 0;
@@ -67,9 +71,7 @@
   font-weight: 700;
 }
 
-.gs-download-container h2 strong {
-  color: #00a66a;
-}
+.gs-download-container h2 strong { color: #00a66a; }
 
 .gs-download-description {
   max-width: 650px;
@@ -89,7 +91,8 @@
   font-weight: 800;
   cursor: pointer;
   box-shadow: 0 12px 30px rgba(0, 166, 106, 0.25);
-  transition: all 0.2s ease;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+  -webkit-tap-highlight-color: transparent;
 }
 
 .gs-download-button:hover {
@@ -97,9 +100,14 @@
   box-shadow: 0 16px 35px rgba(0, 166, 106, 0.30);
 }
 
-.gs-download-button i {
-  margin-right: 9px;
+.gs-download-button:active { transform: translateY(0); }
+
+.gs-download-button:focus-visible {
+  outline: 3px solid rgba(0, 166, 106, 0.25);
+  outline-offset: 3px;
 }
+
+.gs-download-button i { margin-right: 9px; }
 
 .gs-download-meta {
   display: flex;
@@ -109,6 +117,7 @@
   color: #66758d;
   font-size: 13px;
   font-weight: 600;
+  flex-wrap: wrap;
 }
 
 .gs-download-meta span {
@@ -117,11 +126,10 @@
   gap: 6px;
 }
 
-.gs-download-meta i {
-  color: #00a66a;
-}
+.gs-download-meta i { color: #00a66a; }
 
 .gs-download-card {
+  width: 100%;
   max-width: 620px;
   margin: 0 auto 30px;
   padding: 18px 20px;
@@ -133,6 +141,7 @@
   border: 1px solid rgba(23, 43, 77, 0.08);
   border-radius: 18px;
   box-shadow: 0 10px 30px rgba(0, 0, 0, 0.06);
+  box-sizing: border-box;
 }
 
 .gs-download-card-icon {
@@ -148,6 +157,8 @@
   font-size: 25px;
 }
 
+.gs-download-card-content { min-width: 0; }
+
 .gs-download-card strong {
   color: #172b4d;
   font-size: 15px;
@@ -157,6 +168,7 @@
   margin: 4px 0 0;
   color: #7b8799;
   font-size: 12px;
+  line-height: 1.45;
 }
 
 .gs-coming-soon {
@@ -183,6 +195,7 @@
   align-items: center;
   justify-content: center;
   gap: 8px;
+  min-width: 0;
   padding: 13px;
   border-radius: 12px;
   background: rgba(255, 255, 255, 0.65);
@@ -190,61 +203,134 @@
   color: #33445e;
   font-size: 12px;
   font-weight: 700;
+  box-sizing: border-box;
 }
 
 .gs-download-services i {
   color: #00a66a;
   font-size: 16px;
+  flex: 0 0 auto;
 }
+
+.gs-download-services span { min-width: 0; }
 
 .gs-download-note {
   margin: 25px 0 0;
   color: #8a94a5;
   font-size: 11px;
+  line-height: 1.5;
 }
 
-.gs-download-note i {
-  margin-right: 5px;
+.gs-download-note i { margin-right: 5px; }
+
+@media (max-width: 768px) {
+  .gs-download-page {
+    min-height: calc(100dvh - 90px);
+    padding: 40px 18px;
+    overflow: visible;
+  }
+
+  .gs-download-container h1 { letter-spacing: -2px; }
 }
 
 @media (max-width: 600px) {
   .gs-download-page {
-    padding: 35px 15px;
+    min-height: calc(100dvh - 70px);
+    padding: 30px 15px calc(45px + env(safe-area-inset-bottom));
+    align-items: flex-start;
+    overflow: visible;
   }
 
   .gs-download-icon {
     width: 75px;
     height: 75px;
     border-radius: 20px;
+    margin-bottom: 15px;
+  }
+
+  .gs-download-badge {
+    font-size: 12px;
+    padding: 7px 13px;
+    margin-bottom: 12px;
   }
 
   .gs-download-container h1 {
+    font-size: clamp(40px, 14vw, 58px);
     letter-spacing: -2px;
+  }
+
+  .gs-download-container h2 {
+    margin-top: 14px;
+    font-size: 19px;
+    line-height: 1.35;
   }
 
   .gs-download-description {
     font-size: 14px;
+    line-height: 1.6;
+    margin: 14px auto 22px;
   }
 
   .gs-download-button {
     width: 100%;
     max-width: 340px;
+    padding: 15px 20px;
+    font-size: 16px;
   }
 
   .gs-download-meta {
-    gap: 12px;
-    flex-wrap: wrap;
+    gap: 10px 18px;
+    margin: 18px 0 25px;
   }
 
   .gs-download-card {
-    padding: 15px;
+    padding: 14px;
+    gap: 11px;
+    margin-bottom: 22px;
+    border-radius: 16px;
   }
 
-  .gs-coming-soon {
-    display: none;
+  .gs-download-card-icon {
+    width: 42px;
+    height: 42px;
+    flex-basis: 42px;
+    font-size: 21px;
   }
+
+  .gs-download-card strong { font-size: 14px; }
+  .gs-download-card p { font-size: 11px; }
+  .gs-coming-soon { display: none; }
 
   .gs-download-services {
-    grid-template-columns: repeat(2, 1fr);
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 10px;
+  }
+
+  .gs-download-services div {
+    min-height: 48px;
+    padding: 11px 8px;
+    font-size: 11px;
+  }
+
+  .gs-download-services i { font-size: 15px; }
+
+  .gs-download-note {
+    margin-top: 20px;
+    padding-bottom: env(safe-area-inset-bottom);
+  }
+}
+
+@media (max-width: 380px) {
+  .gs-download-page {
+    padding-left: 12px;
+    padding-right: 12px;
+  }
+
+  .gs-download-container h2 { font-size: 17px; }
+  .gs-download-description { font-size: 13px; }
+
+  .gs-download-services div {
+    font-size: 10px;
+    gap: 5px;
   }
 }

@@ -6,6 +6,8 @@ import PromoModal from "../components/common/PromoModal";
 import PaisabazaarHeroSlider from "../components/home/PaisabazaarHeroSlider";
 import SchemeRegistrationModal from "../components/schemes/SchemeRegistrationModal";
 import "../styles/Home.css";
+import AppInstallBanner from "../components/home/AppInstallBanner";
+
 
 // Row 1: Business & Professional
 const BUSINESS_SERVICES = [
@@ -499,6 +501,8 @@ export default function Home() {
           </React.Fragment>
         ))}
       </section>
+
+      <AppInstallBanner />
 
       <Footer />
     </main>

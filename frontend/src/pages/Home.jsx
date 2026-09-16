@@ -8,7 +8,6 @@ import SchemeRegistrationModal from "../components/schemes/SchemeRegistrationMod
 import "../styles/Home.css";
 import AppInstallBanner from "../components/home/AppInstallBanner";
 
-
 // Row 1: Business & Professional
 const BUSINESS_SERVICES = [
   { 
@@ -503,7 +502,6 @@ export default function Home() {
       </section>
 
       <AppInstallBanner />
-
       <Footer />
     </main>
   );

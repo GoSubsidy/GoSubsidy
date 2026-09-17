@@ -2,7 +2,7 @@
   position: fixed;
   left: 0;
   right: 0;
-  bottom: 18px;
+  bottom: calc(18px + env(safe-area-inset-bottom, 0px));
   z-index: 9998;
   display: flex;
   justify-content: center;
@@ -95,6 +95,11 @@
   font-size: 15px;
 }
 
+.gs-app-install-button:disabled {
+  cursor: wait;
+  opacity: .92;
+}
+
 .gs-app-install-close {
   width: 30px;
   height: 30px;
@@ -114,26 +119,117 @@
   color: #172b4d;
 }
 
+.gs-app-install-close:disabled {
+  cursor: wait;
+  opacity: .5;
+}
+
 @keyframes gsInstallSlideUp {
   from { opacity: 0; transform: translateY(35px); }
   to { opacity: 1; transform: translateY(0); }
 }
 
+/* Mobile safe-area protection */
 @media (max-width: 768px) {
-  .gs-app-install-wrapper { bottom: 10px; padding: 0 10px; }
-  .gs-app-install-banner { gap: 10px; padding: 11px; border-radius: 16px; }
-  .gs-app-install-icon { width: 45px; height: 45px; min-width: 45px; border-radius: 12px; }
-  .gs-app-install-icon img { width: 38px; height: 38px; }
-  .gs-app-install-title { font-size: 13px; }
-  .gs-app-install-text { font-size: 9px; }
-  .gs-app-install-button { padding: 10px 12px; font-size: 11px; }
-  .gs-app-install-close { width: 26px; height: 26px; min-width: 26px; }
+  .gs-app-install-wrapper {
+    bottom: calc(10px + env(safe-area-inset-bottom, 0px));
+    padding: 0 10px;
+  }
+
+  .gs-app-install-banner {
+    gap: 10px;
+    padding: 11px;
+    border-radius: 16px;
+  }
+
+  .gs-app-install-icon {
+    width: 45px;
+    height: 45px;
+    min-width: 45px;
+    border-radius: 12px;
+  }
+
+  .gs-app-install-icon img {
+    width: 38px;
+    height: 38px;
+  }
+
+  .gs-app-install-title {
+    font-size: 13px;
+  }
+
+  .gs-app-install-text {
+    font-size: 9px;
+  }
+
+  .gs-app-install-button {
+    padding: 10px 12px;
+    font-size: 11px;
+  }
+
+  .gs-app-install-close {
+    width: 26px;
+    height: 26px;
+    min-width: 26px;
+  }
 }
 
 @media (max-width: 420px) {
-  .gs-app-install-banner { gap: 8px; }
-  .gs-app-install-text { display: none; }
-  .gs-app-install-title { font-size: 12px; }
-  .gs-app-install-button { padding: 9px 10px; }
-  .gs-app-install-button span { display: none; }
+  .gs-app-install-banner {
+    gap: 8px;
+  }
+
+  .gs-app-install-text {
+    display: none;
+  }
+
+  .gs-app-install-title {
+    font-size: 12px;
+  }
+
+  .gs-app-install-button {
+    padding: 9px 10px;
+  }
+
+  .gs-app-install-button span {
+    display: none;
+  }
+}
+
+/* Extra protection for very small Android screens */
+@media (max-width: 360px) {
+  .gs-app-install-wrapper {
+    bottom: calc(8px + env(safe-area-inset-bottom, 0px));
+    padding: 0 7px;
+  }
+
+  .gs-app-install-banner {
+    gap: 6px;
+    padding: 9px;
+  }
+
+  .gs-app-install-icon {
+    width: 40px;
+    height: 40px;
+    min-width: 40px;
+  }
+
+  .gs-app-install-icon img {
+    width: 34px;
+    height: 34px;
+  }
+
+  .gs-app-install-title {
+    font-size: 11px;
+  }
+
+  .gs-app-install-button {
+    padding: 8px 9px;
+  }
+
+  .gs-app-install-close {
+    width: 24px;
+    height: 24px;
+    min-width: 24px;
+  }
 }

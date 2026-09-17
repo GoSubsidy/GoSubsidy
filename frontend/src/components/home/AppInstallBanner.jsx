@@ -9,6 +9,7 @@ const DISMISS_KEY = "gosubsidy_app_install_dismissed";
 
 export default function AppInstallBanner() {
   const [visible, setVisible] = useState(false);
+  const [downloading, setDownloading] = useState(false);
 
   useEffect(() => {
     const ua = navigator.userAgent || "";
@@ -22,8 +23,6 @@ export default function AppInstallBanner() {
       return;
     }
 
-    // Don't show again during the current browser session
-    // after the user closes it.
     try {
       if (sessionStorage.getItem(DISMISS_KEY) === "true") {
         return;
@@ -42,6 +41,8 @@ export default function AppInstallBanner() {
   }, []);
 
   const handleDismiss = () => {
+    if (downloading) return;
+
     try {
       sessionStorage.setItem(DISMISS_KEY, "true");
     } catch (error) {
@@ -52,7 +53,17 @@ export default function AppInstallBanner() {
   };
 
   const handleInstall = () => {
-    // Open the production Release APK.
+    if (downloading) return;
+
+    setDownloading(true);
+
+    /*
+     * Start the APK download.
+     *
+     * The actual download is handled by Android/Chrome.
+     * Therefore the website cannot display the real download
+     * percentage for a Google Drive file.
+     */
     window.location.href = APK_DOWNLOAD_URL;
   };
 
@@ -67,6 +78,7 @@ export default function AppInstallBanner() {
       aria-label="GoSubsidy Android app installation"
     >
       <div className="gs-app-install-banner">
+
         {/* GoSubsidy App Icon */}
         <div className="gs-app-install-icon">
           <img
@@ -79,23 +91,49 @@ export default function AppInstallBanner() {
         {/* Banner Content */}
         <div className="gs-app-install-content">
           <div className="gs-app-install-title">
-            Get GoSubsidy on your phone
+            {downloading
+              ? "Downloading GoSubsidy App..."
+              : "Get GoSubsidy on your phone"}
           </div>
 
           <div className="gs-app-install-text">
-            Schemes • Loans • Insurance • DPR • CIBIL • AI Advisor
+            {downloading
+              ? "Your Android download is starting..."
+              : "Schemes • Loans • Insurance • DPR • CIBIL • AI Advisor"}
           </div>
         </div>
 
-        {/* Install Button */}
+        {/* Install / Download Button */}
         <button
           type="button"
-          className="gs-app-install-button"
+          className={`gs-app-install-button ${
+            downloading ? "is-downloading" : ""
+          }`}
           onClick={handleInstall}
-          aria-label="Install GoSubsidy Android app"
+          disabled={downloading}
+          aria-label={
+            downloading
+              ? "Downloading GoSubsidy Android app"
+              : "Install GoSubsidy Android app"
+          }
         >
-          <i className="bi bi-android2" aria-hidden="true" />
-          <span>Install App</span>
+          {downloading ? (
+            <>
+              <span
+                className="gs-app-install-spinner"
+                aria-hidden="true"
+              />
+              <span>Downloading...</span>
+            </>
+          ) : (
+            <>
+              <i
+                className="bi bi-android2"
+                aria-hidden="true"
+              />
+              <span>Install App</span>
+            </>
+          )}
         </button>
 
         {/* Close Button */}
@@ -103,10 +141,15 @@ export default function AppInstallBanner() {
           type="button"
           className="gs-app-install-close"
           onClick={handleDismiss}
+          disabled={downloading}
           aria-label="Close GoSubsidy app installation banner"
         >
-          <i className="bi bi-x-lg" aria-hidden="true" />
+          <i
+            className="bi bi-x-lg"
+            aria-hidden="true"
+          />
         </button>
+
       </div>
     </div>
   );

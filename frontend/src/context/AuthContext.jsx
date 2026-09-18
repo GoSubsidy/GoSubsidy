@@ -95,10 +95,26 @@ export function AuthProvider({ children }) {
 
     const initializeAuth = async () => {
       try {
+        // Prevent the Login/Registration UI from being held forever if
+        // the WebView auth storage/lock does not resolve.
+        const sessionResult = await Promise.race([
+          supabase.auth.getSession(),
+          new Promise((resolve) =>
+            setTimeout(
+              () =>
+                resolve({
+                  data: { session: null },
+                  error: new Error("Supabase session initialization timed out"),
+                }),
+              8000
+            )
+          ),
+        ]);
+
         const {
           data: { session: currentSession },
           error,
-        } = await supabase.auth.getSession();
+        } = sessionResult;
 
         if (error) {
           console.error(
@@ -115,8 +131,11 @@ export function AuthProvider({ children }) {
 
         setUser(currentUser);
 
+        // Do not block authentication initialization on the customer
+        // profile query. The profile is supplementary and can load after
+        // the auth state has been made available to the application.
         if (currentUser) {
-          await loadProfile(currentUser);
+          void loadProfile(currentUser);
         } else {
           setProfile(null);
         }
@@ -151,13 +170,21 @@ export function AuthProvider({ children }) {
 
         setUser(currentUser);
 
+        // IMPORTANT: Never await another Supabase request from inside
+        // onAuthStateChange. Supabase's auth lock can remain held while
+        // this callback is running, which can leave WebView auth in a
+        // permanent loading state.
+        setLoading(false);
+
         if (currentUser) {
-          await loadProfile(currentUser);
+          setTimeout(() => {
+            if (mounted) {
+              void loadProfile(currentUser);
+            }
+          }, 0);
         } else {
           setProfile(null);
         }
-
-        setLoading(false);
       }
     );
 

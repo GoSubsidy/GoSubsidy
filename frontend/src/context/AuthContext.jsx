@@ -95,8 +95,6 @@ export function AuthProvider({ children }) {
 
     const initializeAuth = async () => {
       try {
-        // Prevent the Login/Registration UI from being held forever if
-        // the WebView auth storage/lock does not resolve.
         const sessionResult = await Promise.race([
           supabase.auth.getSession(),
           new Promise((resolve) =>
@@ -104,7 +102,9 @@ export function AuthProvider({ children }) {
               () =>
                 resolve({
                   data: { session: null },
-                  error: new Error("Supabase session initialization timed out"),
+                  error: new Error(
+                    "Supabase session initialization timed out."
+                  ),
                 }),
               8000
             )
@@ -131,11 +131,17 @@ export function AuthProvider({ children }) {
 
         setUser(currentUser);
 
-        // Do not block authentication initialization on the customer
-        // profile query. The profile is supplementary and can load after
-        // the auth state has been made available to the application.
         if (currentUser) {
-          void loadProfile(currentUser);
+          setTimeout(() => {
+            if (mounted) {
+              loadProfile(currentUser).catch((profileError) => {
+                console.warn(
+                  "[AuthContext] Initial profile load failed:",
+                  profileError
+                );
+              });
+            }
+          }, 0);
         } else {
           setProfile(null);
         }
@@ -160,7 +166,7 @@ export function AuthProvider({ children }) {
     const {
       data: { subscription },
     } = supabase.auth.onAuthStateChange(
-      async (_event, currentSession) => {
+      (_event, currentSession) => {
         if (!mounted) return;
 
         setSession(currentSession || null);
@@ -170,16 +176,19 @@ export function AuthProvider({ children }) {
 
         setUser(currentUser);
 
-        // IMPORTANT: Never await another Supabase request from inside
-        // onAuthStateChange. Supabase's auth lock can remain held while
-        // this callback is running, which can leave WebView auth in a
-        // permanent loading state.
+        // Never await database/profile work inside Supabase's
+        // auth-state callback. This can deadlock auth in WebView.
         setLoading(false);
 
         if (currentUser) {
           setTimeout(() => {
             if (mounted) {
-              void loadProfile(currentUser);
+              loadProfile(currentUser).catch((profileError) => {
+                console.warn(
+                  "[AuthContext] Deferred profile load failed:",
+                  profileError
+                );
+              });
             }
           }, 0);
         } else {

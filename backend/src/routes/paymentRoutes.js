@@ -202,8 +202,16 @@ const allowedProducts = {
   "udyam-registration": { amount: 799, validityDays: 365, name: "Udyam MSME Government Registration" },
   fssai_basic_registration: { amount: 1499, validityDays: 365, name: "FSSAI Basic Food Business Registration" },
   "fssai-registration": { amount: 1499, validityDays: 365, name: "FSSAI Basic Food Business Registration" },
+
+  // FSSAI service-page slug aliases
+  // "fssai-license" is the State/Central License checkout entry.
+  // The current Basic-plan checkout shown by the service page uses the
+  // State License fee of ₹3,999; central license remains ₹7,999.
   fssai_state_license: { amount: 3999, validityDays: 365, name: "FSSAI State Food License Registration" },
+  "fssai-license": { amount: 3999, validityDays: 365, name: "FSSAI State Food License Registration" },
+  "fssai-state-license": { amount: 3999, validityDays: 365, name: "FSSAI State Food License Registration" },
   fssai_central_license: { amount: 7999, validityDays: 365, name: "FSSAI Central Food License Registration" },
+  "fssai-central-license": { amount: 7999, validityDays: 365, name: "FSSAI Central Food License Registration" },
   import_export_code_dgft_iec: { amount: 1499, validityDays: 365, name: "Import Export Code (IEC) from DGFT" },
   "iec-registration": { amount: 1499, validityDays: 365, name: "Import Export Code (IEC) from DGFT" },
   apeda_registration_rcmc: { amount: 3499, validityDays: 365, name: "APEDA Registration for Agricultural Exports" },

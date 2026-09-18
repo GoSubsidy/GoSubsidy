@@ -14,7 +14,7 @@ export default function AppInstallBanner() {
   useEffect(() => {
     const ua = navigator.userAgent || "";
 
-    // Hide the install banner inside the GoSubsidy Android app.
+    // Do not show the install banner inside the GoSubsidy Android app.
     const isGoSubsidyApp =
       /GoSubsidyApp/i.test(ua) ||
       (/Android/i.test(ua) && /wv/i.test(ua));
@@ -23,6 +23,8 @@ export default function AppInstallBanner() {
       return;
     }
 
+    // Do not show again during the current browser session
+    // if the user has already closed the banner.
     try {
       if (sessionStorage.getItem(DISMISS_KEY) === "true") {
         return;
@@ -31,6 +33,7 @@ export default function AppInstallBanner() {
       // Ignore storage errors.
     }
 
+    // Show banner after 1.2 seconds.
     const timer = window.setTimeout(() => {
       setVisible(true);
     }, 1200);
@@ -57,13 +60,8 @@ export default function AppInstallBanner() {
 
     setDownloading(true);
 
-    /*
-     * Start the APK download.
-     *
-     * The actual download is handled by Android/Chrome.
-     * Therefore the website cannot display the real download
-     * percentage for a Google Drive file.
-     */
+    // Start the Google Drive APK download.
+    // The browser/Android handles the actual download.
     window.location.href = APK_DOWNLOAD_URL;
   };
 

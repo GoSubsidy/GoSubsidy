@@ -501,33 +501,36 @@ export default function Navbar() {
           height: 58px;
         }
 
+        /* Public brand logo — transparent circular logo, no square frame */
         .gs-navbar-logo-wrap {
-          width: 44px;
-          height: 44px;
-          min-width: 44px;
+          width: 54px;
+          height: 54px;
+          min-width: 54px;
           display: flex;
           align-items: center;
           justify-content: center;
-          border-radius: 12px;
-          overflow: hidden;
-          background: #ffffff;
-          border: 1px solid rgba(0, 166, 106, 0.18);
-          box-shadow: 0 3px 10px rgba(0, 0, 0, 0.08),
-                      0 1px 3px rgba(0, 166, 106, 0.10);
-          transition: transform 0.2s ease, box-shadow 0.2s ease;
+          overflow: visible;
+          border: 0;
+          border-radius: 50%;
+          background: transparent;
+          box-shadow: none;
+          transition: transform 0.2s ease;
         }
 
         .gs-navbar-brand:hover .gs-navbar-logo-wrap {
           transform: translateY(-1px) scale(1.03);
-          box-shadow: 0 6px 16px rgba(0, 166, 106, 0.15),
-                      0 2px 5px rgba(255, 104, 0, 0.10);
         }
 
         .gs-navbar-logo {
-          width: 38px;
-          height: 38px;
+          width: 54px;
+          height: 54px;
+          max-width: 54px;
+          max-height: 54px;
           object-fit: contain;
           display: block;
+          border: 0;
+          border-radius: 50%;
+          background: transparent;
         }
 
         .gs-navbar-brand-text {
@@ -570,15 +573,16 @@ export default function Navbar() {
           }
 
           .gs-navbar-logo-wrap {
-            width: 40px;
-            height: 40px;
-            min-width: 40px;
-            border-radius: 11px;
+            width: 46px;
+            height: 46px;
+            min-width: 46px;
           }
 
           .gs-navbar-logo {
-            width: 35px;
-            height: 35px;
+            width: 46px;
+            height: 46px;
+            max-width: 46px;
+            max-height: 46px;
           }
 
           .gs-navbar-brand-name {
@@ -599,38 +603,42 @@ export default function Navbar() {
           }
 
           .gs-navbar-logo-wrap {
-            width: 42px;
-            height: 42px;
-            min-width: 42px;
-            border-radius: 12px;
+            width: 48px;
+            height: 48px;
+            min-width: 48px;
           }
 
           .gs-navbar-logo {
-            width: 37px;
-            height: 37px;
+            width: 48px;
+            height: 48px;
+            max-width: 48px;
+            max-height: 48px;
           }
         }
 
         /* Mobile drawer brand */
         .gs-drawer-logo-wrap {
-          width: 40px;
-          height: 40px;
-          min-width: 40px;
+          width: 46px;
+          height: 46px;
+          min-width: 46px;
           display: flex;
           align-items: center;
           justify-content: center;
-          border-radius: 11px;
-          overflow: hidden;
-          background: #fff;
-          border: 1px solid rgba(0, 166, 106, 0.18);
-          box-shadow: 0 3px 9px rgba(0, 0, 0, 0.07);
+          border-radius: 50%;
+          overflow: visible;
+          background: transparent;
+          border: 0;
+          box-shadow: none;
         }
 
         .gs-drawer-logo-wrap .gs-drawer-logo {
-          width: 34px;
-          height: 34px;
+          width: 46px;
+          height: 46px;
           object-fit: contain;
           display: block;
+          border: 0;
+          border-radius: 50%;
+          background: transparent;
         }
       `}</style>
 
@@ -649,7 +657,7 @@ export default function Navbar() {
 
             <Link to="/" className="gs-navbar-brand" onClick={closeMenus} aria-label="GoSubsidy Home">
               <span className="gs-navbar-logo-wrap">
-                <img src="/images/gosubsidy-logo.png" alt="GoSubsidy" className="gs-navbar-logo" />
+                <img src="/images/gosubsidy-public-logo.png" alt="GoSubsidy" className="gs-navbar-logo" />
               </span>
               <div className="gs-navbar-brand-text">
                 <span className="gs-navbar-brand-name">
@@ -1044,7 +1052,7 @@ export default function Navbar() {
             <div className="gs-drawer-header">
               <div className="gs-drawer-brand">
                 <span className="gs-drawer-logo-wrap">
-                  <img src="/images/gosubsidy-logo.png" alt="GoSubsidy" className="gs-drawer-logo" />
+                  <img src="/images/gosubsidy-public-logo.png" alt="GoSubsidy" className="gs-drawer-logo" />
                 </span>
                 <span className="gs-drawer-title">
                   <span className="gs-nav-go">Go</span>

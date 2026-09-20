@@ -2077,3 +2077,76 @@
     max-height: 34px !important;
   }
 }
+
+/* =========================================================
+   GoSubsidy — FINAL HANDSHAKE + ₹ NAVBAR BRANDING
+   Navbar / mobile drawer use the supplied Gold ₹ + Handshake image.
+   Browser favicon and PWA remain the separate Gold G₹ asset.
+   ========================================================= */
+
+.gs-navbar-logo.gs-gold-image-logo,
+.gs-drawer-logo.gs-gold-image-logo {
+  display: block !important;
+  object-fit: contain !important;
+  object-position: center center !important;
+  background: #000000 !important;
+  border: 0 !important;
+  box-shadow: none !important;
+  padding: 0 !important;
+  margin: 0 !important;
+}
+
+.gs-navbar-logo.gs-gold-image-logo {
+  width: 36px !important;
+  height: 36px !important;
+  min-width: 36px !important;
+  max-width: 36px !important;
+  min-height: 36px !important;
+  max-height: 36px !important;
+  border-radius: 10px !important;
+}
+
+.gs-drawer-logo.gs-gold-image-logo {
+  width: 32px !important;
+  height: 32px !important;
+  min-width: 32px !important;
+  max-width: 32px !important;
+  min-height: 32px !important;
+  max-height: 32px !important;
+  border-radius: 9px !important;
+}
+
+.gs-navbar-brand:hover .gs-navbar-logo.gs-gold-image-logo {
+  transform: scale(1.04) !important;
+}
+
+@media (max-width: 768px) {
+  .gs-navbar-logo.gs-gold-image-logo {
+    width: 36px !important;
+    height: 36px !important;
+    min-width: 36px !important;
+    max-width: 36px !important;
+    min-height: 36px !important;
+    max-height: 36px !important;
+  }
+
+  .gs-drawer-logo.gs-gold-image-logo {
+    width: 32px !important;
+    height: 32px !important;
+    min-width: 32px !important;
+    max-width: 32px !important;
+    min-height: 32px !important;
+    max-height: 32px !important;
+  }
+}
+
+@media (max-width: 430px) {
+  .gs-navbar-logo.gs-gold-image-logo {
+    width: 34px !important;
+    height: 34px !important;
+    min-width: 34px !important;
+    max-width: 34px !important;
+    min-height: 34px !important;
+    max-height: 34px !important;
+  }
+}

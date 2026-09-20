@@ -2152,103 +2152,51 @@
 }
 
 
-
 /* ============================================================
-   GoSubsidy — PREMIUM NAVBAR LOGO ANIMATION
-   Added without changing the existing navbar layout.
+   GoSubsidy — UPLOADED 3D LOGO ANIMATION
+   Uses the supplied 10-second 3D emblem animation.
    ============================================================ */
 
-/* Main navbar logo: gentle floating + premium glow */
+/* The animation is inside the GIF itself, so disable the
+   previous CSS float animation for the logo image. */
 .gs-navbar-logo {
+  animation: none !important;
+  filter: none !important;
   transform-origin: center center;
-  animation:
-    gsNavbarLogoFloat 4s ease-in-out infinite,
-    gsNavbarLogoGlow 3.6s ease-in-out infinite;
-  will-change: transform, filter;
+  will-change: transform;
 }
 
-/* Also support the newer GoSubsidy brand icon if used */
-.gosubsidy-brand-icon {
+.gosubsidy-brand-icon img {
+  animation: none !important;
+  filter: none !important;
   transform-origin: center center;
-  animation:
-    gsNavbarLogoFloat 4s ease-in-out infinite,
-    gsNavbarLogoGlow 3.6s ease-in-out infinite;
-  will-change: transform, filter;
+  will-change: transform;
 }
 
-/* Gentle floating movement */
-@keyframes gsNavbarLogoFloat {
-  0%, 100% {
-    transform: translateY(0) rotate(0deg) scale(1);
-  }
-
-  25% {
-    transform: translateY(-1.5px) rotate(-1deg) scale(1.012);
-  }
-
-  50% {
-    transform: translateY(-3px) rotate(0deg) scale(1.025);
-  }
-
-  75% {
-    transform: translateY(-1.5px) rotate(1deg) scale(1.012);
-  }
-}
-
-/* Soft GoSubsidy green/orange premium glow */
-@keyframes gsNavbarLogoGlow {
-  0%, 100% {
-    filter:
-      drop-shadow(0 2px 4px rgba(0, 166, 106, 0.12));
-  }
-
-  50% {
-    filter:
-      drop-shadow(0 4px 10px rgba(0, 166, 106, 0.28))
-      drop-shadow(0 1px 4px rgba(255, 104, 0, 0.10));
-  }
-}
-
-/* Premium hover interaction */
+/* Premium interaction without interfering with the video/GIF. */
 .gs-navbar-brand:hover .gs-navbar-logo,
-.gosubsidy-brand:hover .gosubsidy-brand-icon {
-  animation-play-state: paused;
-  transform: translateY(-2px) scale(1.07) rotate(0deg);
-  filter:
-    drop-shadow(0 5px 13px rgba(0, 166, 106, 0.34))
-    drop-shadow(0 2px 5px rgba(255, 104, 0, 0.14));
-  transition:
-    transform 0.28s ease,
-    filter 0.28s ease;
+.gosubsidy-brand:hover .gosubsidy-brand-icon img {
+  transform: scale(1.06);
+  transition: transform 0.28s cubic-bezier(0.22, 1, 0.36, 1);
 }
 
-/* Mobile: slightly calmer so the header remains stable */
+/* Keep the circular emblem clean inside the existing icon box. */
+.gosubsidy-brand-icon {
+  overflow: hidden;
+}
+
+/* Mobile: very subtle interaction so the header remains stable. */
 @media (max-width: 768px) {
-  .gs-navbar-logo,
-  .gosubsidy-brand-icon {
-    animation-duration: 5s, 4.5s;
-  }
-
   .gs-navbar-brand:hover .gs-navbar-logo,
-  .gosubsidy-brand:hover .gosubsidy-brand-icon {
-    transform: translateY(-1px) scale(1.04) rotate(0deg);
+  .gosubsidy-brand:hover .gosubsidy-brand-icon img {
+    transform: scale(1.035);
   }
 }
 
-/* Very small phones: keep the animation subtle */
-@media (max-width: 380px) {
-  .gs-navbar-logo,
-  .gosubsidy-brand-icon {
-    animation-duration: 5.5s, 5s;
-  }
-}
-
-/* Accessibility: respect user's reduced-motion setting */
 @media (prefers-reduced-motion: reduce) {
   .gs-navbar-logo,
-  .gosubsidy-brand-icon {
+  .gosubsidy-brand-icon img {
     animation: none !important;
     transform: none !important;
-    filter: none !important;
   }
 }

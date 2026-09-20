@@ -80,7 +80,7 @@ export default function AppInstallBanner() {
         {/* GoSubsidy App Icon */}
         <div className="gs-app-install-icon">
           <img
-            src="/images/gosubsidy-logo.png"
+            src="/images/gosubsidy-handshake-512.png"
             alt="GoSubsidy"
             loading="lazy"
           />

@@ -172,23 +172,71 @@
   to { transform: scale(1) translateY(0); opacity: 1; }
 }
 /* =========================================================
-   GOSUBSIDY PROMO MODAL - LOGO SIZE FIX
+   GOSUBSIDY PROMO MODAL - PUBLIC LOGO
+   Uses the new transparent circular GoSubsidy logo.
    ========================================================= */
 
 .gs-promo-header {
   display: flex;
   align-items: center;
   justify-content: center;
-  gap: 8px;
+  gap: 10px;
   width: 100%;
 }
 
-.gs-promo-header img {
-  width: 58px !important;
-  height: 58px !important;
-  max-width: 58px !important;
-  max-height: 58px !important;
+.gs-promo-header img,
+.gs-promo-logo {
+  width: 54px !important;
+  height: 54px !important;
+  max-width: 54px !important;
+  max-height: 54px !important;
+  min-width: 54px !important;
   object-fit: contain !important;
   display: block !important;
-  flex: 0 0 58px !important;
+  flex: 0 0 54px !important;
+  background: transparent !important;
+  border: 0 !important;
+  border-radius: 0 !important;
+  box-shadow: none !important;
+}
+/* Mobile promo modal */
+@media (max-width: 480px) {
+  .gs-promo-overlay {
+    padding: 12px;
+    align-items: center;
+  }
+
+  .gs-promo-card {
+    max-width: 100%;
+    padding: 32px 20px 22px;
+    border-radius: 20px;
+  }
+
+  .gs-promo-header {
+    gap: 8px;
+    margin-bottom: 14px;
+  }
+
+  .gs-promo-header img,
+  .gs-promo-logo {
+    width: 48px !important;
+    height: 48px !important;
+    min-width: 48px !important;
+    max-width: 48px !important;
+    max-height: 48px !important;
+    flex-basis: 48px !important;
+  }
+
+  .gs-promo-brand-text {
+    font-size: 19px;
+  }
+
+  .gs-promo-title {
+    font-size: 25px;
+  }
+
+  .gs-promo-close-btn {
+    top: -8px;
+    right: -8px;
+  }
 }

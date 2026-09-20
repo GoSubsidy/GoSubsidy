@@ -43,7 +43,13 @@ export default function PromoModal() {
   if (!isOpen) return null;
 
   return (
-    <div className="gs-promo-overlay" onClick={closeModal}>
+    <div
+      className="gs-promo-overlay"
+      onClick={closeModal}
+      role="dialog"
+      aria-modal="true"
+      aria-label="GoSubsidy special offer"
+    >
       <div
         className="gs-promo-card"
         onClick={(e) => e.stopPropagation()}
@@ -60,10 +66,13 @@ export default function PromoModal() {
 
         {/* Modal Content */}
         <div className="gs-promo-content">
+
+          {/* GoSubsidy Brand */}
           <div className="gs-promo-header">
             <img
-              src="/images/gosubsidy-logo.png"
+              src="/images/gosubsidy-handshake-512.png"
               alt="GoSubsidy"
+              className="gs-promo-logo"
             />
 
             <span className="gs-promo-brand-text">
@@ -72,19 +81,23 @@ export default function PromoModal() {
             </span>
           </div>
 
+          {/* Offer Badge */}
           <div className="gs-promo-badge">
             <span>Special Offer</span>
           </div>
 
+          {/* Title */}
           <h2 className="gs-promo-title">
             Unlock Flat <span>20% OFF</span>
           </h2>
 
+          {/* Description */}
           <p className="gs-promo-subtitle">
             On all Government Schemes, DPR Reports &amp; Business
             Registrations.
           </p>
 
+          {/* Coupon */}
           <div className="gs-promo-coupon-box">
             <span className="gs-coupon-label">
               USE PROMO CODE
@@ -95,18 +108,21 @@ export default function PromoModal() {
             </strong>
           </div>
 
+          {/* CTA */}
           <Link
             to="/services/proprietorship"
             className="gs-promo-cta-btn"
             onClick={closeModal}
           >
-            Claim Offer Now{" "}
+            Claim Offer Now
             <i className="bi bi-arrow-right ms-2" />
           </Link>
 
+          {/* Terms */}
           <small className="gs-promo-terms">
             *Valid for today only. Applicable at final checkout.
           </small>
+
         </div>
       </div>
     </div>

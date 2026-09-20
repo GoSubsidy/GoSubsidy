@@ -1911,3 +1911,95 @@
     max-width: calc(100vw - 12px) !important;
   }
 }
+
+
+/* =========================================================
+   GoSubsidy — BLACK + GOLD G₹ ICON
+   Final icon styling for the updated Navbar.jsx
+   Existing navigation/layout rules are intentionally preserved.
+   ========================================================= */
+
+/* Inline SVG used by GoSubsidyCompactIcon */
+.gs-compact-gold-icon {
+  display: block;
+  flex: 0 0 auto;
+  width: 36px;
+  height: 36px;
+  max-width: 100%;
+  overflow: visible;
+  vertical-align: middle;
+}
+
+/* Desktop navbar */
+.gs-navbar-logo.gs-compact-gold-icon {
+  width: 36px !important;
+  height: 36px !important;
+  min-width: 36px;
+  max-width: 36px;
+  object-fit: contain;
+  border: 0;
+  border-radius: 12px;
+  background: transparent;
+  box-shadow: none;
+}
+
+/* Keep the black/gold icon crisp — do not rotate the SVG itself */
+.gs-navbar-brand:hover .gs-navbar-logo.gs-compact-gold-icon {
+  transform: scale(1.04);
+}
+
+/* Mobile drawer */
+.gs-drawer-logo.gs-compact-gold-icon {
+  width: 32px !important;
+  height: 32px !important;
+  min-width: 32px;
+  max-width: 32px;
+  object-fit: contain;
+  border: 0;
+  border-radius: 10px;
+  background: transparent;
+  box-shadow: none;
+}
+
+/* If the premium brand wrapper is used elsewhere, keep it visually
+   consistent with the new black + gold GoSubsidy icon. */
+.gosubsidy-brand-icon {
+  background: transparent;
+  border: 0;
+  box-shadow: none;
+  overflow: visible;
+}
+
+.gosubsidy-brand-icon .gs-compact-gold-icon,
+.gosubsidy-brand-icon svg {
+  width: 38px;
+  height: 38px;
+  display: block;
+}
+
+/* Mobile sizing */
+@media (max-width: 768px) {
+  .gs-navbar-logo.gs-compact-gold-icon {
+    width: 36px !important;
+    height: 36px !important;
+    min-width: 36px;
+    max-width: 36px;
+  }
+
+  .gs-drawer-logo.gs-compact-gold-icon {
+    width: 32px !important;
+    height: 32px !important;
+    min-width: 32px;
+    max-width: 32px;
+  }
+}
+
+/* Extra-small phones */
+@media (max-width: 380px) {
+  .gs-navbar-logo.gs-compact-gold-icon {
+    width: 33px !important;
+    height: 33px !important;
+    min-width: 33px;
+    max-width: 33px;
+  }
+}

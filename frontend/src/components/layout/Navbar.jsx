@@ -1,4 +1,4 @@
-
+import React, { useEffect, useRef, useState } from "react";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import { useAuth } from "../../context/AuthContext";
 import { useLanguage } from "../../context/LanguageContext";
@@ -664,7 +664,7 @@ export default function Navbar() {
 
             <Link to="/" className="gs-navbar-brand" onClick={closeMenus} aria-label="GoSubsidy Home">
               <span className="gs-navbar-logo-wrap">
-                <img src="/images/gosubsidy-gold-gs-icon.png" alt="GoSubsidy" className="gs-navbar-logo gs-compact-gold-icon" />
+                <img src="/images/gosubsidy-gold-gs-icon.png" alt="GoSubsidy" className="gs-navbar-logo gs-gold-image-logo" />
               </span>
               <div className="gs-navbar-brand-text">
                 <span className="gs-navbar-brand-name">
@@ -1059,7 +1059,7 @@ export default function Navbar() {
             <div className="gs-drawer-header">
               <div className="gs-drawer-brand">
                 <span className="gs-drawer-logo-wrap">
-                  <img src="/images/gosubsidy-gold-gs-icon.png" alt="GoSubsidy" className="gs-drawer-logo gs-compact-gold-icon" />
+                  <img src="/images/gosubsidy-gold-gs-icon.png" alt="GoSubsidy" className="gs-drawer-logo gs-gold-image-logo" />
                 </span>
                 <span className="gs-drawer-title">
                   <span className="gs-nav-go">Go</span>

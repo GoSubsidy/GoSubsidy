@@ -2003,3 +2003,70 @@
     max-width: 33px;
   }
 }
+
+
+/* =========================================================
+   GoSubsidy — Uploaded Gold G₹ Logo
+   Uses /public/images/gosubsidy-gold-gs-icon.png
+   ========================================================= */
+.gs-navbar-logo.gs-compact-gold-icon {
+  display: block;
+  width: 36px !important;
+  height: 36px !important;
+  min-width: 36px;
+  max-width: 36px;
+  min-height: 36px;
+  max-height: 36px;
+  object-fit: cover;
+  object-position: center;
+  border: 0;
+  border-radius: 10px;
+  background: #000000;
+  box-shadow: none;
+  transform: none;
+}
+
+.gs-navbar-brand:hover .gs-navbar-logo.gs-compact-gold-icon {
+  transform: scale(1.04);
+}
+
+.gs-drawer-logo.gs-compact-gold-icon {
+  display: block;
+  width: 32px !important;
+  height: 32px !important;
+  min-width: 32px;
+  max-width: 32px;
+  min-height: 32px;
+  max-height: 32px;
+  object-fit: cover;
+  object-position: center;
+  border: 0;
+  border-radius: 9px;
+  background: #000000;
+  box-shadow: none;
+}
+
+@media (max-width: 768px) {
+  .gs-navbar-logo.gs-compact-gold-icon {
+    width: 36px !important;
+    height: 36px !important;
+    min-width: 36px;
+    max-width: 36px;
+  }
+
+  .gs-drawer-logo.gs-compact-gold-icon {
+    width: 32px !important;
+    height: 32px !important;
+    min-width: 32px;
+    max-width: 32px;
+  }
+}
+
+@media (max-width: 380px) {
+  .gs-navbar-logo.gs-compact-gold-icon {
+    width: 33px !important;
+    height: 33px !important;
+    min-width: 33px;
+    max-width: 33px;
+  }
+}

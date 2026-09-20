@@ -1,4 +1,4 @@
-import React, { useEffect, useRef, useState } from "react";
+
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import { useAuth } from "../../context/AuthContext";
 import { useLanguage } from "../../context/LanguageContext";
@@ -319,65 +319,6 @@ function ProfileItem({ to, icon, tone, title, text, onClick }) {
   );
 }
 
-
-/* =========================================================
-   GoSubsidy Compact Black + Gold G₹ Icon
-   ========================================================= */
-function GoSubsidyCompactIcon({ size = 48, className = "" }) {
-  return (
-    <svg
-      width={size}
-      height={size}
-      viewBox="0 0 100 100"
-      className={`gs-compact-gold-icon ${className}`}
-      xmlns="http://www.w3.org/2000/svg"
-      aria-hidden="true"
-      focusable="false"
-    >
-      <defs>
-        <linearGradient id="gsGoldGradient" x1="0" y1="0" x2="1" y2="1">
-          <stop offset="0%" stopColor="#FFF3A0" />
-          <stop offset="25%" stopColor="#FFD84A" />
-          <stop offset="55%" stopColor="#F5B800" />
-          <stop offset="80%" stopColor="#D89400" />
-          <stop offset="100%" stopColor="#FFE98A" />
-        </linearGradient>
-        <filter id="gsGoldShadow" x="-20%" y="-20%" width="140%" height="140%">
-          <feDropShadow dx="0" dy="1.2" stdDeviation="1.2"
-            floodColor="#000000" floodOpacity="0.65" />
-        </filter>
-      </defs>
-
-      <rect x="1.5" y="1.5" width="97" height="97" rx="23"
-        fill="#050505" stroke="#1d1d1d" strokeWidth="1.5" />
-
-      {/* Gold G */}
-      <path
-        d="M72 22 C64 14 53 10 42 10 C23 10 9 24 9 43
-           C9 62 23 76 42 76 C51 76 59 73 65 67 L65 53
-           L43 53 L43 64 L54 64 C51 67 47 68 42 68
-           C28 68 18 58 18 43 C18 28 28 18 42 18
-           C50 18 57 21 62 27 Z"
-        fill="url(#gsGoldGradient)"
-        filter="url(#gsGoldShadow)"
-      />
-
-      {/* Integrated ₹ */}
-      <path
-        d="M53 29 H87 L82 37 H70 C75 39 78 42 78 46
-           C78 52 73 56 66 58 L82 76 H69 L52 57 V49 H63
-           C67 49 69 47 69 44 C69 41 66 39 61 39 H52 Z"
-        fill="url(#gsGoldGradient)"
-        filter="url(#gsGoldShadow)"
-      />
-
-      <rect x="51" y="29" width="36" height="5" rx="2.5"
-        fill="url(#gsGoldGradient)" />
-      <rect x="51" y="38" width="30" height="5" rx="2.5"
-        fill="url(#gsGoldGradient)" />
-    </svg>
-  );
-}
 
 export default function Navbar() {
   const { user, signOut } = useAuth();
@@ -723,7 +664,7 @@ export default function Navbar() {
 
             <Link to="/" className="gs-navbar-brand" onClick={closeMenus} aria-label="GoSubsidy Home">
               <span className="gs-navbar-logo-wrap">
-                <GoSubsidyCompactIcon size={54} className="gs-navbar-logo" />
+                <img src="/images/gosubsidy-gold-gs-icon.png" alt="GoSubsidy" className="gs-navbar-logo gs-compact-gold-icon" />
               </span>
               <div className="gs-navbar-brand-text">
                 <span className="gs-navbar-brand-name">
@@ -1118,7 +1059,7 @@ export default function Navbar() {
             <div className="gs-drawer-header">
               <div className="gs-drawer-brand">
                 <span className="gs-drawer-logo-wrap">
-                  <GoSubsidyCompactIcon size={46} className="gs-drawer-logo" />
+                  <img src="/images/gosubsidy-gold-gs-icon.png" alt="GoSubsidy" className="gs-drawer-logo gs-compact-gold-icon" />
                 </span>
                 <span className="gs-drawer-title">
                   <span className="gs-nav-go">Go</span>

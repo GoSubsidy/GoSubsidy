@@ -3,7 +3,7 @@ import "./AppInstallBanner.css";
 
 // GoSubsidy Production Release APK
 const APK_DOWNLOAD_URL =
-  "https://drive.google.com/uc?export=download&id=1GCBHhShsUqcbYnREXGLLYiKV_MrZonKM";
+  "https://drive.google.com/uc?export=download&id=1rz9xicA5duesU73375hELiDfBdJqc-v8";
 
 const DISMISS_KEY = "gosubsidy_app_install_dismissed";
 

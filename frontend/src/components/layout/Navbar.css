@@ -2311,3 +2311,262 @@
     max-width: 40px !important;
   }
 }
+
+
+
+/* ============================================================
+   GoSubsidy MOBILE BOTTOM BAR - BUSINESS SERVICES
+   Schemes | Loans | Insurance | Services | Financial Tools
+   ============================================================ */
+
+.gs-mobile-bottom-nav {
+  display: none;
+}
+
+.gs-mobile-services-backdrop {
+  display: none;
+}
+
+@media (max-width: 768px) {
+  body {
+    padding-bottom: 76px !important;
+  }
+
+  .gs-mobile-bottom-nav {
+    position: fixed;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    z-index: 1990;
+    display: grid;
+    grid-template-columns: repeat(5, minmax(0, 1fr));
+    align-items: stretch;
+    width: 100%;
+    min-height: 64px;
+    padding: 6px 6px max(7px, env(safe-area-inset-bottom));
+    background: rgba(255, 255, 255, 0.98);
+    border-top: 1px solid #e2e8f0;
+    box-shadow: 0 -6px 20px rgba(15, 35, 60, 0.10);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+  }
+
+  .gs-mobile-bottom-nav-item {
+    min-width: 0;
+    min-height: 54px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 2px;
+    padding: 4px 2px;
+    border: 0;
+    border-radius: 12px;
+    background: transparent;
+    color: #64748b;
+    text-decoration: none;
+    font-family: inherit;
+    font-size: 10px;
+    font-weight: 700;
+    line-height: 1.05;
+    cursor: pointer;
+    -webkit-tap-highlight-color: transparent;
+    transition: color 0.18s ease, background 0.18s ease,
+      transform 0.18s ease;
+  }
+
+  .gs-mobile-bottom-nav-item:active {
+    transform: scale(0.96);
+  }
+
+  .gs-mobile-bottom-nav-item.active {
+    color: #00a66a;
+    background: #eefcf6;
+  }
+
+  .gs-mobile-bottom-nav-icon {
+    width: 30px;
+    height: 30px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 9px;
+    font-size: 18px;
+    line-height: 1;
+  }
+
+  .gs-mobile-bottom-nav-item.active .gs-mobile-bottom-nav-icon {
+    background: #00a66a;
+    color: #ffffff;
+    box-shadow: 0 4px 10px rgba(0, 166, 106, 0.22);
+  }
+
+  .gs-mobile-bottom-nav-item:not(.active) .gs-mobile-bottom-nav-icon {
+    background: #f1f5f9;
+  }
+
+  .gs-mobile-bottom-nav-item small {
+    display: block;
+    margin-top: -1px;
+    font-size: 7px;
+    line-height: 1;
+    font-weight: 800;
+    color: currentColor;
+    opacity: 0.9;
+  }
+
+  .gs-mobile-financial-button span:last-child {
+    max-width: 68px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  }
+
+  /* Services popup */
+  .gs-mobile-services-backdrop {
+    position: fixed;
+    inset: 0;
+    z-index: 1985;
+    display: flex;
+    align-items: flex-end;
+    justify-content: center;
+    padding: 0 10px calc(70px + env(safe-area-inset-bottom));
+    background: rgba(15, 23, 42, 0.42);
+    backdrop-filter: blur(3px);
+    -webkit-backdrop-filter: blur(3px);
+  }
+
+  .gs-mobile-services-menu {
+    width: 100%;
+    max-width: 520px;
+    max-height: min(70vh, 560px);
+    overflow-y: auto;
+    background: #ffffff;
+    border: 1px solid #e2e8f0;
+    border-radius: 18px 18px 12px 12px;
+    box-shadow: 0 -12px 36px rgba(15, 35, 60, 0.18);
+    padding: 12px;
+  }
+
+  .gs-mobile-services-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 10px;
+    padding: 4px 4px 12px;
+    border-bottom: 1px solid #edf2f7;
+  }
+
+  .gs-mobile-services-header small {
+    display: block;
+    color: #00a66a;
+    font-size: 8px;
+    font-weight: 900;
+    letter-spacing: 1px;
+  }
+
+  .gs-mobile-services-header strong {
+    display: block;
+    margin-top: 2px;
+    color: #1a2b4c;
+    font-size: 17px;
+    font-weight: 900;
+  }
+
+  .gs-mobile-services-header button {
+    width: 34px;
+    height: 34px;
+    border: 0;
+    border-radius: 9px;
+    background: #f1f5f9;
+    color: #475569;
+  }
+
+  .gs-mobile-services-grid {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 8px;
+    padding: 12px 0;
+  }
+
+  .gs-mobile-service-item {
+    min-height: 54px;
+    display: grid;
+    grid-template-columns: 34px minmax(0, 1fr) 12px;
+    align-items: center;
+    gap: 7px;
+    padding: 8px;
+    border: 1px solid #e8eef4;
+    border-radius: 11px;
+    background: #ffffff;
+    color: #1a2b4c;
+    text-decoration: none;
+    font-size: 11px;
+    font-weight: 800;
+  }
+
+  .gs-mobile-service-item:active {
+    background: #eefcf6;
+  }
+
+  .gs-mobile-service-icon {
+    width: 34px;
+    height: 34px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 9px;
+    background: #eefcf6;
+    color: #00a66a;
+    font-size: 16px;
+  }
+
+  .gs-mobile-service-item > i {
+    color: #94a3b8;
+    font-size: 10px;
+  }
+
+  .gs-mobile-services-all {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 7px;
+    min-height: 42px;
+    border-radius: 10px;
+    background: linear-gradient(135deg, #00a66a, #008d5c);
+    color: #ffffff;
+    text-decoration: none;
+    font-size: 11px;
+    font-weight: 900;
+  }
+}
+
+@media (max-width: 380px) {
+  body {
+    padding-bottom: 72px !important;
+  }
+
+  .gs-mobile-bottom-nav {
+    min-height: 60px;
+    padding-left: 3px;
+    padding-right: 3px;
+    padding-top: 4px;
+  }
+
+  .gs-mobile-bottom-nav-item {
+    min-height: 50px;
+    font-size: 9px;
+    border-radius: 10px;
+  }
+
+  .gs-mobile-bottom-nav-icon {
+    width: 27px;
+    height: 27px;
+    font-size: 16px;
+    border-radius: 8px;
+  }
+
+  .gs-mobile-bottom-nav-item small {
+    font-size: 6.5px;
+  }
+}

@@ -333,6 +333,8 @@ export default function Navbar() {
   const [profileOpen, setProfileOpen] = useState(false);
   const [drawerOpen, setDrawerOpen] = useState(false);
   const [mobileExpandedCat, setMobileExpandedCat] = useState(null);
+  const [mobileServicesOpen, setMobileServicesOpen] = useState(false);
+  const [mobileFinancialToolsOpen, setMobileFinancialToolsOpen] = useState(false);
 
   const [showSchemePopup, setShowSchemePopup] = useState(false);
   const [pendingRoute, setPendingRoute] = useState("/schemes");
@@ -398,6 +400,8 @@ export default function Navbar() {
   }, []);
 
   const closeMenus = () => {
+    setMobileServicesOpen(false);
+    setMobileFinancialToolsOpen(false);
     setOpenCategory(null);
     setExpertOpen(false);
     setProfileOpen(false);
@@ -1154,6 +1158,233 @@ export default function Navbar() {
                 <i className="bi bi-headset me-2" /> {t('nav.talkToExpert')}
               </Link>
             </div>
+          </div>
+        </div>
+      )}
+
+      {/* 5. MOBILE QUICK NAVIGATION
+          Mobile only. Desktop navigation and drawer remain unchanged. */}
+      <nav
+        className="gs-mobile-bottom-nav"
+        aria-label="GoSubsidy mobile quick navigation"
+      >
+        <Link
+          to="/schemes"
+          className={`gs-mobile-bottom-nav-item ${
+            location.pathname === "/schemes" ||
+            location.pathname.startsWith("/schemes/")
+              ? "active"
+              : ""
+          }`}
+          onClick={(e) => handleSchemeNavigation(e, "/schemes")}
+        >
+          <span className="gs-mobile-bottom-nav-icon">
+            <i className="bi bi-bank" />
+          </span>
+          <span>Schemes</span>
+        </Link>
+
+        <Link
+          to="/loans"
+          className={`gs-mobile-bottom-nav-item ${
+            location.pathname === "/loans" ||
+            location.pathname.startsWith("/loans/")
+              ? "active"
+              : ""
+          }`}
+          onClick={closeMenus}
+        >
+          <span className="gs-mobile-bottom-nav-icon">
+            <i className="bi bi-cash-coin" />
+          </span>
+          <span>Loans</span>
+        </Link>
+
+        <Link
+          to="/insurance"
+          className={`gs-mobile-bottom-nav-item ${
+            location.pathname === "/insurance" ||
+            location.pathname.startsWith("/insurance/")
+              ? "active"
+              : ""
+          }`}
+          onClick={closeMenus}
+        >
+          <span className="gs-mobile-bottom-nav-icon">
+            <i className="bi bi-shield-check" />
+          </span>
+          <span>Insurance</span>
+        </Link>
+
+        <button
+          type="button"
+          className={`gs-mobile-bottom-nav-item gs-mobile-services-button ${
+            mobileServicesOpen ? "active" : ""
+          }`}
+          onClick={() => {
+            setMobileFinancialToolsOpen(false);
+            setMobileServicesOpen((open) => !open);
+          }}
+          aria-expanded={mobileServicesOpen}
+          aria-controls="gosubsidy-mobile-services-menu"
+        >
+          <span className="gs-mobile-bottom-nav-icon">
+            <i className="bi bi-grid-3x3-gap" />
+          </span>
+          <span>Services</span>
+        </button>
+
+        <button
+          type="button"
+          className={`gs-mobile-bottom-nav-item gs-mobile-financial-button ${
+            mobileFinancialToolsOpen ? "active" : ""
+          }`}
+          onClick={() => {
+            setMobileServicesOpen(false);
+            setMobileFinancialToolsOpen((open) => !open);
+          }}
+          aria-expanded={mobileFinancialToolsOpen}
+          aria-controls="gosubsidy-mobile-financial-menu"
+        >
+          <span className="gs-mobile-bottom-nav-icon">
+            <i className="bi bi-calculator" />
+          </span>
+          <span>Financial Tools</span>
+        </button>
+      </nav>
+
+      {/* Mobile Services quick menu */}
+      {mobileServicesOpen && (
+        <div
+          className="gs-mobile-services-backdrop"
+          onClick={() => setMobileServicesOpen(false)}
+        >
+          <div
+            id="gosubsidy-mobile-services-menu"
+            className="gs-mobile-services-menu"
+            onClick={(e) => e.stopPropagation()}
+            role="dialog"
+            aria-label="GoSubsidy Services"
+          >
+            <div className="gs-mobile-services-header">
+              <div>
+                <small>GOSUBSIDY SERVICES</small>
+                <strong>Business Services</strong>
+              </div>
+              <button
+                type="button"
+                onClick={() => setMobileServicesOpen(false)}
+                aria-label="Close services"
+              >
+                <i className="bi bi-x-lg" />
+              </button>
+            </div>
+
+            <div className="gs-mobile-services-grid">
+              {[
+                ["Registration", "/services/startup-india", "bi-clipboard2-check"],
+                ["Trademark", "/services/trademark-registration", "bi-shield-shaded"],
+                ["GST", "/services/gst-registration", "bi-receipt-cutoff"],
+                ["Income Tax", "/services/income-tax-e-filing", "bi-calculator"],
+                ["MCA", "/services/company-compliance", "bi-building"],
+                ["Compliance", "/services/fdi-filing", "bi-clipboard-check"],
+                ["Consultation", "/services/ca-consultation", "bi-person-vcard"],
+                ["Global", "/services/uae-company-registration", "bi-globe2"],
+              ].map(([label, path, icon]) => (
+                <Link
+                  key={label}
+                  to={path}
+                  className="gs-mobile-service-item"
+                  onClick={(e) => {
+                    setMobileServicesOpen(false);
+                    handleSchemeNavigation(e, path);
+                  }}
+                >
+                  <span className="gs-mobile-service-icon">
+                    <i className={`bi ${icon}`} />
+                  </span>
+                  <span>{label}</span>
+                  <i className="bi bi-chevron-right" />
+                </Link>
+              ))}
+            </div>
+
+            <Link
+              to="/services"
+              className="gs-mobile-services-all"
+              onClick={() => setMobileServicesOpen(false)}
+            >
+              View All Services
+              <i className="bi bi-arrow-right" />
+            </Link>
+          </div>
+        </div>
+      )}
+
+      {/* Mobile Financial Tools quick menu: DPR + Calculators */}
+      {mobileFinancialToolsOpen && (
+        <div
+          className="gs-mobile-services-backdrop"
+          onClick={() => setMobileFinancialToolsOpen(false)}
+        >
+          <div
+            id="gosubsidy-mobile-financial-menu"
+            className="gs-mobile-services-menu gs-mobile-financial-menu"
+            onClick={(e) => e.stopPropagation()}
+            role="dialog"
+            aria-label="GoSubsidy Financial Tools"
+          >
+            <div className="gs-mobile-services-header">
+              <div>
+                <small>GOSUBSIDY FINANCIAL TOOLS</small>
+                <strong>DPR &amp; Calculators</strong>
+              </div>
+              <button
+                type="button"
+                onClick={() => setMobileFinancialToolsOpen(false)}
+                aria-label="Close financial tools"
+              >
+                <i className="bi bi-x-lg" />
+              </button>
+            </div>
+
+            <div className="gs-mobile-services-grid">
+              {[
+                ["Premium DPR", "/dpr", "bi-file-earmark-text"],
+                ["Loan EMI Calculator", "/calculators/subsidy-loan", "bi-cash-coin"],
+                ["Fixed Deposit Calculator", "/calculators/fixed-deposit", "bi-piggy-bank"],
+                ["GST Calculator", "/calculators/gst", "bi-receipt"],
+                ["SIP Calculator", "/calculators/sip", "bi-graph-up-arrow"],
+                ["Personal Loan EMI", "/calculators/personal-loan", "bi-person"],
+                ["Home Loan EMI", "/calculators/home-loan", "bi-house"],
+                ["Business Loan EMI", "/calculators/business-loan", "bi-briefcase"],
+              ].map(([label, path, icon]) => (
+                <Link
+                  key={label}
+                  to={path}
+                  className="gs-mobile-service-item"
+                  onClick={(e) => {
+                    setMobileFinancialToolsOpen(false);
+                    handleSchemeNavigation(e, path);
+                  }}
+                >
+                  <span className="gs-mobile-service-icon">
+                    <i className={`bi ${icon}`} />
+                  </span>
+                  <span>{label}</span>
+                  <i className="bi bi-chevron-right" />
+                </Link>
+              ))}
+            </div>
+
+            <Link
+              to="/subsidy-loan-emi-calculator"
+              className="gs-mobile-services-all"
+              onClick={() => setMobileFinancialToolsOpen(false)}
+            >
+              Open Main EMI Calculator
+              <i className="bi bi-arrow-right" />
+            </Link>
           </div>
         </div>
       )}

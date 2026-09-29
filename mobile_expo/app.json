@@ -1,10 +1,27 @@
 {
   "expo": {
-    "name": "SubsidyApp",
-    "slug": "subsidy-app",
+    "name": "GoSubsidy",
+    "slug": "gosubsidy",
     "version": "1.0.0",
+    "orientation": "portrait",
+
+    "icon": "./assets/icon.png",
+
+    "userInterfaceStyle": "light",
+    "scheme": "gosubsidy",
+
+    "ios": {
+      "supportsTablet": true,
+      "bundleIdentifier": "com.gosubsidy.app"
+    },
+
     "android": {
-      "usesCleartextTraffic": true
+      "package": "com.gosubsidy.app",
+
+      "adaptiveIcon": {
+        "foregroundImage": "./assets/adaptive-icon.png",
+        "backgroundColor": "#000000"
+      }
     }
   }
 }

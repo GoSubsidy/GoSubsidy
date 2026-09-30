@@ -239,7 +239,17 @@ export function AuthProvider({ children }) {
     if (response?.data?.user) {
       setUser(response.data.user);
 
-      await loadProfile(response.data.user);
+      // Do not block the login flow on customer profile loading.
+      // The profile is loaded separately so a slow WebView/Supabase
+      // profile request cannot leave the login page waiting.
+      setTimeout(() => {
+        loadProfile(response.data.user).catch((error) => {
+          console.warn(
+            "[AuthContext] Login profile load failed:",
+            error
+          );
+        });
+      }, 0);
     }
 
     if (response?.data?.session) {

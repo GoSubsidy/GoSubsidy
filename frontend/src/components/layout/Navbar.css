@@ -2315,43 +2315,6 @@
 
 
 /* ============================================================
-   GoSubsidy MOBILE BOTTOM BAR - NO LOADING / NO SPINNER
-   Keep all bottom navigation icons completely static.
-   ============================================================ */
-@media (max-width: 768px) {
-  .gs-mobile-bottom-nav,
-  .gs-mobile-bottom-nav *,
-  .gs-mobile-bottom-nav i,
-  .gs-mobile-bottom-nav-icon {
-    animation: none !important;
-    animation-name: none !important;
-    animation-duration: 0s !important;
-    animation-iteration-count: 1 !important;
-  }
-
-  .gs-mobile-bottom-nav-icon {
-    transform: none !important;
-    opacity: 1 !important;
-    visibility: visible !important;
-  }
-
-  .gs-mobile-bottom-nav-icon i {
-    display: inline-flex !important;
-    align-items: center;
-    justify-content: center;
-    transform: none !important;
-    animation: none !important;
-  }
-
-  .gs-mobile-bottom-nav .spinner-border,
-  .gs-mobile-bottom-nav .spinner-grow,
-  .gs-mobile-bottom-nav [class*="spinner"],
-  .gs-mobile-bottom-nav [class*="loading"] {
-    display: none !important;
-  }
-}
-
-/* ============================================================
    GoSubsidy MOBILE BOTTOM BAR - BUSINESS SERVICES
    Schemes | Loans | Insurance | Services | Financial Tools
    ============================================================ */
@@ -2607,3 +2570,61 @@
     font-size: 6.5px;
   }
 }
+
+/* ============================================================
+   GoSubsidy NAVIGATION ICON STATIC FIX
+   ============================================================ */
+.gs-mobile-bottom-nav .gs-mobile-bottom-nav-icon,
+.gs-mobile-bottom-nav .gs-mobile-bottom-nav-icon i,
+.gs-mobile-bottom-nav .gs-mobile-bottom-nav-icon svg,
+.gs-mobile-bottom-nav .gs-mobile-bottom-nav-icon img,
+.gs-mobile-bottom-nav .gs-mobile-bottom-nav-icon::before,
+.gs-mobile-bottom-nav .gs-mobile-bottom-nav-icon::after,
+.gs-drawer-icon,
+.gs-drawer-icon::before,
+.gs-drawer-icon::after,
+.gs-drawer-sub-icon,
+.gs-drawer-sub-icon::before,
+.gs-drawer-sub-icon::after,
+.gs-drawer-chevron,
+.gs-drawer-chevron::before,
+.gs-drawer-chevron::after {
+  animation: none !important;
+  animation-name: none !important;
+  animation-duration: 0s !important;
+  animation-delay: 0s !important;
+  animation-iteration-count: 1 !important;
+  animation-play-state: paused !important;
+  transform: none !important;
+  filter: none !important;
+  transition: none !important;
+  will-change: auto !important;
+  backface-visibility: visible !important;
+  perspective: none !important;
+}
+
+.gs-mobile-bottom-nav .gs-mobile-bottom-nav-item:hover .gs-mobile-bottom-nav-icon,
+.gs-mobile-bottom-nav .gs-mobile-bottom-nav-item:active .gs-mobile-bottom-nav-icon,
+.gs-mobile-bottom-nav .gs-mobile-bottom-nav-item:focus .gs-mobile-bottom-nav-icon,
+.gs-mobile-bottom-nav .gs-mobile-bottom-nav-item.active .gs-mobile-bottom-nav-icon,
+.gs-drawer-cat-btn:hover .gs-drawer-icon,
+.gs-drawer-cat-btn:active .gs-drawer-icon,
+.gs-drawer-cat-btn.active .gs-drawer-icon,
+.gs-drawer-sub-link:hover .gs-drawer-sub-icon,
+.gs-drawer-sub-link:active .gs-drawer-sub-icon {
+  animation: none !important;
+  animation-name: none !important;
+  transform: none !important;
+  filter: none !important;
+  transition: none !important;
+}
+
+.gs-mobile-bottom-nav .gs-mobile-bottom-nav-icon i {
+  display: inline-block !important;
+  position: static !important;
+  transform: none !important;
+  animation: none !important;
+  filter: none !important;
+  transition: none !important;
+}
+

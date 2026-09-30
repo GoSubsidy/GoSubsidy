@@ -1179,7 +1179,7 @@ export default function Navbar() {
           onClick={(e) => handleSchemeNavigation(e, "/schemes")}
         >
           <span className="gs-mobile-bottom-nav-icon">
-            <i className="bi bi-bank" aria-hidden="true" />
+            <i className="bi bi-bank" />
           </span>
           <span>Schemes</span>
         </Link>
@@ -1195,7 +1195,7 @@ export default function Navbar() {
           onClick={closeMenus}
         >
           <span className="gs-mobile-bottom-nav-icon">
-            <i className="bi bi-cash-coin" aria-hidden="true" />
+            <i className="bi bi-cash-coin" />
           </span>
           <span>Loans</span>
         </Link>
@@ -1211,7 +1211,7 @@ export default function Navbar() {
           onClick={closeMenus}
         >
           <span className="gs-mobile-bottom-nav-icon">
-            <i className="bi bi-shield-check" aria-hidden="true" />
+            <i className="bi bi-shield-check" />
           </span>
           <span>Insurance</span>
         </Link>
@@ -1229,7 +1229,7 @@ export default function Navbar() {
           aria-controls="gosubsidy-mobile-services-menu"
         >
           <span className="gs-mobile-bottom-nav-icon">
-            <i className="bi bi-grid-3x3-gap" aria-hidden="true" />
+            <i className="bi bi-grid-3x3-gap" />
           </span>
           <span>Services</span>
         </button>
@@ -1247,7 +1247,7 @@ export default function Navbar() {
           aria-controls="gosubsidy-mobile-financial-menu"
         >
           <span className="gs-mobile-bottom-nav-icon">
-            <i className="bi bi-calculator" aria-hidden="true" />
+            <i className="bi bi-calculator" />
           </span>
           <span>Financial Tools</span>
         </button>

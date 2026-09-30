@@ -2315,6 +2315,43 @@
 
 
 /* ============================================================
+   GoSubsidy MOBILE BOTTOM BAR - NO LOADING / NO SPINNER
+   Keep all bottom navigation icons completely static.
+   ============================================================ */
+@media (max-width: 768px) {
+  .gs-mobile-bottom-nav,
+  .gs-mobile-bottom-nav *,
+  .gs-mobile-bottom-nav i,
+  .gs-mobile-bottom-nav-icon {
+    animation: none !important;
+    animation-name: none !important;
+    animation-duration: 0s !important;
+    animation-iteration-count: 1 !important;
+  }
+
+  .gs-mobile-bottom-nav-icon {
+    transform: none !important;
+    opacity: 1 !important;
+    visibility: visible !important;
+  }
+
+  .gs-mobile-bottom-nav-icon i {
+    display: inline-flex !important;
+    align-items: center;
+    justify-content: center;
+    transform: none !important;
+    animation: none !important;
+  }
+
+  .gs-mobile-bottom-nav .spinner-border,
+  .gs-mobile-bottom-nav .spinner-grow,
+  .gs-mobile-bottom-nav [class*="spinner"],
+  .gs-mobile-bottom-nav [class*="loading"] {
+    display: none !important;
+  }
+}
+
+/* ============================================================
    GoSubsidy MOBILE BOTTOM BAR - BUSINESS SERVICES
    Schemes | Loans | Insurance | Services | Financial Tools
    ============================================================ */

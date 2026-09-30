@@ -2627,4 +2627,133 @@
   filter: none !important;
   transition: none !important;
 }
+/* ============================================================
+   GoSubsidy — FINAL STATIC NAVIGATION ICON FIX
+   ============================================================ */
 
+/* Bottom navigation icons */
+.gs-mobile-bottom-nav .gs-mobile-bottom-nav-icon,
+.gs-mobile-bottom-nav .gs-mobile-bottom-nav-icon i,
+.gs-mobile-bottom-nav .gs-mobile-bottom-nav-icon svg,
+.gs-mobile-bottom-nav .gs-mobile-bottom-nav-icon img,
+.gs-mobile-bottom-nav .gs-mobile-bottom-nav-icon::before,
+.gs-mobile-bottom-nav .gs-mobile-bottom-nav-icon::after,
+
+/* Side drawer icons */
+.gs-drawer-icon,
+.gs-drawer-icon::before,
+.gs-drawer-icon::after,
+
+.gs-drawer-sub-icon,
+.gs-drawer-sub-icon::before,
+.gs-drawer-sub-icon::after,
+
+.gs-drawer-chevron,
+.gs-drawer-chevron::before,
+.gs-drawer-chevron::after {
+  animation: none !important;
+  animation-name: none !important;
+  animation-duration: 0s !important;
+  animation-delay: 0s !important;
+  animation-iteration-count: 1 !important;
+  animation-play-state: paused !important;
+
+  transform: none !important;
+  filter: none !important;
+  transition: none !important;
+
+  will-change: auto !important;
+  backface-visibility: visible !important;
+  perspective: none !important;
+}
+
+
+/* ============================================================
+   Bottom navigation icon itself
+   ============================================================ */
+
+.gs-mobile-bottom-nav .gs-mobile-bottom-nav-icon i {
+  display: inline-block !important;
+  position: static !important;
+
+  animation: none !important;
+  transform: none !important;
+  filter: none !important;
+  transition: none !important;
+}
+
+
+/* ============================================================
+   Prevent animation during hover / active / focus
+   ============================================================ */
+
+.gs-mobile-bottom-nav
+.gs-mobile-bottom-nav-item:hover
+.gs-mobile-bottom-nav-icon,
+
+.gs-mobile-bottom-nav
+.gs-mobile-bottom-nav-item:active
+.gs-mobile-bottom-nav-icon,
+
+.gs-mobile-bottom-nav
+.gs-mobile-bottom-nav-item:focus
+.gs-mobile-bottom-nav-icon,
+
+.gs-mobile-bottom-nav
+.gs-mobile-bottom-nav-item.active
+.gs-mobile-bottom-nav-icon,
+
+.gs-mobile-bottom-nav
+.gs-mobile-bottom-nav-item:hover
+.gs-mobile-bottom-nav-icon i,
+
+.gs-mobile-bottom-nav
+.gs-mobile-bottom-nav-item:active
+.gs-mobile-bottom-nav-icon i,
+
+.gs-mobile-bottom-nav
+.gs-mobile-bottom-nav-item:focus
+.gs-mobile-bottom-nav-icon i,
+
+.gs-mobile-bottom-nav
+.gs-mobile-bottom-nav-item.active
+.gs-mobile-bottom-nav-icon i {
+  animation: none !important;
+  transform: none !important;
+  filter: none !important;
+  transition: none !important;
+}
+
+
+/* ============================================================
+   Side drawer icons
+   ============================================================ */
+
+.gs-drawer-cat-btn:hover .gs-drawer-icon,
+.gs-drawer-cat-btn:active .gs-drawer-icon,
+.gs-drawer-cat-btn:focus .gs-drawer-icon,
+.gs-drawer-cat-btn.active .gs-drawer-icon,
+
+.gs-drawer-sub-link:hover .gs-drawer-sub-icon,
+.gs-drawer-sub-link:active .gs-drawer-sub-icon,
+.gs-drawer-sub-link:focus .gs-drawer-sub-icon {
+  animation: none !important;
+  transform: none !important;
+  filter: none !important;
+  transition: none !important;
+}
+
+
+/* ============================================================
+   IMPORTANT:
+   Keep drawer opening animation.
+   Only icons are locked.
+   ============================================================ */
+
+.gs-drawer-content {
+  animation: gsDrawerSlide 0.25s ease-out !important;
+}
+
+.gs-drawer-overlay {
+  animation: gsFadeIn 0.2s ease !important;
+}

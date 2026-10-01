@@ -364,7 +364,7 @@ export default function SchemeRegistrationModal({ isOpen, onClose, onSuccess }) 
                   }}
                 >
                   <img
-                    src="/images/gosubsidy-logo.png"
+                    src="/images/gosubsidy-logo-transparent-72.png"
                     alt="GoSubsidy"
                     style={{
                       width: "42px",

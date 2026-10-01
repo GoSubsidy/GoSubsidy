@@ -346,30 +346,44 @@ export default function SchemeRegistrationModal({ isOpen, onClose, onSuccess }) 
             }}
           >
             <div>
-              <div className="d-flex align-items-center gap-2 mb-3">
+              <div
+                className="d-flex align-items-center mb-3"
+                style={{ gap: "4px" }}
+              >
                 <div
-                  className="rounded-3 d-flex align-items-center justify-content-center bg-white"
+                  className="d-flex align-items-center justify-content-center"
                   style={{
                     width: "42px",
                     height: "42px",
-                    padding: "4px",
+                    padding: "0",
+                    margin: "0",
                     flexShrink: 0,
+                    overflow: "hidden",
                   }}
                 >
                   <img
                     src="/images/icon72.png"
                     alt="GoSubsidy"
                     style={{
-                      width: "100%",
-                      height: "100%",
+                      width: "42px",
+                      height: "42px",
                       objectFit: "contain",
+                      display: "block",
+                      margin: "0",
+                      padding: "0",
                     }}
                   />
                 </div>
 
                 <span
                   className="fw-bolder fs-5"
-                  style={{ letterSpacing: "-0.5px", color: "#00a66a" }}
+                  style={{
+                    letterSpacing: "-0.8px",
+                    color: "#00a66a",
+                    margin: "0",
+                    padding: "0",
+                    lineHeight: 1,
+                  }}
                 >
                   Go<span style={{ color: "#ff6800" }}>Subsidy</span>
                 </span>

@@ -70,7 +70,7 @@ export default function PromoModal() {
           {/* GoSubsidy Brand */}
           <div className="gs-promo-header">
             <img
-              src="/images/gosubsidy-handshake-512.png"
+              src="/images/icon512.png"
               alt="GoSubsidy"
               className="gs-promo-logo"
             />

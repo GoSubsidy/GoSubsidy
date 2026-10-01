@@ -1,0 +1,75 @@
+/* ============================================================
+   GoSubsidy Scheme Registration Modal
+   Logo / Brand spacing only
+   ============================================================ */
+
+/* Brand row */
+.scheme-registration-card .gs-srm-brand-row {
+  display: flex !important;
+  align-items: center !important;
+  gap: 4px !important;
+  margin: 0 0 12px 0 !important;
+  padding: 0 !important;
+}
+
+/* Logo wrapper */
+.scheme-registration-card .gs-srm-logo-wrap {
+  width: 42px !important;
+  height: 42px !important;
+  min-width: 42px !important;
+  min-height: 42px !important;
+  max-width: 42px !important;
+  max-height: 42px !important;
+  padding: 0 !important;
+  margin: 0 !important;
+  border: 0 !important;
+  border-radius: 0 !important;
+  background: transparent !important;
+  box-shadow: none !important;
+  overflow: hidden !important;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  flex-shrink: 0 !important;
+}
+
+/* Logo image */
+.scheme-registration-card .gs-srm-logo {
+  display: block !important;
+  width: 42px !important;
+  height: 42px !important;
+  min-width: 42px !important;
+  min-height: 42px !important;
+  max-width: 42px !important;
+  max-height: 42px !important;
+  margin: 0 !important;
+  padding: 0 !important;
+  border: 0 !important;
+  background: transparent !important;
+  object-fit: contain !important;
+  object-position: center !important;
+}
+
+/* GoSubsidy text */
+.scheme-registration-card .gs-srm-brand-name {
+  display: inline-block !important;
+  margin: 0 !important;
+  padding: 0 !important;
+  line-height: 1 !important;
+  letter-spacing: -0.8px !important;
+  white-space: nowrap !important;
+}
+
+/* Mobile */
+@media (max-width: 767.98px) {
+  .scheme-registration-card .gs-srm-brand-row {
+    gap: 4px !important;
+    margin-bottom: 12px !important;
+  }
+
+  .scheme-registration-card .gs-srm-logo-wrap,
+  .scheme-registration-card .gs-srm-logo {
+    width: 42px !important;
+    height: 42px !important;
+  }
+}

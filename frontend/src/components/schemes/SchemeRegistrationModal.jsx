@@ -15,6 +15,7 @@ import {
 } from "react-icons/fa";
 import { useAuth } from "../../context/AuthContext";
 import PaymentModal from "../premium/PaymentModal";
+import "./SchemeRegistrationModal.css";
 
 const API_BASE_URL = import.meta.env.VITE_API_BASE_URL || "http://localhost:4000";
 

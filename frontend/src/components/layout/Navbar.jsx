@@ -1067,7 +1067,7 @@ export default function Navbar() {
             <div className="gs-drawer-header">
               <div className="gs-drawer-brand">
                 <span className="gs-drawer-logo-wrap">
-                  <img src="/images/gosubsidy-handshake-512.png" alt="GoSubsidy" className="gs-drawer-logo gs-gold-image-logo" />
+                  <img src="/images/icon512.png" alt="GoSubsidy" className="gs-drawer-logo gs-gold-image-logo" />
                 </span>
                 <span className="gs-drawer-title">
                   <span className="gs-nav-go">Go</span>

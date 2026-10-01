@@ -73,3 +73,24 @@
     height: 42px !important;
   }
 }
+/* ============================================================
+   FINAL FIX — REMOVE WHITE BOX FROM LOGO IMAGE
+   ============================================================ */
+
+.scheme-registration-card .gs-srm-logo-wrap {
+  background: transparent !important;
+  padding: 0 !important;
+  border: 0 !important;
+  box-shadow: none !important;
+  overflow: visible !important;
+}
+
+.scheme-registration-card .gs-srm-logo {
+  background: transparent !important;
+  mix-blend-mode: multiply !important;
+  border: 0 !important;
+  box-shadow: none !important;
+  padding: 0 !important;
+  margin: 0 !important;
+  display: block !important;
+}

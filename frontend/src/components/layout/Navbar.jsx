@@ -669,7 +669,7 @@ export default function Navbar() {
             <Link to="/" className="gs-navbar-brand" onClick={closeMenus} aria-label="GoSubsidy Home">
               <span className="gs-navbar-logo-wrap">
                 <img
-  src="/images/gosubsidy-navbar-working-512.gif"
+  src="/images/icon512.gif"
   alt="GoSubsidy"
   className="gs-navbar-logo"
 />

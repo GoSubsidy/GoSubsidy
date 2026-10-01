@@ -357,7 +357,7 @@ export default function SchemeRegistrationModal({ isOpen, onClose, onSuccess }) 
                   }}
                 >
                   <img
-                    src="/images/icon48.png"
+                    src="/images/icon72.png"
                     alt="GoSubsidy"
                     style={{
                       width: "100%",

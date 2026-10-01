@@ -358,11 +358,12 @@ export default function SchemeRegistrationModal({ isOpen, onClose, onSuccess }) 
                     padding: "0",
                     margin: "0",
                     flexShrink: 0,
-                    overflow: "hidden",
+                    overflow: "visible",
+                    background: "transparent",
                   }}
                 >
                   <img
-                    src="/images/icon96.png"
+                    src="/images/gosubsidy-logo-transparent.png"
                     alt="GoSubsidy"
                     style={{
                       width: "42px",

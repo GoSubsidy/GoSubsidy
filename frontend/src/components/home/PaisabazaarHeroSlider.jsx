@@ -21,7 +21,7 @@ import { fetchSchemes } from "../../services/api";
   - onSchemeClick callback
   - /schemes navigation behavior
   - 5 second slider
-  - proposal click -> /dpr
+  - proposal image click -> full-screen image preview
 */
 
 const HERO_SLIDES = [
@@ -139,6 +139,7 @@ export default function PaisabazaarHeroSlider({ onSchemeClick }) {
   const [slides, setSlides] = useState(HERO_SLIDES);
   const [activeIndex, setActiveIndex] = useState(0);
   const [paused, setPaused] = useState(false);
+  const [previewImage, setPreviewImage] = useState(null);
 
   useEffect(() => {
     let mounted = true;
@@ -183,6 +184,24 @@ export default function PaisabazaarHeroSlider({ onSchemeClick }) {
 
     return () => window.clearInterval(timer);
   }, [paused, slides.length]);
+
+  useEffect(() => {
+    if (!previewImage) return undefined;
+
+    const handleKeyDown = (event) => {
+      if (event.key === "Escape") {
+        setPreviewImage(null);
+      }
+    };
+
+    window.addEventListener("keydown", handleKeyDown);
+    document.body.style.overflow = "hidden";
+
+    return () => {
+      window.removeEventListener("keydown", handleKeyDown);
+      document.body.style.overflow = "";
+    };
+  }, [previewImage]);
 
   const goTo = (path) => {
     if (path === "/schemes" && typeof onSchemeClick === "function") {
@@ -812,6 +831,61 @@ export default function PaisabazaarHeroSlider({ onSchemeClick }) {
         }
 
         /* ---------------------------------------------------------
+           BUSINESS PROPOSAL IMAGE PREVIEW
+           Clicking a proposal image opens the image only.
+           It does NOT navigate to /dpr.
+        --------------------------------------------------------- */
+
+        .gs-image-lightbox {
+          position: fixed;
+          inset: 0;
+          z-index: 999999;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          padding: 28px;
+          background: rgba(3, 12, 27, 0.88);
+          backdrop-filter: blur(5px);
+          cursor: zoom-out;
+        }
+
+        .gs-image-lightbox-image {
+          display: block;
+          width: auto;
+          height: auto;
+          max-width: min(94vw, 1500px);
+          max-height: 92vh;
+          object-fit: contain;
+          border-radius: 10px;
+          box-shadow: 0 24px 80px rgba(0, 0, 0, 0.45);
+          cursor: default;
+        }
+
+        .gs-image-lightbox-close {
+          position: fixed;
+          top: 18px;
+          right: 20px;
+          z-index: 2;
+          width: 44px;
+          height: 44px;
+          border: 1px solid rgba(255,255,255,.35);
+          border-radius: 50%;
+          background: rgba(255,255,255,.14);
+          color: #ffffff;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          font-size: 17px;
+          cursor: pointer;
+          transition: background .18s ease, transform .18s ease;
+        }
+
+        .gs-image-lightbox-close:hover {
+          background: rgba(255,255,255,.25);
+          transform: scale(1.05);
+        }
+
+        /* ---------------------------------------------------------
            Tablet
         --------------------------------------------------------- */
 
@@ -1293,8 +1367,13 @@ export default function PaisabazaarHeroSlider({ onSchemeClick }) {
                 key={slide.id}
                 type="button"
                 className={`gs-slide ${index === activeIndex ? "active" : ""}`}
-                onClick={() => goTo(slide.link)}
-                aria-label={`Open ${slide.alt}`}
+                onClick={() => {
+                  setPreviewImage({
+                    src: slide.image,
+                    alt: slide.alt,
+                  });
+                }}
+                aria-label={`View ${slide.alt} full size`}
               >
                 <img
                   className="gs-slide-image"
@@ -1382,6 +1461,32 @@ export default function PaisabazaarHeroSlider({ onSchemeClick }) {
           </div>
         </div>
       </div>
+
+      {previewImage && (
+        <div
+          className="gs-image-lightbox"
+          role="dialog"
+          aria-modal="true"
+          aria-label="Business proposal image preview"
+          onClick={() => setPreviewImage(null)}
+        >
+          <button
+            type="button"
+            className="gs-image-lightbox-close"
+            onClick={() => setPreviewImage(null)}
+            aria-label="Close image preview"
+          >
+            <i className="bi bi-x-lg" />
+          </button>
+
+          <img
+            className="gs-image-lightbox-image"
+            src={previewImage.src}
+            alt={previewImage.alt}
+            onClick={(event) => event.stopPropagation()}
+          />
+        </div>
+      )}
     </section>
   );
 }

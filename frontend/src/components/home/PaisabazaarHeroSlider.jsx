@@ -435,24 +435,15 @@ export default function PaisabazaarHeroSlider({ onSchemeClick }) {
           flex-wrap: wrap;
           gap: 27px;
           margin-top: 23px;
-          padding: 0 !important;
-          min-height: 0 !important;
           position: relative;
           z-index: 9;
-          /* Prevent older/global CSS from adding a dark panel behind trust labels. */
-          background: transparent !important;
-          border: 0 !important;
-          border-radius: 0 !important;
-          box-shadow: none !important;
-          color: #466984;
         }
 
         .gs-trust span {
           display: inline-flex;
           align-items: center;
           gap: 8px;
-          color: #466984 !important;
-          background: transparent !important;
+          color: #466984;
           font-size: 12.5px;
           font-weight: 700;
           white-space: nowrap;
@@ -753,9 +744,7 @@ export default function PaisabazaarHeroSlider({ onSchemeClick }) {
         @media (max-width: 1450px) {
           .gs-hero-main {
             width: min(1320px, calc(100% - 56px));
-            /* Extra vertical room keeps the trust labels clear of the stats strip. */
-            height: 620px;
-            min-height: 620px;
+            height: 575px;
             grid-template-columns: minmax(0,1fr) 430px;
           }
 
@@ -810,7 +799,20 @@ export default function PaisabazaarHeroSlider({ onSchemeClick }) {
           }
 
           .gs-trust {
-            margin-top: 19px;
+            margin-top: 15px;
+            display: flex;
+            flex-wrap: nowrap;
+            align-items: center;
+            gap: clamp(8px, 1vw, 18px);
+            width: max-content;
+            max-width: 100%;
+          }
+
+          .gs-trust span {
+            flex: 0 0 auto;
+            gap: 5px;
+            font-size: clamp(10px, .82vw, 12px);
+            white-space: nowrap;
           }
 
           .gs-person {
@@ -894,6 +896,22 @@ export default function PaisabazaarHeroSlider({ onSchemeClick }) {
         .gs-image-lightbox-close:hover {
           background: rgba(255,255,255,.25);
           transform: scale(1.05);
+        }
+
+        /* Desktop trust row: keep all three benefits visible together. */
+        @media (min-width: 901px) {
+          .gs-reference-hero .gs-trust {
+            display: flex;
+            flex-wrap: nowrap;
+            align-items: center;
+            width: max-content;
+            max-width: 100%;
+          }
+
+          .gs-reference-hero .gs-trust > span {
+            flex: 0 0 auto;
+            white-space: nowrap;
+          }
         }
 
         /* ---------------------------------------------------------

@@ -435,15 +435,24 @@ export default function PaisabazaarHeroSlider({ onSchemeClick }) {
           flex-wrap: wrap;
           gap: 27px;
           margin-top: 23px;
+          padding: 0 !important;
+          min-height: 0 !important;
           position: relative;
           z-index: 9;
+          /* Prevent older/global CSS from adding a dark panel behind trust labels. */
+          background: transparent !important;
+          border: 0 !important;
+          border-radius: 0 !important;
+          box-shadow: none !important;
+          color: #466984;
         }
 
         .gs-trust span {
           display: inline-flex;
           align-items: center;
           gap: 8px;
-          color: #466984;
+          color: #466984 !important;
+          background: transparent !important;
           font-size: 12.5px;
           font-weight: 700;
           white-space: nowrap;
@@ -744,7 +753,9 @@ export default function PaisabazaarHeroSlider({ onSchemeClick }) {
         @media (max-width: 1450px) {
           .gs-hero-main {
             width: min(1320px, calc(100% - 56px));
-            height: 575px;
+            /* Extra vertical room keeps the trust labels clear of the stats strip. */
+            height: 620px;
+            min-height: 620px;
             grid-template-columns: minmax(0,1fr) 430px;
           }
 

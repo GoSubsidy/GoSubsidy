@@ -826,13 +826,13 @@ export default function PaisabazaarHeroSlider({ onSchemeClick }) {
           }
 
           .gs-person-quote {
-            /* Move the slogan below the heading and service-card area. */
-            left: 145px;
-            top: 215px;
-            width: 130px;
-            padding: 12px 12px 13px;
-            font-size: 12px;
-            line-height: 1.38;
+            /* Original placement retained; only the card size is reduced. */
+            left: 211px;
+            top: 25px;
+            width: 104px;
+            padding: 8px 8px 9px;
+            font-size: 10px;
+            line-height: 1.28;
             overflow-wrap: normal;
             word-break: normal;
           }

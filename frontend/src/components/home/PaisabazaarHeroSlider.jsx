@@ -826,23 +826,55 @@ export default function PaisabazaarHeroSlider({ onSchemeClick }) {
           }
 
           .gs-person-quote {
-            /* Original placement retained; only the card size is reduced. */
             left: 211px;
             top: 25px;
-            width: 104px;
-            padding: 8px 8px 9px;
-            font-size: 10px;
-            line-height: 1.28;
-            overflow-wrap: normal;
-            word-break: normal;
+            width: 128px;
+            font-size: 13px;
           }
 
           .gs-slider-column {
             padding-top: 32px;
+            padding-left: 0;
+            padding-right: 0;
+            min-width: 0;
           }
 
           .gs-slider {
+            width: 100%;
             height: 495px;
+            margin: 0;
+            padding: 0;
+          }
+
+          .gs-slide,
+          .gs-slide.active {
+            inset: 0;
+            margin: 0;
+            padding: 0;
+          }
+
+          .gs-slide-image {
+            width: 100%;
+            height: 100%;
+            object-fit: contain;
+            object-position: center;
+          }
+        }
+
+        /* Keep the proposal image aligned with its slider frame on desktop. */
+        @media (min-width: 1101px) {
+          .gs-reference-hero .gs-slider-column {
+            align-self: stretch;
+            min-width: 0;
+          }
+
+          .gs-reference-hero .gs-slider {
+            box-sizing: border-box;
+          }
+
+          .gs-reference-hero .gs-slide-image {
+            object-fit: contain;
+            object-position: center;
           }
         }
 

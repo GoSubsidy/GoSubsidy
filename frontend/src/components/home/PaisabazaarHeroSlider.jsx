@@ -826,9 +826,9 @@ export default function PaisabazaarHeroSlider({ onSchemeClick }) {
           }
 
           .gs-person-quote {
-            /* Keep the slogan card inside the gap before the proposal slider. */
+            /* Move the slogan below the heading and service-card area. */
             left: 145px;
-            top: 28px;
+            top: 215px;
             width: 130px;
             padding: 12px 12px 13px;
             font-size: 12px;
@@ -843,16 +843,6 @@ export default function PaisabazaarHeroSlider({ onSchemeClick }) {
 
           .gs-slider {
             height: 495px;
-          }
-        }
-
-        /* Desktop slogan card: compact, readable, and clear of the slider. */
-        @media (min-width: 1101px) {
-          .gs-reference-hero .gs-person-quote {
-            max-width: 130px;
-            white-space: normal;
-            overflow-wrap: normal;
-            word-break: normal;
           }
         }
 

@@ -435,24 +435,15 @@ export default function PaisabazaarHeroSlider({ onSchemeClick }) {
           flex-wrap: wrap;
           gap: 27px;
           margin-top: 23px;
-          padding: 0 !important;
-          min-height: 0 !important;
           position: relative;
           z-index: 9;
-          /* Prevent older/global CSS from adding a dark panel behind trust labels. */
-          background: transparent !important;
-          border: 0 !important;
-          border-radius: 0 !important;
-          box-shadow: none !important;
-          color: #466984;
         }
 
         .gs-trust span {
           display: inline-flex;
           align-items: center;
           gap: 8px;
-          color: #466984 !important;
-          background: transparent !important;
+          color: #466984;
           font-size: 12.5px;
           font-weight: 700;
           white-space: nowrap;
@@ -753,9 +744,7 @@ export default function PaisabazaarHeroSlider({ onSchemeClick }) {
         @media (max-width: 1450px) {
           .gs-hero-main {
             width: min(1320px, calc(100% - 56px));
-            /* Extra vertical room keeps the trust labels clear of the stats strip. */
-            height: 620px;
-            min-height: 620px;
+            height: 575px;
             grid-template-columns: minmax(0,1fr) 430px;
           }
 
@@ -834,47 +823,10 @@ export default function PaisabazaarHeroSlider({ onSchemeClick }) {
 
           .gs-slider-column {
             padding-top: 32px;
-            padding-left: 0;
-            padding-right: 0;
-            min-width: 0;
           }
 
           .gs-slider {
-            width: 100%;
             height: 495px;
-            margin: 0;
-            padding: 0;
-          }
-
-          .gs-slide,
-          .gs-slide.active {
-            inset: 0;
-            margin: 0;
-            padding: 0;
-          }
-
-          .gs-slide-image {
-            width: 100%;
-            height: 100%;
-            object-fit: contain;
-            object-position: center;
-          }
-        }
-
-        /* Keep the proposal image aligned with its slider frame on desktop. */
-        @media (min-width: 1101px) {
-          .gs-reference-hero .gs-slider-column {
-            align-self: stretch;
-            min-width: 0;
-          }
-
-          .gs-reference-hero .gs-slider {
-            box-sizing: border-box;
-          }
-
-          .gs-reference-hero .gs-slide-image {
-            object-fit: contain;
-            object-position: center;
           }
         }
 

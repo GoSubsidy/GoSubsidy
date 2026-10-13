@@ -52,6 +52,10 @@ import FixedDeposit from "./pages/FixedDeposit";
 import GSTCalculator from "./pages/GSTCalculator";
 import SIPCalculator from "./pages/SIPCalculator";
 import DailySIPCalculator from "./pages/DailySIPCalculator";
+import PersonalLoanEligibility from "./pages/PersonalLoanEligibility";
+import HomeLoanEligibility from "./pages/HomeLoanEligibility";
+import HomeLoanPrepayment from "./pages/HomeLoanPrepayment";
+import PersonalLoanPrepayment from "./pages/PersonalLoanPrepayment";
 
 // ======================================================
 // LENDER / PROVIDER
@@ -297,6 +301,27 @@ function AppContent() {
         <Route
           path="/calculators/mudra-loan"
           element={<SubsidyLoanEMICalculator />}
+        />
+
+        {/* Dedicated eligibility and prepayment calculators use income/obligation-based logic. */}
+        <Route
+          path="/calculators/personal-eligibility"
+          element={<PersonalLoanEligibility />}
+        />
+
+        <Route
+          path="/calculators/home-eligibility"
+          element={<HomeLoanEligibility />}
+        />
+
+        <Route
+          path="/calculators/home-prepayment"
+          element={<HomeLoanPrepayment />}
+        />
+
+        <Route
+          path="/calculators/personal-prepayment"
+          element={<PersonalLoanPrepayment />}
         />
 
         <Route

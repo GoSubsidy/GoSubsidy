@@ -633,7 +633,8 @@ export default function SubsidyLoanEMICalculator() {
                   className="premium-apply-btn"
                   onClick={() => navigate("/loans")}
                 >
-                  Apply For Subsidy Loan <i className="bi bi-arrow-right ms-2" />
+                  {isSubsidyMode ? "Apply For Subsidy Loan" : "Explore Loan Options"}
+                  <i className="bi bi-arrow-right ms-2" />
                 </button>
 
               </div>

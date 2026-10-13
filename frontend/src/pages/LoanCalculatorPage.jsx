@@ -9,7 +9,7 @@ const CONFIG = {
     breadcrumb: "Personal Loan / Eligibility",
     subtitle: "Check maximum borrowing power based on age, income, existing EMI, interest rate and loan tenure.",
     type: "eligibility",
-    defaults: { age: 29, loan: 200000, rate: 10, tenure: 3, income: 40000, existingEmi: 10000 },
+    defaults: { age: 29, loan: 200000, rate: 10, tenure: 3, income: 40000, existingEmi: 10000, foir: 50 },
     loanMax: 5000000,
   },
   homeEligibility: {
@@ -17,7 +17,7 @@ const CONFIG = {
     breadcrumb: "Home Loan / Eligibility",
     subtitle: "Estimate your home loan eligibility using monthly income, existing obligations, interest rate and repayment tenure.",
     type: "eligibility",
-    defaults: { age: 32, loan: 2000000, rate: 8.5, tenure: 20, income: 75000, existingEmi: 15000 },
+    defaults: { age: 32, loan: 2000000, rate: 8.5, tenure: 20, income: 75000, existingEmi: 15000, foir: 45 },
     loanMax: 10000000,
   },
   homePrepayment: {
@@ -95,23 +95,42 @@ export default function LoanCalculatorPage({ mode }) {
   const [tenure, setTenure] = useState(c.defaults.tenure);
   const [income, setIncome] = useState(c.defaults.income || 50000);
   const [existingEmi, setExistingEmi] = useState(c.defaults.existingEmi || 0);
+  const [foir, setFoir] = useState(c.defaults.foir || 50);
   const [prepayment, setPrepayment] = useState(c.defaults.prepayment || 100000);
   const [afterMonths, setAfterMonths] = useState(c.defaults.afterMonths || 12);
   const [goal, setGoal] = useState("tenure");
   const [showMore, setShowMore] = useState(false);
 
   const eligibility = useMemo(() => {
-    const affordableEmi = Math.max(0, (Number(income) || 0) * 0.50 - (Number(existingEmi) || 0));
-    const maxEligible = principalForEmi(affordableEmi, rate, tenure * 12);
+    const monthlyIncome = Math.max(0, Number(income) || 0);
+    const existingMonthlyEmi = Math.max(0, Number(existingEmi) || 0);
+    const repaymentRatio = Math.max(0, Math.min(80, Number(foir) || 0)) / 100;
+    const grossEmiCapacity = monthlyIncome * repaymentRatio;
+    const affordableEmi = Math.max(0, grossEmiCapacity - existingMonthlyEmi);
     const requested = Math.max(0, Number(loan) || 0);
-    const approved = Math.min(requested, maxEligible);
+    const months = Math.max(1, Math.round((Number(tenure) || 1) * 12));
+    const maxEligible = Math.min(c.loanMax, principalForEmi(affordableEmi, rate, months));
+    const eligibleEmi = emi(maxEligible, rate, months);
+    const totalRepayment = eligibleEmi * months;
+    const totalInterest = Math.max(0, totalRepayment - maxEligible);
+    const requestedEmi = emi(requested, rate, months);
     return {
+      monthlyIncome,
+      existingMonthlyEmi,
+      repaymentRatio: repaymentRatio * 100,
+      grossEmiCapacity,
       affordableEmi,
       maxEligible,
-      approved,
-      estimatedEmi: emi(approved, rate, tenure * 12),
+      approved: maxEligible,
+      requested,
+      requestedEmi,
+      requestedIsAffordable: requested <= maxEligible + 0.5,
+      eligibleEmi,
+      totalInterest,
+      totalRepayment,
+      months,
     };
-  }, [income, existingEmi, loan, rate, tenure]);
+  }, [income, existingEmi, foir, loan, rate, tenure, c.loanMax]);
 
   const prepay = useMemo(() => {
     const p = Math.max(0, Number(loan) || 0);
@@ -210,8 +229,9 @@ export default function LoanCalculatorPage({ mode }) {
                   <Field label="Desired Loan Amount" value={loan} min={50000} max={c.loanMax} step={5000} currency onChange={setLoan} />
                   <Field label="Rate of Interest (Yearly)" value={rate} min={6} max={30} step={0.1} suffix="%" onChange={setRate} />
                   <Field label="Loan Tenure" value={tenure} min={1} max={30} step={1} suffix="Yrs" onChange={setTenure} />
-                  <Field label="Monthly Income" value={income} min={20000} max={500000} step={1000} currency onChange={setIncome} />
-                  <Field label="Existing Monthly EMI" value={existingEmi} min={0} max={200000} step={1000} currency onChange={setExistingEmi} />
+                  <Field label="Monthly Net Income" value={income} min={0} max={10000000} step={1000} currency onChange={setIncome} />
+                  <Field label="Existing Monthly EMIs" value={existingEmi} min={0} max={10000000} step={1000} currency onChange={setExistingEmi} />
+                  <Field label="EMI-to-Income Limit (FOIR)" value={foir} min={20} max={80} step={5} suffix="%" onChange={setFoir} />
                 </div>
               ) : (
                 <>
@@ -319,21 +339,29 @@ function Field({ label, value, min, max, step, suffix, currency, onChange }) {
 }
 
 function EligibilityResult({ result, requested, tenure, money, navigate }) {
-  const ratio = Math.max(0, Math.min(100, (result.approved / Math.max(1, requested)) * 100));
+  const ratio = Math.max(0, Math.min(100, (result.maxEligible / Math.max(1, result.requested)) * 100));
 
   return (
     <div className="gs-result">
-      <h3>Results</h3>
+      <h3>Loan Eligibility Results</h3>
       <div className="gs-donut" style={{ "--result": `${ratio}%` }}>
         <div>
-          <span>You are eligible for</span>
-          <strong>{money(result.approved)}</strong>
+          <span>Estimated maximum loan eligibility</span>
+          <strong>{money(result.maxEligible)}</strong>
         </div>
       </div>
-      <ResultLine label="Estimated EMI" value={money(result.estimatedEmi)} />
+      <ResultLine label="Monthly Net Income" value={money(result.monthlyIncome)} />
+      <ResultLine label="Existing Monthly EMIs" value={money(result.existingMonthlyEmi)} />
       <ResultLine label="Maximum affordable EMI" value={money(result.affordableEmi)} />
-      <ResultLine label="Eligible Tenure" value={`${tenure} Years`} />
-      <button type="button" className="gs-apply" onClick={() => navigate("/loans")}>Apply Now <i className="bi bi-arrow-right" /></button>
+      <ResultLine label="EMI for eligible loan" value={money(result.eligibleEmi)} />
+      <ResultLine label="Desired Loan Amount" value={money(result.requested)} />
+      <ResultLine label="EMI for desired loan" value={money(result.requestedEmi)} />
+      <ResultLine label="Loan assessment" value={result.requestedIsAffordable ? "Within estimated limit" : "Above estimated limit"} />
+      <ResultLine label="Total Interest (eligible amount)" value={money(result.totalInterest)} />
+      <ResultLine label="Total Repayment (eligible amount)" value={money(result.totalRepayment)} />
+      <ResultLine label="Loan Tenure" value={`${tenure} Years`} />
+      <small className="gs-result-disclaimer">Indicative estimate using the selected FOIR. Lender eligibility may differ.</small>
+      <button type="button" className="gs-apply" onClick={() => navigate("/loans")}>Explore Loan Options <i className="bi bi-arrow-right" /></button>
     </div>
   );
 }
